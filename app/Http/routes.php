@@ -29,3 +29,19 @@ Route::get('/HMadmin/Store-Users', function () {
 Route::get('/HMadmin/Products', function () {
     return view('admin.products.products');
 });
+
+
+
+
+///////////////////////// Do not modify i will kill you /////////////////
+
+Route::get('/', function () {
+    return view('client.comingsoon');
+});
+Route::get('/home', function () {
+    return view('client.home');
+});
+
+
+
+

@@ -1,0 +1,141 @@
+/** Your theme modifications here **/
+.alignleft {
+	float: left;
+	color:black;
+}
+.alignright {
+	float: right;
+	margin-top:13px;
+	color:black;
+}
+.alignright:hover {
+	float: right;
+	margin-top:13px;
+	color:red;
+}
+
+.category-products{
+	border-radius: 0px 0px 0px 0px;
+	padding-bottom:20px;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	-webkit-border-radius: 0px !important;
+	-moz-border-radius: 0px !important;
+	border-radius: 0px !important;
+	border-collapse: collapse !important;
+	background-image: none !important;
+}
+.category-products img{
+	border-radius: 0px 0px 0px 0px;
+	height:50px;
+	width:50px;
+	margin-right:15px;
+
+}
+
+
+.flat{
+border-radius:0px 0px 0px 0px;
+}
+/* CSS used here will be applied after bootstrap.css */
+
+/* Create a medium height at 40px */
+.navbar-md {min-height:40px}
+.navbar-md .navbar-brand,
+.navbar-md .navbar-nav>li>a {padding-top:10px; padding-bottom:10px}
+.navbar-md .navbar-brand {height: 40px}  
+.navbar-md .navbar-toggle {margin: 6px 12px 6px 0px; padding: 6px 7px 6px 7px;}
+.navbar-md .navbar-toggle .icon-bar {width: 19px;}
+
+
+/* Create a small height at 30px */
+.navbar-sm {min-height:30px}
+.navbar-sm .navbar-brand,
+.navbar-sm .navbar-nav>li>a {padding-top:5px; padding-bottom:5px}
+.navbar-sm .navbar-brand {height: 30px}
+.navbar-sm .navbar-toggle {margin: 3px 9px 3px 0px; padding: 4px 4px 4px 4px;}
+.navbar-sm .navbar-toggle .icon-bar {width: 16px;}
+
+
+   
+    
+.market{
+	margin-bottom:5px;
+}
+.market-logo{
+	padding:1px;
+	border: 1px solid #f3f3f3;
+}
+.market-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+}
+.market-menu li {
+	margin: 10px;
+    display: inline;
+	color:#000;
+}
+.market-menu li a {
+	color:#000;
+	
+}
+.store-logo{
+	border: 1px solid #f3f3f3;
+	overflow:hidden;
+	background:#fff;
+}
+.store-logo img{
+	display: inline-block;
+	/*max-width: 100%;*/
+	height: auto !important;
+	height:90%;
+	width:90%;
+}
+
+
+.wraptocenter {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    height: 96px;
+}
+.wraptocenter * {
+    vertical-align: middle;
+}
+/*\*//*/
+.wraptocenter {
+    display: block;
+}
+.wraptocenter span {
+    display: inline-block;
+    height: 100%;
+    width: 1px;
+}
+/**/
+</style>
+<!--[if lt IE 8]><style>
+.wraptocenter span {
+    display: inline-block;
+    height: 100%;
+}
+
+
+
+
+
+@media(max-width:767px){
+
+}
+@media(min-width:768px){
+
+}
+@media(min-width:992px){
+
+}
+@media(min-width:1200px){
+
+}
+
+

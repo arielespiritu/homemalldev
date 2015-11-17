@@ -1,0 +1,37 @@
+/* Start media ( max = 468px ) */
+@media (max-width: 480px) {
+
+    .title {
+        margin-bottom: 35px;
+    }
+    .clock {
+        margin: 40px auto 0px;
+    }
+
+    /* -------- Watch -------- */
+    #watch .dash span.dash_title {
+        text-align: center;
+		font-size: 12px;
+		padding-top: 5px;
+    }
+
+    #watch .dash {
+        width: 55px;
+        padding: 0px 5px 0px;
+        height: 79px;
+        line-height: 62px;
+        margin: 0px -2px;
+    }
+
+    #watch .dash:last-child {
+        padding: 0px 0px 0px 8px;
+    }
+
+    #watch .dash .digit {
+        font-size: 24px;
+        line-height: 56px;
+        height: 44px;
+        width: 20px;
+    }
+
+}

@@ -1,0 +1,400 @@
+/* ==============================================
+
+Template: Clock
+Version: 1.0
+Author:	Ukieweb
+
+ - General setting
+ - Clock
+ - Watch
+ - Footer
+ - Animationload
+
+================================================ */
+
+
+/* ------------------
+    General setting
+--------------------*/
+*{
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 300;
+}
+html{
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6{
+    color: #f6f7f9;
+    font-weight: 600;
+}
+body {
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #FF0000;
+}
+h1 {
+    font-size: 93px;
+    line-height: 96px;
+    margin-top: 48px;
+    margin-bottom: 24px;
+    font-weight: 900;
+}
+h2 {
+    font-size: 52px;
+    line-height: 72px;
+    margin-top: 0px;
+    margin-bottom: 24px;
+    font-weight: 900;
+}
+h3 {
+    font-size: 29px;
+    line-height: 48px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+h4 {
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+p, ul, ol, pre, table, blockquote {
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+hr {
+    border: 1px solid;
+    margin: -1px 0;
+}
+ul ul, ol ol, ul ol, ol ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+b, strong, em, small, code {
+    line-height: 1;
+}
+sup, sub {
+    vertical-align: baseline;
+    position: relative;
+    top: -0.4em;
+}
+sub {
+    top: 0.4em;
+}
+
+p{
+    font-weight: 300;
+    color: #373b3e;
+}
+.uppercase{
+    text-transform: uppercase;
+}
+.error{
+    border-color: red !important;
+}
+.title{
+    font-size: 30px;
+    font-weight: 300;
+    text-align: center;
+    color: #ffffffff;
+    line-height: 28px;
+    margin: 25px 10px 30px 10px;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #373b3e;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #373b3e;
+    opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #373b3e;
+    opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #373b3e;
+}
+
+
+/* ------------------
+    Clock
+--------------------*/
+.clock{
+    width: 180px;
+    height: 185px;
+    position: relative;
+    margin: 90px auto 0px;
+    background-image: url("../img/clock.svg");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-color: transparent;
+    background-size: 100%;
+}
+
+.clock .circle{
+    width: 22px;
+    height: 22px;
+    background-image: url("../img/circle.svg");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-color: transparent;
+    background-size: 100%;
+    position: absolute;
+    left: 78px;
+    top: 78px;
+    z-index: 2;
+}
+
+.clock .small{
+    width: 22px;
+    height: 69px;
+    background-image: url("../img/small_arrow.svg");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-color: transparent;
+    background-size: 100%;
+    position: absolute;
+    left: 78px;
+    top: 90px;
+    z-index: 2;
+    -moz-animation: 2s ease 0s linear none infinite small;
+    -moz-transform-origin: 50% 0%;
+    -webkit-animation:small 2s infinite linear;
+    -webkit-transform-origin: 50% 0%;
+    -o-animation: 2s ease 0s linear none infinite small;
+    -o-animation:small 2s infinite linear;
+    -o-transform-origin: 50% 0%;
+    -ms-animation: 2s ease 0s linear none infinite small;
+    -ms-animation:small 2s infinite linear;
+    -ms-transform-origin: 50% 0%;
+    animation: 2s ease 0s linear none infinite small;
+    animation:small 2s infinite linear;
+    transform-origin: 50% 0%;
+}
+@-moz-keyframes small {
+    0%{-moz-transform:rotate(0deg)}
+    50%{-moz-transform:rotate(180deg)}
+    100%{-moz-transform:rotate(360deg)}
+}
+@-webkit-keyframes small {
+    0%{-webkit-transform:rotate(0deg)}
+    50%{-webkit-transform:rotate(180deg)}
+    100%{-webkit-transform:rotate(360deg)}
+}
+@-o-keyframes small {
+    0%{-o-transform:rotate(0deg)}
+    50%{-o-transform:rotate(180deg)}
+    100%{-o-transform:rotate(360deg)}
+}
+@-ms-keyframes small {
+    0%{-ms-transform:rotate(0deg)}
+    50%{-ms-transform:rotate(180deg)}
+    100%{-ms-transform:rotate(360deg)}
+}
+@keyframes small {
+    0%{transform:rotate(0deg)}
+    50%{transform:rotate(180deg)}
+    100%{transform:rotate(360deg)}
+}
+
+.clock .big{
+    width: 18px;
+    height: 60px;
+    background-image: url("../img/big_arrow.svg");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-color: transparent;
+    background-size: 100%;
+    position: absolute;
+    left: 81px;
+    top: 90px;
+    z-index: 1;
+    -moz-animation: 5s ease 0s linear none infinite big;
+    -moz-transform-origin: 50% 0%;
+    -webkit-animation: big 5s infinite linear;
+    -webkit-transform-origin: 50% 0%;
+    -o-animation: 5s ease 0s linear none infinite big;
+    -o-animation: big 5s infinite linear;
+    -o-transform-origin: 50% 0%;
+    -ms-animation: 5s ease 0s linear none infinite big;
+    -ms-animation: big 5s infinite linear;
+    -ms-transform-origin: 50% 0%;
+    animation: 5s ease 0s linear none infinite big;
+    animation: big 5s infinite linear;
+    transform-origin: 50% 0%;
+}
+@-moz-keyframes big {
+    0%{-moz-transform:rotate(0deg)}
+    50%{-moz-transform:rotate(180deg)}
+    100%{-moz-transform:rotate(360deg)}
+}
+@-webkit-keyframes big {
+    0%{-webkit-transform:rotate(0deg)}
+    50%{-webkit-transform:rotate(180deg)}
+    100%{-webkit-transform:rotate(360deg)}
+}
+@-o-keyframes big {
+    0%{-o-transform:rotate(0deg)}
+    50%{-o-transform:rotate(180deg)}
+    100%{-o-transform:rotate(360deg)}
+}
+@-ms-keyframes big {
+    0%{-ms-transform:rotate(0deg)}
+    50%{-ms-transform:rotate(180deg)}
+    100%{-ms-transform:rotate(360deg)}
+}
+@keyframes big {
+    0%{transform:rotate(0deg)}
+    50%{transform:rotate(180deg)}
+    100%{transform:rotate(360deg)}
+}
+
+
+/* ------------------
+    Watch
+--------------------*/
+#watch{
+    color: #f6f7f9;
+    text-align: center;
+}
+
+#watch .dash {
+    display: inline-block;
+    padding: 20px 30px;
+    line-height: 72px;
+    text-align: center;
+    margin: 0 -3px;
+}
+
+#watch .dash:first-child{
+    border-radius: 8px 0px 0px 8px;
+    border-style: solid;
+    border-width: 1px;
+	background-color:rgba(0,0,0,.50); 
+}
+#watch .dash:last-child{
+    border-radius: 0px 8px 8px 0px;
+    padding-left: 28px;
+    padding-right: 28px;
+	border-style: solid;
+    border-width: 1px;
+	background-color:rgba(0,0,0,.50); 
+}
+
+#watch .dash:nth-child(2){
+	border-style: solid;
+    border-width: 1px;
+	background-color:rgba(0,0,0,.50); 
+}
+#watch .dash:nth-child(3){
+	border-style: solid;
+    border-width: 1px;
+	background-color:rgba(0,0,0,.50); 
+}
+
+#watch .dash .digit {
+    display: block;
+    width: 24px;
+    font-size: 44px;
+    line-height: 44px;
+    height: 38px;
+    float: left;
+}
+
+#watch .dash .digit .top, #watch .dash .digit .bottom{
+    font-weight: 600;
+}
+
+#watch .dash span.dash_title {
+    font-size: 14px;
+    line-height: 16px;
+    padding-top: 15px;
+    font-weight: 300;
+    display: block;
+    text-align: center;
+    clear: both;
+}
+
+
+
+/* ------------------
+    Footer
+--------------------*/
+#footer{
+    z-index: 9999;
+    position: relative;
+}
+
+.contact_socials{
+    padding: 0;
+    margin: 0;
+}
+
+.contact_socials li{
+    display: inline-block;
+}
+
+.copyright {
+    font-size: 12px;
+    color: #ffffff;
+    margin: 20px 0;
+}
+
+.footer_socials {
+    margin: 25px 0 10px;
+}
+
+.ukie_social{
+    background-color: rgba(0,0,0,.65);
+    font-size: 16px;
+    color: #ffffff;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    display: block;
+    margin: 5px;
+    border-radius: 50%;
+	border-style: solid;
+    border-width: 1px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.ukie_social:hover, .ukie_social:active, .ukie_social:focus{
+    background-color: rgba(0,0,0,.65);
+    color: #fff;
+}
+
+
+/* ------------------
+    Animationload
+--------------------*/
+.animationload {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    z-index: 999999;
+}
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -100px 0 0 -100px;
+    width: 200px;
+    height: 200px;
+    background-image: url("../img/ajax-loader.gif");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
