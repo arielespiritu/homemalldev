@@ -120,7 +120,7 @@ function loginAuth()
 		{
 			if(resultarray[0].session==tkn)
 			{
-				alert('true');
+				window.location.href="/HMadmin"
 			}
 			else
 			{
