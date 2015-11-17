@@ -31,15 +31,22 @@ Route::get('/HMadmin/Products', function () {
 });
 
 
-
+//
 
 ///////////////////////// Do not modify i will kill you /////////////////
+
+
+
+// Authentication routes...
+Route::get('/auth/login', 'Auth\AuthController@getLogin');
+Route::post('/auth/login', 'Auth\AuthController@postLogin');
+Route::get('/auth/logout', 'Auth\AuthController@getLogout');
 
 Route::get('/', function () {
     return view('client.comingsoon');
 });
 Route::get('/home', function () {
-    return view('client.home');
+    return view('client.pages.market');
 });
 
 
