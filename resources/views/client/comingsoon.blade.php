@@ -8,7 +8,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Clock</title>
+    <title>HomemallPH</title>
     <meta name="author" content="ukieweb" />
     <meta name="keywords" content="soon, css3, template, html5 template" />
     <meta name="description" content="Clock - Page Template" />
