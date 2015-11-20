@@ -473,6 +473,7 @@
         <div id="footer" >
             <div class="container">
                 <div class="row">
+				<div class="col-md-12" style="padding:16px">
                     <div class="col-md-3 col-sm-6">
                         <h4>Pages</h4>
 
@@ -596,6 +597,7 @@
                     <!-- /.col-md-3 -->
 
                 </div>
+				</div>
                 <!-- /.row -->
 
             </div>

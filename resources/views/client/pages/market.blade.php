@@ -679,7 +679,7 @@
                         <h3 class="text-uppercase text-center">Hot and New</h3>
                         <p class="lead text-center">Check our new and hottest items!</p>
                     </div>
-					<div class="col-md-12">
+					<div class="col-md-12" style="padding:5px">
 						<div class="col-sm-2" style="padding:10px">
 								<div class="box">
 										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
