@@ -20,6 +20,11 @@
 
 @endsection
 @section('content')
+
+@foreach($userinfo as $user_info)
+@endforeach
+
+
 	<div class="widget-box">
 		<div class="widget-header">
 			<h4>Store Profile</h4>
@@ -44,19 +49,26 @@
 						<h4><b>STORE INFORMATION </b></h4>
 							<span class="profile-picture">
 								<input type="hidden" id="store_logo_status" class="span6" name="file-input" />
-								<img id="store_logo"  src="{{URL::asset('assets/avatars/142.jpg')}}" />
+								@if(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.jpg'))
+									<img id="store_logo"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.jpg')}}" />
+								@elseif(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.jpeg'))
+									<img id="store_logo"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.jpeg')}}" />
+								@elseif(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.png'))
+									<img id="store_logo"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.png')}}" />									
+								@else
+									
+								@endif
 								<br>
 								<br>
+								@if($userLevel == 'STORE ADMIN')
 								<input type="file" id="store_logo_file"  accept="image/gif, image/jpeg, image/png"  class="ace-file-input" name="file-input"/>
 								<button id="store_logo_btncancel" onClick="cancel_upload('#store_logo_btncancel','#store_logo_file','#store_logo','{{URL::asset('assets/avatars/142.jpg')}}')" class="btn btn-small btn-danger" style="display:none">Cancel</button>
+								@else
+								@endif	
 							</span>
 							<br>
 							<br>
-@foreach($userinfo as $user_info)
-	
-		
 
-@endforeach
 							<div class="control-group">
 								<label class="control-label" for="form-field-1">Store Name </label>
 								<div class="controls">
@@ -83,9 +95,9 @@
 										<label class="control-label" for="form-field-1"> <i class="icon-screen-smartphone "></i> Store Mobile</label>
 										<div class="controls">
 											@if($userLevel == 'STORE ADMIN')
-											<input type="text" class="  span12 input-mask-phone" id="form-field-1" value="{{$user_info->showStoreInfo->store_mobile}}" placeholder="(+639)9999-99999-9"  />
+											<input type="text" class="  span12 input-mask-phone" id="form-field-1" value="{{$user_info->showStoreInfo->store_mobile}}" placeholder="(+63)9999-999999-9"  />
 											@else
-											<input type="text" class="  span12 input-mask-phone" id="form-field-1" value="{{$user_info->showStoreInfo->store_mobile}}" placeholder="(+639)9999-99999-9" disabled />	
+											<input type="text" class="  span12 input-mask-phone" id="form-field-1" value="{{$user_info->showStoreInfo->store_mobile}}" placeholder="(+63)9999-999999-9" disabled />	
 											@endif	
 										</div>
 									</div>				
@@ -108,61 +120,14 @@
 										<label class="control-label" for="form-field-1">Store City</label>
 										<div class="controls " >
 											@if($userLevel == 'STORE ADMIN')
-											<select class="span12" style="width:100%;" id="store_profile_city" data-placeholder="Choose a Country...">
+											<select class="span12" onChange="store_getArea(this.value)" style="width:100%;" id="store_profile_city" data-placeholder="Choose a City...">
 											@else
 											<select class="span12" style="width:100%;" id="store_profile_city" data-placeholder="Choose a Country..." disabled>
 											@endif	
 													<option value="" />
-													<option value="AL" />Alabama
-													<option value="AK" />Alaska
-													<option value="AZ" />Arizona
-													<option value="AR" />Arkansas
-													<option value="CA" />California
-													<option value="CO" />Colorado
-													<option value="CT" />Connecticut
-													<option value="DE" />Delaware
-													<option value="FL" />Florida
-													<option value="GA" />Georgia
-													<option value="HI" />Hawaii
-													<option value="ID" />Idaho
-													<option value="IL" />Illinois
-													<option value="IN" />Indiana
-													<option value="IA" />Iowa
-													<option value="KS" />Kansas
-													<option value="KY" />Kentucky
-													<option value="LA" />Louisiana
-													<option value="ME" />Maine
-													<option value="MD" />Maryland
-													<option value="MA" />Massachusetts
-													<option value="MI" />Michigan
-													<option value="MN" />Minnesota
-													<option value="MS" />Mississippi
-													<option value="MO" />Missouri
-													<option value="MT" />Montana
-													<option value="NE" />Nebraska
-													<option value="NV" />Nevada
-													<option value="NH" />New Hampshire
-													<option value="NJ" />New Jersey
-													<option value="NM" />New Mexico
-													<option value="NY" />New York
-													<option value="NC" />North Carolina
-													<option value="ND" />North Dakota
-													<option value="OH" />Ohio
-													<option value="OK" />Oklahoma
-													<option value="OR" />Oregon
-													<option value="PA" />Pennsylvania
-													<option value="RI" />Rhode Island
-													<option value="SC" />South Carolina
-													<option value="SD" />South Dakota
-													<option value="TN" />Tennessee
-													<option value="TX" />Texas
-													<option value="UT" />Utah
-													<option value="VT" />Vermont
-													<option value="VA" />Virginia
-													<option value="WA" />Washington
-													<option value="WV" />West Virginia
-													<option value="WI" />Wisconsin
-													<option value="WY" />Wyoming
+													@foreach($cities as $city)
+													<option value="{{$city->city_id}}" />{{$city->city_name}}
+													@endforeach
 												</select>
 										</div>
 								</div>
@@ -171,62 +136,12 @@
 										<label class="control-label" for="form-field-1">Store Area</label>
 										<div class="controls">
 											@if($userLevel == 'STORE ADMIN')
-											<select class="span12"  onChange=""style="width:100%;" id="store_profile_area" data-placeholder="Choose a Country...">
+											<select class="span12"  onChange="" style="width:100%;" id="store_profile_area" data-placeholder="Choose a City...">
 											@else
-											<select class="span12"  onChange=""style="width:100%;" id="store_profile_area" data-placeholder="Choose a Country..."disabled>
+											<select class="span12"  onChange=""style="width:100%;" id="store_profile_area1" data-placeholder="Choose a Area..."disabled>
 											@endif
-													<option value="" />
-													<option value="AL" />Alabama
-													<option value="AK" />Alaska
-													<option value="AZ" />Arizona
-													<option value="AR" />Arkansas
-													<option value="CA" />California
-													<option value="CO" />Colorado
-													<option value="CT" />Connecticut
-													<option value="DE" />Delaware
-													<option value="FL" />Florida
-													<option value="GA" />Georgia
-													<option value="HI" />Hawaii
-													<option value="ID" />Idaho
-													<option value="IL" />Illinois
-													<option value="IN" />Indiana
-													<option value="IA" />Iowa
-													<option value="KS" />Kansas
-													<option value="KY" />Kentucky
-													<option value="LA" />Louisiana
-													<option value="ME" />Maine
-													<option value="MD" />Maryland
-													<option value="MA" />Massachusetts
-													<option value="MI" />Michigan
-													<option value="MN" />Minnesota
-													<option value="MS" />Mississippi
-													<option value="MO" />Missouri
-													<option value="MT" />Montana
-													<option value="NE" />Nebraska
-													<option value="NV" />Nevada
-													<option value="NH" />New Hampshire
-													<option value="NJ" />New Jersey
-													<option value="NM" />New Mexico
-													<option value="NY" />New York
-													<option value="NC" />North Carolina
-													<option value="ND" />North Dakota
-													<option value="OH" />Ohio
-													<option value="OK" />Oklahoma
-													<option value="OR" />Oregon
-													<option value="PA" />Pennsylvania
-													<option value="RI" />Rhode Island
-													<option value="SC" />South Carolina
-													<option value="SD" />South Dakota
-													<option value="TN" />Tennessee
-													<option value="TX" />Texas
-													<option value="UT" />Utah
-													<option value="VT" />Vermont
-													<option value="VA" />Virginia
-													<option value="WA" />Washington
-													<option value="WV" />West Virginia
-													<option value="WI" />Wisconsin
-													<option value="WY" />Wyoming
-												</select>
+												<option value="" />
+											</select>
 										</div>
 									</div>				
 								</div>
@@ -237,7 +152,17 @@
 								<div class="row-fluid">
 									<span class="profile-picture span6">
 										<input type="hidden" id="owner_image_status" class="" name="file-input" />
-										<center><img id="owner_image"  src="{{URL::asset('assets/avatars/user.jpg')}}" /><center>
+										<center>
+										@if(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpg'))
+											<img id="owner_image"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpg')}}" />
+										@elseif(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpeg'))
+											<img id="owner_image"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpeg')}}" />
+										@elseif(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.png'))
+											<img id="owner_image"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.png')}}" />
+										@else
+											
+										@endif	
+										</center>
 										<input type="file" id="owner_image_file" class="ace-file-input" name="file-input"/>
 										<button id="owner_image_btncancel" onClick="cancel_upload('#owner_image_btncancel','#owner_image_file','#owner_image','{{URL::asset('assets/avatars/user.jpg')}}')" class="btn btn-small btn-danger" style="display:none">Cancel</button>
 									</span>
@@ -255,9 +180,9 @@
 										<label class="control-label" for="form-field-1"><i class="icon-screen-smartphone"></i> Owner Mobile</label>
 										<div class="controls">
 											@if($userLevel == 'STORE ADMIN')
-											<input type="text" class=" span12 input-mask-phone" id="form-field-1" placeholder="(+639)9999-99999-9" />
+											<input type="text" class=" span12 input-mask-phone" id="form-field-1" placeholder="(+63)9999-999999-9" />
 											@else
-											<input type="text" class=" span12 input-mask-phone" id="form-field-1" placeholder="(+639)9999-99999-9" disabled />
+											<input type="text" class=" span12 input-mask-phone" id="form-field-1" placeholder="(+63)9999-999999-9" disabled />
 											@endif	
 										</div>
 									</div>				
@@ -290,9 +215,9 @@
 										<label class="control-label" for="form-field-1">Gender</label>
 										<div class="controls">
 											@if($userLevel == 'STORE ADMIN')
-											<select class="span12"  onChange=""style="width:100%;" id="store_owner_gender" data-placeholder="Choose a Country...">
+											<select class="span12"  onChange=""style="width:100%;" id="store_owner_gender" data-placeholder="Choose a Gender...">
 											@else
-											<select class="span12"  onChange=""style="width:100%;" id="store_owner_gender" data-placeholder="Choose a Country..." disabled>	
+											<select class="span12"  onChange=""style="width:100%;" id="store_owner_gender" data-placeholder="Choose a Gender..." disabled>	
 											@endif	
 													<option value="" />Please Select
 													@if($user_info->showStoreInfo->owner_gender == 'MALE' || 'male')
@@ -312,61 +237,14 @@
 										<label class="control-label" for="form-field-1">Store City</label>
 										<div class="controls " >
 											@if($userLevel == 'STORE ADMIN')
-											<select class="" style="width:100%;" id="store_owner_city" data-placeholder="Choose a Country...">
+											<select class="" onChange="owner_getArea(this.value)" style="width:100%;" id="store_owner_city" data-placeholder="Choose a City...">
 											@else
-											<select class="" style="width:100%;" id="store_owner_city" data-placeholder="Choose a Country...">
+											<select class="" style="width:100%;" id="store_owner_city" data-placeholder="Choose a City...">
 											@endif
 													<option value="" />
-													<option value="AL" />Alabama
-													<option value="AK" />Alaska
-													<option value="AZ" />Arizona
-													<option value="AR" />Arkansas
-													<option value="CA" />California
-													<option value="CO" />Colorado
-													<option value="CT" />Connecticut
-													<option value="DE" />Delaware
-													<option value="FL" />Florida
-													<option value="GA" />Georgia
-													<option value="HI" />Hawaii
-													<option value="ID" />Idaho
-													<option value="IL" />Illinois
-													<option value="IN" />Indiana
-													<option value="IA" />Iowa
-													<option value="KS" />Kansas
-													<option value="KY" />Kentucky
-													<option value="LA" />Louisiana
-													<option value="ME" />Maine
-													<option value="MD" />Maryland
-													<option value="MA" />Massachusetts
-													<option value="MI" />Michigan
-													<option value="MN" />Minnesota
-													<option value="MS" />Mississippi
-													<option value="MO" />Missouri
-													<option value="MT" />Montana
-													<option value="NE" />Nebraska
-													<option value="NV" />Nevada
-													<option value="NH" />New Hampshire
-													<option value="NJ" />New Jersey
-													<option value="NM" />New Mexico
-													<option value="NY" />New York
-													<option value="NC" />North Carolina
-													<option value="ND" />North Dakota
-													<option value="OH" />Ohio
-													<option value="OK" />Oklahoma
-													<option value="OR" />Oregon
-													<option value="PA" />Pennsylvania
-													<option value="RI" />Rhode Island
-													<option value="SC" />South Carolina
-													<option value="SD" />South Dakota
-													<option value="TN" />Tennessee
-													<option value="TX" />Texas
-													<option value="UT" />Utah
-													<option value="VT" />Vermont
-													<option value="VA" />Virginia
-													<option value="WA" />Washington
-													<option value="WV" />West Virginia
-													<option value="WI" />Wisconsin
-													<option value="WY" />Wyoming
+													@foreach($cities as $city)
+													<option value="{{$city->city_id}}" />{{$city->city_name}}
+													@endforeach
 												</select>
 										</div>
 								</div>
@@ -375,62 +253,10 @@
 										<label class="control-label" for="form-field-1">Store Area</label>
 										<div class="controls">
 											@if($userLevel == 'STORE ADMIN')
-											<select class=""  onChange=""style="width:100%;" id="store_owner_area" data-placeholder="Choose a Country...">
+											<select class="" style="width:100%;" id="store_owner_area" data-placeholder="Choose a Area...">
 											@else
-											<select class=""  onChange=""style="width:100%;" id="store_owner_area" data-placeholder="Choose a Country..." disabled>	
+											<select class=""  onChange=""style="width:100%;" id="store_owner_area" data-placeholder="Choose a Area..." disabled>	
 											@endif
-										
-													<option value="" />
-													<option value="AL" />Alabama
-													<option value="AK" />Alaska
-													<option value="AZ" />Arizona
-													<option value="AR" />Arkansas
-													<option value="CA" />California
-													<option value="CO" />Colorado
-													<option value="CT" />Connecticut
-													<option value="DE" />Delaware
-													<option value="FL" />Florida
-													<option value="GA" />Georgia
-													<option value="HI" />Hawaii
-													<option value="ID" />Idaho
-													<option value="IL" />Illinois
-													<option value="IN" />Indiana
-													<option value="IA" />Iowa
-													<option value="KS" />Kansas
-													<option value="KY" />Kentucky
-													<option value="LA" />Louisiana
-													<option value="ME" />Maine
-													<option value="MD" />Maryland
-													<option value="MA" />Massachusetts
-													<option value="MI" />Michigan
-													<option value="MN" />Minnesota
-													<option value="MS" />Mississippi
-													<option value="MO" />Missouri
-													<option value="MT" />Montana
-													<option value="NE" />Nebraska
-													<option value="NV" />Nevada
-													<option value="NH" />New Hampshire
-													<option value="NJ" />New Jersey
-													<option value="NM" />New Mexico
-													<option value="NY" />New York
-													<option value="NC" />North Carolina
-													<option value="ND" />North Dakota
-													<option value="OH" />Ohio
-													<option value="OK" />Oklahoma
-													<option value="OR" />Oregon
-													<option value="PA" />Pennsylvania
-													<option value="RI" />Rhode Island
-													<option value="SC" />South Carolina
-													<option value="SD" />South Dakota
-													<option value="TN" />Tennessee
-													<option value="TX" />Texas
-													<option value="UT" />Utah
-													<option value="VT" />Vermont
-													<option value="VA" />Virginia
-													<option value="WA" />Washington
-													<option value="WV" />West Virginia
-													<option value="WI" />Wisconsin
-													<option value="WY" />Wyoming
 												</select>
 										</div>
 									</div>				
@@ -460,6 +286,7 @@
 						Save Info
 						<i class="fa-save"></i>
 					</button>
+					
 				</div>
 			</div>
 		</div>
@@ -468,9 +295,71 @@
 @endsection
 @section('myscripts')
 <script>
+
+
 document.getElementById('store_logo_status').value="Nothing_Change";
 document.getElementById('owner_image_status').value="Nothing_Change";
 
+function store_getArea(value)
+{	
+
+    var x = document.getElementById("store_profile_area");
+    document.getElementById("store_profile_area").options.length = 0;
+    var option = document.createElement("option");
+    option.text = "";
+    option.value = "";
+    x.add(option);
+	
+	//alert(value);
+	var jsoncity =<?php echo json_encode($cities); ?>;
+	for (i=0;i<jsoncity.length;i++)
+	{
+		if(jsoncity[i].city_id == value)
+		{
+			//alert(JSON.stringify(jsoncity[i].view_all_locations));
+			for(getarea=0;getarea<jsoncity[i].view_all_locations.length;getarea++)
+			{
+			//	alert(jsoncity[i].view_all_locations[getarea].major_area+"-"+jsoncity[i].view_all_locations[getarea].id);
+				var option = document.createElement("option");	
+				option.text =jsoncity[i].view_all_locations[getarea].major_area;
+				option.value =jsoncity[i].view_all_locations[getarea].id;
+				x.add(option);
+			}
+		}
+		$("#store_profile_area").trigger("liszt:updated");
+	}
+	
+}
+function owner_getArea(value)
+{	
+
+    var x = document.getElementById("store_owner_area");
+    document.getElementById("store_owner_area").options.length = 0;
+    var option = document.createElement("option");
+    option.text = "";
+    option.value = "";
+    x.add(option);
+	
+	//alert(value);
+	var jsoncity =<?php echo json_encode($cities); ?>;
+	for (i=0;i<jsoncity.length;i++)
+	{
+		if(jsoncity[i].city_id == value)
+		{
+			//alert(JSON.stringify(jsoncity[i].view_all_locations));
+			for(getarea=0;getarea<jsoncity[i].view_all_locations.length;getarea++)
+			{
+			//	alert(jsoncity[i].view_all_locations[getarea].major_area+"-"+jsoncity[i].view_all_locations[getarea].id);
+				var option = document.createElement("option");	
+				option.text =jsoncity[i].view_all_locations[getarea].major_area;
+				option.value =jsoncity[i].view_all_locations[getarea].id;
+				x.add(option);
+			}
+		}
+		$("#store_owner_area").trigger("liszt:updated");
+	}
+	
+}
 $("#store_logo_file").change(function() {
     var val = $(this).val();
 	var last_gritter;
@@ -519,7 +408,6 @@ function readURL(input,displayTo) {
 
     if (input.files && input.files[0]) {
         var reader = new FileReader();
-		
         reader.onload = function (e) {
             $(displayTo).attr('src', e.target.result);
 	//		var getImagesize = input.files[0].size/1024;
@@ -529,20 +417,15 @@ function readURL(input,displayTo) {
 	//		alert(getImagesize.toFixed(0) +"KB" + "width-"+newimage.width);			
         }
         reader.readAsDataURL(input.files[0]);
-		
     }
 }
-
 $(function() {
 	$("#store_profile_area").chosen(); 
 	$("#store_profile_city").chosen(); 
 	$("#store_owner_city").chosen(); 
 	$("#store_owner_area").chosen(); 
-	
-	
 	$('.input-mask-tel').mask('(99) 999-9999');
-	$('.input-mask-phone').mask('(999) 9999-9999-9');
-
+	$('.input-mask-phone').mask('(+99) 9999-99999-9');
 	});
 function getDrectory(changefrom,changeto)
 {

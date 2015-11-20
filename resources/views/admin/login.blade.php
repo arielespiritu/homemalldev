@@ -88,7 +88,7 @@ function alert_message(alerttype,headertext,content)
 	$("#login_result").removeClass();
 	$("#login_result").addClass("alert");	
 	$("#login_result").addClass(alerttype);
-	document.getElementById('login_result_body').innerHTML="<i class='icon-remove'></i><strong"+headertext+"</strong> "+content;
+	document.getElementById('login_result_body').innerHTML="<strong"+headertext+"</strong> "+content;
 	$("#login_result").fadeIn("slow");
 	//clearInterval(intervalExiting("#login_result",5600));
 	//intervalExiting("#login_result",5600);
@@ -126,6 +126,8 @@ function loginAuth()
 		}
 		else
 		{
+			
+			
 			var messageResult="";
 			for(i=0; i<resultarray[0].data.length; i++)
 			{

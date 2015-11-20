@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\adminmodel\indicator;
 use App\adminmodel\storeowner;
+use App\adminmodel\city;
 class admincontroller extends Controller
 {
 public function showDashboard(Request $request)
@@ -33,7 +34,6 @@ public function showDashboard(Request $request)
 			 }
 			 else
 			 {
-				
 				 foreach($this->checkUserLevel() as $indicatorInfo)
 				 {
 					$indicator_id=$indicatorInfo->id;
@@ -42,6 +42,7 @@ public function showDashboard(Request $request)
 				 }				
 				 if($indicator_name == 'STORE ADMIN')
 				 {
+					
 					$userLogin= Auth::user();
 					$storeowner = storeowner::where('store_id','=',$userLogin->login_id)->with('showStoreInfo')->get();
 					return view('admin.main')
@@ -132,11 +133,13 @@ public function showStoreProfile(Request $request)
 				 }				
 				 if($indicator_name == 'STORE ADMIN')
 				 {
+					$city =city::with('viewAllLocations')->get();
 					$userLogin= Auth::user();
 					$storeowner = storeowner::where('store_id','=',$userLogin->login_id)->with('showStoreInfo')->get();
 					return view('admin.store.profile')
 							->with('userLevel',$indicator_name)
-							->with('userinfo',$storeowner);
+							->with('userinfo',$storeowner)
+							->with('cities',$city);
 				 }
 				 else
 				 {
