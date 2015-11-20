@@ -125,7 +125,7 @@ a{color:#930; text-decoration:none}
 					</div></br>
 				</div>
 				<div class="col-md-6 col-md-offset-3"> 
-					<a  href="/home" class="btn btn-default btn-transparent btn-lg " >Shop Now</a>
+					<a  href="/market" class="btn btn-default btn-transparent btn-lg " >Shop Now</a>
 				</div>
 			</div>
 			

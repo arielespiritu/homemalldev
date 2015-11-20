@@ -38,15 +38,18 @@
  _________________________________________________________ -->  
     <div id="top" style="background:#000">
         <div class="container" >
-            <div class="col-md-6 offer" data-animate="fadeInDown">
+            <div class="col-md-6 offer" >
                 <a href="#" class="btn btn-default btn-sm" style="color:black" >Merchant Login</a>  <a href="#">&nbsp;Be a seller now!</a>
             </div>
-            <div class="col-md-6" data-animate="fadeInDown">
+            <div class="col-md-6 ">
                 <ul class="menu">
-                    <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
-                    </li>
-                    <li><a href="register.html">Register</a>
-                    </li>
+					@if(isset($email))
+						<li><a href="register.html">{{$email}}</a></li>
+						<li><a href="/auth/logout" >Logout</a></li>
+					@else
+						<li><a href="/auth/login" >Login</a></li>
+					@endif  
+
                     <li><a href="contact.html">Contact</a>
                     </li>
                     <li><a href="#">Recently viewed</a>
@@ -89,19 +92,19 @@
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand home" href="index.html" style="padding-top:4px;">
-                    <img src="{{ URL::asset('assets/img/logo.png') }}" alt="homemall logo" class="hidden-xs" style="margin-left:10px">
-                    <img src="{{ URL::asset('assets/img/logo-small.png') }}" alt="homemall logo" class="visible-xs" style="margin-top:10px"><span class="sr-only">Obaju - go to homepage</span>
+                    <img src="{{ URL::asset('assets/img/logo.png') }}" alt="homemall logo" class="hidden-xs" style="margin-left:12px">
+                    <img src="{{ URL::asset('assets/img/logo-small.png') }}" alt="homemall logo" class="visible-xs" style="margin-top:12px"><span class="sr-only">Obaju - go to homepage</span>
                 </a>
-                <div class="navbar-buttons">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+                <div class="navbar-buttons" style="padding:2px;">
+                    <button type="button" class="navbar-toggle btn-sm flat" data-toggle="collapse" data-target="#navigation">
                         <span class="sr-only">Toggle navigation</span>
                         <i class="fa fa-align-justify"></i>
                     </button>
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#search">
+                    <button type="button" class="navbar-toggle btn-sm flat" data-toggle="collapse" data-target="#search">
                         <span class="sr-only">Toggle search</span>
                         <i class="fa fa-search"></i>
                     </button>
-                    <a class="btn btn-default navbar-toggle" href="basket.html">
+                    <a class="btn btn-default navbar-toggle btn-sm flat" href="basket.html">
                         <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">3 items in cart</span>
                     </a>
                 </div>
@@ -111,7 +114,7 @@
             <div class="navbar-collapse collapse" id="navigation" >
 
                 <ul class="nav navbar-nav navbar-left" >
-                    <li class="active"><a href="index.html">Home</a>
+                    <li ><a href="/market">Market</a>
                     </li>
                     <li class="dropdown yamm-fw">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Groceries <b class="caret"></b></a>
@@ -440,7 +443,7 @@
             <div class="collapse clearfix" id="search">
                 <form class="navbar-form" role="search">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control " placeholder="Search">
                         <span class="input-group-btn">
 							<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
 						</span>

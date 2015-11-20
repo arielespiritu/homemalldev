@@ -1,167 +1,113 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>Login Page - Ace Admin</title>
+@extends('client.master.master')
 
-		<meta name="description" content="User login page" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+@section('title', 'Member Login')
 
-		<!--basic styles-->
+@section('content')
 
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap.min.css') }}">
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap-responsive.min.css') }}">
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/font-awesome.min.css') }}">
-
-
-		<!--[if IE 7]>
-		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-		<![endif]-->
-
-		<!--page specific plugin styles-->
-
-		<!--fonts-->
-
-		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
-
-		<!--ace styles-->
-
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/ace.min.css') }}">
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/ace-responsive.min.css') }}">
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/ace-skins.min.css') }}">
-		<!--[if lte IE 8]>
-		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
-		<![endif]-->
-
-		<!--inline styles related to this page-->
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
-
-	<body class="login-layout">
-		<div class="main-container container-fluid">
-			<div class="main-content">
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="login-container">
-							<div class="row-fluid">
-							@if (count($errors) > 0)
-								<div class="alert alert-danger">
-									<strong>Whoops!</strong> There were some problems with your input.<br><br>
-									<ul>
-										@foreach ($errors->all() as $error)
-											<li>{{ $error }}</li>
-										@endforeach
-									</ul>
-								</div>
-							@endif
-							<div class="space"></div>
-							<div class="space"></div>
-							<div class="space"></div>
-								<div class="center">
-									<h4 class="blue">&copy; EBPLS</h4>
-								</div>
-							</div>
-
-							<div class="space-6"></div>
-
-							<div class="row-fluid">
-								<div class="position-relative">
-									<div id="login-box" class="login-box visible widget-box no-border">
-										<div class="widget-body">
-											<div class="widget-main">
-												<h4 class="header blue lighter bigger">
-													Plase enter Username and Password
-												</h4>
-
-												<div class="space-6"></div>
-
-												<form class="form-horizontal" role="form" method="POST" action="/auth/login">
-												<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
-											
-													<fieldset>
-														<label>
-															<span class="block input-icon input-icon-right">
-																<input type="text" class="span12" placeholder="Username" name="email"/>
-																<i class="icon-user"></i>
-															</span>
-														</label>
-
-														<label>
-															<span class="block input-icon input-icon-right">
-																<input type="password" class="span12" placeholder="Password" name="password"/>
-																<i class="icon-lock"></i>
-															</span>
-														</label>
-
-														<div class="space"></div>
-
-														<div class="clearfix center">
-															<button type="submit" class="width-35  btn btn-small btn-primary">
-																<i class="icon-key"></i>
-																Login
-															</button>
-														</div>
-
-														<div class="space-4"></div>
-													</fieldset>
-												</form>
-
-											</div><!--/widget-main-->
-
-										</div><!--/widget-body-->
-									</div><!--/login-box-->
-								</div><!--/position-relative-->
-							</div>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+		<div class="container">	
+			<div class="col-md-12" >
+				<div class="row">
+					<div class="col-md-12 ">
+						@if (count($errors) > 0)
+						<div class="alert alert-danger">
+							<strong>Whoops!</strong> There were some problems with your input.<br><br>
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
 						</div>
-					</div><!--/.span-->
-				</div><!--/.row-fluid-->
-			</div>
-		</div><!--/.main-container-->
+						@endif
+					</div>
+					<div class="col-md-5 col-md-12 ">
+						<div class="col-md-12 " style="background:#fff; padding:15px; margin-bottom:20px;">
+							<form  role="form" method="POST" action="/auth/login" >
+								<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+								<h4 class="blue">Member Login</h4>
+								</br>
+								<div class="form-group">
+									<input type="text" class="form-control input-md" placeholder="Email" name="email">
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control input-md" placeholder="Password" name="password">
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-default btn-md btn-block">Sign In</button>
+									</br>
+									<span><a href="#">Forgot Password?</a></span>
+								</div>
+							</form>
+						</div>	
+					</div>	
+					
+					<div class="col-md-7 col-md-12" >
+						<div class="col-md-12" style="background:#fff; padding:15px">					
+							<form method="POST" action="/auth/register">
+							{!! csrf_field() !!}
+								<h4 class="blue">New Member Registration</h4>
+								</br>
+								<div class="form-group">
+									<input type="text" class="form-control input-md" placeholder="Email" name="email" value="{{ old('email') }}">
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control input-md" placeholder="Password" name="password">
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control input-md" placeholder="Confirm Password" name="password_confirmation">
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-default btn-md btn-block">Sign Up</button>
+									</br>
+								</div>
+							</form>
+						</div>	
+					</div>	
+				</div>
+			</div>	
+		</div>		
+			
 
-		<!--basic scripts-->
 
-		<!--[if !IE]>-->
+			
+			</br>
+			</br>
+			</br>
+   
+						
+@endsection
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
-		<!--<![endif]-->
+@section('page-script')
+	
 
-		<!--[if IE]>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<![endif]-->
+	<script type="text/javascript">
+	
+		function viewAnnouncement(id,date){
+			var announcement_id = id;
+			var announcement_date = date;
+			$.post("/getAnnouncement", {announcement_id: announcement_id}, function(result){	
+				var obj = JSON.parse(result);
+				$("#announcement_preview").show();
+				document.getElementById("announce_title").innerHTML = obj[0].title.replace(/\n/g, "<br />");;
+				document.getElementById("announce_desc").innerHTML = obj[0].description.replace(/\n/g, "<br />");;
+				document.getElementById("announce_date").innerHTML = "&nbsp;&nbsp;"+announcement_date;
+				$('html, body').animate({ scrollTop: 0 }, 'fast');
+			});
+		}
+		
+		$(function() {
+				var oTable1 = $('#sample-table-2').dataTable( {
+				"aoColumns": [
+			      { "bSortable": false },
+			      null, null, null,
+				  { "bSortable": false }
+				] } );
+				
 
-		<!--[if !IE]>-->
-
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
-		</script>
-
-		<!--<![endif]-->
-
-		<!--[if IE]>
-		<script type="text/javascript">
-		 window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-		</script>
-		<![endif]-->
-
-		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>
-		<script src="assets/js/bootstrap.min.js"></script>
-
-		<!--page specific plugin scripts-->
-
-		<!--ace scripts-->
-
-		<script src="assets/js/ace-elements.min.js"></script>
-		<script src="assets/js/ace.min.js"></script>
-
-		<!--inline scripts related to this page-->
-
-		<script type="text/javascript">
-			function show_box(id) {
-			 $('.widget-box.visible').removeClass('visible');
-			 $('#'+id).addClass('visible');
-			}
-		</script>
-	</body>
-</html>
+			})
+	</script>
+	
+	
+	
+@endsection
