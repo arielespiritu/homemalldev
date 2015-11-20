@@ -48,12 +48,16 @@
 						<h4><b>STORE INFORMATION </b></h4>
 							<span class="profile-picture">
 								<input type="hidden" id="store_logo_status" class="span6" name="file-input" />
+								
 								@if(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.jpg'))
 									<img id="store_logo"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.jpg')}}" />
+									<input type="hidden" id="default_store_logo" value="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.jpg')}}" class="span6" name="file-input" />
 								@elseif(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.jpeg'))
 									<img id="store_logo"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.jpeg')}}" />
+									<input type="hidden" id="default_store_logo" value="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.jpeg')}}" class="span6" name="file-input" />
 								@elseif(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.png'))
-									<img id="store_logo"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.png')}}" />									
+									<img id="store_logo"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.png')}}" />		
+   									<input type="hidden" id="default_store_logo" value="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.png')}}" class="span6" name="file-input" />	
 								@else
 									
 								@endif
@@ -61,7 +65,7 @@
 								<br>
 								@if($userLevel == 'STORE ADMIN')
 								<input type="file" id="store_logo_file"  accept="image/gif, image/jpeg, image/png"  class="ace-file-input" name="file-input"/>
-								<button id="store_logo_btncancel" onClick="cancel_upload('#store_logo_btncancel','#store_logo_file','#store_logo','{{URL::asset('assets/avatars/142.jpg')}}')" class="btn btn-small btn-danger" style="display:none">Cancel</button>
+								<button id="store_logo_btncancel" onClick="cancel_upload('#store_logo_btncancel','#store_logo_file','#store_logo','default_store_logo','store_logo_status')" class="btn btn-small btn-danger" style="display:none">Cancel</button>
 								@else
 								@endif	
 							</span>
@@ -159,16 +163,19 @@
 										<center>
 										@if(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpg'))
 											<img id="owner_image"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpg')}}" />
+											<input type="hidden" id="default_owner_image" value="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpg')}}" class="span6" name="file-input" />	
 										@elseif(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpeg'))
 											<img id="owner_image"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpeg')}}" />
+											<input type="hidden" id="default_owner_image" value="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpeg')}}" class="span6" name="file-input" />	
 										@elseif(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.png'))
 											<img id="owner_image"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.png')}}" />
+											<input type="hidden" id="default_owner_image" value="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.png')}}" class="span6" name="file-input" />	
 										@else
 											
 										@endif	
 										</center>
 										<input type="file" id="owner_image_file" class="ace-file-input" name="file-input"/>
-										<button id="owner_image_btncancel" onClick="cancel_upload('#owner_image_btncancel','#owner_image_file','#owner_image','{{URL::asset('assets/avatars/user.jpg')}}')" class="btn btn-small btn-danger" style="display:none">Cancel</button>
+										<button id="owner_image_btncancel" onClick="cancel_upload('#owner_image_btncancel','#owner_image_file','#owner_image','default_owner_image','owner_image_status')" class="btn btn-small btn-danger" style="display:none">Cancel</button>
 									</span>
 								</div>	
 							<br>
@@ -388,7 +395,7 @@ $("#store_logo_file").change(function() {
             break;
         default:
 				$(this).val('');
-				 $("#store_logo").attr('src',"{{URL::asset('assets/avatars/142.jpg')}}");
+				 $("#store_logo").attr('src',document.getElementById('default_store_logo').value);
 				// error message here
 				last_gritter = $.gritter.add({
 					title: 'Ooopss!! the file is not an image',
@@ -410,7 +417,7 @@ $("#owner_image_file").change(function() {
             break;
         default:
 				$(this).val('');
-				 $("#owner_image").attr('src',"{{URL::asset('assets/avatars/142.jpg')}}");
+				 $("#owner_image").attr('src',document.getElementById('default_owner_image').value);
 				// error message here
 				last_gritter = $.gritter.add({
 					title: 'Ooopss!! the file is not an image',
@@ -449,10 +456,11 @@ function getDrectory(changefrom,changeto)
 	 $(changeto).fadeIn("slow");
 	 $(changefrom).fadeOut("slow");
 }
-function cancel_upload(changefrom,changeto,returnimageID,returnImageto)
+function cancel_upload(changefrom,changeto,returnimageID,returnImageto,status)
 {
 	getDrectory(changefrom,changeto);
-	 $(returnimageID).attr('src',returnImageto);
+	 $(returnimageID).attr('src',document.getElementById(returnImageto).value);
+	 document.getElementById(status).value="Nothing_Change";
 }
 
 function updateInfo()
@@ -487,7 +495,7 @@ function updateInfo()
 	formData.append('store_about', store_about); 
 	//owner 
 	formData.append('owner_image_status', owner_image_status); 
-	formData.append('store_logo_file', owner_image_file[0].files[0]); 
+	formData.append('owner_image_file', owner_image_file[0].files[0]); 
 	formData.append('owner_mobile', owner_mobile); 
 	formData.append('owner_tel_num', owner_tel_num); 
 	formData.append('owner_email', owner_email); 
