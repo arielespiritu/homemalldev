@@ -40,8 +40,8 @@
 					<div class="span12">
 						<div class="span6">
 
-											
-						<h4><b>STORE INFORMATION</b></h4>
+										
+						<h4><b>STORE INFORMATION </b></h4>
 							<span class="profile-picture">
 								<input type="hidden" id="store_logo_status" class="span6" name="file-input" />
 								<img id="store_logo"  src="{{URL::asset('assets/avatars/142.jpg')}}" />
@@ -52,17 +52,29 @@
 							</span>
 							<br>
 							<br>
+@foreach($userinfo as $user_info)
+	
+		
 
+@endforeach
 							<div class="control-group">
-								<label class="control-label" for="form-field-1">Store Name</label>
+								<label class="control-label" for="form-field-1">Store Name </label>
 								<div class="controls">
-									<input type="text" class="span12" id="form-field-1" placeholder="" disabled />
+								@if($userLevel == 'STORE ADMIN')
+									<input type="text" class="span12" id="form-field-1" placeholder="" value="{{$user_info->showStoreInfo->store_name}} " disabled />
+								@else
+									
+								@endif
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="form-field-1">Store Description</label>
 								<div class="controls">
-									<textarea class="span12 limited" rows="3" id="form-field-9" style="resize:none;" data-maxlength="50"></textarea>
+									@if($userLevel == 'STORE ADMIN')
+									<textarea class="span12 limited" rows="3" id="form-field-9" style="resize:none;" data-maxlength="50" >{{$user_info->showStoreInfo->store_description}}</textarea>
+									@else
+									<textarea class="span12 limited" rows="3" id="form-field-9" style="resize:none;" data-maxlength="50" disabled>{{$user_info->showStoreInfo->store_description}}</textarea>
+									@endif	
 								</div>
 							</div>
 							<div class="row-fluid span12" style="margin:0px;">
@@ -70,7 +82,11 @@
 									<div class="control-group">
 										<label class="control-label" for="form-field-1"> <i class="icon-screen-smartphone "></i> Store Mobile</label>
 										<div class="controls">
-											<input type="text" class="  span12 input-mask-phone" id="form-field-1" placeholder="(+639)9999-99999-9" />
+											@if($userLevel == 'STORE ADMIN')
+											<input type="text" class="  span12 input-mask-phone" id="form-field-1" value="{{$user_info->showStoreInfo->store_mobile}}" placeholder="(+639)9999-99999-9"  />
+											@else
+											<input type="text" class="  span12 input-mask-phone" id="form-field-1" value="{{$user_info->showStoreInfo->store_mobile}}" placeholder="(+639)9999-99999-9" disabled />	
+											@endif	
 										</div>
 									</div>				
 								</div>
@@ -78,17 +94,24 @@
 									<div class="control-group">
 										<label class="control-label" for="form-field-1"><i class="icon-phone"></i> Store Tel. Num</label>
 										<div class="controls">
-											<input type="text" class=" span12 input-mask-tel" id="form-field-1" placeholder="(02)-0000-000" />
+											@if($userLevel == 'STORE ADMIN')
+											<input type="text" class=" span12 input-mask-tel" id="form-field-1" value="{{$user_info->showStoreInfo->store_tel_num}}" placeholder="(02)-0000-000" />
+											@else
+											<input type="text" class=" span12 input-mask-tel" id="form-field-1" value="{{$user_info->showStoreInfo->store_tel_num}}" placeholder="(02)-0000-000" disabled />	
+											@endif
 										</div>
 									</div>				
 								</div>
 							</div>
-					
 							<div class="row-fluid span12" style="margin:0px;">
 								<div class="span6"  >
 										<label class="control-label" for="form-field-1">Store City</label>
 										<div class="controls " >
+											@if($userLevel == 'STORE ADMIN')
 											<select class="span12" style="width:100%;" id="store_profile_city" data-placeholder="Choose a Country...">
+											@else
+											<select class="span12" style="width:100%;" id="store_profile_city" data-placeholder="Choose a Country..." disabled>
+											@endif	
 													<option value="" />
 													<option value="AL" />Alabama
 													<option value="AK" />Alaska
@@ -147,7 +170,11 @@
 									<div class="control-group">
 										<label class="control-label" for="form-field-1">Store Area</label>
 										<div class="controls">
+											@if($userLevel == 'STORE ADMIN')
 											<select class="span12"  onChange=""style="width:100%;" id="store_profile_area" data-placeholder="Choose a Country...">
+											@else
+											<select class="span12"  onChange=""style="width:100%;" id="store_profile_area" data-placeholder="Choose a Country..."disabled>
+											@endif
 													<option value="" />
 													<option value="AL" />Alabama
 													<option value="AK" />Alaska
@@ -219,7 +246,7 @@
 							<div class="control-group">
 								<label class="control-label" for="form-field-1">Owner Name</label>
 								<div class="controls">
-									<input type="text" class="span12" id="form-field-1" placeholder="" disabled />
+									<input type="text" class="span12" id="form-field-1" value="{{$user_info->owner_name}}" placeholder="" disabled />
 								</div>
 							</div>
 							<div class="row-fluid span12" style="margin:0px;">
@@ -227,7 +254,11 @@
 									<div class="control-group">
 										<label class="control-label" for="form-field-1"><i class="icon-screen-smartphone"></i> Owner Mobile</label>
 										<div class="controls">
+											@if($userLevel == 'STORE ADMIN')
 											<input type="text" class=" span12 input-mask-phone" id="form-field-1" placeholder="(+639)9999-99999-9" />
+											@else
+											<input type="text" class=" span12 input-mask-phone" id="form-field-1" placeholder="(+639)9999-99999-9" disabled />
+											@endif	
 										</div>
 									</div>				
 								</div>
@@ -235,7 +266,11 @@
 									<div class="control-group">
 									<label class="control-label" for="form-field-1"><i class="icon-phone"></i> Owner Tel. Num</label>
 										<div class="controls">
-											<input type="text" class=" span12 input-mask-tel" id="form-field-1" placeholder="(02)-0000-000" />
+											@if($userLevel == 'STORE ADMIN')
+											<input type="text" class=" span12 input-mask-tel" id="form-field-1" value="{{$user_info->owner_tel_num}}" placeholder="(02)-0000-000" />
+											@else
+											<input type="text" class=" span12 input-mask-tel" id="form-field-1" value="{{$user_info->owner_tel_num}}" placeholder="(02)-0000-000" disabled />
+											@endif
 										</div>				
 								</div>
 							</div>
@@ -243,17 +278,30 @@
 								<div class="span6"  >
 										<label class="control-label" for="form-field-1"><i class="icon-envelope-letter"></i> Email</label>
 										<div class="controls " >
-											<input type="text" class=" span12 input-mask-tel" id="form-field-1" placeholder="(02)-0000-000" />
+											@if($userLevel == 'STORE ADMIN')
+												<input type="email" class=" span12 " id="form-field-1" value="{{$user_info->owner_email}}"  />
+											@else
+												<input type="email" class=" span12" id="form-field-1" value="{{$user_info->owner_email}}"  disabled />	
+											@endif	
 										</div>
 								</div>
 								<div class="span6">
 									<div class="control-group">
 										<label class="control-label" for="form-field-1">Gender</label>
 										<div class="controls">
+											@if($userLevel == 'STORE ADMIN')
 											<select class="span12"  onChange=""style="width:100%;" id="store_owner_gender" data-placeholder="Choose a Country...">
+											@else
+											<select class="span12"  onChange=""style="width:100%;" id="store_owner_gender" data-placeholder="Choose a Country..." disabled>	
+											@endif	
 													<option value="" />Please Select
-													<option value="FEMALE" />FEMALE
-													<option value="MALE" />MALE
+													@if($user_info->showStoreInfo->owner_gender == 'MALE' || 'male')
+														<option value="FEMALE" />FEMALE
+														<option selected value="MALE" />MALE
+													@else
+														<option selected value="FEMALE" />FEMALE
+														<option  value="MALE" />MALE														
+													@endif		
 												</select>
 										</div>
 									</div>				
@@ -263,7 +311,11 @@
 								<div class="span6"  >
 										<label class="control-label" for="form-field-1">Store City</label>
 										<div class="controls " >
+											@if($userLevel == 'STORE ADMIN')
 											<select class="" style="width:100%;" id="store_owner_city" data-placeholder="Choose a Country...">
+											@else
+											<select class="" style="width:100%;" id="store_owner_city" data-placeholder="Choose a Country...">
+											@endif
 													<option value="" />
 													<option value="AL" />Alabama
 													<option value="AK" />Alaska
@@ -322,7 +374,12 @@
 									<div class="control-group">
 										<label class="control-label" for="form-field-1">Store Area</label>
 										<div class="controls">
+											@if($userLevel == 'STORE ADMIN')
 											<select class=""  onChange=""style="width:100%;" id="store_owner_area" data-placeholder="Choose a Country...">
+											@else
+											<select class=""  onChange=""style="width:100%;" id="store_owner_area" data-placeholder="Choose a Country..." disabled>	
+											@endif
+										
 													<option value="" />
 													<option value="AL" />Alabama
 													<option value="AK" />Alaska
@@ -384,14 +441,21 @@
 				</div>	
 				<div class="row-fluid">
 					<div class="control-group">
-					
 						<label class="control-label center" for="form-field-1"><i class="icon-film"></i><b> ABOUT STORE</b></label>
 						<div class="controls">
-							<textarea class="span12 limited" rows="10" id="form-field-9" style="resize:none;" data-maxlength="50"></textarea>
+						@if($userLevel == 'STORE ADMIN')
+						<textarea class="span12 limited" rows="10" id="form-field-9" style="resize:none;" data-maxlength="50">{{$user_info->showStoreInfo->store_about}}</textarea>
+						@else
+						<textarea class="span12 limited" rows="10" id="form-field-9" style="resize:none;" data-maxlength="50" disabled >{{$user_info->showStoreInfo->store_about}}</textarea>	
+						@endif	
 						</div>
 					</div>					
-				</div>	
+				</div>
+				@if($userLevel == 'STORE ADMIN')	
 				<div class="row-fluid wizard-actions">
+			    @else
+				<div class="row-fluid wizard-actions" style="display:none">
+				@endif	
 					<button class="btn btn-success btn-next" data-last="Finish ">
 						Save Info
 						<i class="fa-save"></i>

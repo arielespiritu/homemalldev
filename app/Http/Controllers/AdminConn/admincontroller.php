@@ -40,26 +40,24 @@ public function showDashboard(Request $request)
 					$indicator_name=$indicatorInfo->indicator_name;
 					$indicator_for=$indicatorInfo->indicator_for;
 				 }				
-				
 				 if($indicator_name == 'STORE ADMIN')
 				 {
 					$userLogin= Auth::user();
-					$storeowner = storeowner::where('id','=',$userlogin->login_id)->get();
-					return $storeowner;
-					// return view('admin.main')
-							// ->with('userLevel',$indicator_name);
-							// ->with('userinfo',);
+					$storeowner = storeowner::where('store_id','=',$userLogin->login_id)->with('showStoreInfo')->get();
+					return view('admin.main')
+							->with('userLevel',$indicator_name)
+							->with('userinfo',$storeowner);
 				 }
 				 else
 				 {
 					 return $indicator_name;
 				 }
-
 			 }
 		}
 		else
 		{
 			//err method err
+		
 		}			
 	}
 	catch(\Exception $e)
@@ -107,25 +105,55 @@ public function showStoreProfile(Request $request)
 {
 	try
 	{
+		//return $this->checkUserLevel();
 		if ($request->isMethod('GET')) {
 				
-			 if(Auth::user())
+			 if($this->checkUserLevel() == 'authFailed' )
 			 {
-				return view('admin.store.profile');
+				return redirect('/HMadmin/login');
+				
 			 }
-			 else
+			 else if($this->checkUserLevel() == 'authErr' )
 			 {	 
 				return redirect('/HMadmin/login');
+			 }
+			 else if($this->checkUserLevel() == 'empty' )
+			 {
+				return 'no indicator';
+			 }
+			 else
+			 {
+				
+				 foreach($this->checkUserLevel() as $indicatorInfo)
+				 {
+					$indicator_id=$indicatorInfo->id;
+					$indicator_name=$indicatorInfo->indicator_name;
+					$indicator_for=$indicatorInfo->indicator_for;
+				 }				
+				 if($indicator_name == 'STORE ADMIN')
+				 {
+					$userLogin= Auth::user();
+					$storeowner = storeowner::where('store_id','=',$userLogin->login_id)->with('showStoreInfo')->get();
+					return view('admin.store.profile')
+							->with('userLevel',$indicator_name)
+							->with('userinfo',$storeowner);
+				 }
+				 else
+				 {
+					 return $indicator_name;
+				 }
 			 }
 		}
 		else
 		{
+			//err method err
+		
 		}			
 	}
 	catch(\Exception $e)
 	{
 		
-	}	
+	}
 }
 
 
