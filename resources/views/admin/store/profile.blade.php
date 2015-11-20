@@ -24,7 +24,6 @@
 @foreach($userinfo as $user_info)
 @endforeach
 
-
 	<div class="widget-box">
 		<div class="widget-header">
 			<h4>Store Profile</h4>
@@ -83,9 +82,9 @@
 								<label class="control-label" for="form-field-1">Store Description</label>
 								<div class="controls">
 									@if($userLevel == 'STORE ADMIN')
-									<textarea class="span12 limited" rows="3" id="form-field-9" style="resize:none;" data-maxlength="50" >{{$user_info->showStoreInfo->store_description}}</textarea>
+									<textarea class="span12 limited" rows="3" id="store_description"  style="resize:none;" data-maxlength="50" >{{$user_info->showStoreInfo->store_description}}</textarea>
 									@else
-									<textarea class="span12 limited" rows="3" id="form-field-9" style="resize:none;" data-maxlength="50" disabled>{{$user_info->showStoreInfo->store_description}}</textarea>
+									<textarea class="span12 limited" rows="3"  style="resize:none;" data-maxlength="50" disabled>{{$user_info->showStoreInfo->store_description}}</textarea>
 									@endif	
 								</div>
 							</div>
@@ -95,9 +94,9 @@
 										<label class="control-label" for="form-field-1"> <i class="icon-screen-smartphone "></i> Store Mobile</label>
 										<div class="controls">
 											@if($userLevel == 'STORE ADMIN')
-											<input type="text" class="  span12 input-mask-phone" id="form-field-1" value="{{$user_info->showStoreInfo->store_mobile}}" placeholder="(+63)9999-999999-9"  />
+											<input type="text" class="  span12 input-mask-phone" id="store_mobile" value="{{$user_info->showStoreInfo->store_mobile}}" placeholder="(+63)9999-999999-9"  />
 											@else
-											<input type="text" class="  span12 input-mask-phone" id="form-field-1" value="{{$user_info->showStoreInfo->store_mobile}}" placeholder="(+63)9999-999999-9" disabled />	
+											<input type="text" class="  span12 input-mask-phone"  value="{{$user_info->showStoreInfo->store_mobile}}" placeholder="(+63)9999-999999-9" disabled />	
 											@endif	
 										</div>
 									</div>				
@@ -107,9 +106,9 @@
 										<label class="control-label" for="form-field-1"><i class="icon-phone"></i> Store Tel. Num</label>
 										<div class="controls">
 											@if($userLevel == 'STORE ADMIN')
-											<input type="text" class=" span12 input-mask-tel" id="form-field-1" value="{{$user_info->showStoreInfo->store_tel_num}}" placeholder="(02)-0000-000" />
+											<input type="text" class=" span12 input-mask-tel" id="store_tel_num" value="{{$user_info->showStoreInfo->store_tel_num}}" placeholder="(02)-0000-000" />
 											@else
-											<input type="text" class=" span12 input-mask-tel" id="form-field-1" value="{{$user_info->showStoreInfo->store_tel_num}}" placeholder="(02)-0000-000" disabled />	
+											<input type="text" class=" span12 input-mask-tel"  value="{{$user_info->showStoreInfo->store_tel_num}}" placeholder="(02)-0000-000" disabled />	
 											@endif
 										</div>
 									</div>				
@@ -117,7 +116,7 @@
 							</div>
 							<div class="row-fluid span12" style="margin:0px;">
 								<div class="span6"  >
-										<label class="control-label" for="form-field-1">Store City</label>
+										<label class="control-label" for="form-field-1">Store City </label>
 										<div class="controls " >
 											@if($userLevel == 'STORE ADMIN')
 											<select class="span12" onChange="store_getArea(this.value)" style="width:100%;" id="store_profile_city" data-placeholder="Choose a City...">
@@ -126,7 +125,12 @@
 											@endif	
 													<option value="" />
 													@foreach($cities as $city)
-													<option value="{{$city->city_id}}" />{{$city->city_name}}
+														@if($user_info->showStoreInfo->store_city == $city->city_id)
+														<option selected value="{{$city->city_id}}" />{{$city->city_name}}
+														@else
+														<option value="{{$city->city_id}}" />{{$city->city_name}}
+														@endif	
+													
 													@endforeach
 												</select>
 										</div>
@@ -173,16 +177,16 @@
 								<div class="controls">
 									<input type="text" class="span12" id="form-field-1" value="{{$user_info->owner_name}}" placeholder="" disabled />
 								</div>
-							</div>
+							</div> 
 							<div class="row-fluid span12" style="margin:0px;">
 								<div class="span6">
 									<div class="control-group">
 										<label class="control-label" for="form-field-1"><i class="icon-screen-smartphone"></i> Owner Mobile</label>
 										<div class="controls">
 											@if($userLevel == 'STORE ADMIN')
-											<input type="text" class=" span12 input-mask-phone" id="form-field-1" placeholder="(+63)9999-999999-9" />
+											<input type="text" class=" span12 input-mask-phone" id="owner_mobile" placeholder="(+63)9999-999999-9" />
 											@else
-											<input type="text" class=" span12 input-mask-phone" id="form-field-1" placeholder="(+63)9999-999999-9" disabled />
+											<input type="text" class=" span12 input-mask-phone" placeholder="(+63)9999-999999-9" disabled />
 											@endif	
 										</div>
 									</div>				
@@ -192,9 +196,9 @@
 									<label class="control-label" for="form-field-1"><i class="icon-phone"></i> Owner Tel. Num</label>
 										<div class="controls">
 											@if($userLevel == 'STORE ADMIN')
-											<input type="text" class=" span12 input-mask-tel" id="form-field-1" value="{{$user_info->owner_tel_num}}" placeholder="(02)-0000-000" />
+											<input type="text" class=" span12 input-mask-tel" id="owner_tel_num" value="{{$user_info->owner_tel_num}}" placeholder="(02)-0000-000" />
 											@else
-											<input type="text" class=" span12 input-mask-tel" id="form-field-1" value="{{$user_info->owner_tel_num}}" placeholder="(02)-0000-000" disabled />
+											<input type="text" class=" span12 input-mask-tel"  value="{{$user_info->owner_tel_num}}" placeholder="(02)-0000-000" disabled />
 											@endif
 										</div>				
 								</div>
@@ -204,9 +208,9 @@
 										<label class="control-label" for="form-field-1"><i class="icon-envelope-letter"></i> Email</label>
 										<div class="controls " >
 											@if($userLevel == 'STORE ADMIN')
-												<input type="email" class=" span12 " id="form-field-1" value="{{$user_info->owner_email}}"  />
+												<input type="email" class=" span12 " id="owner_email" value="{{$user_info->owner_email}}"  />
 											@else
-												<input type="email" class=" span12" id="form-field-1" value="{{$user_info->owner_email}}"  disabled />	
+												<input type="email" class=" span12" id="" value="{{$user_info->owner_email}}"  disabled />	
 											@endif	
 										</div>
 								</div>
@@ -217,7 +221,7 @@
 											@if($userLevel == 'STORE ADMIN')
 											<select class="span12"  onChange=""style="width:100%;" id="store_owner_gender" data-placeholder="Choose a Gender...">
 											@else
-											<select class="span12"  onChange=""style="width:100%;" id="store_owner_gender" data-placeholder="Choose a Gender..." disabled>	
+											<select class="span12"  onChange=""style="width:100%;" data-placeholder="Choose a Gender..." disabled>	
 											@endif	
 													<option value="" />Please Select
 													@if($user_info->showStoreInfo->owner_gender == 'MALE' || 'male')
@@ -231,7 +235,7 @@
 										</div>
 									</div>				
 								</div>
-							</div>								
+							</div>		
 							<div class="row-fluid span12" style="margin:0px;">
 								<div class="span6"  >
 										<label class="control-label" for="form-field-1">Store City</label>
@@ -239,15 +243,20 @@
 											@if($userLevel == 'STORE ADMIN')
 											<select class="" onChange="owner_getArea(this.value)" style="width:100%;" id="store_owner_city" data-placeholder="Choose a City...">
 											@else
-											<select class="" style="width:100%;" id="store_owner_city" data-placeholder="Choose a City...">
+											<select class="" style="width:100%;"  data-placeholder="Choose a City..." disabled >
 											@endif
 													<option value="" />
 													@foreach($cities as $city)
+													@if($city->city_id == $user_info->owner_city)
+													<option selected value="{{$city->city_id}}" />{{$city->city_name}}	
+													@else
 													<option value="{{$city->city_id}}" />{{$city->city_name}}
+													@endif
+												
 													@endforeach
-												</select>
+											</select>
 										</div>
-								</div>
+								</div>						
 								<div class="span6">
 									<div class="control-group">
 										<label class="control-label" for="form-field-1">Store Area</label>
@@ -255,8 +264,9 @@
 											@if($userLevel == 'STORE ADMIN')
 											<select class="" style="width:100%;" id="store_owner_area" data-placeholder="Choose a Area...">
 											@else
-											<select class=""  onChange=""style="width:100%;" id="store_owner_area" data-placeholder="Choose a Area..." disabled>	
+											<select class=""  onChange=""style="width:100%;"  data-placeholder="Choose a Area..." disabled>	
 											@endif
+											<option value="" />
 												</select>
 										</div>
 									</div>				
@@ -270,9 +280,9 @@
 						<label class="control-label center" for="form-field-1"><i class="icon-film"></i><b> ABOUT STORE</b></label>
 						<div class="controls">
 						@if($userLevel == 'STORE ADMIN')
-						<textarea class="span12 limited" rows="10" id="form-field-9" style="resize:none;" data-maxlength="50">{{$user_info->showStoreInfo->store_about}}</textarea>
+						<textarea class="span12 limited" rows="10" id="store_about" style="resize:none;" data-maxlength="50">{{$user_info->showStoreInfo->store_about}}</textarea>
 						@else
-						<textarea class="span12 limited" rows="10" id="form-field-9" style="resize:none;" data-maxlength="50" disabled >{{$user_info->showStoreInfo->store_about}}</textarea>	
+						<textarea class="span12 limited" rows="10"  style="resize:none;" data-maxlength="50" disabled >{{$user_info->showStoreInfo->store_about}}</textarea>	
 						@endif	
 						</div>
 					</div>					
@@ -282,7 +292,7 @@
 			    @else
 				<div class="row-fluid wizard-actions" style="display:none">
 				@endif	
-					<button class="btn btn-success btn-next" data-last="Finish ">
+					<button onClick="updateInfo()" class="btn btn-success btn-next" data-last="Finish ">
 						Save Info
 						<i class="fa-save"></i>
 					</button>
@@ -296,13 +306,20 @@
 @section('myscripts')
 <script>
 
-
 document.getElementById('store_logo_status').value="Nothing_Change";
 document.getElementById('owner_image_status').value="Nothing_Change";
 
+var store_savedcity= "{{$user_info->showStoreInfo->store_city}}";
+store_getArea(store_savedcity);
+
+var owner_savedcity= "{{$user_info->owner_city}}";
+owner_getArea(owner_savedcity);
+
+
+
 function store_getArea(value)
 {	
-
+	var savedArea= "{{$user_info->showStoreInfo->store_area}}";
     var x = document.getElementById("store_profile_area");
     document.getElementById("store_profile_area").options.length = 0;
     var option = document.createElement("option");
@@ -328,11 +345,11 @@ function store_getArea(value)
 		}
 		$("#store_profile_area").trigger("liszt:updated");
 	}
-	
+		document.getElementById("store_profile_area").value = savedArea;
 }
 function owner_getArea(value)
 {	
-
+	var savedArea= "{{$user_info->owner_area}}";
     var x = document.getElementById("store_owner_area");
     document.getElementById("store_owner_area").options.length = 0;
     var option = document.createElement("option");
@@ -358,7 +375,7 @@ function owner_getArea(value)
 		}
 		$("#store_owner_area").trigger("liszt:updated");
 	}
-	
+	document.getElementById("store_owner_area").value = savedArea;
 }
 $("#store_logo_file").change(function() {
     var val = $(this).val();
@@ -437,5 +454,54 @@ function cancel_upload(changefrom,changeto,returnimageID,returnImageto)
 	getDrectory(changefrom,changeto);
 	 $(returnimageID).attr('src',returnImageto);
 }
+
+function updateInfo()
+{
+	var store_logo_status=document.getElementById('store_logo_status').value;
+	var store_description=document.getElementById('store_description').value;
+	var store_mobile=document.getElementById('store_mobile').value;
+	var store_tel_num=document.getElementById('store_tel_num').value;
+	var store_profile_city=document.getElementById('store_profile_city').value;
+	var store_profile_area=document.getElementById('store_profile_area').value;
+	var store_about=document.getElementById('store_about').value;
+	var store_logo_file = $('#store_logo_file');
+	
+	var owner_image_status=document.getElementById('owner_image_status').value;
+	var owner_mobile=document.getElementById('owner_mobile').value;
+	var owner_tel_num=document.getElementById('owner_tel_num').value;
+	var owner_email=document.getElementById('owner_email').value;
+	var store_owner_gender=document.getElementById('store_owner_gender').value;
+	var store_owner_city=document.getElementById('store_owner_city').value;
+	var store_owner_area=document.getElementById('store_owner_area').value;
+	var owner_image_file = $('#owner_image_file');
+	
+	var formData = new FormData();	
+	//store
+	formData.append('store_logo_status', store_logo_status);  
+	formData.append('store_logo_file', store_logo_file[0].files[0]); 
+	formData.append('store_description', store_description); 
+	formData.append('store_mobile', store_mobile); 
+	formData.append('store_tel_num', store_tel_num); 
+	formData.append('store_profile_city', store_profile_city); 
+	formData.append('store_profile_area', store_profile_area); 
+	formData.append('store_about', store_about); 
+	//owner 
+	formData.append('owner_image_status', owner_image_status); 
+	formData.append('store_logo_file', owner_image_file[0].files[0]); 
+	formData.append('owner_mobile', owner_mobile); 
+	formData.append('owner_tel_num', owner_tel_num); 
+	formData.append('owner_email', owner_email); 
+	formData.append('store_owner_gender', store_owner_gender); 
+	formData.append('store_owner_city', store_owner_city); 
+	formData.append('store_owner_area', store_owner_area); 
+	formData.append('store_owner_area', store_owner_area); 
+	
+	alert(store_logo_status+""+store_description+""+store_mobile+""+store_tel_num+""+store_profile_city+""+store_profile_area+""+store_about);
+	alert(owner_image_status+""+owner_mobile+""+owner_tel_num+""+owner_email+""+store_owner_gender+""+store_owner_city+""+store_owner_area);
+	
+	
+	
+}
+
 </script>
 @endsection
