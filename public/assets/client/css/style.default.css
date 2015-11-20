@@ -1145,10 +1145,10 @@ h1 {
 }
 .navbar-brand {
   float: left;
-  margin-top:0px;
+  margin-top:5px;
   font-size: 18px;
   line-height: 10px;
-  height: 60px;
+  height:45px;
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
@@ -1159,6 +1159,7 @@ h1 {
   .navbar > .container-fluid .navbar-brand {
     margin-left: -15px;
   }
+
 }
 .navbar-toggle {
   padding: 9px 10px !important;
@@ -1171,6 +1172,13 @@ h1 {
   .navbar-toggle {
     margin-right: 5px;
   }
+	.navbar-brand {
+	  float: left;
+	  margin-top:-5px;
+	  font-size: 18px;
+	  line-height: 10px;
+	  height:45px;
+	}
 }
 .navbar-nav {
   margin: 12.5px -15px;
@@ -1227,7 +1235,8 @@ h1 {
   margin-bottom: 18px;
 }
 .navbar-btn.btn-sm {
-  margin-top: 5px;
+  margin-top: 10px;
+  margin-left: 10px;
   margin-bottom: 0px;
 }
 .navbar-btn.btn-xs {

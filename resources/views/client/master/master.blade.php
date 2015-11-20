@@ -95,7 +95,7 @@
                     <img src="{{ URL::asset('assets/img/logo.png') }}" alt="homemall logo" class="hidden-xs" style="margin-left:12px">
                     <img src="{{ URL::asset('assets/img/logo-small.png') }}" alt="homemall logo" class="visible-xs" style="margin-top:12px"><span class="sr-only">Obaju - go to homepage</span>
                 </a>
-                <div class="navbar-buttons" style="padding:2px;">
+                <div class="navbar-buttons" style="padding:0px;">
                     <button type="button" class="navbar-toggle btn-sm flat" data-toggle="collapse" data-target="#navigation">
                         <span class="sr-only">Toggle navigation</span>
                         <i class="fa fa-align-justify"></i>
@@ -426,9 +426,9 @@
             </div>
             <!--/.nav-collapse -->
 
-            <div class="navbar-buttons" style="padding:0px;">
+            <div class="navbar-buttons" >
                 <div class="navbar-collapse collapse right" id="basket-overview"  >
-                    <a href="basket.html" class="btn btn-default navbar-btn btn-sm flat" style="margin-right:10px"><i class="fa fa-shopping-cart"></i><span class="hidden-sm" >3 items in cart</span></a>
+                    <a href="basket.html" class="btn btn-default navbar-btn btn-sm flat" style="margin-right:0px"><i class="fa fa-shopping-cart"></i><span class="hidden-sm" >3 items in cart</span></a>
                 </div>
                 <!--/.nav-collapse -->
 
@@ -487,9 +487,9 @@
                         <h4>User section</h4>
 
                         <ul>
-                            <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+                            <li><a href="#" data-toggle="modal" data-target="#login-modal">Member Login</a>
                             </li>
-                            <li><a href="register.html">Regiter</a>
+                            <li><a href="register.html">Merchant Login</a>
                             </li>
                         </ul>
 
@@ -500,20 +500,20 @@
 
                     <div class="col-md-3 col-sm-6">
 
-                        <h4>Top categories</h4>
+                        <h4>Top Market</h4>
 
-                        <h5>Men</h5>
+                        <h5>Groceries</h5>
 
                         <ul>
-                            <li><a href="category.html">T-shirts</a>
+                            <li><a href="category.html">Liquor and Beverages</a>
                             </li>
-                            <li><a href="category.html">Shirts</a>
+                            <li><a href="category.html">Bakery</a>
                             </li>
-                            <li><a href="category.html">Accessories</a>
+                            <li><a href="category.html">Fruits and Veggies</a>
                             </li>
                         </ul>
 
-                        <h5>Ladies</h5>
+                        <h5>Apparel</h5>
                         <ul>
                             <li><a href="category.html">T-shirts</a>
                             </li>
@@ -534,13 +534,16 @@
 
                         <h4>Where to find us</h4>
 
-                        <p><strong>Obaju Ltd.</strong>
-                            <br>13/25 New Avenue
-                            <br>New Heaven
-                            <br>45Y 73J
-                            <br>England
-                            <br>
-                            <strong>Great Britain</strong>
+                        <p><strong>SYSIDE INC.</strong>
+                            <br>3 Queen Street
+                            <br>Forest Hills
+                            <br>Novaliches, Quezon City
+                            <br>1117
+							<br>
+                            <strong>Philippines</strong>
+							<br>
+							<br>homemallph@gmail.com
+							<br>
                         </p>
 
                         <a href="contact.html">Go to contact page</a>
@@ -554,9 +557,9 @@
 
                     <div class="col-md-3 col-sm-6">
 
-                        <h4>Get the news</h4>
+                        <h4>Get the news and latest products!</h4>
 
-                        <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                        <p class="text-muted">By subscribing to us you will get latest news and product trends.</p>
 
                         <form>
                             <div class="input-group">
