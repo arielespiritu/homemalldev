@@ -43,7 +43,7 @@ border-radius:0px 0px 0px 0px;
 /* Create a medium height at 40px */
 .navbar-md {min-height:40px}
 .navbar-md .navbar-brand,
-.navbar-md .navbar-nav>li>a {padding-top:10px; padding-bottom:10px}
+.navbar-md .navbar-nav>li>a {padding-top:10px; padding-bottom:10px }
 .navbar-md .navbar-brand {height: 40px}  
 .navbar-md .navbar-toggle {margin: 6px 12px 6px 0px; padding: 6px 7px 6px 7px;}
 .navbar-md .navbar-toggle .icon-bar {width: 19px;}
