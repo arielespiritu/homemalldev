@@ -26,13 +26,13 @@
 								<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
 								<h4 class="blue">Member Login</h4>
 								</br>
-								<div class="form-group">
+								<div class="form-group col-md-12">
 									<input type="text" class="form-control input-md" placeholder="Email" name="email">
 								</div>
-								<div class="form-group">
+								<div class="form-group col-md-12">
 									<input type="password" class="form-control input-md" placeholder="Password" name="password">
 								</div>
-								<div class="form-group">
+								<div class="form-group col-md-12">
 									<button type="submit" class="btn btn-default btn-md btn-block">Sign In</button>
 									</br>
 									<span><a href="#">Forgot Password?</a></span>
@@ -47,16 +47,39 @@
 							{!! csrf_field() !!}
 								<h4 class="blue">New Member Registration</h4>
 								</br>
-								<div class="form-group">
-									<input type="text" class="form-control input-md" placeholder="Email" name="email" value="{{ old('email') }}">
+								<div class="form-group col-md-6 col-md-12">
+									<input type="text" class="form-control input-md" placeholder="First Name" name="firstname" value="">
 								</div>
-								<div class="form-group">
+								<div class="form-group col-md-6 col-md-12">
+									<input type="text" class="form-control input-md" placeholder="Last Name" name="lastname" value="">
+								</div>
+								<div class="form-group col-md-6 col-md-12">
+									Birthday<input class="form-control" id="date" type="date" placeholder="Birthday" max="2030-01-01" min="2015-01-01" name="birthday" />
+								</div>
+								<div class="form-group col-md-6 col-md-12">
+									Gender<select class="form-control" id="gender" name="gender">
+										<option>Male</option>
+										<option>Female</option>
+									 </select>
+								</div>
+								<div class="form-group col-md-12 col-md-12">
+									<div class="input-group">
+									  <span class="input-group-addon" id="sizing-addon2">+63</span>
+									  <input type="text" class="form-control input-md" placeholder="Mobile" aria-describedby="sizing-addon2" id="mobile" value="" name="mobile">
+									</div>
+								</div>
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control input-md" placeholder="Email" name="email" value="">
+								</div>
+								<div class="form-group col-md-12">
 									<input type="password" class="form-control input-md" placeholder="Password" name="password">
 								</div>
-								<div class="form-group">
+								<div class="form-group col-md-12">
 									<input type="password" class="form-control input-md" placeholder="Confirm Password" name="password_confirmation">
 								</div>
-								<div class="form-group">
+								
+								<div class="form-group col-md-12">
+								<p>By clicking Sign Up, you agree to our <a href="">Terms</a> and <a href="">Conditions</a></p>
 									<button type="submit" class="btn btn-default btn-md btn-block">Sign Up</button>
 									</br>
 								</div>
@@ -79,33 +102,9 @@
 
 
 @section('page-script')
-	
-
+	<script src="{{URL::asset('assets/js/jquery.maskedinput.min.js')}}"></script>
 	<script type="text/javascript">
-	
-		function viewAnnouncement(id,date){
-			var announcement_id = id;
-			var announcement_date = date;
-			$.post("/getAnnouncement", {announcement_id: announcement_id}, function(result){	
-				var obj = JSON.parse(result);
-				$("#announcement_preview").show();
-				document.getElementById("announce_title").innerHTML = obj[0].title.replace(/\n/g, "<br />");;
-				document.getElementById("announce_desc").innerHTML = obj[0].description.replace(/\n/g, "<br />");;
-				document.getElementById("announce_date").innerHTML = "&nbsp;&nbsp;"+announcement_date;
-				$('html, body').animate({ scrollTop: 0 }, 'fast');
-			});
-		}
-		
-		$(function() {
-				var oTable1 = $('#sample-table-2').dataTable( {
-				"aoColumns": [
-			      { "bSortable": false },
-			      null, null, null,
-				  { "bSortable": false }
-				] } );
-				
-
-			})
+		$('#mobile').mask('999999999');
 	</script>
 	
 	

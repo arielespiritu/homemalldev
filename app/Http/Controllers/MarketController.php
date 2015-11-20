@@ -2,6 +2,7 @@
 use Auth;
 use DB;
 use Input;
+use App\User;
 class MarketController extends Controller {
 
 	/*
@@ -22,7 +23,7 @@ class MarketController extends Controller {
 	 */
 	public function __construct()
 	{
-		//$this->middleware('auth');
+		$this->middleware('auth');
 	}
 
 	/**
@@ -34,8 +35,9 @@ class MarketController extends Controller {
 	{
 		if (Auth::check())
 		{
-			$email = Auth::user()->email;
-			return view('client.pages.market')->with('email',$email);
+			$id = Auth::user()->login_id;
+			$user = User::where('id', $id )->with('member')->get();
+			return view('client.pages.market')->with('user',$user);
 		}else{
 			return view('client.pages.market');
 		}

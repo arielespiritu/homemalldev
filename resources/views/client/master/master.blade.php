@@ -43,9 +43,11 @@
             </div>
             <div class="col-md-6 ">
                 <ul class="menu">
-					@if(isset($email))
-						<li><a href="register.html">{{$email}}</a></li>
-						<li><a href="/auth/logout" >Logout</a></li>
+					@if(isset($user))
+						@foreach($user as $user)
+							<li><a href="register.html">Hi&nbsp;&nbsp;{{ucfirst($user->member->fname)}}</a></li>
+							<li><a href="/auth/logout" >Logout</a></li>
+						@endforeach
 					@else
 						<li><a href="/auth/login" >Login</a></li>
 					@endif  
@@ -428,7 +430,7 @@
 
             <div class="navbar-buttons" >
                 <div class="navbar-collapse collapse right" id="basket-overview"  >
-                    <a href="basket.html" class="btn btn-default navbar-btn btn-sm flat" style="margin-right:0px"><i class="fa fa-shopping-cart"></i><span class="hidden-sm" >3 items in cart</span></a>
+                    <a href="basket.html" class="btn btn-default navbar-btn btn-sm flat" style="margin-right:15px"><i class="fa fa-shopping-cart"></i><span class="hidden-sm" >3 items in cart</span></a>
                 </div>
                 <!--/.nav-collapse -->
 
@@ -465,7 +467,63 @@
 
         <!-- *** FOOTER ***
  _________________________________________________________ -->
-        <div id="footer" data-animate="fadeInUp">
+ 
+ 
+	<div style="background:#fff;" >
+		<div class="container">
+            <div class="row">
+			<br>
+				<div class="col-md-12">
+					<div class="col-md-2 img-footer" style="padding:20px;" >
+						<center>
+							<img class="" src="{{ URL::asset('assets/img/convenience.png') }}" alt="..." >
+							<h4 class="text-center">Convenience</h4>
+							<p class="text-center">You don't need to get dressed and  drive to your favorite store.</p>
+						</center>
+					</div>
+					<div class="col-md-2 img-footer" style="padding:20px" >
+						<center>
+							<img class="" src="{{ URL::asset('assets/img/DeliveryIcon.png') }}" alt="..." >
+							<h4 class="text-center">Shipping</h4>
+							<p class="text-center"> We ship first in National Capital Region (NCR) with our logisctic partner.</p>
+						</center>
+					</div>
+					<div class="col-md-2 img-footer" style="padding:20px" >
+						<center>
+							<img class="" src="{{ URL::asset('assets/img/SafePayment.png') }}" alt="..." >
+							<h4 class="text-center">Payment</h4>
+							<p class="text-center"> Pay with the world’s most popular and secure payment methods..</p>
+						</center>
+					</div>
+					<div class="col-md-2 img-footer" style="padding:20px" >
+						<center>
+							<img class="" src="{{ URL::asset('assets/img/ShopWithConfidence.png') }}" alt="..." >
+							<h4 class="text-center">Shop with Confidence</h4>
+							<p class="text-center"> Our Buyer Protection covers your purchase from click to delivery..</p>
+						</center>
+					</div>
+					<div class="col-md-2 img-footer" style="padding:20px" >
+						<center>
+							<img class="" src="{{ URL::asset('assets/img/HelpCenter.png') }}" alt="..." >
+							<h4 class="text-center">24/7 Help Center</h4>
+							<p class="text-center"> Round-the-clock assistance for a smooth shopping experience..</p>
+						</center>
+					</div>
+					<div class="col-md-2" style="padding:20px" >
+						<center>
+						</br>
+							<img class="" src="{{ URL::asset('assets/img/1googlePlay.png') }}" alt="..." style="height:30px; width:120px;" >
+							<h4 class="text-center">Andriod app</h4>
+							<p class="text-center"> Download the app and get the world of HomeMallPH at your fingertips..</p>
+						</center>
+					</div>
+				
+				</div>
+
+			</div>
+		</div>
+	</div>
+        <div id="footer" >
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 col-sm-6">
@@ -489,7 +547,7 @@
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#login-modal">Member Login</a>
                             </li>
-                            <li><a href="register.html">Merchant Login</a>
+                            <li><a href="/HMadmin">Merchant Login</a>
                             </li>
                         </ul>
 
@@ -533,20 +591,20 @@
                     <div class="col-md-3 col-sm-6">
 
                         <h4>Where to find us</h4>
-
+						<img class="" src="{{ URL::asset('assets/img/logohm.png') }}" alt="HomemallPH logo" style="height:100px; width:100px;">
+						<br>
+						<br>
                         <p><strong>SYSIDE INC.</strong>
-                            <br>3 Queen Street
-                            <br>Forest Hills
+                            <br>3 Queen Street, Forest Hills
                             <br>Novaliches, Quezon City
                             <br>1117
 							<br>
                             <strong>Philippines</strong>
-							<br>
 							<br>homemallph@gmail.com
 							<br>
                         </p>
 
-                        <a href="contact.html">Go to contact page</a>
+                        <a href="contact.html" style="color:#ff3333">Go to contact page</a>
 
                         <hr class="hidden-md hidden-lg">
 
@@ -581,11 +639,9 @@
                         <h4>Stay in touch</h4>
 
                         <p class="social">
-                            <a href="#" class="facebook external" data-animate-hover="shake"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="twitter external" data-animate-hover="shake"><i class="fa fa-twitter"></i></a>
-                            <a href="#" class="instagram external" data-animate-hover="shake"><i class="fa fa-instagram"></i></a>
-                            <a href="#" class="gplus external" data-animate-hover="shake"><i class="fa fa-google-plus"></i></a>
-                            <a href="#" class="email external" data-animate-hover="shake"><i class="fa fa-envelope"></i></a>
+                            <a href="#" class="facebook external" ><i class="fa fa-facebook"></i></a>
+                            <a href="#" class="twitter external" ><i class="fa fa-twitter"></i></a>
+                          
                         </p>
 
 
@@ -614,7 +670,7 @@
 
                 </div>
                 <div class="col-md-6">
-                    <p class="pull-right">Template by <a href="http://bootstrapious.com/e-commerce-templates">Bootstrap Ecommerce Templates</a> with support from <a href="http://kakusei.cz">Designové předměty</a> 
+                    <p class="pull-right">Template by <a href="http://bootstrapious.com/e-commerce-templates" style="color:#ff3333">Bootstrap Ecommerce Templates</a> modified by <a href="" style="color:#ff3333">SYSIDE INC.</a> 
                         <!-- Not removing these links is part of the licence conditions of the template. Thanks for understanding :) -->
                     </p>
                 </div>

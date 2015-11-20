@@ -577,7 +577,6 @@
 									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
 									<h5 class="list-group-item-heading">Product Name</h5>
 									<p class="list-group-item-text">P 100.00</p>
-									
 								  </a>
 								</div>
                             </div>
@@ -586,39 +585,264 @@
                 </div>
            
 
-            <div class="container" data-animate="fadeInUpBig">
+            <div class="container" data-animate="fadeInUp">
                 <div class="col-md-12">
                     <div class="box slideshow">
-                        <h3>Get Inspired</h3>
-                        <p class="lead">Get the inspiration from our world class designers</p>
+                        <h3>Brands</h3>
+                        <p class="lead">Choose from different branded items!</p>
                         <div id="get-inspired" class="owl-carousel owl-theme">
                             <div class="item">
-                                <a href="#">
-                                    <img src="img/getinspired1.jpg" alt="Get inspired" class="img-responsive">
-                                </a>
-                            </div>
-                            <div class="item">
-                                <a href="#">
-                                    <img src="img/getinspired2.jpg" alt="Get inspired" class="img-responsive">
-                                </a>
-                            </div>
-                            <div class="item">
-                                <a href="#">
-                                    <img src="img/getinspired3.jpg" alt="Get inspired" class="img-responsive">
-                                </a>
+                               <div class="col-sm-12 market" style="padding:0px">
+											<div class="col-sm-12 same-height-row" style="padding:0px">							
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store1.png') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store2.png') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store3.jpg') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store4.png') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store6.png') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store4.png') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store6.png') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store4.png') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store6.png') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store1.png') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store2.png') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store3.jpg') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store4.png') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store6.png') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store4.png') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store6.png') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store4.png') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store6.png') }}" alt="..."></div>
+												</div>
+												<div class="col-sm-2 store-logo" >
+													<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
+												</div>													
+											</div>
+										</div>	
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="box text-center" data-animate="fadeInUp">
-                <div class="container">
+            <div class="box" data-animate="fadeInUp">
+                <div class="container" >
                     <div class="col-md-12">
-                        <h3 class="text-uppercase">From our blog</h3>
-
-                        <p class="lead">What's new in the world of fashion? <a href="blog.html">Check our blog!</a>
-                        </p>
+                        <h3 class="text-uppercase text-center">Hot and New</h3>
+                        <p class="lead text-center">Check our new and hottest items!</p>
                     </div>
+					<div class="col-md-12">
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Namessssssss</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+						<div class="col-sm-2" style="padding:10px">
+								<div class="box">
+										<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+										<div class="item-desc" style="padding:10px" >
+											<h4 >Product Name</h4>
+											<p >P 100.00</p>
+										</div>
+								</div>
+						</div>
+					</div>
                 </div>
             </div>
         </div>

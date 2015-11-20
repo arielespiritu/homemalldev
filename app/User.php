@@ -26,11 +26,17 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['email', 'password'];
+    protected $fillable = ['email', 'password','indicator_id','login_id'];
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
    protected $hidden = ['password', 'remember_token'];
+   
+    public function member() {
+        return $this->belongsTo('App\Member','login_id','id')->withTrashed();
+    }
+   
+   
 }
