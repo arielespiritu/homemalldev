@@ -13,7 +13,15 @@ class loginauth extends Controller
 		try
 		{
 			if ($request->isMethod('GET')) {
-				  return view('admin.login');
+					
+				 if(Auth::user())
+				 {
+					 return view('admin.login');
+				 }
+				 else
+				 {
+					 return redirect('/HMadmin');
+				 }
 			}
 			else
 			{
@@ -41,7 +49,7 @@ class loginauth extends Controller
 						];
 						$rules = [
 							'tempname' => 'required|email',
-							'temppass' => 'required|min:8',
+							'temppass' => 'required',
 						];
 
 					$validator = Validator::make($request->all(),$rules,[],$attributes);
@@ -53,7 +61,8 @@ class loginauth extends Controller
 						
 						if (Auth::attempt(['email' => $username, 'password' => $password])) 
 						{
-							return 'true';
+							$user= Auth::user();
+							return json_encode(array(['key' => '0','session' => csrf_token(),'success' => '1','message' => 'login success','data' => $user]));
 						}
 						else
 						{
@@ -70,7 +79,7 @@ class loginauth extends Controller
 		}
 		catch(\Exception $e)
 		{
-			return '400';
+			return '400'.$e;
 		}
 	}
 	
