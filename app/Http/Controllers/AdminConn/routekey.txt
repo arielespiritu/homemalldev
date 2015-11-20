@@ -1,5 +1,0 @@
-routes
-login:
-	ROUTE: /HMadmin/loginauth 
-	METHOD:POST
-	

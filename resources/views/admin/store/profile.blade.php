@@ -496,10 +496,20 @@ function updateInfo()
 	formData.append('store_owner_area', store_owner_area); 
 	formData.append('store_owner_area', store_owner_area); 
 	
-	alert(store_logo_status+""+store_description+""+store_mobile+""+store_tel_num+""+store_profile_city+""+store_profile_area+""+store_about);
-	alert(owner_image_status+""+owner_mobile+""+owner_tel_num+""+owner_email+""+store_owner_gender+""+store_owner_city+""+store_owner_area);
+	// alert(store_logo_status+""+store_description+""+store_mobile+""+store_tel_num+""+store_profile_city+""+store_profile_area+""+store_about);
+	// alert(owner_image_status+""+owner_mobile+""+owner_tel_num+""+owner_email+""+store_owner_gender+""+store_owner_city+""+store_owner_area);
 	
-	
+	$.ajax({
+		type: "POST",
+		url: "/HMadmin/Store-Profile/Update",     // Url to which the request is send
+		data:formData,
+		contentType: false,       // The content type used when sending data to the server.
+		processData:false,        // To send DOMDocument or non processed data file it is set to false		
+		success: function(result)   // A function to be called if request succeeds
+	{
+		alert(result);
+	}
+	});	
 	
 }
 
