@@ -846,6 +846,61 @@
                 </div>
             </div>
         </div>
+		
+		<div style="background:#fff;" >
+		<div class="container">
+            <div class="row">
+			<br>
+				<div class="col-md-12">
+					<div class="col-md-2 img-footer" style="padding:20px;" >
+						<center>
+							<img class="" src="{{ URL::asset('assets/img/convenience.png') }}" alt="..." >
+							<h4 class="text-center">Convenience</h4>
+							<p class="text-center">You don't need to get dressed and  drive to your favorite store.</p>
+						</center>
+					</div>
+					<div class="col-md-2 img-footer" style="padding:20px" >
+						<center>
+							<img class="" src="{{ URL::asset('assets/img/DeliveryIcon.png') }}" alt="..." >
+							<h4 class="text-center">Shipping</h4>
+							<p class="text-center"> We ship first in National Capital Region (NCR) with our logisctic partner.</p>
+						</center>
+					</div>
+					<div class="col-md-2 img-footer" style="padding:20px" >
+						<center>
+							<img class="" src="{{ URL::asset('assets/img/SafePayment.png') }}" alt="..." >
+							<h4 class="text-center">Payment</h4>
+							<p class="text-center"> Pay with the world’s most popular and secure payment methods..</p>
+						</center>
+					</div>
+					<div class="col-md-2 img-footer" style="padding:20px" >
+						<center>
+							<img class="" src="{{ URL::asset('assets/img/ShopWithConfidence.png') }}" alt="..." >
+							<h4 class="text-center">Shop with Confidence</h4>
+							<p class="text-center"> Our Buyer Protection covers your purchase from click to delivery..</p>
+						</center>
+					</div>
+					<div class="col-md-2 img-footer" style="padding:20px" >
+						<center>
+							<img class="" src="{{ URL::asset('assets/img/HelpCenter.png') }}" alt="..." >
+							<h4 class="text-center">24/7 Help Center</h4>
+							<p class="text-center"> Round-the-clock assistance for a smooth shopping experience..</p>
+						</center>
+					</div>
+					<div class="col-md-2" style="padding:20px" >
+						<center>
+						</br>
+							<img class="" src="{{ URL::asset('assets/img/1googlePlay.png') }}" alt="..." style="height:30px; width:120px;" >
+							<h4 class="text-center">Andriod app</h4>
+							<p class="text-center"> Download the app and get the world of HomeMallPH at your fingertips..</p>
+						</center>
+					</div>
+				
+				</div>
+
+			</div>
+		</div>
+	</div>
 						
 @endsection
 
