@@ -65,7 +65,7 @@
 														<button onclick="loginAuth()" class="width-35 pull-right btn btn-small btn-primary">
 															<i class="icon-key"></i>
 															<i class="fa fa-spinner fa-spin"></i>
- Login
+															Login
 														</button>
 													</div>
 													<div class="space-4"></div>
@@ -102,7 +102,6 @@ function intervalExiting(id,interval)
 }
 function loginAuth()
 {	
-
 	var login_username=document.getElementById('login_username').value;
 	var login_password=document.getElementById('login_password').value;
 	var tkn ="{!! csrf_token() !!}";
@@ -110,17 +109,15 @@ function loginAuth()
 	{
 		tempname:login_username,
 		temppass:login_password,
-		
 	},
 	function(result)
 	{
-		alert(result);
 		var resultarray= JSON.parse(result);
 		if(resultarray[0].success[0]==1)
 		{
 			if(resultarray[0].session==tkn)
 			{
-				window.location.href="/HMadmin"
+				window.location.reload();
 			}
 			else
 			{

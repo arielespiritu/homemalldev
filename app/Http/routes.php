@@ -11,20 +11,18 @@
 |
 */
 
-Route::get('/HMadmin', function () {
-    return view('admin.main');
-});
+Route::get('/HMadmin','AdminConn\adminController@showDashboard');
 
 Route::get('/HMadmin/login','AdminConn\loginauth@showLogin');
 Route::post('/HMadmin/loginauth','AdminConn\loginauth@validateLogin');
 
-Route::get('/HMadmin/Store-Profile', function () {
-    return view('admin.store.profile');
-});
+Route::get('/HMadmin/logout','AdminConn\loginauth@getlogOut');
 
 Route::get('/HMadmin/Store-Users', function () {
     return view('admin.store.storeuser');
 });
+
+Route::get('/HMadmin/Store-Profile','AdminConn\adminController@showStoreProfile');
 
 Route::get('/HMadmin/Products', function () {
     return view('admin.products.products');

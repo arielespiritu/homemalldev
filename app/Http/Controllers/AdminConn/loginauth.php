@@ -16,23 +16,21 @@ class loginauth extends Controller
 					
 				 if(Auth::user())
 				 {
-					 return view('admin.login');
+					return redirect('/HMadmin');
 				 }
 				 else
-				 {
-					 return redirect('/HMadmin');
+				 {	 
+					return view('admin.login');
 				 }
 			}
 			else
 			{
-				
 			}			
 		}
 		catch(\Exception $e)
 		{
 			
 		}
-
 	}
 	public function validateLogin(Request $request)
 	{
@@ -59,7 +57,7 @@ class loginauth extends Controller
 						return json_encode(array(['key' => '0','session' => csrf_token(),'success' => '0','message' => 'login','data' => $validator->errors()->all()]));
 					}else{
 						
-						if (Auth::attempt(['email' => $username, 'password' => $password])) 
+						if (Auth::attempt(['email' => $username, 'password' => $password],'remember')) 
 						{
 							$user= Auth::user();
 							return json_encode(array(['key' => '0','session' => csrf_token(),'success' => '1','message' => 'login success','data' => $user]));
@@ -69,8 +67,6 @@ class loginauth extends Controller
 							return 'false';
 						}
 					}				
-					
-					
 			}
 			else
 			{
@@ -81,6 +77,19 @@ class loginauth extends Controller
 		{
 			return '400'.$e;
 		}
+	}
+	public function getlogOut() {
+
+		Auth::logout();
+		if(Auth::check())
+		{
+			
+		}
+		else
+		{
+			return 'false';
+		}
+
 	}
 	
 }

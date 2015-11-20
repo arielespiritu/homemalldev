@@ -244,7 +244,7 @@
 								</li>
 								<li class="divider"></li>
 								<li>
-									<a href="#">
+									<a href="javascript:;" onclick="logout()">
 										<i class="icon-off"></i>
 										Logout
 									</a>
@@ -431,7 +431,18 @@
 		</a>
 		
 		@include('admin.includes.scripts')
+		
 		@yield('myscripts')
 
 	</body>
+	<script>
+function logout()
+{	
+	$.get("/HMadmin/logout",
+	function(result)
+	{
+		window.location.reload();
+	});
+}
+</script>
 </html>
