@@ -41,13 +41,23 @@ class MarketController extends Controller {
 		}else{
 			return view('client.pages.market');
 		}
-		
-		
 	}
 	public function redirectToMarket()
 	{
 		$email = Auth::user()->email;
 		return view('client.pages.market')->with('email',$email);
 	}
-
+	public function showMarketPage($id)
+	{
+		if($id=="Grocery"){
+			if (Auth::check())
+			{
+				$id = Auth::user()->login_id;
+				$user = User::where('id', $id )->with('member')->get();
+				return view('client.pages.market-page')->with('user',$user)->with('market',$id);
+			}else{
+				return view('client.pages.market-page')->with('market',$id);
+			}
+		}
+	}
 }

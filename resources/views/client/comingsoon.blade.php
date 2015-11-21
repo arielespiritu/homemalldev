@@ -114,7 +114,7 @@ a{color:#930; text-decoration:none}
 			<center>
 			<img src="{{ URL::asset('assets/img/icon.png') }}" class="img-responsive" alt="HomeMallPH">
 			</center>
-			<div class="col-md-6 col-md-offset-3 col-md-12" > 
+			<!--<div class="col-md-6 col-md-offset-3 col-md-12" > 
 				<div class="col-md-12"> 
 					<div style="height:100px"><center><p  id="tag-line">dsdssds</p></center></br></br></div>
 					<div class="input-group">
@@ -127,11 +127,11 @@ a{color:#930; text-decoration:none}
 				<div class="col-md-6 col-md-offset-3"> 
 					<a  href="/market" class="btn btn-default btn-transparent btn-lg " >Shop Now</a>
 				</div>
-			</div>
+			</div>-->
 			
 			<div class="col-md-12 "> 
 			</br>
-				<!-- <div id="watch">
+				 <div id="watch">
 					<div class="dash days_dash">
 						<div class="digit"></div>
 						<div class="digit"></div>
@@ -152,7 +152,13 @@ a{color:#930; text-decoration:none}
 						<div class="digit"></div>
 						<span class="dash_title">Sec</span>
 					</div>
-				</div> -->
+				</div> 
+			</div>
+			<div class="col-md-12 ">
+				<br>
+				<div class="col-md-4 col-md-offset-4"> 
+					<a  href="/market" class="btn btn-default btn-transparent btn-lg " >Preview</a>
+				</div>
 			</div>
 		</div>
 		

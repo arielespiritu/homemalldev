@@ -37,24 +37,24 @@
     <!-- *** TOPBAR ***
  _________________________________________________________ -->  
     <div id="top" style="background:#000">
-        <div class="container" >
-            <div class="col-md-6 offer" >
-                <a href="#" class="btn btn-default btn-sm" style="color:black" >Merchant Login</a>  <a href="#">&nbsp;Be a seller now!</a>
+        <div class="container"  >
+            <div class="col-md-6 offer" style="padding:0px" >
+                <a href="/HMadmin" class="btn btn-default btn-sm" style="color:black" >Merchant Login</a>  <a href="/HMadmin">&nbsp;Be a seller now!</a>
             </div>
-            <div class="col-md-6 ">
+            <div class="col-md-6 " style="padding:0px">
                 <ul class="menu">
 					@if(isset($user))
 						@foreach($user as $user)
-							<li><a href="register.html">Hi&nbsp;&nbsp;{{ucfirst($user->member->fname)}}</a></li>
+							<li><a href="register.html"><i class="fa fa-user"></i>Hi&nbsp;&nbsp;{{ucfirst($user->member->fname)}}</a></li>
 							<li><a href="/auth/logout" >Logout</a></li>
 						@endforeach
 					@else
-						<li><a href="/auth/login" >Login</a></li>
+						<li><a href="/auth/login" ><i class="fa fa-user"></i>Login</a></li>
 					@endif  
 
-                    <li><a href="contact.html">Contact</a>
+                    <li><a href="contact.html"><i class="fa fa-heart"></i>Favorites</a>
                     </li>
-                    <li><a href="#">Recently viewed</a>
+                    <li><a href="#"><i class="fa fa-star"></i>Wishlist</a>
                     </li>
                 </ul>
             </div>
@@ -93,8 +93,8 @@
     <div class="navbar navbar-default yamm navbar-md " role="navigation" id="navbar" >
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand home" href="index.html" style="padding-top:4px;">
-                    <img src="{{ URL::asset('assets/img/logo.png') }}" alt="homemall logo" class="hidden-xs" style="margin-left:12px">
+                <a class="navbar-brand home" href="/market" style="padding-top:4px;">
+                    <img src="{{ URL::asset('assets/img/logo.png') }}" alt="homemall logo" class="hidden-xs" >
                     <img src="{{ URL::asset('assets/img/logo-small.png') }}" alt="homemall logo" class="visible-xs" style="margin-top:12px"><span class="sr-only">Obaju - go to homepage</span>
                 </a>
                 <div class="navbar-buttons" style="padding:0px;">
@@ -102,15 +102,22 @@
                         <span class="sr-only">Toggle navigation</span>
                         <i class="fa fa-align-justify"></i>
                     </button>
-                    <button type="button" class="navbar-toggle btn-sm flat" data-toggle="collapse" data-target="#search">
-                        <span class="sr-only">Toggle search</span>
-                        <i class="fa fa-search"></i>
-                    </button>
                     <a class="btn btn-default navbar-toggle btn-sm flat" href="basket.html">
-                        <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">3 items in cart</span>
+                        <i class="fa fa-shopping-cart"></i> <span class="badge">0</span> <span class="hidden-xs"> </span>
                     </a>
                 </div>
+				
+
             </div>
+			<form class="navbar-form navbar-toggle " id="search-toggle" role="search">
+				<div class="input-group" style="padding:0px; margin-left:-10px; margin-right:-12px;">
+					<input type="text" class="form-control input-xs flat" placeholder="Search">
+					<span class="input-group-btn">
+						<button type="submit" class="btn btn-default btn-sm flat"><i class="fa fa-search"></i></button>
+					</span>
+				</div>
+			</form>
+			
             <!--/.navbar-header -->
 
             <div class="navbar-collapse collapse" id="navigation" >
@@ -429,29 +436,24 @@
             <!--/.nav-collapse -->
 
             <div class="navbar-buttons" >
-                <div class="navbar-collapse collapse right" id="basket-overview"  >
-                    <a href="basket.html" class="btn btn-default navbar-btn btn-sm flat" style="margin-right:15px"><i class="fa fa-shopping-cart"></i><span class="hidden-sm" >3 items in cart</span></a>
+                <div class="navbar-collapse collapse right" id="basket-overview" style="margin-top:4px;" >
+                    <a href="basket.html" class="btn btn-default navbar-btn btn-sm flat" ><i class="fa fa-shopping-cart"></i><span class="hidden-sm" > <span class="badge">0</span>&nbsp;&nbsp;P 0.00</span></a>
                 </div>
                 <!--/.nav-collapse -->
 
                 <div class="navbar-collapse collapse right" id="search-not-mobile" >
-                    <button type="button" class="btn navbar-btn btn-default  btn-sm flat" data-toggle="collapse" data-target="#search">
-                        <span class="sr-only">Toggle search</span>
-                        <i class="fa fa-search"></i>
-                    </button>
+						<form class="navbar-form" role="search" style="margin-top:15px;">
+							<div class="input-group">
+								<input type="text" class="form-control input-xs flat" placeholder="Search">
+								<span class="input-group-btn">
+									<button type="submit" class="btn btn-default btn-sm flat"><i class="fa fa-search"></i></button>
+								</span>
+							</div>
+						</form>
                 </div>
             </div>
 
-            <div class="collapse clearfix" id="search">
-                <form class="navbar-form" role="search">
-                    <div class="input-group">
-                        <input type="text" class="form-control " placeholder="Search">
-                        <span class="input-group-btn">
-							<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
-						</span>
-                    </div>
-                </form>
-            </div>
+           
             <!--/.nav-collapse -->
         </div>
         <!-- /.container -->
@@ -679,7 +681,7 @@ $(window).load(function(){
 			
 			})
 			$(window).resize(function(){
-			window.location.href=window.location.href
+			//window.location.href=window.location.href
 			})
 			
 			

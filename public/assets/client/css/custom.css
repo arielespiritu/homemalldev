@@ -2,16 +2,17 @@
 .alignleft {
 	float: left;
 	color:black;
+	margin-top:0px;
 }
 .alignright {
 	float: right;
-	margin-top:13px;
+	margin-top:0px;
 	color:black;
 }
 
 .alignright:hover {
 	float: right;
-	margin-top:13px;
+	margin-top:0px;
 	color:red;
 }
 
@@ -43,7 +44,8 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-
+	font-size:15px;
+	margin-bottom:0px;
 }
 .item-desc p{
     margin-left:0px;
@@ -51,9 +53,20 @@
 	white-space: nowrap;
 }
 
-
+.input-xs {
+    height: 30px;
+    padding: 2px 5px;
+    font-size: 12px;
+    line-height: 1.5; //If Placeholder of the input is moved up, rem/modify this.
+    border-radius: 3px;
+    }
 .flat{
 border-radius:0px 0px 0px 0px;
+}
+
+
+.no-padding{
+padding:0px;
 }
 /* CSS used here will be applied after bootstrap.css */
 
@@ -73,15 +86,40 @@ border-radius:0px 0px 0px 0px;
 .navbar-sm .navbar-toggle {margin: 3px 9px 3px 0px; padding: 4px 4px 4px 4px;}
 .navbar-sm .navbar-toggle .icon-bar {width: 16px;}
 
-
+#navcontainer ul
+{
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+#navcontainer ul li { display: inline; }
    
-    
+.heart{
+color:red;
+font-size:15px;
+}
+.star{
+color:yellow;
+font-size:15px;
+} 
+.cart{
+color:blue;
+font-size:15px;
+}    
+
+#search-toggle{
+margin-top:0px; padding:0px; margin:0px; 
+}
+#search-toggle:hover{
+background:transparent;
+}
+
 .market{
-	margin-bottom:5px;
+	margin-bottom:10px;	
 }
 .market-logo{
-	padding:1px;
-	border: 1px solid #f3f3f3;
+	padding:0px;
+	border: 1px solid #transparent;
 }
 .market-menu ul {
     list-style-type: none;
@@ -94,13 +132,13 @@ border-radius:0px 0px 0px 0px;
 	color:#000;
 }
 .market-menu li a {
-	color:#000;
-	
+	color:#000;	
 }
 .store-logo{
-	border: 1px solid #f3f3f3;
+	border: 2px solid transparent;
 	overflow:hidden;
 	background:#fff;
+	padding: 0px;
 }
 .store-logo img{
 	display: inline-block;
@@ -110,6 +148,9 @@ border-radius:0px 0px 0px 0px;
 	width:90%;
 }
 
+#textbox{
+margin-top:10px;
+}
 
 .wraptocenter {
     display: table-cell;
@@ -142,16 +183,78 @@ border-radius:0px 0px 0px 0px;
 
 
 @media(max-width:767px){
-
+	.market-logo{
+		display:none;
+	}
+	.wraptocenter {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    height: 100px;
+	}
+	.store-logo img{
+	display: inline-block;
+	/*max-width: 100%;*/
+	height: auto !important;
+	height:70%;
+	width:70%;
+	}
+	
 }
 @media(min-width:768px){
-
+	.market-logo{
+		display:none;
+	}
+	.wraptocenter {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    height: 100px;
+	}
+	.store-logo img{
+	display: inline-block;
+	/*max-width: 100%;*/
+	height: auto !important;
+	height:70%;
+	width:70%;
+	}
 }
 @media(min-width:992px){
+	.market-logo{
+		display:block;
+	}
+	.wraptocenter {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    height: 80px;
+	}
+	.store-logo img{
+	display: inline-block;
+	/*max-width: 100%;*/
+	height: auto !important;
+	height:70%;
+	width:70%;
+	}
 
 }
 @media(min-width:1200px){
-
+	.market-logo{
+		display:block;
+	}
+	.wraptocenter {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    height: 96px;
+	}
+	.store-logo img{
+	display: inline-block;
+	/*max-width: 100%;*/
+	height: auto !important;
+	height:90%;
+	width:90%;
+	}
 }
 
 

@@ -6,9 +6,9 @@
 
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 		<div class="container">	
-			<div class="col-md-12" >
+			<div class="col-md-12" style="padding:0px; ">
 				<div class="row">
-					<div class="col-md-12 ">
+					<div class="col-md-12 " >
 						@if (count($errors) > 0)
 						<div class="alert alert-danger">
 							<strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -79,7 +79,7 @@
 								</div>
 								
 								<div class="form-group col-md-12">
-								<p>By clicking Sign Up, you agree to our <a href="">Terms</a> and <a href="">Conditions</a></p>
+								<p>By clicking Sign Up, you agree to our <a href="">Terms</a> and <a href="">Conditions</a>.</p>
 									<button type="submit" class="btn btn-default btn-md btn-block">Sign Up</button>
 									</br>
 								</div>

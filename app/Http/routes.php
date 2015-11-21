@@ -51,10 +51,13 @@ Route::get('/', function () {
     return view('client.comingsoon');
 });
 
+//market
 Route::get('/market', 'MarketController@showMarket');
 Route::get('/home', function () {
     return redirect('market');
 });
+
+Route::get('/market/{id}', 'MarketController@showMarketPage'); //views
 
 
 
