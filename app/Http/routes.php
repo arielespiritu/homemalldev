@@ -10,25 +10,21 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/HMadmin','AdminConn\adminController@showDashboard');
-
+//GET
+Route::get('/HMadmin','AdminConn\admincontroller@showDashboard');
 Route::get('/HMadmin/login','AdminConn\loginauth@showLogin');
-Route::post('/HMadmin/loginauth','AdminConn\loginauth@validateLogin');
-
 Route::get('/HMadmin/logout','AdminConn\loginauth@getlogOut');
-
 Route::get('/HMadmin/Store-Users', function () {
     return view('admin.store.storeuser');
 });
 
-Route::get('/HMadmin/Store-Profile','AdminConn\adminController@showStoreProfile');
-
+Route::get('/HMadmin/Store-Profile','AdminConn\admincontroller@showStoreProfile');
 Route::get('/HMadmin/Products', function () {
     return view('admin.products.products');
 });
-
-
+//POST
+Route::post('/HMadmin/loginauth','AdminConn\loginauth@validateLogin');
+Route::post('/HMadmin/Store-Profile/Update','AdminConn\store@validateUpdate');
 //
 
 ///////////////////////// Do not modify i will kill you /////////////////
@@ -46,7 +42,6 @@ Route::post('/auth/register', 'Auth\AuthController@postRegister');
 
 
 // controllers
-
 Route::get('/', function () {
     return view('client.comingsoon');
 });
