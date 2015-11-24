@@ -17,10 +17,20 @@
 			<script src="{{URL::asset('assets/js/jquery.dataTables.min.js')}}"></script>
 			<script src="{{URL::asset('assets/js/jquery.dataTables.bootstrap.js')}}"></script>
 			<script src="{{URL::asset('assets/js/spin.min.js')}}"></script>
+			
 	<!--data tables -->
+	<!-- dashboardcharts -->
+		<script src="{{URL::asset('assets/js/jquery.easy-pie-chart.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/ace-elements.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/jquery.sparkline.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/Chart.js')}}"></script>
+		<script src="{{URL::asset('assets/js/flot/jquery.flot.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/flot/jquery.flot.pie.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/flot/jquery.flot.resize.min.js')}}"></script>
 <script>
 	$.ajaxSetup({
 		headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
 	});	
 </script>
+	
 	

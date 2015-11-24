@@ -11,8 +11,16 @@ use Validator;
 use File;
 use App\adminmodel\storeinfo;
 use App\adminmodel\storeowner;
+use App\adminmodel\indicator;
+use Auth;
 class store extends Controller
 {
+////////
+////////
+/////////////////////////////////////// END STORE PROFILE//////////////////////////////////////////////////////////
+////////
+////////
+	
 	public function validateUpdate(Request $request)
 	{
 		$input= Input::all();
@@ -249,7 +257,7 @@ class store extends Controller
 		if($extension =='jpeg' || $extension =='png' || $extension =='jpg')
 		{
 			$getsize =filesize($photo) /  pow(1024, 2);
-			if(round($getsize,0) >1)
+			if(round($getsize,2) > 1)
 			{
 				return $imageInfo.' image is too Large less than 1mb is accepted';
 			}
@@ -263,5 +271,110 @@ class store extends Controller
 		{
 			return 'Selected '.$imageInfo.' is not an image. accept only jpg and png';	
 		}
+	}
+////////
+////////
+/////////////////////////////////////// END STORE PROFILE//////////////////////////////////////////////////////////
+////////
+////////	
+
+////////
+////////
+/////////////////////////////////////// END STORE BANNER//////////////////////////////////////////////////////////
+////////
+////////
+	public function checkUserLevel()
+	{
+		try
+		{
+			 if(Auth::user())
+			 {
+				$usersinfo= Auth::user();
+				$getIndicatorDescription=Indicator::where('id','=',$usersinfo->indicator_id)->where('indicator_for','=','STORE')->get();
+				if(count($getIndicatorDescription) <= 0)
+				{
+					return 'empty';
+				}
+				else
+				{
+					// foreach($getIndicatorDescription as $indicatorInfo)
+					// {
+						// $indicator_id=$indicatorInfo->id;
+						// $indicator_name=$indicatorInfo->indicator_name;
+						// $indicator_for=$indicatorInfo->indicator_for;
+								// //id-indicator name - indicator for
+						// return $indicator_id.'-'.$indicator_name.'-'.$indicator_for;
+					// }
+					return $getIndicatorDescription;
+				}
+			 }
+			 else
+			 {	 
+				return 'authFailed';
+			 }
+		}
+		catch(\Exception $e)
+		{
+			return 'authErr';
+		}
+	}
+	public function showStoreBanner(Request $request)
+	{
+		try
+		{
+			//return $this->checkUserLevel();
+			if ($request->isMethod('GET')) {
+					
+				 if($this->checkUserLevel() == 'authFailed' )
+				 {
+					return redirect('/HMadmin/login');
+					
+				 }
+				 else if($this->checkUserLevel() == 'authErr' )
+				 {	 
+					return redirect('/HMadmin/login');
+				 }
+				 else if($this->checkUserLevel() == 'empty' )
+				 {
+					return 'no indicator';
+				 }
+				 else
+				 {
+					
+					 foreach($this->checkUserLevel() as $indicatorInfo)
+					 {
+						$indicator_id=$indicatorInfo->id;
+						$indicator_name=$indicatorInfo->indicator_name;
+						$indicator_for=$indicatorInfo->indicator_for;
+					 }				
+					 if($indicator_name == 'STORE ADMIN')
+					 {
+						$userLogin= Auth::user();
+						$storeowner = storeowner::where('store_id','=',$userLogin->login_id)->with('showStoreInfo')->get();
+						return view('admin.store.banner')
+								->with('userLevel',$indicator_name)
+								->with('userinfo',$storeowner);
+					 }
+					 else
+					 {
+						$userLogin= Auth::user();
+						$storeowner = storeowner::where('store_id','=',$userLogin->login_id)->with('showStoreInfo')->get();
+						return view('admin.store.banner')
+								->with('userLevel',$indicator_name)
+								->with('userinfo',$storeowner);
+					 }
+				 }
+			}
+			else
+			{
+				//err method err
+			
+			}			
+		}
+		catch(\Exception $e)
+		{
+			
+		}		
+		
 	}
 }

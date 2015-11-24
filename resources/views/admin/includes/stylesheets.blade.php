@@ -11,4 +11,8 @@
 		<link href="{{URL::asset('assets/simple-line-icons/simple-line-icons.min.css')}}" rel="stylesheet">
 		<link href="{{URL::asset('assets/css/bootstrap-editable.css')}}" rel="stylesheet">
 		<link href="{{URL::asset('assets/css/ace-responsive.min.css')}}" rel="stylesheet">
+		<link href="{{URL::asset('assets/css/fullcalendar.css')}}" rel="stylesheet">
+		
+
+
 	<meta name="_token" content="{!! csrf_token() !!}"/>

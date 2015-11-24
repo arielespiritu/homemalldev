@@ -14,9 +14,14 @@
 Route::get('/HMadmin','AdminConn\admincontroller@showDashboard');
 Route::get('/HMadmin/login','AdminConn\loginauth@showLogin');
 Route::get('/HMadmin/logout','AdminConn\loginauth@getlogOut');
+
+Route::get('/HMadmin/Store-Banner','AdminConn\store@showStoreBanner');
+
 Route::get('/HMadmin/Store-Users', function () {
     return view('admin.store.storeuser');
 });
+
+
 
 Route::get('/HMadmin/Store-Profile','AdminConn\admincontroller@showStoreProfile');
 Route::get('/HMadmin/Products', function () {
