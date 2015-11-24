@@ -47,16 +47,58 @@ class MarketController extends Controller {
 		$email = Auth::user()->email;
 		return view('client.pages.market')->with('email',$email);
 	}
-	public function showMarketPage($id)
+	public function showMarketPage($market)
 	{
-		if($id=="Grocery"){
+		if($market=="grocery"||$market=="apparel"||$market=="gadget"||$market=="furniture"){
 			if (Auth::check())
 			{
 				$id = Auth::user()->login_id;
 				$user = User::where('id', $id )->with('member')->get();
-				return view('client.pages.market-page')->with('user',$user)->with('market',$id);
+				return view('client.pages.market-page')->with('user',$user)->with('market',$market);
 			}else{
-				return view('client.pages.market-page')->with('market',$id);
+				return view('client.pages.market-page')->with('market',$market);
+			}
+		}
+	}
+	public function showMarketStores($market,$type)
+	{
+		if($market=="grocery"||$market=="apparel"||$market=="gadget"||$market=="furniture"){
+			if (Auth::check())
+			{
+				$id = Auth::user()->login_id;
+				$user = User::where('id', $id )->with('member')->get();
+				if($type=="all"){
+					return view('client.pages.market-stores')->with('user',$user)->with('market',$market)->with('type',$type);
+				}else if($type=="new"){
+					return view('client.pages.market-stores')->with('user',$user)->with('market',$market)->with('type',$type);
+				}else if($type=="most-visited"){
+					return view('client.pages.market-stores')->with('user',$user)->with('market',$market)->with('type',$type);
+				}else if($type=="online"){
+					return view('client.pages.market-stores')->with('user',$user)->with('market',$market)->with('type',$type);
+				}
+			}else{
+				if($type=="all"){
+					return view('client.pages.market-stores')->with('market',$market)->with('type',$type);
+				}else if($type=="new"){
+					return view('client.pages.market-stores')->with('market',$market)->with('type',$type);
+				}else if($type=="most-visited"){
+					return view('client.pages.market-stores')->with('market',$market)->with('type',$type);
+				}else if($type=="online"){
+					return view('client.pages.market-stores')->with('market',$market)->with('type',$type);
+				}
+			}
+		}
+	}
+	public function showMarketCategory($market)
+	{
+		if($market=="grocery"||$market=="apparel"||$market=="gadget"||$market=="furniture"){
+			if (Auth::check())
+			{
+				$id = Auth::user()->login_id;
+				$user = User::where('id', $id )->with('member')->get();
+				return view('client.pages.market-category')->with('user',$user)->with('market',$market);
+			}else{
+				return view('client.pages.market-category')->with('market',$market);
 			}
 		}
 	}
