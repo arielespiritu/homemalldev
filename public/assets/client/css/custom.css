@@ -10,6 +10,16 @@
 	color:black;
 }
 
+.alignright-market {
+	float: right;
+	margin-top:0px;
+	margin-left:20px;
+	color:black;
+}.alignright-market:hover {
+	float: right;
+	margin-top:0px;
+	color:red;
+}
 .alignright:hover {
 	float: right;
 	margin-top:0px;
@@ -133,6 +143,9 @@ background:transparent;
 }
 .market-menu li a {
 	color:#000;	
+}
+.market-category{
+	margin-bottom:0px;	
 }
 .store-logo{
 	border: 2px solid transparent;

@@ -10,12 +10,16 @@
 					<div class="col-md-3 same-height-row" style="padding:0px; ">
 						<div class="col-md-12  market-logo box" >
 						@if($market=='grocery')
+							<?php $market="Grocery"; ?>
 							<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/grocery.png') }}" alt=""></center>
 						@elseif($market=='apparel')
+							<?php $market="Apparel"; ?>
 							<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/apparel.png') }}" alt=""></center>
 						@elseif($market=='gadget')
+							<?php $market="Gadget"; ?>
 							<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/gadgets.png') }}" alt=""></center>
 						@elseif($market=='furniture')
+							<?php $market="Furniture"; ?>	
 							<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/furniture.png') }}" alt=""></center>
 						@endif
 							 
@@ -36,64 +40,13 @@
 								</div>		
 					</div>
 				</div>
-				<div class="col-md-12 same-height-row" style="padding:0px; ">
-					<div id="textbox">
-						  <h4 class="alignleft">Store List</h4>
-						  <div id="navcontainer" >
-								<ul>
-									<li><a href="/market/grocery/stores/online" class="alignright-market">Online</a></li>
-									<li><a href="/market/grocery/stores/most-visited" class="alignright-market" >Most Visited</a></li>
-									<li><a href="/market/grocery/stores/new" class="alignright-market">New</a></li>
-									<li><a href="/market/grocery/stores/all" class="alignright-market">All</a></li>
-								</ul>
-							</div>
-					</div>
-				</div>
-				<div style="clear: both;"></div>
             </div>
-            <div id="advantages" >
-                <div class="container">
-					<div class="col-md-12 market box" >
-						<div class="col-md-12 same-height-row" style="padding:0px; ">
-							<div class="col-md-3  col-xs-6 store-logo" >
-								<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store1.png') }}" alt="..."></div>
-							</div>
-							<div class="col-md-3 col-xs-6 store-logo" >
-								<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store2.png') }}" alt="..."></div>
-							</div>
-							<div class="col-md-3 col-xs-6 store-logo" >
-								<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store3.jpg') }}" alt="..."></div>
-							</div>
-							<div class="col-md-3 col-xs-6 store-logo" >
-								<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store4.png') }}" alt="..."></div>
-							</div>
-							<div class="col-md-3 col-xs-6 store-logo" >
-								<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store6.png') }}" alt="..."></div>
-							</div>
-							<div class="col-md-3 col-xs-6 store-logo" >
-								<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
-							</div>
-							<div class="col-md-3 col-xs-6 store-logo" >
-								<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store4.png') }}" alt="..."></div>
-							</div>
-							<div class="col-md-3 col-xs-6 store-logo" >
-								<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store6.png') }}" alt="..."></div>
-							</div>
-							<div class="col-md-3  col-xs-6 store-logo" >
-								<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
-							</div>							
-						</div>
-					</div>
-                </div>
-            </div>
-         
-		
+
 			<div class="container">
-				<div class="col-md-12 " style="padding:0px" >
+				<div class="col-md-12 " style="padding:0px; margin-bottom:40px;" >
 					<div class="col-md-12" style="padding:2px">
 						<div id="textbox">
-						  <h4 class="alignleft">Category</h4>
-						   <a  href="/market/grocery/category/all" class="alignright" >See All Category</a>
+						  <h4 class="alignleft">{{$market}} Categories</h4>
 						</div>
 						<div style="clear: both;"></div>
 					</div>
@@ -187,69 +140,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="container" >
-				<div class="col-md-12" style="padding:5px; margin-top:-20px;">
-							<div id="textbox">
-							  <h4 class="alignleft">Sale</h4>
-							   <a  href="/market/Grocery" class="alignright" >See More</a>
-							</div>
-							<div style="clear: both;"></div>
-				</div>	
-			</div>
-            <div class=""  >
-                <div class="container" >
-					<div class="col-md-12" style="padding:2px; margin-top:20px;" >
-						<div class="col-md-12" style="padding:0px">
-						@for ($x = 0; $x < 12; $x++)
-							<div class="col-md-2 col-xs-6" style="padding:2px; margin-top:-25px;">
-									<div class="box">
-											<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
-											<div class="item-desc" style="padding:10px" >
-												<h4 >Product Namessssssss</h4>
-												<p >P 100.00</p>
-												<div id="navcontainer">
-												<ul>
-													<li><a href="" ><i class="fa fa-shopping-cart cart" ></i></a></li>
-													<li><a href=""><i class="fa fa-heart heart" ></i></a></li>
-													<li><a href=""><i class="fa fa-star star" ></i></a></li>
-												</ul>
-												</div>
-												
-											</div>
-									</div>
-							</div>
-						@endfor	
-						</div>
-					</div>
-                </div>
-            </div>
-			 <!--<div class="container">
-				<div id="myCarousel" class="carousel slide" data-ride="carousel">
-					<div class="carousel-inner">
-						<div class="item active">
-						</div>
-						 <div class="item">
-						</div>
-						<div class="item">
-						</div>
-						<div class="item">
-						</div>	
-						</div>
-						<ul class="nav nav-pills nav-justified">
-						  <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">About<small>Lorem ipsum dolor sit</small></a></li>
-						  <li data-target="#myCarousel" data-slide-to="1"><a href="#">Projects<small>Lorem ipsum dolor sit</small></a></li>
-						  <li data-target="#myCarousel" data-slide-to="2"><a href="#">Portfolio<small>Lorem ipsum dolor sit</small></a></li>
-						  <li data-target="#myCarousel" data-slide-to="3"><a href="#">Services<small>Lorem ipsum dolor sit</small></a></li>
-						</ul>
-				</div>
-			</div> -->
 			
-			
-			
-			
-			
-			
-        
 						
 @endsection
 
