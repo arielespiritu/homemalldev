@@ -11,6 +11,10 @@
 		
 	</head>
 	<body>
+@foreach($userinfo as $user_info)
+@endforeach
+
+
 		<div class="navbar">
 			<div class="navbar-inner">
 				<div class="container-fluid">
@@ -222,7 +226,15 @@
 						</li>
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="{{URL::asset('assets/avatars/user.jpg')}}" alt="Jason's Photo" />
+								@if(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpg'))
+									<img class="nav-user-photo" id="owner_image"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpg')}}" />
+								@elseif(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpeg'))
+									<img class="nav-user-photo" id="owner_image"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpeg')}}" />
+								@elseif(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.png'))
+									<img  class="nav-user-photo" id="owner_image"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.png')}}" />
+								@else
+									
+								@endif							
 								<span class="user-info">
 									<small>Welcome,</small>
 									Jason
@@ -264,7 +276,7 @@
 					<li class="active">
 						<a href="/HMadmin">
 							<i class=" icon-bar-chart"></i>
-							<span class="menu-text"> Dashboard </span>
+							<span class="menu-text"> Dashboard  </span>
 						</a>
 					</li>
 					<li>
@@ -288,6 +300,12 @@
 									Store Users
 								</a>
 							</li>
+							<li>
+								<a href="/HMadmin/Store-Banner">
+									<i class="icon-double-angle-right"></i>
+									Store Banner
+								</a>
+							</li>							
 						</ul>
 					</li>
 					<li>

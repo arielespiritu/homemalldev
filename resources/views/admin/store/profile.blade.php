@@ -8,7 +8,7 @@
 		<ul class="breadcrumb">
 			<li>
 				<i class="icon-home home-icon"></i>
-				<a href="/">Home</a>
+				<a href="/HMadmin">Home</a>
 
 				<span class="divider">
 					<i class="icon-angle-right arrow-icon"></i>
@@ -28,9 +28,7 @@
 		<div class="widget-header">
 			<h4>Store Profile</h4>
 			<span class="widget-toolbar">
-				<a href="#" data-action="reload">
-					<i class="icon-refresh"></i>
-				</a>
+
 
 				<a href="#" data-action="collapse">
 					<i class="icon-chevron-up"></i>
@@ -43,11 +41,11 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="span6">
-
-										
 						<h4><b>STORE INFORMATION </b></h4>
 							<span class="profile-picture">
 								<input type="hidden" id="store_logo_status" class="span6" name="file-input" />
+								<!--<input type="hidden" style="display:none" id="store_id" value="{{$user_info->showStoreInfo->id}}" class="span6"/> -->
+								<input type="hidden" style="display:none" id="store_id" value="{{$user_info->showStoreInfo->id}}" class="span6"/>
 								
 								@if(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.jpg'))
 									<img id="store_logo"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/logo/'.$user_info->showStoreInfo->id.'.jpg')}}" />
@@ -65,7 +63,7 @@
 								<br>
 								@if($userLevel == 'STORE ADMIN')
 								<input type="file" id="store_logo_file"  accept="image/gif, image/jpeg, image/png"  class="ace-file-input" name="file-input"/>
-								<button id="store_logo_btncancel" onClick="cancel_upload('#store_logo_btncancel','#store_logo_file','#store_logo','default_store_logo','store_logo_status')" class="btn btn-small btn-danger" style="display:none">Cancel</button>
+								<button id="store_logo_btncancel" onClick="cancel_upload('#store_logo_btncancel','#store_logo_file','#store_logo','default_store_logo','store_logo_status','store_logo_file')" class="btn btn-small btn-danger" style="display:none">Cancel</button>
 								@else
 								@endif	
 							</span>
@@ -76,7 +74,8 @@
 								<label class="control-label" for="form-field-1">Store Name </label>
 								<div class="controls">
 								@if($userLevel == 'STORE ADMIN')
-									<input type="text" class="span12" id="form-field-1" placeholder="" value="{{$user_info->showStoreInfo->store_name}} " disabled />
+									<input type="hidden" class="span12" id="store_name" placeholder="" value="{{$user_info->showStoreInfo->store_name}} "  />
+									<input type="text" class="span12"  placeholder="" value="{{$user_info->showStoreInfo->store_name}} " disabled />
 								@else
 									
 								@endif
@@ -153,7 +152,11 @@
 										</div>
 									</div>				
 								</div>
-							</div>			
+							</div>		
+							<div class="row-fluid span12" style="margin:0px;">
+								<label class="control-label center" for="form-field-1"><i class="icon-film"></i><b> Complete Address</b></label>
+								<textarea class="span12 limited" rows="10" id="store_complete_address" style="resize:none;" data-maxlength="50">{{$user_info->showStoreInfo->store_complete_address}}</textarea>
+							</div>								
 						</div>
 						<div class="span6">
 								<h4><b>STORE OWNER INFORMATION</b></h4>
@@ -162,20 +165,23 @@
 										<input type="hidden" id="owner_image_status" class="" name="file-input" />
 										<center>
 										@if(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpg'))
-											<img id="owner_image"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpg')}}" />
+											<img id="owner_picture"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpg')}}" />
 											<input type="hidden" id="default_owner_image" value="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpg')}}" class="span6" name="file-input" />	
 										@elseif(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpeg'))
-											<img id="owner_image"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpeg')}}" />
+											<img id="owner_picture"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpeg')}}" />
 											<input type="hidden" id="default_owner_image" value="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.jpeg')}}" class="span6" name="file-input" />	
 										@elseif(File::exists('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.png'))
-											<img id="owner_image"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.png')}}" />
+											<img id="owner_picture"  src="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.png')}}" />
 											<input type="hidden" id="default_owner_image" value="{{URL::asset('assets/img/store/'.$user_info->showStoreInfo->store_name.'/ownerimage/'.$user_info->showStoreInfo->id.'.png')}}" class="span6" name="file-input" />	
 										@else
 											
 										@endif	
 										</center>
+										@if($userLevel == 'STORE ADMIN')
 										<input type="file" id="owner_image_file" class="ace-file-input" name="file-input"/>
-										<button id="owner_image_btncancel" onClick="cancel_upload('#owner_image_btncancel','#owner_image_file','#owner_image','default_owner_image','owner_image_status')" class="btn btn-small btn-danger" style="display:none">Cancel</button>
+										<button id="owner_image_btncancel" onClick="cancel_upload('#owner_image_btncancel','#owner_image_file','#owner_picture','default_owner_image','owner_image_status','owner_image_file')" class="btn btn-small btn-danger" style="display:none">Cancel</button>
+										@else
+										@endif	
 									</span>
 								</div>	
 							<br>
@@ -191,7 +197,7 @@
 										<label class="control-label" for="form-field-1"><i class="icon-screen-smartphone"></i> Owner Mobile</label>
 										<div class="controls">
 											@if($userLevel == 'STORE ADMIN')
-											<input type="text" class=" span12 input-mask-phone" id="owner_mobile" placeholder="(+63)9999-999999-9" />
+											<input type="text" class=" span12 input-mask-phone" id="owner_mobile" value="{{$user_info->owner_mobile}}" placeholder="(+63)9999-999999-9" />
 											@else
 											<input type="text" class=" span12 input-mask-phone" placeholder="(+63)9999-999999-9" disabled />
 											@endif	
@@ -278,7 +284,11 @@
 										</div>
 									</div>				
 								</div>
-							</div>						
+							</div>	
+							<div class="row-fluid span12" style="margin:0px;">
+								<label class="control-label center" for="form-field-1"><i class="icon-film"></i><b> Complete Address</b></label>
+								<textarea class="span12 limited" rows="10" id="owner_complete_address" style="resize:none;" data-maxlength="50">{{$user_info->owner_complete_address}}</textarea>
+							</div>		
 						</div>		
 					</div>
 				</div>	
@@ -299,7 +309,7 @@
 			    @else
 				<div class="row-fluid wizard-actions" style="display:none">
 				@endif	
-					<button onClick="updateInfo()" class="btn btn-success btn-next" data-last="Finish ">
+					<button onClick="updateInfo()"  class="btn btn-success btn-next" data-last="Finish ">
 						Save Info
 						<i class="fa-save"></i>
 					</button>
@@ -312,7 +322,7 @@
 @endsection
 @section('myscripts')
 <script>
-
+var last_gritter;
 document.getElementById('store_logo_status').value="Nothing_Change";
 document.getElementById('owner_image_status').value="Nothing_Change";
 
@@ -384,50 +394,54 @@ function owner_getArea(value)
 	}
 	document.getElementById("store_owner_area").value = savedArea;
 }
-$("#store_logo_file").change(function() {
-    var val = $(this).val();
-	var last_gritter;
-    switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
-        case 'gif': case 'jpg': case 'png':
-				readURL(this,"#store_logo");
-				document.getElementById('store_logo_status').value="New_Image";
-				getDrectory("#store_logo_file","#store_logo_btncancel");
-            break;
-        default:
-				$(this).val('');
-				 $("#store_logo").attr('src',document.getElementById('default_store_logo').value);
-				// error message here
-				last_gritter = $.gritter.add({
-					title: 'Ooopss!! the file is not an image',
-					text: 'accept only JPEG or PNG file/s!',
-					class_name: 'gritter-error gritter-center'
-				});
-				document.getElementById('store_logo_status').value="Change_err";
-            break;
-    }
-});
-$("#owner_image_file").change(function() {
-    var val = $(this).val();
-	var last_gritter;
-    switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
-        case 'gif': case 'jpg': case 'png':
-				readURL(this,"#owner_image");
-				document.getElementById('owner_image_status').value="New_Image";
-				getDrectory("#owner_image_file","#owner_image_btncancel");
-            break;
-        default:
-				$(this).val('');
-				 $("#owner_image").attr('src',document.getElementById('default_owner_image').value);
-				// error message here
-				last_gritter = $.gritter.add({
-					title: 'Ooopss!! the file is not an image',
-					text: 'accept only JPEG or PNG file/s!',
-					class_name: 'gritter-error gritter-center'
-				});
-				document.getElementById('owner_image_status').value="Change_err";
-            break;
-    }
-});
+	$("#store_logo_file").change(function() {
+		var val = $(this).val();
+		
+		
+		switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
+			 case 'jpg': case 'png':
+					readURL(this,"#store_logo");
+					document.getElementById('store_logo_status').value="New_Image";
+					getDrectory("#store_logo_file","#store_logo_btncancel");
+				break;
+			default:
+					$(this).val('');
+				
+					 $("#store_logo").attr('src',document.getElementById('default_store_logo').value);
+					// error message here
+					last_gritter = $.gritter.add({
+						title: 'Ooopss!! the file is not an image',
+						text: 'accept only JPEG or PNG file/s!',
+						class_name: 'gritter-error gritter-center'
+					});
+					document.getElementById('store_logo_status').value="Nothing_Change";
+				break;
+					
+		}
+		
+	});
+	$("#owner_image_file").change(function() {
+		var val = $(this).val();
+		
+		switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
+			 case 'jpg': case 'png':
+					readURL(this,"#owner_picture");
+					document.getElementById('owner_image_status').value="New_Image";
+					getDrectory("#owner_image_file","#owner_image_btncancel");
+				break;
+			default:
+					$(this).val('');
+					 $("#owner_picture").attr('src',document.getElementById('default_owner_image').value);
+					// error message here
+					last_gritter = $.gritter.add({
+						title: 'Ooopss!! the file is not an image',
+						text: 'accept only JPEG or PNG file/s!',
+						class_name: 'gritter-error gritter-center'
+					});
+					document.getElementById('owner_image_status').value="Nothing_Change";
+				break;
+		}
+	});
 function readURL(input,displayTo) {
 
     if (input.files && input.files[0]) {
@@ -456,13 +470,13 @@ function getDrectory(changefrom,changeto)
 	 $(changeto).fadeIn("slow");
 	 $(changefrom).fadeOut("slow");
 }
-function cancel_upload(changefrom,changeto,returnimageID,returnImageto,status)
+function cancel_upload(changefrom,changeto,returnimageID,returnImageto,status,clearinputID)
 {
 	getDrectory(changefrom,changeto);
 	 $(returnimageID).attr('src',document.getElementById(returnImageto).value);
 	 document.getElementById(status).value="Nothing_Change";
+	 document.getElementById(clearinputID).value="";
 }
-
 function updateInfo()
 {
 	var store_logo_status=document.getElementById('store_logo_status').value;
@@ -472,7 +486,11 @@ function updateInfo()
 	var store_profile_city=document.getElementById('store_profile_city').value;
 	var store_profile_area=document.getElementById('store_profile_area').value;
 	var store_about=document.getElementById('store_about').value;
+	var store_complete_address=document.getElementById('store_complete_address').value;
+	var store_name=document.getElementById('store_name').value;
 	var store_logo_file = $('#store_logo_file');
+	
+	var store_id=document.getElementById('store_id').value;
 	
 	var owner_image_status=document.getElementById('owner_image_status').value;
 	var owner_mobile=document.getElementById('owner_mobile').value;
@@ -481,6 +499,7 @@ function updateInfo()
 	var store_owner_gender=document.getElementById('store_owner_gender').value;
 	var store_owner_city=document.getElementById('store_owner_city').value;
 	var store_owner_area=document.getElementById('store_owner_area').value;
+	var owner_complete_address=document.getElementById('owner_complete_address').value;
 	var owner_image_file = $('#owner_image_file');
 	
 	var formData = new FormData();	
@@ -492,7 +511,11 @@ function updateInfo()
 	formData.append('store_tel_num', store_tel_num); 
 	formData.append('store_profile_city', store_profile_city); 
 	formData.append('store_profile_area', store_profile_area); 
+	formData.append('store_complete_address', store_complete_address); 
+	formData.append('store_name', store_name); 
+	
 	formData.append('store_about', store_about); 
+	formData.append('store_id', store_id); 
 	//owner 
 	formData.append('owner_image_status', owner_image_status); 
 	formData.append('owner_image_file', owner_image_file[0].files[0]); 
@@ -503,6 +526,7 @@ function updateInfo()
 	formData.append('store_owner_city', store_owner_city); 
 	formData.append('store_owner_area', store_owner_area); 
 	formData.append('store_owner_area', store_owner_area); 
+	formData.append('owner_complete_address', owner_complete_address); 
 	
 	// alert(store_logo_status+""+store_description+""+store_mobile+""+store_tel_num+""+store_profile_city+""+store_profile_area+""+store_about);
 	// alert(owner_image_status+""+owner_mobile+""+owner_tel_num+""+owner_email+""+store_owner_gender+""+store_owner_city+""+store_owner_area);
@@ -515,7 +539,33 @@ function updateInfo()
 		processData:false,        // To send DOMDocument or non processed data file it is set to false		
 		success: function(result)   // A function to be called if request succeeds
 	{
-		alert(result);
+		if(result == '1')
+		{
+			document.getElementById("owner_image_status").value="Nothing_Change";
+			document.getElementById("store_logo_status").value="Nothing_Change";
+			document.getElementById("store_logo_file").value="";			
+			document.getElementById("owner_image_file").value="";			
+			getDrectory("#store_logo_btncancel","#store_logo_file");
+			getDrectory("#owner_image_btncancel","#owner_image_file");
+			
+			
+			last_gritter = $.gritter.add({
+				title: 'Huraayy!!! Your Information is Up-to-date',
+				text: 'Please Reload the page to See Changes',
+				class_name: 'gritter-success gritter-center'
+			});
+		}
+		else
+		{
+			last_gritter = $.gritter.add({
+				title: 'Ooopss!! Something Wrong',
+				text: result,
+				class_name: 'gritter-error gritter-center'
+			});			
+		}
+		$('body,html').animate({
+		scrollTop: 0
+		}, 500);		
 	}
 	});	
 	

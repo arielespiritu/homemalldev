@@ -8,7 +8,7 @@
 		<ul class="breadcrumb">
 			<li>
 				<i class="icon-home home-icon"></i>
-				<a href="/">Home</a>
+				<a href="/HMadmin">Home</a>
 
 				<span class="divider">
 					<i class="icon-angle-right arrow-icon"></i>

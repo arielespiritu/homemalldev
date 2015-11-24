@@ -51,7 +51,11 @@ public function showDashboard(Request $request)
 				 }
 				 else
 				 {
-					 return $indicator_name;
+					$userLogin= Auth::user();
+					$storeowner = storeowner::where('store_id','=',$userLogin->login_id)->with('showStoreInfo')->get();
+					return view('admin.main')
+							->with('userLevel',$indicator_name)
+							->with('userinfo',$storeowner);
 				 }
 			 }
 		}
@@ -143,7 +147,13 @@ public function showStoreProfile(Request $request)
 				 }
 				 else
 				 {
-					 return $indicator_name;
+					$city =city::with('viewAllLocations')->get();
+					$userLogin= Auth::user();
+					$storeowner = storeowner::where('store_id','=',$userLogin->login_id)->with('showStoreInfo')->get();
+					return view('admin.store.profile')
+							->with('userLevel',$indicator_name)
+							->with('userinfo',$storeowner)
+							->with('cities',$city);
 				 }
 			 }
 		}
