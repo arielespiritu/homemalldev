@@ -21,7 +21,7 @@
 @section('content')
 <div class="row-fluid">
 	<div class="span12 center">
-		<div class="infobox infobox-green infobox-medium infobox-dark">
+		<div class="infobox infobox-green infobox-large infobox-dark">
 				<div class="infobox-progress">
 					<div class="easy-pie-chart percentage" data-percent="61" data-size="39">
 						<span class="percent">61</span>
