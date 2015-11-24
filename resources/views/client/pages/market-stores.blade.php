@@ -7,36 +7,23 @@
 			<div class="container">
 				<div class="col-md-12 market "  style="padding:0px;" >
 					
-					<div class="col-md-3 same-height-row" style="padding:0px; ">
+					<div class="col-md-3 same-height-row" style="padding:0px;" >
 						<div class="col-md-12  market-logo box" >
-						@if($market=='grocery')
-							<a href="/market/{{$market}}"><center><img class="img-responsive" src="{{ URL::asset('assets/img/market/grocery.png') }}" alt=""></center></a>
-						@elseif($market=='apparel')
-							<a href="/market/{{$market}}"><center><img class="img-responsive" src="{{ URL::asset('assets/img/market/apparel.png') }}" alt=""></center></a>
-						@elseif($market=='gadget')
-							<a href="/market/{{$market}}"><center><img class="img-responsive" src="{{ URL::asset('assets/img/market/gadgets.png') }}" alt=""></center></a>
-						@elseif($market=='furniture')
-							<a href="/market/{{$market}}"><center><img class="img-responsive" src="{{ URL::asset('assets/img/market/furniture.png') }}" alt=""></center></a>
-						@endif
-							 
+							 <center><img class="img-responsive" src="{{ URL::asset('assets/img/market/'.$market.'.png') }}" alt=""></center>
 						</div>
 					</div>
-					<div class="col-md-9 same-height-row" style="padding:0px; ">
-						
-								<div id="main-slider" style="padding:0px; margin-bottom:0px;">
-											<div class="item"  style="background:#b3a387;">
-												<center><img src="{{ URL::asset('assets/img/banner1.png') }}" alt="" class="img-responsive"></center>
-											</div>
-											<div class="item" style="background:#32ace8;" >
-												<center><img class="img-responsive" src="{{ URL::asset('assets/img/banner2.png') }}" alt=""></center>
-											</div>
-											<div class="item" >
-												<center><img class="img-responsive" src="{{ URL::asset('assets/img/banner3.png') }}" alt=""></center>
-											</div>						
-								</div>		
+					<div class="col-md-9 same-height-row market-slide">
+						<div id="main-slider" style="padding-bottom:0px;">
+							<div class="item" style="background:#32ace8;" >
+								<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/slides/'.$market.'/slide1.png') }}" alt=""></center>
+							</div>
+							<div class="item"  >
+								<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/slides/'.$market.'/slide2.png') }}" alt=""></center>
+							</div>							
+						</div>		
 					</div>
 				</div>
-				<div class="col-md-12 same-height-row" style="padding:0px; ">
+				<div class="col-md-4 col-xs-12 same-height-row" style="padding:0px; ">
 					<div id="textbox">
 						@if($type=='online')
 							<?php $types="Online"; ?>
@@ -47,7 +34,11 @@
 						@elseif($type=='all')
 							<?php $types="All"; ?>
 						@endif
-						  <h4 class="alignleft">{{$types}} Store</h4>
+						  <h4 class="alignleft">{{ucfirst($market)}} {{$types}} Store</h4>
+					</div>
+				</div>
+				<div class="col-md-8 col-xs-12 same-height-row" style="padding:0px; ">
+					<div id="textbox">
 						  <div id="navcontainer" >
 								<ul>
 									<li><a href="/market/{{$market}}/stores/online" class="alignright-market">Online</a></li>

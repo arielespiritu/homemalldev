@@ -59,7 +59,9 @@ Route::get('/home', function () {
 
 Route::get('/market/{id}', 'MarketController@showMarketPage'); //views
 Route::get('/market/{id}/stores/{id2}', 'MarketController@showMarketStores'); //views
+Route::get('/market/{id}/product/{id2}', 'MarketController@showMarketProducts'); //views
 Route::get('/market/{id}/category/all', 'MarketController@showMarketCategory'); //views
+Route::get('/market/{id}/category/product/{id2}', 'MarketController@showMarketCategoryProduct'); //views
 
 
 

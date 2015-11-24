@@ -17,26 +17,22 @@
 					</div>						
 			 </div>
 	</div>
-			<div class="container" >
-				<div class="col-md-12" style="padding:2px; margin-top:0px;">
-					<div class="col-md-12 box" >
-							<h3 class="text-uppercase text-center">Stores</h3>
-							<p class="lead text-center">Buy and Shop from different stores from different markets!</p>
-					</div>
-				</div>
-			</div>
-            <div id="advantages" >
+			
+			
+			
+            <div id="advantages" style="margin-top:0px;" >
+			@foreach($market_data as $market_datas )
                 <div class="container">
 						<div id="textbox">
-						  <h4 class="alignleft">Grocery</h4>
-						  <a  href="/market/grocery" class="alignright" >See more</a>
+						  <a  href="/market/{{strtolower($market_datas->market_name)}}"><h4 class="alignleft link">{{$market_datas->market_name}}</h4></a>
+						  <a  href="/market/{{strtolower($market_datas->market_name)}}/stores/all" class="alignright" >See more</a>
 						</div>
 						<div style="clear: both;"></div>
                         <div class="col-md-12 market box" >
 							
 							<div class="col-md-3 same-height-row" style="padding:0px; ">
 								<div class="col-md-12  market-logo" >
-									 <a  href="/market/grocery"><center><img class="img-responsive" src="{{ URL::asset('assets/img/market/grocery.png') }}" alt=""></center></a>
+									 <a  href="/market/{{strtolower($market_datas->market_name)}}"><center><img class="img-responsive" src="{{ URL::asset('assets/img/market/'.strtolower($market_datas->market_name).'.png') }}" alt=""></center></a>
 								</div>
 							</div>
 							<div class="col-md-9 same-height-row" style="padding:0px; ">
@@ -70,554 +66,61 @@
 							</div>
                         </div>
                 </div>
-
-				
-				  <div class="container">
-				  		<div id="textbox">
-							  <h4 class="alignleft">Furniture</h4>
-							  <a  href="/market/furniture" class="alignright">See more</a>
-						</div>
-						<div style="clear: both;"></div>
-                        <div class="col-md-12 market box"  >
-							<div class="col-md-3 same-height-row" style="padding:0px">
-								<div class="col-md-12  market-logo" >
-									<a  href="/market/furniture"><center><img class="img-responsive" src="{{ URL::asset('assets/img/market/furniture.png') }}" alt=""></center></a>
-								</div>
-							</div>
-							<div class="col-md-9 same-height-row" style="padding:0px">							
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store1.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store2.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store3.jpg') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store4.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store6.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store4.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store6.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
-								</div>	
-							</div>
-                        </div>
-                </div>
-				<div class="container">
-						<div id="textbox" >
-							<h4 class="alignleft">Apparel</h4>
-							<a  href="/market/apparel" class="alignright">See more</a>
-						</div>
-						<div style="clear: both;"></div>
-                        <div class="col-md-12 market box"  >
-							<div class="col-md-3 same-height-row" style="padding:0px">
-								<div class="col-md-12  market-logo" >
-									<a  href="/market/apparel"><center><img class="img-responsive" src="{{ URL::asset('assets/img/market/apparel.png') }}" alt=""></center></a>
-								</div>
-							</div>
-							<div class="col-md-9 same-height-row" style="padding:0px">							
-								<div class="col-md-4 col-xs-6 store-logo ">
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store1.png') }}" alt="..." ></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store2.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store3.jpg') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store4.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store6.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store4.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store6.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
-								</div>	
-							</div>
-                        </div>
-                </div>
-				
-				
-				 <div class="container">
-						<div id="textbox">
-							  <h4 class="alignleft">Gadgets</h4>
-							  <a  href="/market/gadget" class="alignright">See more</a>
-						</div>
-						<div style="clear: both;"></div>
-                        <div class="col-md-12 market box" >
-							<div class="col-md-3 same-height-row" style="padding:0px">
-								<div class="col-md-12  market-logo" >
-									<a  href="/market/gadget"><center><img class="img-responsive" src="{{ URL::asset('assets/img/market/gadgets.png') }}" alt=""></center></a>
-								</div>
-							</div>
-							<div class="col-md-9 same-height-row" style="padding:0px">							
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store1.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store2.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store3.jpg') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store4.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store6.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store4.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store6.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
-								</div>	
-							</div>
-                        </div>
-                </div>
-				
-			
+			@endforeach
             </div>
          
-        <div id="hot">
-                <div class="box"  style="background:#f6ecb7; padding:0px; margin-top:70px;  margin-bottom:10px;">
-                    <center><img class="img-responsive" style="margin-top:-50px;" src="{{ URL::asset('assets/img/market/grocery-add.png') }}" alt=""></center>
+		<div id="hot" style="margin-top:80px;">
+			<?php 
+				$bg=array("#f6ecb7","#103f71","#ca27f4","#4a79f5"); 
+				$num = 0;
+			?>
+			@foreach($market_data as $markets_datas )
+			<?php $count=0; ?>
+                <div class="box"  style="background:{{$bg[$num]}}; padding:0px; margin-top:50px;  margin-bottom:10px;">
+                    <center><img class="img-responsive" style="margin-top:-80px;" src="{{ URL::asset('assets/img/market/'.$markets_datas->market_name.'-add.png') }}" alt=""></center>
                 </div>
 				<div style="clear: both;"></div>
 				<div class="container">
 						<div class="col-md-12 " style="padding:0px; margin-top:20px;"  >
 							<div id="textbox">
-								  <a  href="/market/grocery/category/all" class="alignright" style="margin-top:-20px;">See More</a>
+								  <a  href="/market/{{strtolower($markets_datas->market_name)}}/category/all" class="alignright" style="margin-top:-20px;">See More</a>
 							</div>
 						</div>
-                        <div class="col-md-3 col-xs-6" style="padding:2px">
-                            <div class="box">
-                                 <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/breads.png') }}" alt=""></center>
-								<div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								   <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>									
-								  </a>
+						@foreach($markets_datas->category as $category )
+							@if($count<4)
+							
+							<?php $count++; ?>
+								<div class="col-md-3 col-xs-6" style="padding:2px">
+									<div class="box">
+										<a href="/market/{{strtolower($markets_datas->market_name)}}/category/product/{{str_replace(' ','-',$category->category_name)}}"> <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/'.$markets_datas->market_name.'/'.$count.'.png') }}" alt=""></center></a>
+										<div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
+										  <a href="#" class="list-group-item category-products" >
+											<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
+											<h5 class="list-group-item-heading">Product Name</h5>
+											<p class="list-group-item-text">P 100.00</p>
+										  </a>
+										  <a href="#" class="list-group-item category-products" >
+											<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
+											<h5 class="list-group-item-heading">Product Name</h5>
+											<p class="list-group-item-text">P 100.00</p>
+										  </a>
+										   <a href="#" class="list-group-item category-products" >
+											<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
+											<h5 class="list-group-item-heading">Product Name</h5>
+											<p class="list-group-item-text">P 100.00</p>									
+										  </a>
+										</div>
+									</div>
 								</div>
-                            </div>
-                        </div>
-						<div class="col-md-3  col-xs-6" style="padding:2px">
-                            <div class="box">
-                                  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
-								  <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								   <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>								
-								  </a>
-								</div>
-                            </div>
-                        </div>
-						<div class="col-md-3 col-xs-6" style="padding:2px">
-                            <div class="box">
-                                  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/condiments.png') }}" alt=""></center>
-								  <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								   <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								</div>
-                            </div>
-                        </div>
-						<div class="col-md-3 col-xs-6" style="padding:2px">
-                            <div class="box">
-                                  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/beverages.png') }}" alt=""></center>
-								  <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								   <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								</div>
-                            </div>
-                        </div>
-                    </div>
+							@endif
+						@endforeach	
                 </div>
+     		<?php $num++; ?>
+			@endforeach	
 				
-				<div class="box"  style="background:#103f71; padding:0px; margin-top:50px; margin-bottom:10px; ">
-                    <center><img class="img-responsive" style="margin-top:-80px;" src="{{ URL::asset('assets/img/market/furniture-add.png') }}" alt=""></center>
-                </div>
-				
-				<div class="container">
-                    <div class="col-md-12" style="padding:0px" >
-					<div class="col-md-12 " style="padding:0px; margin-top:20px;"  >
-							<div id="textbox">
-								  <a  href="/market/Grocery" class="alignright" style="margin-top:-20px;">See More</a>
-							</div>
-						</div>
-                        <div class="col-md-3  col-xs-6" style="padding:2px">
-                            <div class="box" >
-                                 <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/furniture/Bed.png') }}" alt=""></center>
-								   <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								   <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>	
-								  </a>
-								</div>
-                            </div>
-                        </div>
-						<div class="col-md-3 col-xs-6" style="padding:2px">
-                            <div class="box">
-                                  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/furniture/Dining.png') }}" alt=""></center>
-								    <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								   <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								</div>
-                            </div>
-                        </div>
-						<div class="col-md-3 col-xs-6" style="padding:2px">
-                            <div class="box">
-                                  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/furniture/HomeDecor.png') }}" alt=""></center>
-								    <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								   <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>				
-								  </a>
-								</div>
-                            </div>
-                        </div>
-						<div class="col-md-3 col-xs-6" style="padding:2px">
-                            <div class="box">
-                                  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/furniture/Sofa.png') }}" alt=""></center>
-								    <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								   <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-				
-                <div class="box"  style="background:#ca27f4; padding:0px; margin-top:50px;  margin-bottom:10px;">
-                    <center><img class="img-responsive" style="margin-top:-80px;" src="{{ URL::asset('assets/img/market/apparel-add.png') }}" alt=""></center>
-                </div>
-				<div class="container">
-                    <div class="col-md-12" style="padding:0px" >
-					<div class="col-md-12 " style="padding:0px; margin-top:20px;"  >
-							<div id="textbox">
-								  <a  href="/market/Grocery" class="alignright" style="margin-top:-20px;">See More</a>
-							</div>
-						</div>
-                        <div class="col-md-3 col-xs-6" style="padding:2px">
-                            <div class="box" >
-                                 <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/apparel/MensPolo.png') }}" alt=""></center>
-								   <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								   <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-									
-								  </a>
-								</div>
-                            </div>
-                        </div>
-						<div class="col-md-3 col-xs-6" style="padding:2px">
-                            <div class="box">
-                                  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/apparel/MensWatches.png') }}" alt=""></center>
-								    <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								   <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								</div>
-                            </div>
-                        </div>
-						<div class="col-md-3 col-xs-6" style="padding:2px">
-                            <div class="box">
-                                  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/apparel/WomensClothes.png') }}" alt=""></center>
-								    <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								   <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-									
-								  </a>
-								</div>
-                            </div>
-                        </div>
-						<div class="col-md-3 col-xs-6" style="padding:2px">
-                            <div class="box">
-                                  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/apparel/WomensFootwear.png') }}" alt=""></center>
-								    <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								   <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-				
-			<div class="box"  style="background:#4a79f5; padding:0px; margin-top:50px;  margin-bottom:10px;">
-                    <center><img class="img-responsive" style="margin-top:-84px;" src="{{ URL::asset('assets/img/market/gadgets-add.png') }}" alt=""></center>
-                </div>
-				<div class="container">
-                    <div class="col-md-12" style="padding:0px" >
-					<div class="col-md-12 " style="padding:0px; margin-top:20px;"  >
-							<div id="textbox">
-								  <a  href="/market/Grocery" class="alignright" style="margin-top:-20px;">See More</a>
-							</div>
-						</div>
-                        <div class="col-md-3 col-xs-6" style="padding:2px">
-                            <div class="box" >
-                                 <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/gadget/Cameras.png') }}" alt=""></center>
-								   <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								   <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-									
-								  </a>
-								</div>
-                            </div>
-                        </div>
-						<div class="col-md-3 col-xs-6" style="padding:2px">
-                            <div class="box">
-                                  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/gadget/Laptop.png') }}" alt=""></center>
-								    <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								   <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								</div>
-                            </div>
-                        </div>
-						<div class="col-md-3 col-xs-6" style="padding:2px">
-                            <div class="box">
-                                  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/gadget/Mobile.png') }}" alt=""></center>
-								    <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								   <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-									
-								  </a>
-								</div>
-                            </div>
-                        </div>
-						<div class="col-md-3 col-xs-6" style="padding:2px">
-                            <div class="box">
-                                  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/gadget/MobileAccessories.png') }}" alt=""></center>
-								    <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								  <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								   <a href="#" class="list-group-item category-products" >
-									<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-									<h5 class="list-group-item-heading">Product Name</h5>
-									<p class="list-group-item-text">P 100.00</p>
-								  </a>
-								</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+			
            <div class="container" >
-				<div class="col-md-12" style="padding:2px; margin-top:-20px;">
+				<div class="col-md-12" style="padding:2px; margin-top:-30px;">
 					<div class="col-md-12 box" >
 							<h3 class="text-uppercase text-center">Brands</h3>
 							<p class="lead text-center">Choose your branded items!</p>
@@ -721,7 +224,7 @@
 						@for ($x = 0; $x < 18; $x++)
 							<div class="col-md-2 col-xs-6" style="padding:2px; margin-top:-25px;">
 									<div class="box">
-											<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+											<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center>
 											<div class="item-desc" style="padding:10px" >
 												<h4 >Product Namessssssss</h4>
 												<p >P 100.00</p>

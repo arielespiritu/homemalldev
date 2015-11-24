@@ -11,7 +11,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use Auth;
-
+use App\Market;
 
 class AuthController extends Controller
 {
@@ -88,6 +88,7 @@ class AuthController extends Controller
     }
 	public function postLogin(Request $request)
     {
+	$market_data = Market::with('category')->get();
 		// validate the info, create rules for the inputs
 		$rules = array(
 			'email'    => 'required|email', // make sure the email is an actual email
@@ -99,9 +100,10 @@ class AuthController extends Controller
 
 		// if the validator fails, redirect back to the form
 		if ($validator->fails()) {
+		
 			return redirect('auth/login')
 				->withErrors($validator) // send back all errors to the login form
-				->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
+				->withInput(Input::except('password'))->with('market_data',$market_data); // send back the input (not the password) so that we can repopulate the form
 		} else {
 			// create our user data for the authentication
 			$userdata = array(
@@ -111,15 +113,28 @@ class AuthController extends Controller
 			);
 			// attempt to do the login
 			if (Auth::attempt($userdata)) {
-				return redirect()->intended('/market');
+				return redirect()->intended('/market')->with('market_data',$market_data);
 			} else {        
 				// validation not successful, send back to form 
-				return redirect()->back()->withInput()->withErrors('Wrong username/password combination.');
+				return redirect()->back()->withInput()->withErrors('Wrong username/password combination.')->with('market_data',$market_data);
 			}
 		}
 	}
+	public function getLogin()
+	{
+	$market_data = Market::with('category')->get();
+		if (Auth::check())
+		{
+			$id = Auth::user()->login_id;
+			$user = User::where('id', $id )->with('member')->get();
+			return view('auth.login')->with('user',$user)->with('market_data',$market_data);
+		}else{
+			return view('auth.login')->with('market_data',$market_data);
+		}
+	}
 	public function getLogout() {
+	    $market_data = Market::with('category')->get();
         Auth::logout(); // logout user
-        return redirect(\URL::previous());
+        return redirect(\URL::previous())->with('market_data',$market_data);
 	}
 }

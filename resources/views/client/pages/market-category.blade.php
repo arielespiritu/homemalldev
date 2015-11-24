@@ -7,37 +7,20 @@
 			<div class="container">
 				<div class="col-md-12 market "  style="padding:0px;" >
 					
-					<div class="col-md-3 same-height-row" style="padding:0px; ">
+					<div class="col-md-3 same-height-row" style="padding:0px;" >
 						<div class="col-md-12  market-logo box" >
-						@if($market=='grocery')
-							<?php $market="Grocery"; ?>
-							<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/grocery.png') }}" alt=""></center>
-						@elseif($market=='apparel')
-							<?php $market="Apparel"; ?>
-							<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/apparel.png') }}" alt=""></center>
-						@elseif($market=='gadget')
-							<?php $market="Gadget"; ?>
-							<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/gadgets.png') }}" alt=""></center>
-						@elseif($market=='furniture')
-							<?php $market="Furniture"; ?>	
-							<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/furniture.png') }}" alt=""></center>
-						@endif
-							 
+							 <center><img class="img-responsive" src="{{ URL::asset('assets/img/market/'.$market.'.png') }}" alt=""></center>
 						</div>
 					</div>
-					<div class="col-md-9 same-height-row" style="padding:0px; ">
-						
-								<div id="main-slider" style="padding:0px; margin-bottom:0px;">
-											<div class="item"  style="background:#b3a387;">
-												<center><img src="{{ URL::asset('assets/img/banner1.png') }}" alt="" class="img-responsive"></center>
-											</div>
-											<div class="item" style="background:#32ace8;" >
-												<center><img class="img-responsive" src="{{ URL::asset('assets/img/banner2.png') }}" alt=""></center>
-											</div>
-											<div class="item" >
-												<center><img class="img-responsive" src="{{ URL::asset('assets/img/banner3.png') }}" alt=""></center>
-											</div>						
-								</div>		
+					<div class="col-md-9 same-height-row market-slide">
+						<div id="main-slider" style="padding-bottom:0px;">
+							<div class="item" style="background:#32ace8;" >
+								<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/slides/'.$market.'/slide1.png') }}" alt=""></center>
+							</div>
+							<div class="item"  >
+								<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/slides/'.$market.'/slide2.png') }}" alt=""></center>
+							</div>							
+						</div>		
 					</div>
 				</div>
             </div>
@@ -46,13 +29,13 @@
 				<div class="col-md-12 " style="padding:0px; margin-bottom:40px;" >
 					<div class="col-md-12" style="padding:2px">
 						<div id="textbox">
-						  <h4 class="alignleft">{{$market}} Categories</h4>
+						  <h4 class="alignleft">{{ucfirst($market)}} Categories</h4>
 						</div>
 						<div style="clear: both;"></div>
 					</div>
 					<div class="col-md-3 col-xs-6" style="padding:2px">
 						<div class="box">
-							 <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/breads.png') }}" alt=""></center>
+							 <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center>
 							<div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
 							  <a href="#" class="list-group-item category-products" >
 								<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
@@ -74,7 +57,7 @@
 					</div>
 					<div class="col-md-3  col-xs-6" style="padding:2px">
 						<div class="box">
-							  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+							  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/2.png') }}" alt=""></center>
 							  <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
 							  <a href="#" class="list-group-item category-products" >
 								<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
@@ -96,7 +79,7 @@
 					</div>
 					<div class="col-md-3 col-xs-6" style="padding:2px">
 						<div class="box">
-							  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/condiments.png') }}" alt=""></center>
+							  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/3.png') }}" alt=""></center>
 							  <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
 							  <a href="#" class="list-group-item category-products" >
 								<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
@@ -118,7 +101,7 @@
 					</div>
 					<div class="col-md-3 col-xs-6" style="padding:2px">
 						<div class="box">
-							  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/beverages.png') }}" alt=""></center>
+							  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/4.png') }}" alt=""></center>
 							  <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
 							  <a href="#" class="list-group-item category-products" >
 								<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >

@@ -7,44 +7,35 @@
 			<div class="container">
 				<div class="col-md-12 market "  style="padding:0px;" >
 					
-					<div class="col-md-3 same-height-row" style="padding:0px; ">
+					<div class="col-md-3 same-height-row" style="padding:0px;" >
 						<div class="col-md-12  market-logo box" >
-						@if($market=='grocery')
-							<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/grocery.png') }}" alt=""></center>
-						@elseif($market=='apparel')
-							<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/apparel.png') }}" alt=""></center>
-						@elseif($market=='gadget')
-							<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/gadgets.png') }}" alt=""></center>
-						@elseif($market=='furniture')
-							<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/furniture.png') }}" alt=""></center>
-						@endif
-							 
+							 <center><img class="img-responsive" src="{{ URL::asset('assets/img/market/'.$market.'.png') }}" alt=""></center>
 						</div>
 					</div>
-					<div class="col-md-9 same-height-row" style="padding:0px; ">
-						
-								<div id="main-slider" style="padding:0px; margin-bottom:0px;">
-											<div class="item"  style="background:#b3a387;">
-												<center><img src="{{ URL::asset('assets/img/banner1.png') }}" alt="" class="img-responsive"></center>
-											</div>
-											<div class="item" style="background:#32ace8;" >
-												<center><img class="img-responsive" src="{{ URL::asset('assets/img/banner2.png') }}" alt=""></center>
-											</div>
-											<div class="item" >
-												<center><img class="img-responsive" src="{{ URL::asset('assets/img/banner3.png') }}" alt=""></center>
-											</div>						
-								</div>		
+					<div class="col-md-9 same-height-row market-slide">
+						<div id="main-slider" style="padding-bottom:0px;">
+							<div class="item" style="background:#32ace8;" >
+								<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/slides/'.$market.'/slide1.png') }}" alt=""></center>
+							</div>
+							<div class="item"  >
+								<center><img class="img-responsive" src="{{ URL::asset('assets/img/market/slides/'.$market.'/slide2.png') }}" alt=""></center>
+							</div>							
+						</div>		
 					</div>
 				</div>
-				<div class="col-md-12 same-height-row" style="padding:0px; ">
+				<div class="col-md-4 col-xs-12 same-height-row" style="padding:0px; ">
 					<div id="textbox">
-						  <h4 class="alignleft">Store List</h4>
+						  <h4 class="alignleft">{{ucfirst($market)}} Store List</h4>
+					</div>
+				</div>
+				<div class="col-md-8  col-xs-12 same-height-row" style="padding:0px; ">
+					<div id="textbox">
 						  <div id="navcontainer" >
 								<ul>
-									<li><a href="/market/grocery/stores/online" class="alignright-market">Online</a></li>
-									<li><a href="/market/grocery/stores/most-visited" class="alignright-market" >Most Visited</a></li>
-									<li><a href="/market/grocery/stores/new" class="alignright-market">New</a></li>
-									<li><a href="/market/grocery/stores/all" class="alignright-market">All</a></li>
+									<li><a href="/market/{{$market}}/stores/online" class="alignright-market">Online</a></li>
+									<li><a href="/market/{{$market}}/stores/most-visited" class="alignright-market" >Most Visited</a></li>
+									<li><a href="/market/{{$market}}/stores/new" class="alignright-market">New</a></li>
+									<li><a href="/market/{{$market}}/stores/all" class="alignright-market">All</a></li>
 								</ul>
 							</div>
 					</div>
@@ -93,13 +84,13 @@
 					<div class="col-md-12" style="padding:2px">
 						<div id="textbox">
 						  <h4 class="alignleft">Category</h4>
-						   <a  href="/market/grocery/category/all" class="alignright" >See All Category</a>
+						   <a  href="/market/{{$market}}/category/all" class="alignright" >See All Category</a>
 						</div>
 						<div style="clear: both;"></div>
 					</div>
 					<div class="col-md-3 col-xs-6" style="padding:2px">
 						<div class="box">
-							 <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/breads.png') }}" alt=""></center>
+							 <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center>
 							<div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
 							  <a href="#" class="list-group-item category-products" >
 								<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
@@ -121,7 +112,7 @@
 					</div>
 					<div class="col-md-3  col-xs-6" style="padding:2px">
 						<div class="box">
-							  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+							  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/2.png') }}" alt=""></center>
 							  <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
 							  <a href="#" class="list-group-item category-products" >
 								<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
@@ -143,7 +134,7 @@
 					</div>
 					<div class="col-md-3 col-xs-6" style="padding:2px">
 						<div class="box">
-							  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/condiments.png') }}" alt=""></center>
+							  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/3.png') }}" alt=""></center>
 							  <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
 							  <a href="#" class="list-group-item category-products" >
 								<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
@@ -165,7 +156,7 @@
 					</div>
 					<div class="col-md-3 col-xs-6" style="padding:2px">
 						<div class="box">
-							  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/beverages.png') }}" alt=""></center>
+							  <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/4.png') }}" alt=""></center>
 							  <div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
 							  <a href="#" class="list-group-item category-products" >
 								<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
@@ -189,11 +180,24 @@
 			</div>
 			<div class="container" >
 				<div class="col-md-12" style="padding:5px; margin-top:-20px;">
+							<div class="col-md-4 col-xs-12 same-height-row" style="padding:0px; ">
 							<div id="textbox">
-							  <h4 class="alignleft">Sale</h4>
-							   <a  href="/market/Grocery" class="alignright" >See More</a>
+								  <h4 class="alignleft">Products</h4>
 							</div>
-							<div style="clear: both;"></div>
+							</div>
+							<div class="col-md-8 col-xs-12 same-height-row" style="padding:0px; ">
+							<div id="textbox">
+								  <div id="navcontainer" >
+										<ul>
+											<li><a href="/market/{{$market}}/product/sale" class="alignright-market">Sale</a></li>
+											<li><a href="/market/{{$market}}/product/popular" class="alignright-market" >Popular</a></li>
+											<li><a href="/market/{{$market}}/product/new" class="alignright-market">New</a></li>
+											<li><a href="/market/{{$market}}/product/all" class="alignright-market">All</a></li>
+										</ul>
+									</div>
+							</div>
+							</div>
+				<div style="clear: both;"></div>
 				</div>	
 			</div>
             <div class=""  >
@@ -203,7 +207,7 @@
 						@for ($x = 0; $x < 12; $x++)
 							<div class="col-md-2 col-xs-6" style="padding:2px; margin-top:-25px;">
 									<div class="box">
-											<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/fruits.png') }}" alt=""></center>
+											<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center>
 											<div class="item-desc" style="padding:10px" >
 												<h4 >Product Namessssssss</h4>
 												<p >P 100.00</p>

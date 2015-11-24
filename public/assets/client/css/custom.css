@@ -25,7 +25,9 @@
 	margin-top:0px;
 	color:red;
 }
-
+.link:hover {
+	color:red;
+}
 .category-products{
 	border-radius: 0px 0px 0px 0px;
 	padding-bottom:20px;
@@ -103,7 +105,9 @@ padding: 0;
 list-style-type: none;
 }
 #navcontainer ul li { display: inline; }
-   
+ 
+
+ 
 .heart{
 color:red;
 font-size:15px;
@@ -146,6 +150,9 @@ background:transparent;
 }
 .market-category{
 	margin-bottom:0px;	
+}
+.market-slide{
+padding-right:0px; padding-bottom:30px;
 }
 .store-logo{
 	border: 2px solid transparent;
@@ -198,6 +205,9 @@ margin-top:10px;
 @media(max-width:767px){
 	.market-logo{
 		display:none;
+	}
+	.market-slide{
+	padding:0px; 
 	}
 	.wraptocenter {
     display: table-cell;
