@@ -20,16 +20,13 @@ Route::get('/HMadmin/Store-Banner','AdminConn\store@showStoreBanner');
 Route::get('/HMadmin/Store-Users', function () {
     return view('admin.store.storeuser');
 });
-
-
-
 Route::get('/HMadmin/Store-Profile','AdminConn\admincontroller@showStoreProfile');
-Route::get('/HMadmin/Products', function () {
-    return view('admin.products.products');
-});
+Route::get('/HMadmin/Products','AdminConn\products@showProducts');
+
 //POST
 Route::post('/HMadmin/loginauth','AdminConn\loginauth@validateLogin');
 Route::post('/HMadmin/Store-Profile/Update','AdminConn\store@validateUpdate');
+Route::post('/HMadmin/Products/addSub','AdminConn\products@addsubcat');
 //
 
 ///////////////////////// Do not modify i will kill you /////////////////

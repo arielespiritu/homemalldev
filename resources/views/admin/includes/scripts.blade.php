@@ -17,7 +17,6 @@
 			<script src="{{URL::asset('assets/js/jquery.dataTables.min.js')}}"></script>
 			<script src="{{URL::asset('assets/js/jquery.dataTables.bootstrap.js')}}"></script>
 			<script src="{{URL::asset('assets/js/spin.min.js')}}"></script>
-			
 	<!--data tables -->
 	<!-- dashboardcharts -->
 		<script src="{{URL::asset('assets/js/jquery.easy-pie-chart.min.js')}}"></script>

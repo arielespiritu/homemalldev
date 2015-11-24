@@ -447,11 +447,8 @@
 		<a href="#" id="btn-scroll-up" style="position:fixed" class="btn-scroll-up btn btn-small btn-inverse">
 			<i class="icon-double-angle-up icon-only bigger-110"></i>
 		</a>
-		
 		@include('admin.includes.scripts')
-		
 		@yield('myscripts')
-
 	</body>
 	<script>
 function logout()
@@ -459,7 +456,7 @@ function logout()
 	$.get("/HMadmin/logout",
 	function(result)
 	{
-		window.location.reload();
+		location.reload();
 	});
 }
 </script>
