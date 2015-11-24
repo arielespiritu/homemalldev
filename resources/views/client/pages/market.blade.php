@@ -120,7 +120,7 @@
 				
 			
            <div class="container" >
-				<div class="col-md-12" style="padding:2px; margin-top:-30px;">
+				<div class="col-md-12" style="padding:2px; margin-top:-20px;">
 					<div class="col-md-12 box" >
 							<h3 class="text-uppercase text-center">Brands</h3>
 							<p class="lead text-center">Choose your branded items!</p>
@@ -230,7 +230,7 @@
 												<p >P 100.00</p>
 												<div id="navcontainer">
 												<ul>
-													<li><a href="" ><i class="fa fa-shopping-cart cart" ></i></a></li>
+													<li><a href="" ><i class="fa fa-shopping-cart cart " ></i></a></li>
 													<li><a href=""><i class="fa fa-heart heart" ></i></a></li>
 													<li><a href=""><i class="fa fa-star star" ></i></a></li>
 												</ul>

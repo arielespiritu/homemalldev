@@ -69,7 +69,7 @@
 										<div class="form-group">
 											<input type="text" name="text" placeholder="I am searching for..." class="form-control input-lg">
 										</div>
-										<button type="submit" class="btn btn-primary btn-lg">Search</button>
+										<a href="/market" class="btn btn-primary btn-lg">Search</a>
 									</form>
 								</div>
 							</div>
