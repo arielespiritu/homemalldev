@@ -450,7 +450,7 @@
        
         <script src="seria/js/scripts.js"></script>
 		<script type="text/javascript">
-			$('#clock').countdown('2020/10/10', function(event) {
+			$('#clock').countdown('2015/12/1', function(event) {
 				var $this = $(this).html(event.strftime(''
 				+ '<span>%w</span> weeks '
 				+ '<span>%d</span> days '
