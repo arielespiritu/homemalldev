@@ -390,11 +390,11 @@ $(window).load(function(){
 
 				console.log($(window).scrollTop());
 
-				if ($(window).scrollTop() > 550) {
+				if ($(window).scrollTop() > 150) {
 				  $('#navbar').addClass('navbar-fixed-top');
 				}
 
-				if ($(window).scrollTop() < 551) {
+				if ($(window).scrollTop() < 151) {
 				  $('#navbar').removeClass('navbar-fixed-top');
 				}
 			  });

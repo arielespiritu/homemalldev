@@ -45,7 +45,7 @@ Route::post('/auth/register', 'Auth\AuthController@postRegister');
 
 // controllers
 Route::get('/', function () {
-    return view('client.comingsoon');
+    return view('seria.index');
 });
 
 //market
