@@ -19,40 +19,72 @@
 	</div>
 @endsection
 @section('content')
+<div class="row-fluid">
+	<div class="widget-box span12 collapsed">
+			<div class="widget-header widget-header-small header-color-dark">
+				<h5>Add Product Here</h5>
+				<div class="widget-toolbar">
+					<a href="#" data-action="collapse">
+						<i class="icon-chevron-down"></i>
+					</a>
+				</div>
+			</div>
 
-<div id="accordion2" class="accordion">
-	<div class="accordion-group">
-		<div class="accordion-heading">
-			<a href="#collapseOne" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed">
-				<li class="icon-plus"></li> Add Product
-			</a>
-		</div>
-		<div class="accordion-body collapse"  id="collapseOne">
-			<div class="accordion-inner">
+		<div class="widget-body">
+			<div class="widget-main">
 				<center>
 				<div class="row-fluid">
-					<div class="span12">
-						<center><span class="profile-picture ">
-							<img id="avatar" class=""  src="{{URL::asset('assets/avatars/user.jpg')}}" />
-						</span>
-						</center>			
-						<input type="file" id="store_logo_file"  accept="image/gif, image/jpeg, image/png"  class="ace-file-input" name="file-input"/>						
-					</div>
+						<div class="widget-box span3">
+							<div class="widget-header widget-header-small header-color-dark ">
+								<h5>Default Image</h5>
+							</div>
+							<div class="widget-body">
+								<div class="widget-main">
+									<span class="profile-picture ">
+										<img id="avatar" class=""  src="{{URL::asset('assets/avatars/user.jpg')}}" />
+									</span>
+									<input type="file" id="store_logo_file"  accept="image/gif, image/jpeg, image/png"  class="ace-file-input" name="file-input"/>						
+								</div>
+							</div>
+						</div>
+						<div class="widget-box span9">
+							<div class="widget-header widget-header-small header-color-dark ">
+								<h5>Other Images</h5>
+							</div>
+							<div class="widget-body">
+								<div class="widget-main">
+									<div id="other_images_result" >
+									
+									</div>
+									<div class="hr hr-18 dotted hr-double"></div>									
+									<div class="row-fluid">
+										<input type="file" id="product_other_file" name="files[]" onChange="multipleImgViews()" multiple="multiple"  accept="image/gif, image/jpeg, image/png"  class="ace-file-input" name="file-input"/>						
+									</div>
+								</div>
+							</div>
+						</div>							
 				</div>
 				</center>
 					<div class="hr hr-18 dotted hr-double"></div>
 				<div class="row-fluid" >
 					<div class="span6">
+						<div class="widget-box span12">
+							<div class="widget-header widget-header-small header-color-dark ">
+								<h5>Product Information</h5>
+							</div>
+
+							<div class="widget-body">
+								<div class="widget-main">
 						<div class="control-group">
 							<label class="control-label" for="form-field-1"><li class="icon-basket"></li> Product Name</label>
 							<div class="controls">
-								<input type="text" class="span12" id="form-field-1" placeholder=""  />
+								<input type="text" class="span12" id="product_name" placeholder=""  />
 							</div>
 						</div>					
 						<div class="control-group">
 							<label class="control-label" for="form-field-1">Product description</label>
 							<div class="controls">
-									<textarea class="span12 limited" rows="3" id="form-field-9" style="resize:none;" data-maxlength="50"></textarea>
+									<textarea class="span12 limited" rows="3" id="product_description" style="resize:none;" data-maxlength="50"></textarea>
 							</div>
 						</div>	
 						<div class="span12" style="margin:0px;">
@@ -98,6 +130,7 @@
 												<input type="text" class="span10" id="add_subcat_input" placeholder="Sub category Name"  />
 												<button class="btn btn-default btn-mini span2 pull-right" onClick="addSubcat('add_subcat_input')">add</button>
 											</div>
+										
 										</div>
 									</div>
 								</div>
@@ -135,8 +168,8 @@
 									<div class="accordion-body collapse" id="accor1">
 										<div class="accordion-inner">
 											<div class="row-fluid">
-												<input type="text" class="span10" id="add_subcat_input" placeholder="Brand Name"  />
-												<button class="btn btn-default btn-mini span2 pull-right" onClick="">add</button>
+												<input type="text" class="span10" id="add_brand_input" placeholder="Brand Name"  />
+												<button class="btn btn-default btn-mini span2 pull-right" onClick="addBrand('add_brand_input')">add</button>
 											</div>
 										</div>
 									</div>
@@ -196,145 +229,81 @@
 						<div class="control-group">
 							<div class="controls">
 							<label class="control-label" for="form-field-1">Product Ranged: </label>							
-									<textarea class="span12 limited" rows="4" id="form-field-9" style="resize:none;" data-maxlength="50"></textarea>
+									<textarea class="span12 limited" rows="4" id="product_ranged" placeholder="EG. 2 to 3 days timeframe" style="resize:none;" data-maxlength="50"></textarea>
 							</div>
-						</div>	
+						</div>								
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="span6">
 						<div class="widget-box span12">
-							<div class="widget-header">
-								<h5>Product Variants(Optional)</h5>
-
-								<div class="widget-toolbar">
-									<a href="#" data-action="collapse">
-										<i class="icon-chevron-up"></i>
-									</a>
-								</div>
+							<div class="widget-header widget-header-small header-color-dark">
+								<h5>Product Variants ( Optional )</h5>
 							</div>
-
 							<div class="widget-body">
 								<div class="widget-main">
-									<div class="span12" style="margin:0px;">
-										<div class="control-group span6">
-											<label class="control-label" for="form-field-1">Sale Price</label>
+									<div class="span12">
+										<div class="control-group span8">
+											<label class="control-label" for="form-field-1">Variant Type<a href="javascript:;"  onClick="nodatainVariantType()" class="pull-right"><li class="icon-info" style="Color:red"> No data ?</li></a></label>
 											<div class="controls">
-												<input type="text" class="span12" id="form-field-1" placeholder="" disabled />
-											</div>
-										</div>
-										<div class="control-group span6">
-											<label class="control-label" for="form-field-1">Retail Price</label>
-											<div class="controls">
-												<input type="text" class="span12" id="form-field-1" placeholder="" disabled />
+												<div class="span12">
+													<select class="span12" style="width:100%;" id="variant_info" data-placeholder="Choose Variant Type" >
+														<option value="" />
+													</select>	
+												</div>	
 											</div>
 										</div>	
-									</div>								
-									<table id="sample-table-2" class="table table-striped table-bordered table-hover">
+										<div class="control-group span4">
+											<label class="control-label" for="form-field-1">Add-ons amount </label>
+											<div class="controls">
+												<input type="text" class="span12" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  onpaste="return false;"  maxlength='9' ondrop="return false;" id="addon_amount" placeholder=""  />
+											</div>
+										</div>										
+									</div>
+									<div class="span12" style="margin:0px;">
+											<div class="row-fluid">
+												<div class="control-group span10">
+													<div class="controls">
+														<input type="text" class="span12" id="variant_name" placeholder="Variant Name"  />
+													</div>
+												</div>													
+												<div class="span2">
+													<button class="btn btn-default btn-mini span12 pull-right" onClick="addVariants()">add</button>
+												</div>									
+											</div>	
+											<br>											
+									</div>	
+										
+									<table id="variant_tbl" class="table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
-												<th class="center">
-													<label>
-														<input type="checkbox" />
-														<span class="lbl"></span>
-													</label>
-												</th>
-												<th>Domain</th>
-												<th>Price</th>
-												<th class="hidden-480">Clicks</th>
-
-												<th class="hidden-phone">
-													<i class="icon-time bigger-110 hidden-phone"></i>
-													Update
-												</th>
-												<th class="hidden-480">Status</th>
-
+												<th >Variant Name</th>
+												<th>Variant Type</th>
+												<th >Add-ons Price</th>
 												<th></th>
 											</tr>
 										</thead>
-
 										<tbody>
-											<tr>
-												<td class="center">
-													<label>
-														<input type="checkbox" />
-														<span class="lbl"></span>
-													</label>
-												</td>
-
-												<td>
-													<a href="#">once.com</a>
-												</td>
-												<td>$20</td>
-												<td class="hidden-480">1,400</td>
-												<td class="hidden-phone">Apr 04</td>
-
-												<td class="hidden-480">
-													<span class="label label-info arrowed arrowed-righ">Sold</span>
-												</td>
-
-												<td class="td-actions">
-													<div class="hidden-phone visible-desktop action-buttons">
-														<a class="blue" href="#">
-															<i class="icon-zoom-in bigger-130"></i>
-														</a>
-
-														<a class="green" href="#">
-															<i class="icon-pencil bigger-130"></i>
-														</a>
-
-														<a class="red" href="#">
-															<i class="icon-trash bigger-130"></i>
-														</a>
-													</div>
-
-													<div class="hidden-desktop visible-phone">
-														<div class="inline position-relative">
-															<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-																<i class="icon-caret-down icon-only bigger-120"></i>
-															</button>
-
-															<ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-																<li>
-																	<a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-																		<span class="blue">
-																			<i class="icon-zoom-in bigger-120"></i>
-																		</span>
-																	</a>
-																</li>
-
-																<li>
-																	<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-																		<span class="green">
-																			<i class="icon-edit bigger-120"></i>
-																		</span>
-																	</a>
-																</li>
-
-																<li>
-																	<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-																		<span class="red">
-																			<i class="icon-trash bigger-120"></i>
-																		</span>
-																	</a>
-																</li>
-															</ul>
-														</div>
-													</div>
-												</td>
-											</tr>
 										</tbody>
 									</table>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>				
+				</div>
+				<div class="row-fluid wizard-actions">
+					<button  class="btn btn-success btn-next" data-last="Finish ">
+						Add Product
+						<i class="fa-save"></i>
+					</button>
+				</div>			
 			</div>
 		</div>
-	</div>
-</div>
- <br>
+	</div>		
+</div>		
+<br>
 <div class="row-fluid">
-
 	<table id="sample-table-2" class="table table-striped table-bordered table-hover">
 		<thead>
 			<tr>
@@ -357,7 +326,6 @@
 				<th></th>
 			</tr>
 		</thead>
-
 		<tbody>
 			<tr>
 				<td class="center">
@@ -435,6 +403,7 @@
 @endsection
 @section('myscripts')
 <script>
+
 $("#market_info").chosen({ width: '100%' });
 $("#product_category").chosen({ width: '100%' });
 $("#product_sub_category").chosen({ width: '100%' });
@@ -442,9 +411,14 @@ $("#brand_info").chosen({ width: '100%' });
 $("#add_brand").chosen({ width: '100%' });
 $("#active_price").chosen({ width: '100%' });
 $("#product_status").chosen({ width: '100%'});
-//var jsonBrand =<?php echo json_encode($brand_info); ?>;
-//alert(JSON.stringify(jsoncity[i].view_all_locations));
-
+$("#variant_info").chosen({ width: '100%'});
+//
+ //noSpecialChar('#product_name');
+ noSpecialChar('#product_description');
+ noSpecialChar('#add_subcat_input');
+ noSpecialChar('#add_brand_input');
+ noSpecialChar('#product_ranged');
+ noSpecialChar('#variant_name');
 var last_gritter;
 function addSubcat(id)
 {
@@ -501,6 +475,58 @@ function addSubcat(id)
 	
 	}
 }
+function addBrand(id)
+{
+	var getValue = document.getElementById(id).value;
+	var mkrt_id = document.getElementById("market_info").value;
+	if(getValue == '' || getValue == null)
+	{
+		last_gritter = $.gritter.add({
+			title: 'Ooppss, Something Wrong',
+			text: 'Empty Field Occured',
+			class_name: 'gritter-error gritter-center'
+		});		
+	}
+	else
+	{
+		$.post("/HMadmin/Products/addBrand",
+		{
+			temp_mrktid:mkrt_id,
+			brand_name:getValue,
+		},
+		function(result)
+		{
+			//alert(result);
+			if(result == '0')
+			{
+				last_gritter = $.gritter.add({
+					title: 'Error Occured',
+					text: 'Please Contact the Administrator or please try again',
+					class_name: 'gritter-error gritter-center'
+				});					
+			}
+			else if(result == '2')
+			{
+				last_gritter = $.gritter.add({
+					title: 'Something Wrong',
+					text: 'the Sub category name is Exist Try to change the name or just look in the sub category dropdown',
+					class_name: 'gritter-error gritter-center'
+				});				
+			}
+			else
+			{
+				last_gritter = $.gritter.add({
+					title: 'Add Succesfull',
+					text: 'Your added Sub category name is on the Brand Dropdown',
+					class_name: 'gritter-success gritter-center'
+				});	
+				var jsonParse=  JSON.parse(result);
+				$('#product_sub_category').append('<option value='+jsonParse.id+'>'+jsonParse.brand_name+'</option>');
+				$("#product_sub_category").trigger("liszt:updated");	
+			}
+		});		
+	}	
+}
 function showCategoryInfo(market_id)
 {
 	visibilityaccordion("#add_sub_category","out");
@@ -545,8 +571,90 @@ function showCategoryInfo(market_id)
 			}
 		}	
 		$("#brand_info").trigger("liszt:updated");
+//variants
+	var jsonVariants =<?php echo json_encode($variants); ?>;
+	//alert(JSON.stringify(jsonVariants));
+	var x2 = document.getElementById("variant_info");
+    document.getElementById("variant_info").options.length = 0;
+    var option = document.createElement("option");
+    option.text = "";
+    option.value = "";
+    x2.add(option);
+		for(getVariants=0;getVariants<jsonVariants.length;getVariants++)
+		{
+			//alert(jsonVariants[getVariants].variant_name+""+jsonVariants[getVariants].id);
+			if(jsonVariants[getVariants].market_id == market_id)
+			{
+				var option = document.createElement("option");	
+				option.text =jsonVariants[getVariants].variant_name;
+				option.value =jsonVariants[getVariants].id;
+				x2.add(option);
+			}
+		}	
+		$("#variant_info").trigger("liszt:updated");
 		
 }
+function noSpecialChar(id)
+{
+	$(id).bind('input', function() {
+	$(this).val($(this).val().replace(/[^a-z0-9\s\w]/gi, ''));
+	});
+}
+function addVariants()
+{	  
+	var variantName= document.getElementById('variant_name').value;
+	var variant_info= document.getElementById('variant_info').value;
+	var addon_amount= document.getElementById('addon_amount').value;
+	if(variantName == '' || variant_info == '' || variant_info == '')
+	{
+		last_gritter = $.gritter.add({
+			title: 'Something Wrong',
+			text: 'Product Variants Fields are Required',
+			class_name: 'gritter-error gritter-center'
+		});			
+	}
+	else
+	{
+		var table = document.getElementById("variant_tbl");
+		var row = table.insertRow(1);
+		var variant_name = row.insertCell(0);
+		var variant_type = row.insertCell(1);
+		var addons_price = row.insertCell(2);
+		var action_btn = row.insertCell(3);
+		variant_name.innerHTML = variantName;
+		variant_type.innerHTML = variant_info;
+		addons_price.innerHTML = addon_amount;
+		action_btn.innerHTML = 	
+								'<div class="hidden-phone visible-desktop action-buttons">'+
+									'<a class="red" href="javascript:;" onClick="delRow()">'+
+										'<i class="icon-trash bigger-130"></i>'+
+									'</a>'+
+								'</div>'+
+								'<div class="hidden-desktop visible-phone">'+
+									'<div class="inline position-relative">'+
+										'<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">'+
+											'<i class="icon-caret-down icon-only bigger-120"></i>'+
+										'</button>'+
+										'<ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">'+
+											'<li>'+
+												'<a href="javascript:;" onClick="delRow()" class="tooltip-error" data-rel="tooltip" title="Delete">'+
+													'<span class="red">'+
+														'<i class="icon-trash bigger-120"></i>'+
+													'</span>'+
+												'</a>'+
+											'</li>'+
+										'</ul>'+
+									'</div>'+
+								'</div>';		
+	}
+}
+function delRow()
+  {
+    var current = window.event.srcElement;
+    //here we will delete the line
+    while ( (current = current.parentElement)  && current.tagName !="TR");
+         current.parentElement.removeChild(current);
+  }
 function showSubCategoryInfo(category_id)
 {
 visibilityaccordion("#add_sub_category","in");
@@ -598,5 +706,66 @@ function toTitleCase(str)
 {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
+function nodatainVariantType()
+{
+		last_gritter = $.gritter.add({
+		title: 'No Data In Variant',
+		text: 'Product Variants it Depends on the market place you Selected if there is no data in Selected Market place, you may Contact HomemallPH to request A Variants info',
+		class_name: 'gritter-info gritter-center'
+		});	
+	
+}
+        window.onload = function () {
+            var fileUpload = document.getElementById("product_other_file");
+            fileUpload.onchange = function () {
+                if (typeof (FileReader) != "undefined") {
+                    var dvPreview = document.getElementById("other_images_result");
+                    dvPreview.innerHTML = "";
+                    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                    for (var i = 0; i < fileUpload.files.length; i++) {
+														
+                        var file = fileUpload.files[i];
+                        if (regex.test(file.name.toLowerCase())) {
+							var getid=0;
+                            var reader = new FileReader();
+							reader.fileName = file.name;
+							reader.fileSize = file.size;
+							reader.fileWidth = file.width;
+							reader.fileHeight = file.height;
+                            reader.onload = function (e) {
+								alert(e.target.fileName);
+								alert(getKiloBytes(e.target.fileSize));
+								alert("width"+e.target.fileWidth);
+								alert("height"+e.target.fileHeight);
+								$("#other_images_result").append('<span class="profile-picture "><img id="other_image-'+getid+++'" class=""  src="'+e.target.result+'" /></span>');
+                            }
+                            reader.readAsDataURL(file);
+                        } else {
+                            alert(file.name + " is not a valid image file.");
+                            dvPreview.innerHTML = "";
+                            return false;
+                        }
+                    }
+                } else {
+                    alert("This browser does not support HTML5 FileReader.");
+                }
+            }
+        };
+		
+function formatSizeUnits(bytes){
+        if      (bytes>=1000000000) {bytes=(bytes/1000000000).toFixed(2)+' GB';}
+        else if (bytes>=1000000)    {bytes=(bytes/1000000).toFixed(2)+' MB';}
+        else if (bytes>=1000)       {bytes=(bytes/1000).toFixed(2)+' KB';}
+        else if (bytes>1)           {bytes=bytes+' bytes';}
+        else if (bytes==1)          {bytes=bytes+' byte';}
+        else                        {bytes='0 byte';}
+        return bytes;
+}
+function getKiloBytes(bytes)
+{
+	bytes=(bytes/1000).toFixed(2);
+	return bytes;
+}
 </script>
+
 @endsection

@@ -15,6 +15,10 @@ use App\adminmodel\indicator;
 use Auth;
 class store extends Controller
 {
+public function __construct()
+{
+	$this->middleware('authadmin');
+}		
 ////////
 ////////
 /////////////////////////////////////// END STORE PROFILE//////////////////////////////////////////////////////////
@@ -171,6 +175,7 @@ class store extends Controller
 			{
 				File::delete($dir2);
 			}			
+			
 			$result=$file->move($destination_logo,$file_name.'.'.$extension);
 			if(file_exists($result))			
 			{
