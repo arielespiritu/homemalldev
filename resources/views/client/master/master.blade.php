@@ -33,19 +33,20 @@
 
 
 </head>
-<body>
+ <!--<body style="background:url({{ URL::asset('assets/img/bg.jpg') }});">-->
+ <body>
     <!-- *** TOPBAR ***
  _________________________________________________________ -->  
     <div id="top" style="background:#000">
         <div class="container"  >
             <div class="col-md-6 offer" style="padding:0px" >
-                <a href="/HMadmin" class="btn btn-default btn-sm" style="color:black" >Merchant Login</a>  <a href="/HMadmin">&nbsp;Be a seller now!</a>
+                <a href="/HMadmin" class="btn btn-default btn-sm flat" style="color:black" >Merchant Login</a>  <a href="/HMadmin">&nbsp;Be a seller now!</a>
             </div>
             <div class="col-md-6 " style="padding:0px">
                 <ul class="menu">
 					@if(isset($user))
 						@foreach($user as $user)
-							<li><a href="register.html"><i class="fa fa-user"></i>Hi&nbsp;&nbsp;{{ucfirst($user->member->fname)}}</a></li>
+							<li><a href="javascript:void()"><i class="fa fa-user"></i>Hi&nbsp;&nbsp;{{ucfirst($user->member->fname)}}</a></li>
 							<li><a href="/auth/logout" >Logout</a></li>
 						@endforeach
 					@else
@@ -136,7 +137,7 @@
 												@foreach($market_data->category as $category )
 												<div class="col-sm-3">
 												<ul>
-													<li ><a href="category.html" >{{$category->category_name}}</a>
+													<li ><a href="/market/{{strtolower($market_data->market_name)}}/category/product/{{str_replace(' ','-',$category->category_name)}}" >{{$category->category_name}}</a>
 													</li>
 												</ul>
 												</div>

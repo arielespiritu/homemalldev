@@ -60,5 +60,7 @@ Route::get('/market/{id}/product/{id2}', 'MarketController@showMarketProducts');
 Route::get('/market/{id}/category/all', 'MarketController@showMarketCategory'); //views
 Route::get('/market/{id}/category/product/{id2}', 'MarketController@showMarketCategoryProduct'); //views
 
+Route::get('/product/details/{id}', 'ProductDetailsController@showProductDetails'); //views
+
 
 
