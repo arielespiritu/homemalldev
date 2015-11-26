@@ -11,7 +11,8 @@
         <!--link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css"-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="seria/css/animate.css">
-        <link rel="stylesheet" href="seria/css/form-elements.css">
+        <!--link rel="stylesheet" href="seria/ultimate-flat-social-icons/ultm-css/ultm.css"-->
+		<link rel="stylesheet" href="seria/css/form-elements.css">
         <link rel="stylesheet" href="seria/css/style.css">
         <link rel="stylesheet" href="seria/css/media-queries.css">
     	
@@ -28,9 +29,7 @@
 @endsection
 @section('body')    
         <!-- Loader -->
-    	<div class="loader">
-    		<div class="loader-img"></div>
-    	</div>
+    	
 		
 		<!-- Top menu -->
 		<nav>
@@ -55,7 +54,7 @@
                     <div class="row">
                         <div class="col-sm-12 text">
                         	<div class="logo">  {{-- wow fadeInDown --}}
-                        		<a href="/market"><img src="/seria/img/logo2.png" height="180px" /></a>
+                        		<a href="/coming-soon2"><img src="seria/img/logo2.png" height="180px" /></a>
                         	</div>
                             <!--h1 class="wow fadeInLeftBig">HomeMallPH</h1-->
                             <h1 class="wow fadeInLeftBig">We are coming soon</h1>
@@ -67,9 +66,11 @@
 	               				 <div class="col-sm-12 wow fadeInLeftDown">
 									<form class="form-inline" role="form" action="assets/subscribe.php" method="post">
 										<div class="form-group">
-											<input type="text" name="text" placeholder="I am searching for..." class="form-control input-lg">
+											<input type="text" name="text" placeholder="I am searching for..." class="form-control flat input-lg">
+											<button type="submit" class="btn btn-primary flat btn-lg">Search</button>
+										<button type="submit" class="btn btn-success flat btn-lg">Go to Marketplace</button>
 										</div>
-										<a href="/market" class="btn btn-primary btn-lg">Search</a>
+										
 									</form>
 								</div>
 							</div>
@@ -115,12 +116,12 @@
         </div>
    
         <!-- Subscription form -->
-        <div class="subscribe-container section-container" style="background-color: white;">
+        <div class="subscribe-container section-container" style="background-color: rgba(0,0,0,0.8);">
 	        <div class="container">
 	            <div class="row">
 	                <div class="col-sm-12 subscribe section-description wow fadeIn">
-	                    <h2 style="color:#444;">Email updates</h2>
-	                    <p style="color:#444;">Sign up now to our newsletter and you'll be one of the first to know when we're ready:</p>
+	                    <h2>Email updates</h2>
+	                    <p>Sign up now to our newsletter and you'll be one of the first to know when we're ready:</p>
 	                    <form class="form-inline" role="form" action="assets/subscribe.php" method="post">
 	                    	<div class="form-group">
 	                    		<label class="sr-only" for="subscribe-email">Email address</label>
@@ -131,7 +132,7 @@
 	                    <div class="success-message"></div>
 	                    <div class="error-message"></div>
 	                    <div class="scroll-page">
-                        	<a  style="color:#666;" class="scroll-link" href="#features"><i class="fa fa-chevron-down"></i></a>
+                        	<a class="scroll-link" href="#features"><i class="fa fa-chevron-down"></i></a>
                         </div>
 	                </div>
 	            </div>
@@ -201,7 +202,7 @@
 		                    		<a href="">John Doe, johndoe.com</a>
 		                    	</p>
 		                    	<div class="testimonial-single-image">
-		                    		<img src="assets/img/testimonials/1.jpg" alt="" data-at2x="assets/img/testimonials/1.jpg">
+		                    		<img src="seria/img/testimonials/1.jpg" alt="" data-at2x="seria/img/testimonials/1.jpg">
 		                    	</div>
 		                    </div>
 		                    <div class="testimonial-single">
@@ -213,7 +214,7 @@
 		                    		<a href="">Jane Jonsson, blog.jane.com</a>
 		                    	</p>
 		                    	<div class="testimonial-single-image">
-		                    		<img src="assets/img/testimonials/2.jpg" alt="" data-at2x="assets/img/testimonials/2.jpg">
+		                    		<img src="seria/img/testimonials/2.jpg" alt="" data-at2x="seria/img/testimonials/2.jpg">
 		                    	</div>
 		                    </div>
 		                    <div class="testimonial-single">
@@ -225,7 +226,7 @@
 		                    		<a href="">John Doe, johndoe.com</a>
 		                    	</p>
 		                    	<div class="testimonial-single-image">
-		                    		<img src="assets/img/testimonials/3.jpg" alt="" data-at2x="assets/img/testimonials/3.jpg">
+		                    		<img src="seria/img/testimonials/3.jpg" alt="" data-at2x="seria/img/testimonials/3.jpg">
 		                    	</div>
 		                    </div>
 		                    <div class="testimonial-single">
@@ -237,7 +238,7 @@
 		                    		<a href="">Jane Jonsson, blog.jane.com</a>
 		                    	</p>
 		                    	<div class="testimonial-single-image">
-		                    		<img src="assets/img/testimonials/4.jpg" alt="" data-at2x="assets/img/testimonials/4.jpg">
+		                    		<img src="seria/img/testimonials/4.jpg" alt="" data-at2x="seria/img/testimonials/4.jpg">
 		                    	</div>
 		                    </div>
 	                    <div class="scroll-page">
@@ -263,7 +264,7 @@
 	            <div class="row">
 	                <div class="col-sm-4 about-us-box wow fadeInUp">
 		                <div class="about-us-photo">
-		                	<img src="assets/img/team/1.jpg" alt="" data-at2x="assets/img/team/1.jpg">
+		                	<img src="seria/img/team/1.jpg" alt="" data-at2x="assets/img/team/1.jpg">
 		                </div>
 	                    <h3>John Doe</h3>
 	                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
@@ -275,7 +276,7 @@
 	                </div>
 	                <div class="col-sm-4 about-us-box wow fadeInDown">
 		                <div class="about-us-photo">
-		                	<img src="assets/img/team/2.jpg" alt="" data-at2x="assets/img/team/2.jpg">
+		                	<img src="seria/img/team/2.jpg" alt="" data-at2x="assets/img/team/2.jpg">
 		                </div>
 	                    <h3>Tim Brown</h3>
 	                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
@@ -287,7 +288,7 @@
 	                </div>
 	                <div class="col-sm-4 about-us-box wow fadeInUp">
 		                <div class="about-us-photo">
-		                	<img src="assets/img/team/3.jpg" alt="" data-at2x="assets/img/team/3.jpg">
+		                	<img src="seria/img/team/3.jpg" alt="" data-at2x="assets/img/team/3.jpg">
 		                </div>
 	                    <h3>Sarah Red</h3>
 	                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
@@ -446,19 +447,9 @@
         <script src="seria/js/jquery.backstretch.min.js"></script>
         <script src="seria/js/wow.min.js"></script>
         <script src="seria/js/retina-1.1.0.min.js"></script>
+        <!--script src="seria/js/jquery.countdown.min.js"></script-->
         <script src="seria/js/jquery.countdown.min.js"></script>
-       
         <script src="seria/js/scripts.js"></script>
-		<script type="text/javascript">
-			$('#clock').countdown('2015/12/1', function(event) {
-				var $this = $(this).html(event.strftime(''
-				+ '<span>%w</span> weeks '
-				+ '<span>%d</span> days '
-				+ '<span>%H</span> hr '
-				+ '<span>%M</span> min '
-				+ '<span>%S</span> sec'));
-			});
-		</script>
 
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>

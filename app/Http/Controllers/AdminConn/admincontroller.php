@@ -12,6 +12,11 @@ use App\adminmodel\storeowner;
 use App\adminmodel\city;
 class admincontroller extends Controller
 {
+	
+public function __construct()
+{
+	$this->middleware('authadmin');
+}	
 public function showDashboard(Request $request)
 {
 	try

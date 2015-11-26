@@ -20,7 +20,7 @@
 				<div class="container-fluid">
 					<a href="/HMadmin" class="brand">
 						<small>
-							<i class="icon-home"></i>
+							<img src="{{URL::asset('assets/img/HMicon.png')}}" style="width:17%;height:17%; margin-top:-10px; padding:0px;"/>
 							<strong>HM ADMIN</strong>
 						</small>
 					</a><!--/.brand-->

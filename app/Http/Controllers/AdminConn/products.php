@@ -15,12 +15,18 @@ use App\adminmodel\category;
 use App\adminmodel\brand;
 use App\adminmodel\market;
 use App\adminmodel\subcategory;
+use App\adminmodel\variants;
 use Auth;
+use Image;
 class products extends Controller
 {
 ///
 // GLOBAL FUNC
 ///
+public function __construct()
+{
+	$this->middleware('authadmin');
+}	
 	public function checkUserLevel()
 	{
 		try
@@ -48,6 +54,50 @@ class products extends Controller
 			return 'authErr';
 		}
 	}
+	public function upload_file($file,$destination_logo,$file_name)
+	{
+		try
+		{
+			$extension = strtolower($file->getClientOriginalExtension());
+			$dir= $destination_logo.$file_name.'.jpg';
+			$dir1= $destination_logo.$file_name.'.png';
+			$dir2= $destination_logo.$file_name.'.jpeg';
+			list($width, $height) = getimagesize($file);
+			//return json_encode($this->calculateDimensions($width,$height,'768','768'));
+			//return 'Width:'.$width.'Height'.$height;
+			//$dir= $destination_logo.'/'.$file_name.'png';
+			if (File::exists($dir))
+			{
+				File::delete($dir);
+			}
+			if (File::exists($dir1))
+			{
+				File::delete($dir1);
+			}
+			if (File::exists($dir2))
+			{
+				File::delete($dir2);
+			}			
+			
+			// $result=$file->move($destination_logo,$file_name.'.'.$extension);
+			$img = Image::make($file);
+			$img->resize(300,300);
+			$img->insert('assets/avatar.png', 'bottom-right', 10, 10);
+			$img->save($destination_logo.'/'.$file_name.'.'.$extension);			
+			if(file_exists($destination_logo.'/'.$file_name.'.'.$extension))			
+			{
+				return '1';
+			}
+			else
+			{
+				return '0';
+			}
+		}
+		catch(\Exception $e)
+		{
+			return 'err'.$e;
+		}
+	}	
 ///
 // END GLOBAL FUNC
 ///
@@ -72,12 +122,59 @@ class products extends Controller
 		{
 			return '0';
 		}
-		
-		
+	}
+	public function checkBrandnameExist($brand_name,$marketid)
+	{
+		try
+		{
+			$ifExist = brand::where('market_id','=',$marketid)->where('brand_name',$brand_name)->get();
+			if(count($ifExist) <= 0)
+			{
+				return '0';//no data
+			}
+			else
+			{
+				return '1'; //with data
+			}
+			
+		}
+		catch(\Exception $e)
+		{
+			return '0';
+		}
+	}
+	public function addProduct(Request $request)
+	{
+		return '1';
+	}
+	public function addBrand(Request $request)
+	{
+		$input= Input::all();
+		try
+		{
+			if($this->checkBrandnameExist($input['brand_name'],$input['temp_mrktid'])=='1')
+			{
+				return '2';
+			}
+			else
+			{			
+				$brand = new brand;
+				$brand->market_id = $input['temp_mrktid'];
+				$brand->brand_name = $input['brand_name'];
+				$brand->brand_indicator = 'STORE';
+				$brand->save();
+				return json_encode($brand);	
+			}			
+		}
+		catch(\Exception $e)
+		{
+			return '0';
+		}
 	}
 	public function addsubcat(Request $request)
 	{
-		try{
+		try
+		{
 			$input= Input::all();
 			if($this->checkSubcatNameExist($input['temp_catid'],$input['sub_name'])=='1')
 			{
@@ -96,19 +193,17 @@ class products extends Controller
 		{
 			return '0';
 		}
-
     }
 	public function showProducts(Request $request)
 	{
 		try
 		{
 			//return $this->checkUserLevel();
-			if ($request->isMethod('GET')) {
-					
+			if ($request->isMethod('GET')) 
+			{
 				 if($this->checkUserLevel() == 'authFailed' )
 				 {
 					return redirect('/HMadmin/login');
-					
 				 }
 				 else if($this->checkUserLevel() == 'authErr' )
 				 {	 
@@ -134,6 +229,7 @@ class products extends Controller
 						$sub_category= subcategory::all();
 						$brand= brand::all();
 						$market= market::all();
+						$variants= variants::all();
 						$indicator= indicator::where('indicator_for','=','PRODUCT STATUS')->get();
 						$product_status= indicator::where('indicator_for','=','PRODUCT PRICE')->get();
 						return view('admin.products.products')
@@ -144,6 +240,7 @@ class products extends Controller
 								->with('sub_cat',$sub_category)
 								->with('indicator',$indicator)
 								->with('product_status',$product_status)
+								->with('variants',$variants)
 								->with('brand_info',$brand);
 					 }
 					 else

@@ -1,3 +1,11 @@
+		
+/*     Background slideshow     */
+$.backstretch([
+              "seria/img/background/10.jpg",
+              "seria/img/background/5.jpg",
+              "seria/img/background/6.jpg"
+], {duration: 3000, fade: 750});
+
 
 function scroll_to(clicked_link, nav_height) {
 	var element_class = clicked_link.attr('href').replace('#', '.');
@@ -31,14 +39,7 @@ jQuery(document).ready(function() {
 		$('nav').slideUp(function(){ $('.show-menu a').fadeIn(); });
 	});	
 	
-    /*
-        Background slideshow
-    */
-    $.backstretch([
-                  "seria/img/background/10.jpg",
-                  "seria/img/background/5.jpg",
-                  "seria/img/background/6.jpg"
-                ], {duration: 3000, fade: 750});
+
     
     /*
         Wow
@@ -166,18 +167,18 @@ jQuery(document).ready(function() {
 });
 
 
-jQuery(window).load(function() {
+// jQuery(window).load(function() {
 	
-	/*
-		Loader
-	*/
-	$(".loader-img").fadeOut();
-	$(".loader").delay(1000).fadeOut("slow");
+// 	/*
+// 		Loader
+// 	*/
+// 	$(".loader-img").fadeOut();
+// 	$(".loader").delay(1000).fadeOut("slow");
 	
-	/*
-		Modal images
-	*/
-	$(".modal-body img").attr("style", "width: auto !important; height: auto !important;");
+// 	/*
+// 		Modal images
+// 	*/
+// 	$(".modal-body img").attr("style", "width: auto !important; height: auto !important;");
 	
-});
+// });
 

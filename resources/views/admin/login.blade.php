@@ -18,7 +18,7 @@
 						<div class="row-fluid">
 							<div class="center">
 								<h1>
-									<i class="icon-home white"></i>
+									<img src="{{URL::asset('assets/img/HMicon.png')}}" style="margin-top:-20px;"/>
 									<span class="red">HM</span>
 									<span class="white">Admin</span>
 								</h1>
@@ -39,7 +39,7 @@
 </div>									
 										<div class="widget-main">
 											<h4 class="header blue lighter bigger">
-												<i class="icon-home red"></i>
+												<i class="icon-lock-open dark"></i>
 												Please Enter Your Information
 											</h4>
 											<div class="space-6"></div>
@@ -58,10 +58,11 @@
 													</label>
 													<div class="space"></div>
 													<div class="clearfix">
-														<label class="inline">
-															<input type="checkbox" />
-															<span class="lbl"> Remember Me</span>
-														</label>
+														<a href="/" class="width-35  btn btn-small btn-danger ">
+															<i class="icon-home"></i>
+															<i class="fa fa-spinner fa-spin"></i>
+															My Store
+														</a>													
 														<button onclick="loginAuth()" class="width-35 pull-right btn btn-small btn-primary">
 															<i class="icon-key"></i>
 															<i class="fa fa-spinner fa-spin"></i>
