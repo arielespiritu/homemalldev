@@ -128,10 +128,10 @@
 											@endif	
 													<option value="" />
 													@foreach($cities as $city)
-														@if($user_info->showStoreInfo->store_city == $city->city_id)
-														<option selected value="{{$city->city_id}}" />{{$city->city_name}}
+														@if($user_info->showStoreInfo->store_city == $city->CT1)
+														<option selected value="{{$city->CT1}}" />{{$city->CTN2}}
 														@else
-														<option value="{{$city->city_id}}" />{{$city->city_name}}
+														<option value="{{$city->CT1}}" />{{$city->CTN2}}
 														@endif	
 													
 													@endforeach
@@ -261,9 +261,9 @@
 													<option value="" />
 													@foreach($cities as $city)
 													@if($city->city_id == $user_info->owner_city)
-													<option selected value="{{$city->city_id}}" />{{$city->city_name}}	
+													<option selected value="{{$city->CT1}}" />{{$city->CT1}}	
 													@else
-													<option value="{{$city->city_id}}" />{{$city->city_name}}
+													<option value="{{$city->CT1}}" />{{$city->CTN2}}
 													@endif
 												
 													@endforeach
@@ -318,7 +318,6 @@
 			</div>
 		</div>
 	</div>
-					
 @endsection
 @section('myscripts')
 <script>
@@ -346,17 +345,18 @@ function store_getArea(value)
 	
 	//alert(value);
 	var jsoncity =<?php echo json_encode($cities); ?>;
+//	
 	for (i=0;i<jsoncity.length;i++)
 	{
-		if(jsoncity[i].city_id == value)
+		if(jsoncity[i].CT1 == value)
 		{
-			//alert(JSON.stringify(jsoncity[i].view_all_locations));
+			
 			for(getarea=0;getarea<jsoncity[i].view_all_locations.length;getarea++)
 			{
-			//	alert(jsoncity[i].view_all_locations[getarea].major_area+"-"+jsoncity[i].view_all_locations[getarea].id);
+			//	alert(jsoncity[i].view_all_locations[getarea].LMA3+"-"+jsoncity[i].view_all_locations[getarea].LI1);
 				var option = document.createElement("option");	
-				option.text =jsoncity[i].view_all_locations[getarea].major_area;
-				option.value =jsoncity[i].view_all_locations[getarea].id;
+				option.text =jsoncity[i].view_all_locations[getarea].LMA3;
+				option.value =jsoncity[i].view_all_locations[getarea].LI1;
 				x.add(option);
 			}
 		}
@@ -378,15 +378,15 @@ function owner_getArea(value)
 	var jsoncity =<?php echo json_encode($cities); ?>;
 	for (i=0;i<jsoncity.length;i++)
 	{
-		if(jsoncity[i].city_id == value)
+		if(jsoncity[i].CT1 == value)
 		{
-			//alert(JSON.stringify(jsoncity[i].view_all_locations));
+			
 			for(getarea=0;getarea<jsoncity[i].view_all_locations.length;getarea++)
 			{
 			//	alert(jsoncity[i].view_all_locations[getarea].major_area+"-"+jsoncity[i].view_all_locations[getarea].id);
 				var option = document.createElement("option");	
-				option.text =jsoncity[i].view_all_locations[getarea].major_area;
-				option.value =jsoncity[i].view_all_locations[getarea].id;
+				option.text =jsoncity[i].view_all_locations[getarea].LMA3;
+				option.value =jsoncity[i].view_all_locations[getarea].LI1;
 				x.add(option);
 			}
 		}
@@ -489,7 +489,7 @@ function updateInfo()
 	var store_complete_address=document.getElementById('store_complete_address').value;
 	var store_name=document.getElementById('store_name').value;
 	var store_logo_file = $('#store_logo_file');
-	
+	store_logo_file[0].files[0]
 	var store_id=document.getElementById('store_id').value;
 	
 	var owner_image_status=document.getElementById('owner_image_status').value;
