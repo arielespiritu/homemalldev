@@ -489,7 +489,7 @@ function updateInfo()
 	var store_complete_address=document.getElementById('store_complete_address').value;
 	var store_name=document.getElementById('store_name').value;
 	var store_logo_file = $('#store_logo_file');
-	
+
 	var store_id=document.getElementById('store_id').value;
 	
 	var owner_image_status=document.getElementById('owner_image_status').value;

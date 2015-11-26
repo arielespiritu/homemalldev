@@ -17,6 +17,7 @@ use App\adminmodel\market;
 use App\adminmodel\subcategory;
 use App\adminmodel\variants;
 use Auth;
+use Image;
 class products extends Controller
 {
 ///
@@ -53,6 +54,50 @@ public function __construct()
 			return 'authErr';
 		}
 	}
+	public function upload_file($file,$destination_logo,$file_name)
+	{
+		try
+		{
+			$extension = strtolower($file->getClientOriginalExtension());
+			$dir= $destination_logo.$file_name.'.jpg';
+			$dir1= $destination_logo.$file_name.'.png';
+			$dir2= $destination_logo.$file_name.'.jpeg';
+			list($width, $height) = getimagesize($file);
+			//return json_encode($this->calculateDimensions($width,$height,'768','768'));
+			//return 'Width:'.$width.'Height'.$height;
+			//$dir= $destination_logo.'/'.$file_name.'png';
+			if (File::exists($dir))
+			{
+				File::delete($dir);
+			}
+			if (File::exists($dir1))
+			{
+				File::delete($dir1);
+			}
+			if (File::exists($dir2))
+			{
+				File::delete($dir2);
+			}			
+			
+			// $result=$file->move($destination_logo,$file_name.'.'.$extension);
+			$img = Image::make($file);
+			$img->resize(300,300);
+			$img->insert('assets/avatar.png', 'bottom-right', 10, 10);
+			$img->save($destination_logo.'/'.$file_name.'.'.$extension);			
+			if(file_exists($destination_logo.'/'.$file_name.'.'.$extension))			
+			{
+				return '1';
+			}
+			else
+			{
+				return '0';
+			}
+		}
+		catch(\Exception $e)
+		{
+			return 'err'.$e;
+		}
+	}	
 ///
 // END GLOBAL FUNC
 ///
@@ -97,6 +142,10 @@ public function __construct()
 		{
 			return '0';
 		}
+	}
+	public function addProduct(Request $request)
+	{
+		return '1';
 	}
 	public function addBrand(Request $request)
 	{

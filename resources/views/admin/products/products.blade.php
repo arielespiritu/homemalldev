@@ -24,7 +24,7 @@
 			<div class="widget-header widget-header-small header-color-dark">
 				<h5>Add Product Here</h5>
 				<div class="widget-toolbar">
-					<a href="#" data-action="collapse">
+					<a href="javascript:;" data-action="collapse">
 						<i class="icon-chevron-down"></i>
 					</a>
 				</div>
@@ -32,6 +32,34 @@
 
 		<div class="widget-body">
 			<div class="widget-main">
+				<br>
+				<div class="row-fluid">
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label" for="form-field-1">Product Type <a href="javascript:;"  onClick="messageInfo('product_type')" class="pull-right"><li class="icon-info" style="Color:red"> what ?</li></a></label>
+							<div class="controls">
+								<select class="span12" id="product_type" onChange="" style="width:100%;" data-placeholder="Choose Category" >
+									<option value="" />
+									<option value="Main"/>Main Product
+									<option value="Child"/>Child Product
+								</select>
+							</div>
+						</div>						
+					</div>	
+					<div class="span6" >
+						<div class="control-group">
+							<label class="control-label" for="form-field-1">Product Type <a href="javascript:;"  onClick="messageInfo('product_type')" class="pull-right"><li class="icon-info" style="Color:red"> what ?</li></a></label>
+							<div class="controls">
+								<select class="span12" id="product_main_names" onChange="" style="width:100%;" data-placeholder="Choose Product main" >
+									<option value="" />
+									<option value="Main"/>Main Product
+									<option value="Child"/>Child Product
+								</select>
+							</div>
+						</div>						
+					</div>					
+				</div>	
+				<div class="hr hr-18 dotted hr-double"></div>			
 				<center>
 				<div class="row-fluid">
 						<div class="widget-box span3">
@@ -49,12 +77,13 @@
 						</div>
 						<div class="widget-box span9">
 							<div class="widget-header widget-header-small header-color-dark ">
-								<h5>Other Images</h5>
+								<h5>Other Images </h5>
 							</div>
 							<div class="widget-body">
 								<div class="widget-main">
+								<a href="javascript:;"  onClick="messageInfo('upload_other_image')" class="pull-left"><li class="icon-info" style="Color:red"><b> Read Rules First</b></li></a>
+									<br>
 									<div id="other_images_result" >
-									
 									</div>
 									<div class="hr hr-18 dotted hr-double"></div>									
 									<div class="row-fluid">
@@ -175,8 +204,9 @@
 									</div>
 								</div>
 							</div>
-						</div>						
-						<div class="span12" style="margin:0px;">
+						</div>	
+						
+						<!--<div class="span12" style="margin:0px;">
 							<div class="control-group span4">
 								<label class="control-label" for="form-field-1">Sale Price</label>
 								<div class="controls">
@@ -195,7 +225,7 @@
 									<input type="text" class="span12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onpaste="return false;"  maxlength='9' ondrop="return false;" id="form-field-1" placeholder=""  />
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<div class="span12" style="margin:0px;">
 							<div class="control-group span6">
 								<label class="control-label" for="form-field-1">Choose your Active Price:</label>
@@ -208,13 +238,13 @@
 									</select>	
 								</div>
 							</div>
-							<div class="control-group span2">
+							<!--<div class="control-group span2">
 								<label class="control-label" for="form-field-1">Quantity:</label>
 								<div class="controls">
 									<input type="text" class="span12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onpaste="return false;"  maxlength='9' ondrop="return false;"  id="form-field-1" placeholder=""  />
 								</div>
-							</div>	
-							<div class="control-group span4">
+							</div>	 -->
+							<div class="control-group span6">
 								<div class="controls">
 									<label class="control-label" for="form-field-1">Product Status: </label>							
 									<select class="span12" style="width:100%; " id="product_status" data-placeholder="Choose Category" >
@@ -245,7 +275,7 @@
 								<div class="widget-main">
 									<div class="span12">
 										<div class="control-group span8">
-											<label class="control-label" for="form-field-1">Variant Type<a href="javascript:;"  onClick="nodatainVariantType()" class="pull-right"><li class="icon-info" style="Color:red"> No data ?</li></a></label>
+											<label class="control-label" for="form-field-1">Variant Type<a href="javascript:;"  onClick="messageInfo('variant_info')" class="pull-right"><li class="icon-info" style="Color:red"> No data ?</li></a></label>
 											<div class="controls">
 												<div class="span12">
 													<select class="span12" style="width:100%;" id="variant_info" data-placeholder="Choose Variant Type" >
@@ -293,7 +323,7 @@
 					</div>
 				</div>
 				<div class="row-fluid wizard-actions">
-					<button  class="btn btn-success btn-next" data-last="Finish ">
+					<button onClick="addProduct()"  class="btn btn-success btn-next" data-last="Finish ">
 						Add Product
 						<i class="fa-save"></i>
 					</button>
@@ -404,7 +434,9 @@
 @section('myscripts')
 <script>
 
+$("#product_main_names").chosen({ width: '100%' });
 $("#market_info").chosen({ width: '100%' });
+$("#product_type").chosen({ width: '100%' });
 $("#product_category").chosen({ width: '100%' });
 $("#product_sub_category").chosen({ width: '100%' });
 $("#brand_info").chosen({ width: '100%' });
@@ -474,6 +506,32 @@ function addSubcat(id)
 		});			
 	
 	}
+}
+function addProduct()
+{
+		
+var files = document.getElementById("product_other_file").files;
+for (var i = 0; i < files.length; i++)
+{
+	
+}
+	var formData = new FormData();	
+	//store
+	formData.append('store_logo_status', 'a'); 
+	$.ajax({
+		type: "POST",
+		url: "/HMadmin/Products/addProduct",     // Url to which the request is send
+		data:formData,
+		contentType: false,       // The content type used when sending data to the server.
+		processData:false,        // To send DOMDocument or non processed data file it is set to false		
+		success: function(result)   // A function to be called if request succeeds
+	{
+		alert(result);
+		$('body,html').animate({
+		scrollTop: 0
+		}, 500);		
+	}
+	});
 }
 function addBrand(id)
 {
@@ -706,13 +764,36 @@ function toTitleCase(str)
 {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
-function nodatainVariantType()
+function messageInfo(messagetype)
 {
+	if(messagetype == 'variant_info')
+	{
 		last_gritter = $.gritter.add({
 		title: 'No Data In Variant',
 		text: 'Product Variants it Depends on the market place you Selected if there is no data in Selected Market place, you may Contact HomemallPH to request A Variants info',
 		class_name: 'gritter-info gritter-center'
-		});	
+		});			
+		
+	}
+	else if(messagetype == 'product_type')
+	{
+		last_gritter = $.gritter.add({
+		title: 'What is Product Type?',
+		text: 'product is categorized by its type such as: <b>MAIN</b> and <b>CHILD</b> product. MAIN product is the default product and the Child Product is the Related to the Main Product',
+		class_name: 'gritter-info gritter-center'
+		});		
+		
+	}
+	else if(messagetype == 'upload_other_image')
+	{
+		last_gritter = $.gritter.add({
+		title: 'Upload Other Images',
+		text: '1. LIMIT 5 images Only <br>2. PNG or JPG Only <br>3. less than 1mb Only <br> if some images you selected is not Display on the panel it may have Encounter this rules',
+		class_name: 'gritter-info gritter-center'
+		});		
+		
+	}
+
 	
 }
         window.onload = function () {
@@ -732,12 +813,19 @@ function nodatainVariantType()
 							reader.fileSize = file.size;
 							reader.fileWidth = file.width;
 							reader.fileHeight = file.height;
-                            reader.onload = function (e) {
-								alert(e.target.fileName);
-								alert(getKiloBytes(e.target.fileSize));
-								alert("width"+e.target.fileWidth);
-								alert("height"+e.target.fileHeight);
-								$("#other_images_result").append('<span class="profile-picture "><img id="other_image-'+getid+++'" class=""  src="'+e.target.result+'" /></span>');
+                            reader.onload = function (e) 
+							{
+								if(getid <5)
+								{
+									var checkifextension= e.target.fileName.split('.').pop()
+									if(getKiloBytes(e.target.fileSize) < 1 )
+									{
+										if(checkifextension.toLowerCase() == 'png' || checkifextension.toLowerCase() == 'jpg' )
+										{
+											$("#other_images_result").append('<span class="profile-picture "><img id="other_image-'+getid+++'" class=""  src="'+e.target.result+'" style="width:100px; height:100px;" /></span>');									
+										}
+									}
+								}
                             }
                             reader.readAsDataURL(file);
                         } else {
@@ -763,9 +851,10 @@ function formatSizeUnits(bytes){
 }
 function getKiloBytes(bytes)
 {
-	bytes=(bytes/1000).toFixed(2);
+	bytes=(bytes/1000000).toFixed(2)
 	return bytes;
 }
+
 </script>
 
 @endsection

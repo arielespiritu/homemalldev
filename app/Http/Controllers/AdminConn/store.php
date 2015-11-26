@@ -13,6 +13,7 @@ use App\adminmodel\storeinfo;
 use App\adminmodel\storeowner;
 use App\adminmodel\indicator;
 use Auth;
+use Image;
 class store extends Controller
 {
 public function __construct()
@@ -134,7 +135,19 @@ public function __construct()
 					$checkSuccessUpdate= $this->validateStoreFields();
 					if($checkSuccessUpdate=='1')
 					{
+						// try{
 						return $this->upload_file(Input::file('owner_image_file'),$destination_owner_image,$owner_file_name);
+						// $img = Image::make(Input::file('owner_image_file'));
+						// $img->resize(320, 240);
+						// $img->insert('assets/avatar.png');
+						// $img->save('assets/bar.jpg');
+						// return $img;						
+						// }
+						// catch(\Exception $e)
+						// {
+							// return $e;
+					//	}
+						
 					}
 					else if($checkSuccessUpdate=='0')
 					{
@@ -161,7 +174,9 @@ public function __construct()
 			$dir= $destination_logo.$file_name.'.jpg';
 			$dir1= $destination_logo.$file_name.'.png';
 			$dir2= $destination_logo.$file_name.'.jpeg';
-			
+			list($width, $height) = getimagesize($file);
+			//return json_encode($this->calculateDimensions($width,$height,'768','768'));
+			//return 'Width:'.$width.'Height'.$height;
 			//$dir= $destination_logo.'/'.$file_name.'png';
 			if (File::exists($dir))
 			{
@@ -176,8 +191,12 @@ public function __construct()
 				File::delete($dir2);
 			}			
 			
-			$result=$file->move($destination_logo,$file_name.'.'.$extension);
-			if(file_exists($result))			
+			// $result=$file->move($destination_logo,$file_name.'.'.$extension);
+			$img = Image::make($file);
+			$img->resize(300,300);
+			$img->insert('assets/avatar.png', 'bottom-right', 10, 10);
+			$img->save($destination_logo.'/'.$file_name.'.'.$extension);			
+			if(file_exists($destination_logo.'/'.$file_name.'.'.$extension))			
 			{
 				return '1';
 			}
@@ -188,9 +207,42 @@ public function __construct()
 		}
 		catch(\Exception $e)
 		{
-			return 'err';
+			return 'err'.$e;
 		}
 	}
+function calculateDimensions($width,$height,$maxwidth,$maxheight)
+{
+
+        if($width != $height)
+        {
+            if($width > $height)
+            {
+                $t_width = $maxwidth;
+                $t_height = (($t_width * $height)/$width);
+                //fix height
+                if($t_height > $maxheight)
+                {
+                    $t_height = $maxheight;
+                    $t_width = (($width * $t_height)/$height);
+                }
+            }
+            else
+            {
+                $t_height = $maxheight;
+                $t_width = (($width * $t_height)/$height);
+                //fix width
+                if($t_width > $maxwidth)
+                {
+                    $t_width = $maxwidth;
+                    $t_height = (($t_width * $height)/$width);
+                }
+            }
+        }
+        else
+            $t_width = $t_height = min($maxheight,$maxwidth);
+
+        return array('height'=>(int)$t_height,'width'=>(int)$t_width);
+    }	
 	public function validateStoreFields()
 	{
 		$attributes = [
