@@ -260,13 +260,14 @@
 											@endif
 													<option value="" />
 													@foreach($cities as $city)
-													@if($city->city_id == $user_info->owner_city)
-													<option selected value="{{$city->CT1}}" />{{$city->CT1}}	
+													@if($city->CT1 == $user_info->owner_city)
+													<option selected value="{{$city->CT1}}" />{{$city->CTN2}}
 													@else
 													<option value="{{$city->CT1}}" />{{$city->CTN2}}
-													@endif
+													@endif	
 												
 													@endforeach
+													
 											</select>
 										</div>
 								</div>						
@@ -489,7 +490,6 @@ function updateInfo()
 	var store_complete_address=document.getElementById('store_complete_address').value;
 	var store_name=document.getElementById('store_name').value;
 	var store_logo_file = $('#store_logo_file');
-	store_logo_file[0].files[0]
 	var store_id=document.getElementById('store_id').value;
 	
 	var owner_image_status=document.getElementById('owner_image_status').value;

@@ -132,6 +132,19 @@ class AuthController extends Controller
 			return view('auth.login')->with('market_data',$market_data);
 		}
 	}
+	public function getRegister()
+	{
+	$market_data = Market::with('category')->get();
+		if (Auth::check())
+		{
+			$id = Auth::user()->login_id;
+			$user = User::where('id', $id )->with('member')->get();
+			return view('auth.login')->with('user',$user)->with('market_data',$market_data);
+		}else{
+			return view('auth.login')->with('market_data',$market_data);
+		}
+	}
+
 	public function getLogout() {
 	    $market_data = Market::with('category')->get();
         Auth::logout(); // logout user

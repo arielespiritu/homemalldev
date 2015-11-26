@@ -51,10 +51,10 @@
 						@for ($x = 0; $x < 12; $x++)
 							<div class="col-md-2 col-xs-6" style="padding:2px; margin-top:-25px;">
 									<div class="box">
-											<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center>
+											<a href="/product/details/sample"><center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center></a>
 											<div class="item-desc" style="padding:10px" >
-												<h4 >Product Namessssssss</h4>
-												<p >P 100.00</p>
+												<a href="/product/details/sample"><h4 >Product Namessssssss</h4></a>
+												<a href="/product/details/sample"><p >P 100.00</p></a>
 												<div id="navcontainer">
 												<ul>
 													<li><a href="" ><i class="fa fa-shopping-cart cart" ></i></a></li>

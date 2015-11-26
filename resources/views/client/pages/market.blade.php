@@ -5,7 +5,10 @@
 @section('content')
 
     <div id="all">
-		<div id="main-slider" >
+		<div id="main-slider" > 
+					<div class="item" style="background:#a22221;">
+						<center><img class="img-responsive" src="{{ URL::asset('assets/img/banner4.png') }}" alt=""></center>
+					</div>	
 					<div class="item"  style="background:#b3a387;">
 						<center><img src="{{ URL::asset('assets/img/banner1.png') }}" alt="" class="img-responsive"></center>
 					</div>
@@ -15,24 +18,33 @@
 					<div class="item" >
 						<center><img class="img-responsive" src="{{ URL::asset('assets/img/banner3.png') }}" alt=""></center>
 					</div>						
-			 </div>
+		</div>
 	</div>
 			
 			
 			
-            <div id="advantages" style="margin-top:0px;" >
-			@foreach($market_data as $market_datas )
-                <div class="container">
-						<div id="textbox">
-						  <a  href="/market/{{strtolower($market_datas->market_name)}}"><h4 class="alignleft link">{{$market_datas->market_name}}</h4></a>
-						  <a  href="/market/{{strtolower($market_datas->market_name)}}/stores/all" class="alignright" >See more</a>
-						</div>
+           
+         
+		<div id="hot" style="margin-top:80px;">
+			<?php 
+				$bg=array("#f6ecb7","#103f71","#ca27f4","#4a79f5"); 
+				$num = 0;
+			?>
+			@foreach($market_data as $markets_datas )
+			<?php $count=0; ?>
+				
+                <div class="box"  style="background:{{$bg[$num]}}; padding:0px; margin-top:50px;  margin-bottom:12px;">
+                    <center><img class="img-responsive" style="margin-top:-80px;" src="{{ URL::asset('assets/img/market/'.strtolower($markets_datas->market_name).'-add.png') }}" alt=""></center>
+                </div>
+				<div style="clear: both;"></div>
+				   <div class="container">
+
 						<div style="clear: both;"></div>
                         <div class="col-md-12 market box" >
 							
 							<div class="col-md-3 same-height-row" style="padding:0px; ">
 								<div class="col-md-12  market-logo" >
-									 <a  href="/market/{{strtolower($market_datas->market_name)}}"><center><img class="img-responsive" src="{{ URL::asset('assets/img/market/'.strtolower($market_datas->market_name).'.png') }}" alt=""></center></a>
+									 <a  href="/market/{{strtolower($markets_datas->market_name)}}"><center><img class="img-responsive" src="{{ URL::asset('assets/img/market/'.strtolower($markets_datas->market_name).'.png') }}" alt=""></center></a>
 								</div>
 							</div>
 							<div class="col-md-9 same-height-row" style="padding:0px; ">
@@ -66,26 +78,11 @@
 							</div>
                         </div>
                 </div>
-			@endforeach
-            </div>
-         
-		<div id="hot" style="margin-top:80px;">
-			<?php 
-				$bg=array("#f6ecb7","#103f71","#ca27f4","#4a79f5"); 
-				$num = 0;
-			?>
-			@foreach($market_data as $markets_datas )
-			<?php $count=0; ?>
-                <div class="box"  style="background:{{$bg[$num]}}; padding:0px; margin-top:50px;  margin-bottom:10px;">
-                    <center><img class="img-responsive" style="margin-top:-80px;" src="{{ URL::asset('assets/img/market/'.$markets_datas->market_name.'-add.png') }}" alt=""></center>
-                </div>
-				<div style="clear: both;"></div>
-				<div class="container">
-						<div class="col-md-12 " style="padding:0px; margin-top:20px;"  >
-							<div id="textbox">
-								  <a  href="/market/{{strtolower($markets_datas->market_name)}}/category/all" class="alignright" style="margin-top:-20px;">See More</a>
-							</div>
-						</div>
+				
+				
+				
+				<div class="container" >
+
 						@foreach($markets_datas->category as $category )
 							@if($count<4)
 							
@@ -94,17 +91,17 @@
 									<div class="box">
 										<a href="/market/{{strtolower($markets_datas->market_name)}}/category/product/{{str_replace(' ','-',$category->category_name)}}"> <center><img class="img-responsive" src="{{ URL::asset('assets/img/category/'.$markets_datas->market_name.'/'.$count.'.png') }}" alt=""></center></a>
 										<div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-										  <a href="#" class="list-group-item category-products" >
+										  <a href="/product/details/sample" class="list-group-item category-products" >
 											<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
 											<h5 class="list-group-item-heading">Product Name</h5>
 											<p class="list-group-item-text">P 100.00</p>
 										  </a>
-										  <a href="#" class="list-group-item category-products" >
+										  <a href="/product/details/sample1" class="list-group-item category-products" >
 											<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
 											<h5 class="list-group-item-heading">Product Name</h5>
 											<p class="list-group-item-text">P 100.00</p>
 										  </a>
-										   <a href="#" class="list-group-item category-products" >
+										   <a href="/product/details/sample2" class="list-group-item category-products" >
 											<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
 											<h5 class="list-group-item-heading">Product Name</h5>
 											<p class="list-group-item-text">P 100.00</p>									
@@ -114,13 +111,20 @@
 								</div>
 							@endif
 						@endforeach	
+						<div class="col-md-12 " style="padding:0px; margin-top:-10px;"  >
+							<div id="textbox">
+								  <a  href="/market/{{strtolower($markets_datas->market_name)}}" class="alignright" style="margin-top:-20px;">See More</a>
+							</div>
+						</div>
+					</div>
+
                 </div>
      		<?php $num++; ?>
 			@endforeach	
 				
 			
            <div class="container" >
-				<div class="col-md-12" style="padding:2px; margin-top:-20px;">
+				<div class="col-md-12" style="padding:2px; margin-top:-25px;">
 					<div class="col-md-12 box" >
 							<h3 class="text-uppercase text-center">Brands</h3>
 							<p class="lead text-center">Choose your branded items!</p>
@@ -128,7 +132,7 @@
 				</div>
 			</div>
             <div class="container" >
-                <div class="col-md-12" style="padding:2px; margin-top:-30px;" >
+                <div class="col-md-12" style="padding:2px; margin-top:-25px;" >
                     <div class="box" >
                         <div id="get-inspired" class="owl-carousel owl-theme">
                             <div class="item">
@@ -215,19 +219,19 @@
             </div>
             <div class=""  >
                 <div class="container" >
-					<div class="col-md-12" style="padding:2px; margin-top:-20px;" >
+					<div class="col-md-12" style="padding:2px; margin-top:-25px;" >
 						<div class="col-md-12 box" >
 							<h3 class="text-uppercase text-center">Trending</h3>
 							<p class="lead text-center">Check our new and hottest items!</p>
 						</div>
 						<div class="col-md-12" style="padding:0px">
 						@for ($x = 0; $x < 18; $x++)
-							<div class="col-md-2 col-xs-6" style="padding:2px; margin-top:-25px;">
+							<div class="col-md-2 col-xs-6" style="padding:2px; margin-top:-23px;">
 									<div class="box">
-											<center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center>
+											<a href="/product/details/sample"><center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center></a>
 											<div class="item-desc" style="padding:10px" >
-												<h4 >Product Namessssssss</h4>
-												<p >P 100.00</p>
+												<a href="/product/details/sample"><h4 >Product Namessssssss</h4>
+												<a href="/product/details/sample"><p >P 100.00</p></h4>
 												<div id="navcontainer">
 												<ul>
 													<li><a href="" ><i class="fa fa-shopping-cart cart " ></i></a></li>
