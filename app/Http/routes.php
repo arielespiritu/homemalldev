@@ -29,7 +29,9 @@ Route::post('/HMadmin/Store-Profile/Update','AdminConn\store@validateUpdate');
 Route::post('/HMadmin/Products/addSub','AdminConn\products@addsubcat');
 Route::post('/HMadmin/Products/addBrand','AdminConn\products@addBrand');
 Route::post('/HMadmin/Products/addProduct','AdminConn\products@addProduct');
-//
+Route::post('/HMadmin/Products/getProducts','AdminConn\products@getProducNames');
+Route::post('/HMadmin/responsedec','AdminConn\decrypter@decrypt');
+//""
 
 ///////////////////////// Do not modify i will kill you /////////////////
 

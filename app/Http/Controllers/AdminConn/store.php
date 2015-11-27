@@ -308,7 +308,7 @@ function calculateDimensions($width,$height,$maxwidth,$maxheight)
 		}
 	}
 	}
-	public function checkifImagefile($photo,$imageInfo)
+	public function checkifImagefile($photo)
 	{
 		$extension = strtolower($photo->getClientOriginalExtension()); //get extension
 		if($extension =='jpeg' || $extension =='png' || $extension =='jpg')
