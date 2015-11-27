@@ -20,11 +20,6 @@
 					</div>						
 		</div>
 	</div>
-			
-			
-			
-           
-         
 		<div id="hot" style="margin-top:80px;">
 			<?php 
 				$bg=array("#f6ecb7","#103f71","#ca27f4","#4a79f5"); 
