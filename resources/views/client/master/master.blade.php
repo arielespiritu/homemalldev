@@ -181,21 +181,30 @@
             <!--/.nav-collapse -->
 
             <div class="navbar-buttons" >
+				<style>
+					.clear {
+						width: 1%;
+						display: table-cell;
+						padding-left: 3px;
+						vertical-align: middle; }
+					.clear a:hover { text-decoration: none; }
+				</style>
+				
                 <div class="navbar-collapse collapse right" id="basket-overview" style="margin-top:4px;" >
                     <a href="/Cart" class="btn btn-default navbar-btn btn-sm flat" ><i class="fa fa-shopping-cart cart-cart"></i><span class="hidden-sm" > <span class="badge">0</span>&nbsp;&nbsp;P 0.00</span></a>
                 </div>
                 <!--/.nav-collapse -->
 
-                <div class="navbar-collapse collapse right" id="search-not-mobile" >
-						<form class="navbar-form" role="search" style="margin-top:15px;">
+                <div class="navbar-collapse collapse right" id="search-not-mobile"  style="width:300px;">
+						<form class="navbar-form" role="search" style="margin-top:15px; ">
 							<div class="input-group">
-								<input type="text" class="form-control input-xs flat" placeholder="Search">
+								<input type="text" class="form-control input-xs flat" style="width:250px;;" placeholder="Search">
 								<span class="input-group-btn">
 									<button type="submit" class="btn btn-default btn-sm flat"><i class="fa fa-search"></i></button>
 								</span>
 							</div>
 						</form>
-                </div>
+                </div>	
             </div>
 
            
