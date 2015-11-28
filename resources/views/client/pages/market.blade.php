@@ -23,11 +23,7 @@
 		
 		
 	</div>
-			
-			
-			
-           
-         
+   
 		<div id="hot" style="margin-top:10px;">
 			<div class="container" >
 				<div class="col-md-12" style="padding:0px;" >
@@ -65,6 +61,7 @@
 					</div>
 				</div>
 			</div>			
+
 			<?php 
 				$bg=array("#f6ecb7","#103f71","#ca27f4","#4a79f5"); 
 				$num = 0;

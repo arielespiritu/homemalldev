@@ -16,6 +16,7 @@ use App\adminmodel\brand;
 use App\adminmodel\market;
 use App\adminmodel\subcategory;
 use App\adminmodel\variants;
+use App\adminmodel\productinformation;
 use Auth;
 use Image;
 class products extends Controller
@@ -97,6 +98,53 @@ public function __construct()
 		{
 			return 'err'.$e;
 		}
+	}
+	public function getProducNames(Request $request)
+	{
+		if($request->isMethod('POST')) 
+		{	
+			try
+			{
+				$input = Input::all();	
+				//return json_encode($input);
+				$product_information= productinformation::where('sub_category_id','=','315')->select('product_name')->get();
+				return json_encode($product_information);
+			}
+			catch(\Exception $e)
+			{
+				return '0'.$e;
+			}
+
+		}
+		else
+		{
+				return '0';
+		}				
+	}
+	public function checkifImagefile($photo)
+	{
+		
+		$extension = strtolower($photo->getClientOriginalExtension()); //get extension
+		//return $extension;
+		if($extension =='jpeg' || $extension =='png' || $extension =='jpg')
+		{
+			$getsize =filesize($photo) /  pow(1024, 2);
+			if(round($getsize,2) > 1)
+			{
+				//return $imageInfo.' image is too Large less than 1mb is accepted';
+				return 'false';
+			}
+			else
+			{
+				list($width, $height) = getimagesize($photo);
+				return 'true';
+			}
+		}
+		else
+		{
+			//return 'Selected '.$imageInfo.' is not an image. accept only jpg and png';	
+			return 'false';
+		}
 	}	
 ///
 // END GLOBAL FUNC
@@ -145,7 +193,23 @@ public function __construct()
 	}
 	public function addProduct(Request $request)
 	{
-		return '1';
+		$extension = strtolower(Input::file('image-0')->getClientOriginalExtension());
+		$filename = strtolower(Input::file('image-0')->getClientOriginalName());
+		$input = Input::all();
+		$count =0;
+		for($i=0;$i<$input['imagecount'];$i++)
+		{
+			if($this->checkifImagefile(Input::file('image-'.$i)) == 'true')
+			{
+				$count+=1;
+			}
+			else
+			{
+				
+			}				
+		}
+		return $count;
+		
 	}
 	public function addBrand(Request $request)
 	{
@@ -159,16 +223,17 @@ public function __construct()
 			else
 			{			
 				$brand = new brand;
-				$brand->market_id = $input['temp_mrktid'];
-				$brand->brand_name = $input['brand_name'];
-				$brand->brand_indicator = 'STORE';
+				$brand->MI1 = $input['temp_mrktid'];
+				$brand->BN2 = $input['brand_name'];
+				$brand->BINR3 = 'STORE';
 				$brand->save();
+			
 				return json_encode($brand);	
 			}			
 		}
 		catch(\Exception $e)
 		{
-			return '0';
+			return '0'.$e;
 		}
 	}
 	public function addsubcat(Request $request)
@@ -183,15 +248,15 @@ public function __construct()
 			else
 			{
 				$subcategory = new subcategory;
-				$subcategory->category_id = $input['temp_catid'];
-				$subcategory->sub_category_name = $input['sub_name'];
+				$subcategory->CI1 = $input['temp_catid'];
+				$subcategory->SCN3 = $input['sub_name'];
 				$subcategory->save();
 				return json_encode($subcategory);				
 			}
 		}
 		catch(\Exception $e)
 		{
-			return '0';
+			return '0'.$e;
 		}
     }
 	public function showProducts(Request $request)
@@ -227,6 +292,7 @@ public function __construct()
 						$storeowner = storeowner::where('store_id','=',$userLogin->login_id)->with('showStoreInfo')->get();
 						$category= category::all();
 						$sub_category= subcategory::all();
+	
 						$brand= brand::all();
 						$market= market::all();
 						$variants= variants::all();
@@ -242,6 +308,7 @@ public function __construct()
 								->with('product_status',$product_status)
 								->with('variants',$variants) // ok
 								->with('brand_info',$brand); //ok
+								//->with('product_information',$product_information);
 					 }
 					 else
 					 {

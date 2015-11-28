@@ -334,8 +334,31 @@ owner_getArea(owner_savedcity);
 
 
 
+
+function getResponses(text_value)
+{
+	var myresult="";
+	var formData = new FormData();	
+	formData.append('temp_value', text_value); 
+	$.ajax({
+		type: "POST",
+		url: "/HMadmin/responsedec",     // Url to which the request is send
+		data:formData,
+		contentType: false,       // The content type used when sending data to the server.
+		processData:false,        // To send DOMDocument or non processed data file it is set to false		
+		async:false,        // To send DOMDocument or non processed data file it is set to false		
+		success: function(result)   // A function to be called if request succeeds
+	{
+		 myresult=result;
+	}
+	});	
+	return myresult;
+}
+
+
 function store_getArea(value)
 {	
+
 	var savedArea= "{{$user_info->showStoreInfo->store_area}}";
     var x = document.getElementById("store_profile_area");
     document.getElementById("store_profile_area").options.length = 0;
@@ -346,15 +369,14 @@ function store_getArea(value)
 	
 	//alert(value);
 	var jsoncity =<?php echo json_encode($cities); ?>;
-//	
 	for (i=0;i<jsoncity.length;i++)
 	{
 		if(jsoncity[i].CT1 == value)
 		{
-			
+			//alert(getResponses(jsoncity[i].CT1));
 			for(getarea=0;getarea<jsoncity[i].view_all_locations.length;getarea++)
 			{
-			//	alert(jsoncity[i].view_all_locations[getarea].LMA3+"-"+jsoncity[i].view_all_locations[getarea].LI1);
+			//alert(jsoncity[i].view_all_locations[getarea].LMA3+"-"+jsoncity[i].view_all_locations[getarea].LI1);
 				var option = document.createElement("option");	
 				option.text =jsoncity[i].view_all_locations[getarea].LMA3;
 				option.value =jsoncity[i].view_all_locations[getarea].LI1;
@@ -374,14 +396,12 @@ function owner_getArea(value)
     option.text = "";
     option.value = "";
     x.add(option);
-	
 	//alert(value);
 	var jsoncity =<?php echo json_encode($cities); ?>;
 	for (i=0;i<jsoncity.length;i++)
 	{
 		if(jsoncity[i].CT1 == value)
 		{
-			
 			for(getarea=0;getarea<jsoncity[i].view_all_locations.length;getarea++)
 			{
 			//	alert(jsoncity[i].view_all_locations[getarea].major_area+"-"+jsoncity[i].view_all_locations[getarea].id);
@@ -397,8 +417,6 @@ function owner_getArea(value)
 }
 	$("#store_logo_file").change(function() {
 		var val = $(this).val();
-		
-		
 		switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
 			 case 'jpg': case 'png':
 					readURL(this,"#store_logo");
@@ -417,13 +435,10 @@ function owner_getArea(value)
 					});
 					document.getElementById('store_logo_status').value="Nothing_Change";
 				break;
-					
 		}
-		
 	});
 	$("#owner_image_file").change(function() {
 		var val = $(this).val();
-		
 		switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
 			 case 'jpg': case 'png':
 					readURL(this,"#owner_picture");

@@ -41,7 +41,7 @@
     <div id="top" style="background:#000">
         <div class="container"  >
             <div class="col-md-6 offer" style="padding:0px" >
-                <a href="/HMadmin" class="btn btn-danger btn-sm " style="color:white" >Merchant Login</a>  <a href="/HMadmin">&nbsp;Be a seller now!</a>
+                <a href="/HMadmin"  style="color:white" ><i class="fa fa-user nav-user"></i>Merchant Login</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/HMadmin">&nbsp;Be a seller now!</a>
             </div>
             <div class="col-md-6 " style="padding:0px">
                 <ul class="menu">

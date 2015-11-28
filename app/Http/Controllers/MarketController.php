@@ -89,7 +89,7 @@ class MarketController extends Controller {
 			{
 				$id = Auth::user()->login_id;
 				$user = User::where('id', $id )->with('member')->get();
-				return view('client.pages.market-stores')->with('user',$user)->with('market',$market)->with('type',$type)->with('market_data',$market_data);
+				return view('client.pages.market-stores')->with('user',$user)->with('market',$market)->with('types',$type)->with('market_data',$market_data);
 			}else{
 				return view('client.pages.market-stores')->with('market',$market)->with('types',$type)->with('market_data',$market_data);
 			}

@@ -9,7 +9,7 @@
 					
 					<div class="col-md-3 same-height-row" style="padding:0px;" >
 						<div class="col-md-12  market-logo box" >
-							 <center><img class="img-responsive" src="{{ URL::asset('assets/img/market/'.$market.'.png') }}" alt=""></center>
+							 <a href="/{{$market}}"><center><img class="img-responsive" src="{{ URL::asset('assets/img/market/'.$market.'.png') }}" alt=""></center></a>
 						</div>
 					</div>
 					<div class="col-md-9 same-height-row market-slide">
