@@ -101,13 +101,14 @@ public function __construct()
 	}
 	public function getProducNames(Request $request)
 	{
+	//	return 'tang ina mo';
 		if($request->isMethod('POST')) 
 		{	
 			try
 			{
 				$input = Input::all();	
-				//return json_encode($input);
-				$product_information= productinformation::where('sub_category_id','=','315')->select('product_name')->get();
+				
+				$product_information= productinformation::where('sub_category_id','=',$input['tempChild_subcat'])->select('id','product_name')->get();
 				return json_encode($product_information);
 			}
 			catch(\Exception $e)
@@ -193,9 +194,10 @@ public function __construct()
 	}
 	public function addProduct(Request $request)
 	{
-		$extension = strtolower(Input::file('image-0')->getClientOriginalExtension());
-		$filename = strtolower(Input::file('image-0')->getClientOriginalName());
+		// $extension = strtolower(Input::file('image-0')->getClientOriginalExtension());
+		// $filename = strtolower(Input::file('image-0')->getClientOriginalName());
 		$input = Input::all();
+		return json_encode($input);
 		$count =0;
 		for($i=0;$i<$input['imagecount'];$i++)
 		{

@@ -35,7 +35,7 @@
 				<div class="row-fluid">
 					<div class="span4">
 						<div class="control-group">
-							<label class="control-label" for="form-field-1">Product Type <a href="javascript:;"  onClick="messageInfo('product_type')" class="pull-right"><li class="icon-info" style="Color:red"> what ?</li></a></label>
+							<label class="control-label" >Product Type <a href="javascript:;"  onClick="messageInfo('product_type')" class="pull-right"><li class="icon-info" style="Color:red"> what ?</li></a></label>
 							<div class="controls">
 								<select class="span12" id="product_type" onChange="isChildorParent(this.value)" style="width:100%;" data-placeholder="Choose Category" >
 									<option value="" />
@@ -46,7 +46,7 @@
 						</div>						
 					</div>	
 					<div class="control-group span2">
-						<label class="control-label" for="form-field-1">Market</label>
+						<label class="control-label" >Market</label>
 						<div class="controls">
 							<select class="span12" onChange="showChild_category_info(this.value)" id="child_market_info" style="width:100%;"  data-placeholder="Choose Category" > 
 								<option value="" />
@@ -57,7 +57,7 @@
 						</div>
 					</div>	
 					<div class="control-group span3">
-						<label class="control-label" for="form-field-1">Category</label>
+						<label class="control-label" >Category</label>
 						<div class="controls">
 							<select class="span12" style="width:100%;" onChange=" showChild_sub_category(this.value)" id="child_category_info" data-placeholder="Choose Category" >
 								<option value="" />
@@ -65,7 +65,7 @@
 						</div>
 					</div>
 					<div class="control-group span3">
-						<label class="control-label" for="form-field-1">Sub Category</label>
+						<label class="control-label" >Sub Category</label>
 						<div class="controls">
 							<select class="span12" style="width:100%;" onChange="getProduct(this.value)" id="child_sub_category_info" data-placeholder="Choose Sub category" >
 								<option value="" />
@@ -80,7 +80,7 @@
 				<div class="row-fluid">				
 					<div class="span12" >
 						<div class="control-group">
-							<label class="control-label" for="form-field-1">Product Name </label>
+							<label class="control-label" >Product Name </label>
 							<div class="controls">
 								<select class="span12" id="product_main_names" onChange="" style="width:100%;" data-placeholder="Choose Product main" >
 
@@ -99,21 +99,23 @@
 
 							<div class="widget-body">
 								<div class="widget-main">
+								
 									<div class="control-group">
-										<label class="control-label" for="form-field-1"><li class="icon-basket"></li> Product Name</label>
+										<input id="product_information_status"/>
+										<label class="control-label" ><li class="icon-basket"></li> Product Name</label>
 										<div class="controls">
 											<input type="text" class="span12" id="product_name" placeholder=""  />
 										</div>
 									</div>					
 									<div class="control-group">
-										<label class="control-label" for="form-field-1">Product description</label>
+										<label class="control-label" >Product description</label>
 										<div class="controls">
 												<textarea class="span12 limited" rows="3" id="product_description" style="resize:none;" data-maxlength="50"></textarea>
 										</div>
 									</div>	
 									<div class="span12" style="margin:0px;">
 										<div class="control-group span4">
-											<label class="control-label" for="form-field-1">Market</label>
+											<label class="control-label" >Market</label>
 											<div class="controls">
 												<select class="span12" onChange="showCategoryInfo(this.value)" id="market_info" style="width:100%;"  data-placeholder="Choose Category" > 
 													<option value="" />
@@ -122,9 +124,9 @@
 													@endforeach										
 												</select>	
 											</div>
-										</div>					
+										</div>		
 										<div class="control-group span4">
-											<label class="control-label" for="form-field-1">Category</label>
+											<label class="control-label" >Category</label>
 											<div class="controls">
 												<select class="span12" style="width:100%;" onChange="showSubCategoryInfo(this.value)" id="product_category" data-placeholder="Choose Category" >
 													<option value="" />
@@ -132,7 +134,7 @@
 											</div>
 										</div>
 										<div class="control-group span4">
-											<label class="control-label" for="form-field-1">Sub Category</label>
+											<label class="control-label" >Sub Category</label>
 											<div class="controls">
 												<select class="span12" style="width:100%;" onchange="alert(this.value)" id="product_sub_category" data-placeholder="Choose Category" >
 													<option value="" />
@@ -162,7 +164,7 @@
 									</div>
 									<div class="span12" style="margin:0px;">
 										<div class="control-group span6">
-											<label class="control-label" for="form-field-1">Brand</label>
+											<label class="control-label" >Brand</label>
 											<div class="controls">
 												<select class="span12"  id="brand_info" style="width:100%;"  data-placeholder="Choose Category" > 
 													<option value="" />
@@ -171,7 +173,7 @@
 											</div>
 										</div>
 										<div class="control-group span6">
-											<label class="control-label" for="form-field-1">Add More Brand?</label>
+											<label class="control-label" >Add More Brand?</label>
 											<div class="controls">
 												<select class="span12" id="add_brand" onChange="visibleBrand(this.value)" style="width:100%;" data-placeholder="Choose Category" >
 													<option value="" />
@@ -202,7 +204,7 @@
 									</div>	
 									<div class="span12" style="margin:0px;">
 										<div class="control-group span12">
-											<label class="control-label" for="form-field-1">Product Status:</label>
+											<label class="control-label" >Product Status:</label>
 											<div class="controls">
 												<select class="span12" style="width:100%;" id="active_price" data-placeholder="Choose Category" >
 													<option value="" />
@@ -215,7 +217,7 @@
 									</div>
 									<div class="control-group">
 										<div class="controls">
-										<label class="control-label" for="form-field-1">Product Ranged: </label>							
+										<label class="control-label" >Product Ranged: </label>							
 												<textarea class="span12 limited" rows="4" id="product_ranged" placeholder="EG. 2 to 3 days timeframe" style="resize:none;" data-maxlength="50"></textarea>
 										</div>
 									</div>								
@@ -229,13 +231,15 @@
 								<h5>Product Complex Description</h5>
 							</div>
 							<div class="widget-body">
-								<div class="widget-main"  style="height:515px; overfloy-y: scroll;">
+								<div class="widget-main"  style="height:515px; overflow-y: scroll;">
 									<div class="span12">
+									<input id="product_complex_status"/>
 										<div class="control-group span12">
-											<label class="control-label" for="form-field-1">Description Type<a href="javascript:;"  onClick="messageInfo('variant_info')" class="pull-right"><li class="icon-info" style="Color:red"> No data ?</li></a></label>
+										
+											<label class="control-label" >Description Type<a href="javascript:;"  onClick="messageInfo('variant_info')" class="pull-right"><li class="icon-info" style="Color:red"> No data ?</li></a></label>
 											<div class="controls">
 												<div class="span12">
-													<select class="span12" style="width:100%;" id="variant_info" data-placeholder="Choose Variant Type" >
+													<select class="span12" style="width:100%;"  id="description_type" data-placeholder="Choose Variant Type" >
 														<option value="" />
 													</select>	
 												</div>	
@@ -246,7 +250,7 @@
 											<div class="row-fluid">
 												<div class="control-group span10">
 													<div class="controls">
-														<input type="text" class="span12" id="variant_name" placeholder="Variant Name"  />
+														<input type="text" class="span12" id="description_name" placeholder="Variant Name"  />
 													</div>
 												</div>						 					
 												<div class="span2">
@@ -255,13 +259,11 @@
 											</div>	
 											<br>											
 									</div>	
-										
-									<table id="variant_tbl" class="table table-striped table-bordered table-hover">
+									<table id="variant_tbl" class="table table-striped table-bordered table-hover"  >
 										<thead>
 											<tr>
-												<th >Variant Name</th>
-												<th>Variant Type</th>
-												<th >Add-ons Price</th>
+												<th>Description Type</th>
+												<th>Description Value</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -302,54 +304,59 @@
 									</center>	
 								</div>
 								<div class="row-fluid span12" style="margin:0px;">
+									
 									<div class="control-group span2">
-										<label class="control-label" for="form-field-1">Sale Price</label>
+										<label class="control-label" >Sale Price</label>
 										<div class="controls">
 											<input type="text" class="span12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onpaste="return false;" maxlength='9' ondrop="return false;" id="form-field-1" placeholder=""  />
 										</div>
 									</div>
 									<div class="control-group span2">
-										<label class="control-label" for="form-field-1">Retail Price</label>
+										<label class="control-label" >Retail Price</label>
 										<div class="controls">
 											<input type="text" class="span12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onpaste="return false;"  maxlength='9' ondrop="return false;" id="form-field-1" placeholder=""  />
 										</div>
 									</div>	
 									<div class="control-group span2">
-										<label class="control-label"  for="form-field-1">Product Cost</label>
+										<label class="control-label"  >Product Cost</label>
 										<div class="controls">
 											<input type="text" class="span12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onpaste="return false;"  maxlength='9' ondrop="return false;" id="form-field-1" placeholder=""  />
 										</div>
 									</div>
 									<div class="control-group span2">
-										<label class="control-label" for="form-field-1">Quantity:</label>
+										<label class="control-label" >Quantity:</label>
 										<div class="controls">
 											<input type="text" class="span12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onpaste="return false;"  maxlength='9' ondrop="return false;"  id="form-field-1" placeholder=""  />
 										</div>
 									</div>		
-									<div class="control-group span4">
+									<div class="control-group span2">
 										<div class="controls">
-											<label class="control-label" for="form-field-1">Choose your Active Price: </label>							
-											<select class="span12" style="width:100%; " id="product_status" data-placeholder="Choose Category" >
+											<label class="control-label" > Active Price: </label>							
+											<select class="span12" style="width:100%; " id="combo_active_price" data-placeholder="Choose Active Price" >
 													<option value="" />
 												@foreach($product_status as $product_stat)
 													<option value="{{$product_stat->id}}" />{{$product_stat->indicator_name}} 
 												@endforeach	
 											</select>	
 										</div>
-									</div>										
+									</div>	
+									<div class="control-group span2">
+										<div class="controls">
+											<label class="control-label" >Status: </label>							
+											<select class="span12" style="width:100%;" id="combo_status" data-placeholder="Choose Status" >
+													<option value="" />
+												@foreach($indicator as $price_status)
+													<option value="{{$price_status->id}}" />{{$price_status->indicator_name}} 
+												@endforeach	
+											</select>		
+										</div>
+									</div>									
+									<div id="product_combinations" class="span12 row-fluid" style="margin: 0px;">
+
+									</div>
 								</div>	
-									<table id="variant_tbl" class="table table-striped table-bordered table-hover">
-										<thead>
-											<tr>
-												<th >Variant Name</th>
-												<th>Variant Type</th>
-												<th >Add-ons Price</th>
-												<th></th>
-											</tr>
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
+								<input id="select_values" style="display:none"/>
+								<input id="product_combo_result"/>
 								</div>
 							</div>
 						</div>
@@ -357,6 +364,10 @@
 				</div>
 				<div class="hr hr-18 dotted hr-double"></div>				
 				<div class="row-fluid wizard-actions">
+					<button onClick=""  class="btn btn-danger btn-next" data-last="Finish ">
+						Reset Product
+						<i class="fa-save"></i>
+					</button>				
 					<button onClick="addProduct()"  class="btn btn-success btn-next" data-last="Finish ">
 						Add Product
 						<i class="fa-save"></i>
@@ -481,17 +492,19 @@ $("#brand_info").chosen({ width: '100%' });
 $("#add_brand").chosen({ width: '100%' });
 $("#active_price").chosen({ width: '100%' });
 $("#product_status").chosen({ width: '100%'});
-$("#variant_info").chosen({ width: '100%'});
+$("#description_type").chosen({ width: '100%'});
 $("#child_category_info").chosen({ width: '100%'});
 $("#child_market_info").chosen({ width: '100%'});
 $("#child_sub_category_info").chosen({ width: '100%'});
-
+$("#combo_status").chosen({ width: '100%'});
+$("#combo_active_price").chosen({ width: '100%'});
+ 
  //noSpecialChar('#product_name');
  noSpecialChar('#product_description');
  noSpecialChar('#add_subcat_input');
  noSpecialChar('#add_brand_input');
  noSpecialChar('#product_ranged');
- noSpecialChar('#variant_name');
+ noSpecialChar('#description_name');
 
 
 isChildorParent(document.getElementById('product_type').value);
@@ -544,7 +557,7 @@ function addSubcat(id)
 					class_name: 'gritter-success gritter-center'
 				});	
 				var jsonParse=  JSON.parse(result);
-				$('#product_sub_category').append('<option value='+jsonParse.id+'>'+jsonParse.sub_category_name+'</option>');
+				$('#product_sub_category').append('<option value='+jsonParse.SC1+'>'+jsonParse.SCN3+'</option>');
 				$("#product_sub_category").trigger("liszt:updated");	
 				
 			}
@@ -567,9 +580,9 @@ function isChildorParent(value)
 		$('#product_sub_category').prop('disabled', true).trigger("liszt:updated");
 		$('#active_price').prop('disabled', true).trigger("liszt:updated");
 		//product complex
-		$('#variant_info').prop('disabled', true).trigger("liszt:updated");
+		$('#description_type').prop('disabled', true).trigger("liszt:updated");
 		document.getElementById("variant_add_btn").disabled = true;
-		document.getElementById("variant_name").disabled = true;
+		document.getElementById("description_name").disabled = true;
 		//
 		$('#child_market_info').prop('disabled', false).trigger("liszt:updated");
 		$('#child_category_info').prop('disabled', false).trigger("liszt:updated");
@@ -587,9 +600,9 @@ function isChildorParent(value)
 		$('#product_sub_category').prop('disabled', false).trigger("liszt:updated");
 		$('#active_price').prop('disabled', false).trigger("liszt:updated");
 		//product complex
-		$('#variant_info').prop('disabled', false).trigger("liszt:updated");
+		$('#description_type').prop('disabled', false).trigger("liszt:updated");
 		document.getElementById("variant_add_btn").disabled = false;
-		document.getElementById("variant_name").disabled = false;
+		document.getElementById("description_name").disabled = false;
 		//
 		$('#child_market_info').prop('disabled', true).trigger("liszt:updated");
 		$('#child_category_info').prop('disabled', true).trigger("liszt:updated");
@@ -599,12 +612,32 @@ function isChildorParent(value)
 }
 function addProduct()
 {
+//product information
+	var product_name = document.getElementById('product_name').value;
+	var product_description = document.getElementById('product_description').value;
+	var market_info = document.getElementById('market_info').value;
+	var product_sub_category = document.getElementById('product_sub_category').value;
+	var brand_info = document.getElementById('brand_info').value;
+	var active_price = document.getElementById('active_price').value;
+	var product_ranged = document.getElementById('product_ranged').value;
+
+	var formData = new FormData();
+	formData.append('product_name',product_name); 
+	formData.append('product_description',product_description); 
+	formData.append('market_info',market_info); 
+	formData.append('product_sub_category',product_sub_category); 
+	formData.append('brand_info',brand_info); 
+	formData.append('active_price',active_price); 
+	formData.append('product_ranged',product_ranged); 
+	
 	var countFiles=0;
-	var formData = new FormData();	
+	
 		jQuery.each(jQuery('#product_other_file')[0].files, function(i, file) {
 		countFiles++;
 		formData.append('image-'+i, file);
 	});
+	
+	
 	//alert(countFiles);
 	formData.append('imagecount',countFiles); 
 	$.ajax({
@@ -688,6 +721,8 @@ function showChild_category_info(MI1)
     document.getElementById("child_category_info").options.length = 0;
 	$("#child_category_info").trigger("liszt:updated");
 	
+    document.getElementById("child_sub_category_info").options.length = 0;
+	$("#child_sub_category_info").trigger("liszt:updated");	
 	
 	var x = document.getElementById("child_category_info");
     document.getElementById("child_category_info").options.length = 0;
@@ -709,17 +744,28 @@ function showChild_category_info(MI1)
 }
 function getProduct(SC1)
 {
-	alert(SC1);
 	$.post("/HMadmin/Products/getProducts",
 	{
-		temp_subcat:SC1,
+		tempChild_subcat:SC1,
 	},
 	function(result)
 	{	
-		alert(result);
-		
+		var x = document.getElementById("product_main_names");
+		document.getElementById("product_main_names").options.length = 0;
+		var option = document.createElement("option");
+		option.text = "";
+		option.value = "";
+		x.add(option);	
+		var jsonProduct=  JSON.parse(result);
+		for(getProdNames= 0;getProdNames < jsonProduct.length;getProdNames++)
+		{
+			var option = document.createElement("option");
+			option.text = jsonProduct[getProdNames].product_name;
+			option.value = jsonProduct[getProdNames].id;
+			x.add(option);	
+		}
+		$("#product_main_names").trigger("liszt:updated");
 	});
-	
 }
 function showChild_sub_category(CI1)
 {
@@ -796,8 +842,8 @@ function showCategoryInfo(MI1)
 //variants
 
 	//alert(JSON.stringify(jsonVariants));
-	var x2 = document.getElementById("variant_info");
-    document.getElementById("variant_info").options.length = 0;
+	var x2 = document.getElementById("description_type");
+    document.getElementById("description_type").options.length = 0;
     var option = document.createElement("option");
     option.text = "";
     option.value = "";
@@ -809,11 +855,11 @@ function showCategoryInfo(MI1)
 			{
 				var option = document.createElement("option");	
 				option.text =jsonVariants[getVariants].VN2;
-				option.value =jsonVariants[getVariants].VN1;
+				option.value =jsonVariants[getVariants].VT1;
 				x2.add(option);
 			}
 		}	
-		$("#variant_info").trigger("liszt:updated");
+		$("#description_type").trigger("liszt:updated");
 		
 }
 function noSpecialChar(id)
@@ -861,29 +907,32 @@ function removeElement(element)
 
 function addVariants()
 {	  
-	var variantName= document.getElementById('variant_name').value;
-	var variant_info= document.getElementById('variant_info').value;
-	var addon_amount= document.getElementById('addon_amount').value;
-	if(variantName == '' || variant_info == '' || variant_info == '')
+	var variantName= document.getElementById('description_name').value;
+    var x = document.getElementById("description_type").selectedIndex;
+    var y = document.getElementById("description_type").options;	
+	var variant_info=y[x].text;
+	variant_name = variantName;
+	variant_type = variant_info;
+
+	if(variantName == '' || variant_info == '')
 	{
 		last_gritter = $.gritter.add({
 			title: 'Something Wrong',
-			text: 'Product Variants Fields are Required',
+			text: 'Description Type Fields are Required',
 			class_name: 'gritter-error gritter-center'
 		});			
 	}
+	else if(checkifhasinTable("variant_tbl",variant_type,variant_name)=='true')
+	{
+		last_gritter = $.gritter.add({
+			title: 'Something Wrong',
+			text: 'Already Exist in table',
+			class_name: 'gritter-error gritter-center'
+		});					
+	}
 	else
 	{
-		var table = document.getElementById("variant_tbl");
-		var row = table.insertRow(1);
-		var variant_name = row.insertCell(0);
-		var variant_type = row.insertCell(1);
-		var addons_price = row.insertCell(2);
-		var action_btn = row.insertCell(3);
-		variant_name.innerHTML = variantName;
-		variant_type.innerHTML = variant_info;
-		addons_price.innerHTML = addon_amount;
-		action_btn.innerHTML = 	
+		action_btn = 	
 								'<div class="hidden-phone visible-desktop action-buttons">'+
 									'<a class="red" href="javascript:;" onClick="delRow()">'+
 										'<i class="icon-trash bigger-130"></i>'+
@@ -904,9 +953,125 @@ function addVariants()
 											'</li>'+
 										'</ul>'+
 									'</div>'+
-								'</div>';		
+								'</div>';
+
+		$('#variant_tbl').append('<tr><td>'+variant_type+'</td><td>'+variant_name+'</td><td>'+action_btn+'</td></tr>');
+		
+		getTableValues("variant_tbl");		
 	}
 }
+function checkifhasinTable(tableid,type,description)
+{
+	var rows = document.getElementById(tableid).getElementsByTagName('tbody')[0].getElementsByTagName('tr').length;
+	var bool='false';
+	for(y=0;y< rows;y++)
+	{
+		if(document.getElementById(tableid).rows[y+1].cells[0].innerHTML == type && document.getElementById(tableid).rows[y+1].cells[1].innerHTML == description )
+		{
+			bool='true';
+		}
+	}	
+	return bool;
+}
+function getTableValues(tableid)
+{
+	var rows = document.getElementById(tableid).getElementsByTagName('tbody')[0].getElementsByTagName('tr').length;
+	var x = document.getElementById(tableid).rows[1].cells[0].innerHTML;
+	var arrayList= document.getElementById('select_values');
+	var selectstags = [];
+	for(y=0;y< rows;y++)
+	{
+		var cell0value=document.getElementById(tableid).rows[y+1].cells[0].innerHTML;
+		var cell0description=document.getElementById(tableid).rows[y+1].cells[1].innerHTML;
+		if(arrayList.value=='' || arrayList.value == null)
+		{
+			selectstags.push(cell0value);
+			creatingSelects(cell0value,selectstags);
+			var x1= document.getElementById(cell0value);
+			var option = document.createElement("option");
+			option.text = cell0description;
+			option.value = cell0description;
+			x1.add(option);	
+			$("#"+cell0value).trigger("liszt:updated");
+		}
+		else
+		{
+			selectstags = arrayList.value.split(",");
+			if(selectstags.indexOf(cell0value) > -1)
+			{
+				var exist='false';
+				$('#'+cell0value+' option').each(function(){
+					if (this.value == cell0description) {
+						exist= 'true';
+					}
+				});
+				if(exist=='false')
+				{
+					// alert('false');
+					var x1= document.getElementById(cell0value);
+					var option = document.createElement("option");
+					option.text = cell0description;
+					option.value = cell0description;
+					x1.add(option);	
+					$("#"+cell0value).trigger("liszt:updated");
+				}
+				else
+				{
+					// alert('true');
+				}
+
+			}
+			else
+			{
+				selectstags.push(cell0value);
+				creatingSelects(cell0value,selectstags);
+				var x1= document.getElementById(cell0value);
+				var option = document.createElement("option");
+				option.text = cell0description;
+				option.value = cell0description;
+				x1.add(option);	
+				$("#"+cell0value).trigger("liszt:updated");
+			}
+			
+		}
+	}
+	arrayList.value=selectstags;
+	
+}
+
+function validateDuplicate(cell0value)
+{
+	$('#'+cell0value+' option').each(function(){
+	if (this.value == cell0description) {
+		return 'true';
+	}
+	else
+	{
+		return 'false';
+	}
+});
+}
+function creatingSelects(values,optionlist)
+{
+	//$('#product_combinations').html('');
+var getselectLabels = values.split(',');
+
+	for(i=0;i<getselectLabels.length;i++)
+	{
+		//alert(getselectLabels[i]);
+		var selectList = '<div class="control-group span4 style="margin:0px;">'+
+						 '<label class="control-label" >'+getselectLabels[i]+'</label>'+
+						 '<div class="controls">'+
+						 '<select id="'+getselectLabels[i]+'" onChange="alert(this.id)" data-placeholder="Choose '+toTitleCase(getselectLabels[i]) +'" values="'+getselectLabels[i]+'"  class="span12" style="width:100%;">';
+		selectList += "<option values=''></option>";
+		selectList += "</select></div></div>";
+		$('#product_combinations').append(selectList);
+		$("#"+getselectLabels[i]).chosen({ width: '100%'});
+		
+	}
+	
+}
+	
 function delRow()
   {
     var current = window.event.srcElement;
@@ -971,7 +1136,7 @@ function messageInfo(messagetype)
 	{
 		last_gritter = $.gritter.add({
 		title: 'No Data In Description',
-		text: 'The Product Description it Depends on the market place you Selected if there is no data in Selected Market place, you may Contact HomemallPH to request A Variants info',
+		text: 'The Product Description is Depends on the market place you Selected if there is no data in Selected Market place, you may Contact HomemallPH to request A Variants info',
 		class_name: 'gritter-info gritter-center'
 		});			
 		

@@ -1,11 +1,5 @@
 		
 /*     Background slideshow     */
-$.backstretch([
-              "seria/img/background/10.jpg",
-              "seria/img/background/5.jpg",
-              "seria/img/background/6.jpg"
-], {duration: 3000, fade: 750});
-
 
 function scroll_to(clicked_link, nav_height) {
 	var element_class = clicked_link.attr('href').replace('#', '.');
