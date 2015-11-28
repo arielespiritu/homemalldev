@@ -5,7 +5,7 @@
 @section('content')
 
 			<div class="container">
-				<div class="col-md-12 market "  style="padding:0px;" >
+				<div class="col-md-12 market "  style="padding:0px; margin-top:-15px;" >
 					
 					<div class="col-md-3 same-height-row" style="padding:0px;" >
 						<div class="col-md-12  market-logo box" >
@@ -25,15 +25,6 @@
 				</div>
 				<div class="col-md-4 col-xs-12 same-height-row" style="padding:0px; ">
 					<div id="textbox">
-						@if($type=='online')
-							<?php $types="Online"; ?>
-						@elseif($type=='most-visited')
-							<?php $types="Most Visited"; ?>
-						@elseif($type=='new')
-							<?php $types="New"; ?>
-						@elseif($type=='all')
-							<?php $types="All"; ?>
-						@endif
 						  <h4 class="alignleft">{{ucfirst($market)}} {{$types}} Store</h4>
 					</div>
 				</div>
@@ -41,10 +32,10 @@
 					<div id="textbox">
 						  <div id="navcontainer" >
 								<ul>
-									<li><a href="/market/{{$market}}/stores/online" class="alignright-market">Online</a></li>
-									<li><a href="/market/{{$market}}/stores/most-visited" class="alignright-market" >Most Visited</a></li>
-									<li><a href="/market/{{$market}}/stores/new" class="alignright-market">New</a></li>
-									<li><a href="/market/{{$market}}/stores/all" class="alignright-market">All</a></li>
+									<li><a href="/{{$market}}/Stores/Online" class="alignright-market">Online</a></li>
+									<li><a href="/{{$market}}/Stores/Most-Visited" class="alignright-market" >Most Visited</a></li>
+									<li><a href="/{{$market}}/Stores/New" class="alignright-market">New</a></li>
+									<li><a href="/{{$market}}/Stores/All" class="alignright-market">All</a></li>
 								</ul>
 							</div>
 					</div>

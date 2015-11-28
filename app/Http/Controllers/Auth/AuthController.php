@@ -88,6 +88,10 @@ class AuthController extends Controller
     }
 	public function postLogin(Request $request)
     {
+	$loginPath = 'auth/login';
+	$redirectPath = '/market';
+	$redirectAfterLogout = 'auth/login';
+	
 	$market_data = Market::with('category')->get();
 		// validate the info, create rules for the inputs
 		$rules = array(
@@ -122,6 +126,9 @@ class AuthController extends Controller
 	}
 	public function getLogin()
 	{
+	$loginPath = 'auth/login';
+	$redirectPath = '/market';
+	$redirectAfterLogout = 'auth/login';
 	$market_data = Market::with('category')->get();
 		if (Auth::check())
 		{
@@ -134,6 +141,9 @@ class AuthController extends Controller
 	}
 	public function getRegister()
 	{
+	$loginPath = 'auth/login';
+	$redirectPath = '/market';
+	$redirectAfterLogout = 'auth/login';
 	$market_data = Market::with('category')->get();
 		if (Auth::check())
 		{
@@ -146,6 +156,9 @@ class AuthController extends Controller
 	}
 
 	public function getLogout() {
+    $loginPath = 'auth/login';
+	$redirectPath = '/market';
+	$redirectAfterLogout = 'auth/login';
 	    $market_data = Market::with('category')->get();
         Auth::logout(); // logout user
         return redirect(\URL::previous())->with('market_data',$market_data);

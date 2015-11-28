@@ -5,7 +5,7 @@
 @section('content')
 
 			<div class="container">
-				<div class="col-md-12 market "  style="padding:0px;" >
+				<div class="col-md-12 market "  style="padding:0px; margin-top:-15px;" >
 					<div class="col-md-3 same-height-row" style="padding:0px;" >
 						<div class="col-md-12  market-logo box" >
 							 <center><img class="img-responsive" src="{{ URL::asset('assets/img/market/'.$market.'.png') }}" alt=""></center>
@@ -22,19 +22,19 @@
 						</div>		
 					</div>
 				</div>
-				<div class="col-md-4 col-xs-12 same-height-row" style="padding:0px; ">
+				<div class="col-md-4 col-xs-12 same-height-row" style="padding:0px;  ">
 							<div id="textbox">
-								<h4 class="alignleft">{{ucfirst($market)}} Products</h4>
+								<h4 class="alignleft">{{$type}} {{$market}} Products</h4>
 							</div>
 						</div>
 						<div class="col-md-8 col-xs-12  same-height-row" style="padding:0px; ">
 							<div id="textbox">
 								<div id="navcontainer" >
 										<ul>
-											<li><a href="/market/{{$market}}/product/sale" class="alignright-market">Sale</a></li>
-											<li><a href="/market/{{$market}}/product/popular" class="alignright-market" >Popular</a></li>
-											<li><a href="/market/{{$market}}/product/new" class="alignright-market">New</a></li>
-											<li><a href="/market/{{$market}}/product/all" class="alignright-market">All</a></li>
+											<li><a href="/{{$market}}/Product/Sale" class="alignright-market">Sale</a></li>
+											<li><a href="/{{$market}}/Product/Popular" class="alignright-market" >Popular</a></li>
+											<li><a href="/{{$market}}/Product/New" class="alignright-market">New</a></li>
+											<li><a href="/{{$market}}/Product/All" class="alignright-market">All</a></li>
 										</ul>
 								</div>
 							</div>
@@ -51,15 +51,15 @@
 						@for ($x = 0; $x < 12; $x++)
 							<div class="col-md-2 col-xs-6" style="padding:2px; margin-top:-25px;">
 									<div class="box">
-											<a href="/product/details/sample"><center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center></a>
+											<a href="/Product/Details/sample"><center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center></a>
 											<div class="item-desc" style="padding:10px" >
-												<a href="/product/details/sample"><h4 >Product Namessssssss</h4></a>
-												<a href="/product/details/sample"><p >P 100.00</p></a>
+												<a href="/Product/Details/sample"><h4 >Product Namessssssss</h4></a>
+												<a href="/Product/Details/sample"><p >P 100.00</p></a>
 												<div id="navcontainer">
 												<ul>
 													<li><a href="" ><i class="fa fa-shopping-cart cart" ></i></a></li>
-													<li><a href=""><i class="fa fa-heart heart" ></i></a></li>
-													<li><a href=""><i class="fa fa-star star" ></i></a></li>
+													<li><a href="" class="alignright-icon"><i class="fa fa-heart heart" ></i></a></li>
+													<li><a href="" class="alignright-icon"><i class="fa fa-star star" ></i></a></li>
 												</ul>
 												</div>
 												

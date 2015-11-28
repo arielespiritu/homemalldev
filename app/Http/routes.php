@@ -31,9 +31,21 @@ Route::post('/HMadmin/Products/addBrand','AdminConn\products@addBrand');
 Route::post('/HMadmin/Products/addProduct','AdminConn\products@addProduct');
 //
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ///////////////////////// Do not modify i will kill you /////////////////
-
-
 
 // Authentication routes...
 Route::get('/auth/login', 'Auth\AuthController@getLogin');
@@ -51,18 +63,25 @@ Route::get('/', function () {
 });
 
 //market
-Route::get('/market', 'MarketController@showMarket');
+Route::get('/Market', 'MarketController@showMarket');
+Route::get('/market', function () {
+    return redirect('/Market');
+});
+
+Route::get('/Cart', 'CartController@showCart');
+Route::get('/Checkout', 'CheckoutController@showCheckout');
+
 Route::get('/home', function () {
     return redirect('market');
 });
 
-Route::get('/market/{id}', 'MarketController@showMarketPage'); //views
-Route::get('/market/{id}/stores/{id2}', 'MarketController@showMarketStores'); //views
-Route::get('/market/{id}/product/{id2}', 'MarketController@showMarketProducts'); //views
-Route::get('/market/{id}/category/all', 'MarketController@showMarketCategory'); //views
-Route::get('/market/{id}/category/product/{id2}', 'MarketController@showMarketCategoryProduct'); //views
+Route::get('/{id}', 'MarketController@showMarketPage'); //views
+Route::get('/{id}/Stores/{id2}', 'MarketController@showMarketStores'); //views
+Route::get('/{id}/Product/{id2}', 'MarketController@showMarketProducts'); //views
+Route::get('/{id}/Category/All', 'MarketController@showMarketCategory'); //views
+Route::get('/{id}/Category/{id2}/{id3}', 'MarketController@showMarketCategoryProduct'); //views
 
-Route::get('/product/details/{id}', 'ProductDetailsController@showProductDetails'); //views
+Route::get('/Product/Details/{id}', 'ProductDetailsController@showProductDetails'); //views
 
 
 

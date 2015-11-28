@@ -1051,12 +1051,15 @@ h1 {
 }
 .nav-pills > li > a {
   border-radius: 0;
+  border:1px solid #ccc;
+    border-width:0 0 1px;
 }
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   color: #ffffff;
-  background-color: #4fbfa8;
+  background-color: blue;
+
 }
 .nav-tabs-justified > li > a {
   border-radius: 4px;
@@ -1308,8 +1311,8 @@ h1 {
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-  background-color: #e7e7e7;
-  color: #777777;
+  background-color: transparent;
+  color: black;
 }
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
