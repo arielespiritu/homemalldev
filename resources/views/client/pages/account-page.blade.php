@@ -8,7 +8,7 @@
 			<div class="container" style="margin-top:-17px;">
 				<div class="col-md-12 " style="padding:2px; "  >
 					<div class="col-md-12 box " style="padding:15px; background:white;">
-                        <h1>My-Account</h1>
+                        <h1>My-Account </h1>
 						<div class="col-md-12" style="padding:10px; "  >
 						
 					
@@ -161,7 +161,7 @@
 													<tr>
 														<td>
 															<a href="/product/details/sample" class=" category-products" >
-																<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
+																<img class="alignleft"  data-src="{{ URL::asset(imagePath('assets/img/store/samplestore/product/1/0')) }}" data-src-retina="{{ URL::asset(imagePath('assets/img/store/samplestore/product/1/0')) }}" src="{{ URL::asset('assets/img/loading.gif') }}" alt=".sdsdssdsdsds." >
 															</a>
 														</td>
 														<td><a href="#">White Blouse Armani</a>

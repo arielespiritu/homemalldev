@@ -36,8 +36,8 @@
 								<div class="box">
 										<a href="/Product/Details/sample"><center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center></a>
 										<div class="item-desc" style="padding:10px" >
-											<a href="/Product/Details/sample"><h4 >Product Namessssssss</h4>
-											<a href="/Product/Details/sample"><p >P 100.00</p></h4>
+											<a href="/Product/Details/sample"><h4 >Product Namessssssss</h4></a>
+											<p >P 100.00</p></h4>
 											<div id="navcontainer">
 											<ul>
 												<li><a href="" ><i class="fa fa-shopping-cart cart " ></i></a></li>
@@ -56,9 +56,9 @@
 			</div>
 			<div class="container" >
 				<div class="col-md-12" style="padding:0px; margin-top:-26px; margin-bottom:-26px" >
-					<div class="col-md-12 box" >
-						<h3 class="text-uppercase text-center"><i class="fa fa-shopping-bag"></i>&nbsp;&nbsp; Market&nbsp;&nbsp;<i class="fa fa-shopping-bag"></i></h3>
-					</div>
+						<div class="col-md-12 box" >
+							<img class="img-responsive" src="{{ URL::asset('assets/img/market/market.png') }}" alt="Homemallph Market">
+						</div>
 				</div>
 			</div>			
 
@@ -126,26 +126,19 @@
 									<div class="box">
 										<a href="/{{$markets_datas->market_name}}/Category/{{str_replace(' ','-',$category->category_name)}}/All"> <center><img class="img-responsive"  data-src="{{ URL::asset('assets/img/category/'.strtolower($markets_datas->market_name).'/'.$category->id.'.png') }}" data-src-retina="{{ URL::asset('assets/img/category/'.strtolower($markets_datas->market_name).'/'.$category->id.'.png') }}" src="{{ URL::asset('assets/img/loading.gif') }}" alt="" /></center></a>
 										<div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-										  <a href="/Product/Details/sample" class="list-group-item category-products" >
-											<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-											<h5 class="list-group-item-heading">Product Name</h5>
-											<p class="list-group-item-text">P 100.00</p>
-										  </a>
-										  <a href="/Product/Details/sample1" class="list-group-item category-products" >
-											<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-											<h5 class="list-group-item-heading">Product Name</h5>
-											<p class="list-group-item-text">P 100.00</p>
-										  </a>
-										   <a href="/Product/Details/sample2" class="list-group-item category-products" >
-											<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
-											<h5 class="list-group-item-heading">Product Name</h5>
-											<p class="list-group-item-text">P 100.00</p>									
-										  </a>
+										@for ($x = 0; $x < 3; $x++)
+										    <a href="/Product/Details/sample" class="list-group-item category-products" >
+												<img class="alignleft" src="{{ URL::asset(imagePath('assets/img/store/samplestore/product/1/0')) }}" alt="..." >
+												<h5 class="list-group-item-heading">Product Name</h5>
+												<p class="list-group-item-text">P 100.00</p>
+											</a>
+										@endfor
 										</div>
 									</div>
 								</div>
 							@endif
 						@endforeach	
+						
 						<!--<div class="col-md-12 " style="padding:0px; margin-top:10px;"  >
 							<div id="textbox">
 								  <a  href="/market/{{strtolower($markets_datas->market_name)}}" class="alignright" style="margin-top:-20px;">See More</a>

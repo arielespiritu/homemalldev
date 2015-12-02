@@ -44,5 +44,17 @@ class ProductDetailsController extends Controller {
 			return view('client.pages.product-details')->with('market_data',$market_data)->with('product_name',$product_name);
 		}
 	}
+	public function showProductInfo($product_name)
+	{
+	$market_data = Market::with('category')->get();
+		if (Auth::check())
+		{
+			$id = Auth::user()->login_id;
+			$user = User::where('id', $id )->with('member')->get();
+			return view('client.pages.product-details')->with('user',$user)->with('market_data',$market_data)->with('product_name',$product_name);
+		}else{
+			return view('client.pages.product-details')->with('market_data',$market_data)->with('product_name',$product_name);
+		}
+	}
 	
 }

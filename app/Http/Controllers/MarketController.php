@@ -152,4 +152,11 @@ class MarketController extends Controller {
 			return redirect(\URL::previous());
 		}
 	}
+	function imageHandler($destination){
+		if(file_exists($destination.'.png')){
+			return $destination.'.png';
+		}else{
+			return $destination.'.jpg';
+		}
+	}
 }

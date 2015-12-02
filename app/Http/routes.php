@@ -84,12 +84,10 @@ Route::get('/{id}/Product/{id2}', 'MarketController@showMarketProducts'); //view
 Route::get('/{id}/Category/All', 'MarketController@showMarketCategory'); //views
 Route::get('/{id}/Category/{id2}/{id3}', 'MarketController@showMarketCategoryProduct'); //views
 Route::get('/Product/Details/{id}', 'ProductDetailsController@showProductDetails'); //views
+Route::get('/Product/{id}', 'ProductDetailsController@showProductInfo'); //views
 Route::get('/My-Account/{id}', 'CustomerAccountController@showAccount'); //views
 Route::get('/My-Account/{id}/{id2}', 'CustomerAccountController@showCustomerAccount'); //views
 
-
-
-//Route::get('//{id}', 'CustomerAccountController@showCustomerAccount'); //views
 
 
 
