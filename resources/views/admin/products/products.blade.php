@@ -28,7 +28,6 @@
 					</a>
 				</div>
 			</div>
-
 		<div class="widget-body">
 			<div class="widget-main">
 				<br>
@@ -72,10 +71,6 @@
 							</select>	
 						</div>
 					</div>					
-					
-					
-					
-					
 				</div>
 				<div class="row-fluid">				
 					<div class="span12" >
@@ -101,7 +96,7 @@
 								<div class="widget-main">
 								
 									<div class="control-group">
-										<input id="product_information_status"/>
+										<input id="product_information_status" value="NEW" style="display:none"/>
 										<label class="control-label" ><li class="icon-basket"></li> Product Name</label>
 										<div class="controls">
 											<input type="text" class="span12" id="product_name" placeholder=""  />
@@ -206,7 +201,7 @@
 										<div class="control-group span12">
 											<label class="control-label" >Product Status:</label>
 											<div class="controls">
-												<select class="span12" style="width:100%;" id="active_price" data-placeholder="Choose Category" >
+												<select class="span12" style="width:100%;" id="product_info_status" data-placeholder="Choose Category" >
 													<option value="" />
 												@foreach($indicator as $price_status)
 													<option value="{{$price_status->id}}" />{{$price_status->indicator_name}} 
@@ -233,9 +228,9 @@
 							<div class="widget-body">
 								<div class="widget-main"  style="height:515px; overflow-y: scroll;">
 									<div class="span12">
-									<input id="product_complex_status"/>
+							
 										<div class="control-group span12">
-										
+											<input id="product_complex_status" value="NEW" style="display:none"/>
 											<label class="control-label" >Description Type<a href="javascript:;"  onClick="messageInfo('variant_info')" class="pull-right"><li class="icon-info" style="Color:red"> No data ?</li></a></label>
 											<div class="controls">
 												<div class="span12">
@@ -247,17 +242,17 @@
 										</div>	
 									</div>
 									<div class="span12" style="margin:0px;">
-											<div class="row-fluid">
-												<div class="control-group span10">
-													<div class="controls">
-														<input type="text" class="span12" id="description_name" placeholder="Variant Name"  />
-													</div>
-												</div>						 					
-												<div class="span2">
-													<button class="btn btn-default btn-mini span12 pull-right" id="variant_add_btn" onClick="addVariants()">add</button>
-												</div>									
-											</div>	
-											<br>											
+										<div class="row-fluid">
+											<div class="control-group span10">
+												<div class="controls">
+													<input type="text" class="span12" id="description_name" placeholder="Variant Name"  />
+												</div>
+											</div>						 					
+											<div class="span2">
+												<button class="btn btn-default btn-mini span12 pull-right" id="variant_add_btn" onClick="addVariants()">add</button>
+											</div>									
+										</div>	
+										<br>											
 									</div>	
 									<table id="variant_tbl" class="table table-striped table-bordered table-hover"  >
 										<thead>
@@ -281,82 +276,84 @@
 							</div>
 							<div class="widget-body">
 								<div class="widget-main" >
-								<div class="row-fluid span12" style="margin-bottom:30px;">
-									<center>
-										<div class="widget-box span12" id="sample">
-											<div class="widget-header ">
-											<h5>Images</h5>
-											</div>
-											<div class="widget-body">
-												<div class="widget-main">
-												<a href="javascript:;"  onClick="messageInfo('upload_other_image')" class="pull-left"><li class="icon-info" style="Color:red"><b> Read Rules First</b></li></a>
-													<br>
-													<div id="other_images_result" >
-													</div>
-													<div class="hr hr-18 dotted hr-double"></div>									
-													<div class="row-fluid">
-														<input type="file" id="product_other_file" name="files[]" onChange="multipleImgViews()" multiple="multiple"  accept="image/gif, image/jpeg, image/png"  class="ace-file-input" name="file-input"/>						
-														<button id="product_other_cancel" onClick='getDrectory("product_other_cancel","product_other_file","cancelOther")' style="display:none"  class="btn btn-small btn-danger" >Cancel</button>
+									<div class="row-fluid span12" style="margin-bottom:30px;">
+										<input type="text" id="product_combo_image_result" value="NO IMAGES" style="display:none"/> 
+										<center>
+									
+											<div class="widget-box span12" id="sample">
+												<div class="widget-header ">
+												<h5>Images</h5>
+												</div>
+												<div class="widget-body">
+													<div class="widget-main">
+													<a href="javascript:;"  onClick="messageInfo('upload_other_image')" class="pull-left"><li class="icon-info" style="Color:red"><b> Read Rules First</b></li></a>
+														<br>
+														<div id="other_images_result" >
+														</div>
+														<div class="hr hr-18 dotted hr-double"></div>									
+														<div class="row-fluid">
+															<input type="file" id="product_other_file" name="files[]" onChange="multipleImgViews()" multiple="multiple"  accept="image/gif, image/jpeg, image/png"  class="ace-file-input" name="file-input"/>						
+															<button id="product_other_cancel" onClick='getDrectory("product_other_cancel","product_other_file","cancelOther")' style="display:none"  class="btn btn-small btn-danger" >Cancel</button>
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-									</center>	
-								</div>
-								<div class="row-fluid span12" style="margin:0px;">
-									
-									<div class="control-group span2">
-										<label class="control-label" >Sale Price</label>
-										<div class="controls">
-											<input type="text" class="span12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onpaste="return false;" maxlength='9' ondrop="return false;" id="form-field-1" placeholder=""  />
-										</div>
+										</center>	
 									</div>
-									<div class="control-group span2">
-										<label class="control-label" >Retail Price</label>
-										<div class="controls">
-											<input type="text" class="span12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onpaste="return false;"  maxlength='9' ondrop="return false;" id="form-field-1" placeholder=""  />
+									<div class="row-fluid span12" style="margin:0px;">
+										<div class="control-group span2">
+											<label class="control-label" >Sale Price</label>
+											<div class="controls">
+												<input type="text" class="span12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onpaste="return false;" maxlength='9' ondrop="return false;" id="product_saleprice" placeholder=""  />
+											</div>
 										</div>
-									</div>	
-									<div class="control-group span2">
-										<label class="control-label"  >Product Cost</label>
-										<div class="controls">
-											<input type="text" class="span12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onpaste="return false;"  maxlength='9' ondrop="return false;" id="form-field-1" placeholder=""  />
+										<div class="control-group span2">
+											<label class="control-label" >Retail Price</label>
+											<div class="controls">
+												<input type="text" class="span12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onpaste="return false;"  maxlength='9' ondrop="return false;" id="product_retailprice" placeholder=""  />
+											</div>
+										</div>	
+										<div class="control-group span2">
+											<label class="control-label"  >Product Cost</label>
+											<div class="controls">
+												<input type="text" class="span12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onpaste="return false;"  maxlength='9' ondrop="return false;" id="product_cost" placeholder=""  />
+											</div>
 										</div>
-									</div>
-									<div class="control-group span2">
-										<label class="control-label" >Quantity:</label>
-										<div class="controls">
-											<input type="text" class="span12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onpaste="return false;"  maxlength='9' ondrop="return false;"  id="form-field-1" placeholder=""  />
-										</div>
-									</div>		
-									<div class="control-group span2">
-										<div class="controls">
-											<label class="control-label" > Active Price: </label>							
-											<select class="span12" style="width:100%; " id="combo_active_price" data-placeholder="Choose Active Price" >
-													<option value="" />
-												@foreach($product_status as $product_stat)
-													<option value="{{$product_stat->id}}" />{{$product_stat->indicator_name}} 
-												@endforeach	
-											</select>	
-										</div>
-									</div>	
-									<div class="control-group span2">
-										<div class="controls">
-											<label class="control-label" >Status: </label>							
-											<select class="span12" style="width:100%;" id="combo_status" data-placeholder="Choose Status" >
-													<option value="" />
-												@foreach($indicator as $price_status)
-													<option value="{{$price_status->id}}" />{{$price_status->indicator_name}} 
-												@endforeach	
-											</select>		
-										</div>
-									</div>									
-									<div id="product_combinations" class="span12 row-fluid" style="margin: 0px;">
+										<div class="control-group span2">
+											<label class="control-label" >Quantity:</label>
+											<div class="controls">
+												<input type="text" class="span12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onpaste="return false;"  maxlength='9' ondrop="return false;"  id="product_quantity" placeholder=""  />
+											</div>
+										</div>		
+										<div class="control-group span2">
+											<div class="controls">
+												<label class="control-label" > Active Price: </label>							
+												<select class="span12" style="width:100%; " id="combo_active_price" data-placeholder="Choose Active Price" >
+														<option value="" />
+													@foreach($product_status as $product_stat)
+														<option value="{{$product_stat->id}}" />{{$product_stat->indicator_name}} 
+													@endforeach	
+												</select>	
+											</div>
+										</div>	
+										<div class="control-group span2">
+											<div class="controls">
+												<label class="control-label" >Status: </label>							
+												<select class="span12" style="width:100%;" id="combo_status" data-placeholder="Choose Status" >
+														<option value="" />
+													@foreach($indicator as $price_status)
+														<option value="{{$price_status->id}}" />{{$price_status->indicator_name}} 
+													@endforeach	
+												</select>		
+											</div>
+										</div>									
+										<div id="product_combinations" class="span12 row-fluid" style="margin: 0px;">
 
-									</div>
-								</div>	
-								<input id="select_values" style="display:none"/>
-								<input id="product_combo_result"/>
+										</div>
+									</div>	
+									<input id="select_values" style="display:none" />
+									<input id="product_combo_result" value="NOT YET SAVE" style="display:none"/>
+									<label> &nbsp;</label>
 								</div>
 							</div>
 						</div>
@@ -364,7 +361,7 @@
 				</div>
 				<div class="hr hr-18 dotted hr-double"></div>				
 				<div class="row-fluid wizard-actions">
-					<button onClick=""  class="btn btn-danger btn-next" data-last="Finish ">
+					<button onClick="window.location.reload();"  class="btn btn-danger btn-next" data-last="Finish ">
 						Reset Product
 						<i class="fa-save"></i>
 					</button>				
@@ -566,6 +563,7 @@ function addSubcat(id)
 	
 	}
 }
+
 function isChildorParent(value)
 {
 	//alert(value)
@@ -612,48 +610,124 @@ function isChildorParent(value)
 }
 function addProduct()
 {
+	var arrayParent= [];
+	var child={};
+	var getSelect= document.getElementById('select_values').value;
 //product information
+	var product_combo_result = document.getElementById('product_combo_result').value;
+	
 	var product_name = document.getElementById('product_name').value;
 	var product_description = document.getElementById('product_description').value;
 	var market_info = document.getElementById('market_info').value;
+	var product_category = document.getElementById('product_category').value;
 	var product_sub_category = document.getElementById('product_sub_category').value;
 	var brand_info = document.getElementById('brand_info').value;
-	var active_price = document.getElementById('active_price').value;
+	var product_info_status = document.getElementById('product_info_status').value;
 	var product_ranged = document.getElementById('product_ranged').value;
+//product 	
+	var product_saleprice = document.getElementById('product_saleprice').value;
+	var product_retailprice = document.getElementById('product_retailprice').value;
+	var product_cost = document.getElementById('product_cost').value;
+	var product_quantity = document.getElementById('product_quantity').value;
+	var combo_active_price = document.getElementById('combo_active_price').value;
+	var combo_status = document.getElementById('combo_status').value;
+	
+	var selectValues = document.getElementById('select_values').value;
 
 	var formData = new FormData();
-	formData.append('product_name',product_name); 
-	formData.append('product_description',product_description); 
-	formData.append('market_info',market_info); 
-	formData.append('product_sub_category',product_sub_category); 
-	formData.append('brand_info',brand_info); 
-	formData.append('active_price',active_price); 
-	formData.append('product_ranged',product_ranged); 
-	
 	var countFiles=0;
 	
-		jQuery.each(jQuery('#product_other_file')[0].files, function(i, file) {
-		countFiles++;
-		formData.append('image-'+i, file);
-	});
-	
-	
-	//alert(countFiles);
-	formData.append('imagecount',countFiles); 
-	$.ajax({
-		type: "POST",
-		url: "/HMadmin/Products/addProduct",     // Url to which the request is send
-		data:formData,
-		contentType: false,       // The content type used when sending data to the server.
-		processData:false,        // To send DOMDocument or non processed data file it is set to false		
-		success: function(result)   // A function to be called if request succeeds
+	if(getSelect === '' || getSelect === null)
 	{
-		alert(result);
-		$('body,html').animate({
-		scrollTop: 0
-		}, 500);		
+		last_gritter = $.gritter.add({
+			title: 'Something Wrong',
+			text: 'Your Product Complex Is Empty Please Create product complex ',
+			class_name: 'gritter-error gritter-center'
+		});			
 	}
-	});
+	else
+	{
+		getSelect = getSelect.split(',');
+		for(i=0; i<getSelect.length;i++)
+		{
+				var selectobject= document.getElementById(getSelect[i]);
+				var y = 1;
+				alert(selectobject.value);
+				formData.append("default_"+getSelect[i],selectobject.value); 
+				while(selectobject.options[y]) 
+				{
+					child={};
+					child[getSelect[i]]=selectobject.options[y].value;
+					//alert(selectobject.options[y].value);	
+					//alert(child[getSelect[i]]);	
+					arrayParent.push(child);
+					y++;
+				}
+				//alert();
+				formData.append(getSelect[i],JSON.stringify(arrayParent)); 
+				arrayParent= [];
+		}
+			formData.append('product_name',product_name); 
+			formData.append('product_description',product_description); 
+			formData.append('market_info',market_info); 
+			formData.append('product_sub_category',product_sub_category); 
+			formData.append('brand_info',brand_info); 
+			formData.append('product_info_status',product_info_status); 
+			formData.append('brand_info',brand_info); 
+			formData.append('product_category',product_category); 
+			formData.append('product_ranged',product_ranged); 
+			
+			formData.append('product_saleprice',product_saleprice); 
+			formData.append('product_retailprice',product_retailprice); 
+			formData.append('product_cost',product_cost); 
+			formData.append('product_quantity',product_quantity); 
+			formData.append('combo_active_price',combo_active_price); 
+			formData.append('combo_status',combo_status); 
+			formData.append('product_combo_result',product_combo_result); 
+			
+			formData.append('selectValues',selectValues); 
+			
+			
+			jQuery.each(jQuery('#product_other_file')[0].files, function(i, file) {
+			countFiles++;
+			formData.append('image-'+i, file);
+		});
+
+			//alert(countFiles);
+			formData.append('imagecount',countFiles); 
+			$.ajax({
+				type: "POST",
+				url: "/HMadmin/Products/addProduct",     // Url to which the request is send
+				data:formData,
+				contentType: false,       // The content type used when sending data to the server.
+				processData:false,        // To send DOMDocument or non processed data file it is set to false		
+				success: function(result)   // A function to be called if request succeeds
+			{
+				alert(result);
+				var jsonResponse=  JSON.parse(result);
+				if(jsonResponse[0].success == '1')
+				{
+					//alert('1');
+					document.getElementById('product_combo_result').value = jsonResponse[0].data;
+					document.getElementById('product_complex_status').value='SAVED';
+				}
+				else
+				{
+					
+					messageResult='';
+					for(i= 0; i<jsonResponse[0].data.length;i++)
+					{
+						messageResult+=jsonResponse[0].data[i]+'<br>';
+					}
+						last_gritter = $.gritter.add({
+							title: 'Something Wrong',
+							text: messageResult,
+							class_name: 'gritter-error gritter-center'
+						});	
+				}
+			}
+			});		
+	}
 }
 function addBrand(id)
 {
@@ -896,6 +970,7 @@ function getDrectory(changefrom,changeto,checkifcancel,imgsrclear)
 	{
 		 document.getElementById(changeto).value="";
 		 $("#other_images_result").empty();
+		 document.getElementById('product_combo_image_result').value='NO IMAGES';
 	}
 		 $("#"+changeto).fadeIn("slow");
 		 $("#"+changefrom).fadeOut("slow");
@@ -910,10 +985,26 @@ function addVariants()
 	var variantName= document.getElementById('description_name').value;
     var x = document.getElementById("description_type").selectedIndex;
     var y = document.getElementById("description_type").options;	
-	var variant_info=y[x].text;
+   	var variant_info=y[x].text;
 	variant_name = variantName;
 	variant_type = variant_info;
-
+	var checkifNew= document.getElementById('product_complex_status').value;
+	if(checkifNew == 'SAVED')
+	{
+		var prod_info_id = document.getElementById("product_combo_result").value;	
+		$.post("/HMadmin/Products/addVariant",
+		{
+			variant_name:variant_name,
+			variant_type:variant_type,
+			product_info_id:prod_info_id,
+		},
+		function(result)
+		{
+			alert(result);
+		});			
+		
+		
+	}
 	if(variantName == '' || variant_info == '')
 	{
 		last_gritter = $.gritter.add({
@@ -934,7 +1025,7 @@ function addVariants()
 	{
 		action_btn = 	
 								'<div class="hidden-phone visible-desktop action-buttons">'+
-									'<a class="red" href="javascript:;" onClick="delRow()">'+
+									'<a class="red" href="javascript:;" onClick= delRow("'+variant_type+'","'+variant_name.split(' ').join('_')+'")>'+
 										'<i class="icon-trash bigger-130"></i>'+
 									'</a>'+
 								'</div>'+
@@ -945,7 +1036,7 @@ function addVariants()
 										'</button>'+
 										'<ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">'+
 											'<li>'+
-												'<a href="javascript:;" onClick="delRow()" class="tooltip-error" data-rel="tooltip" title="Delete">'+
+												'<a href="javascript:;" onClick= delRow("'+variant_type+'","'+variant_name.split(' ').join('_')+'") class="tooltip-error" data-rel="tooltip" title="Delete">'+
 													'<span class="red">'+
 														'<i class="icon-trash bigger-120"></i>'+
 													'</span>'+
@@ -956,7 +1047,6 @@ function addVariants()
 								'</div>';
 
 		$('#variant_tbl').append('<tr><td>'+variant_type+'</td><td>'+variant_name+'</td><td>'+action_btn+'</td></tr>');
-		
 		getTableValues("variant_tbl");		
 	}
 }
@@ -975,61 +1065,63 @@ function checkifhasinTable(tableid,type,description)
 }
 function getTableValues(tableid)
 {
+
 	var rows = document.getElementById(tableid).getElementsByTagName('tbody')[0].getElementsByTagName('tr').length;
 	var x = document.getElementById(tableid).rows[1].cells[0].innerHTML;
 	var arrayList= document.getElementById('select_values');
 	var selectstags = [];
 	for(y=0;y< rows;y++)
 	{
+		
 		var cell0value=document.getElementById(tableid).rows[y+1].cells[0].innerHTML;
 		var cell0description=document.getElementById(tableid).rows[y+1].cells[1].innerHTML;
 		if(arrayList.value=='' || arrayList.value == null)
 		{
+
 			selectstags.push(cell0value);
 			creatingSelects(cell0value,selectstags);
-			var x1= document.getElementById(cell0value);
-			var option = document.createElement("option");
-			option.text = cell0description;
-			option.value = cell0description;
-			x1.add(option);	
+			$("#"+cell0value+" option:last").after($('<option value="'+cell0description.split(' ').join('_')+'">'+cell0description+'</option>'));	
 			$("#"+cell0value).trigger("liszt:updated");
 		}
 		else
 		{
+			
 			selectstags = arrayList.value.split(",");
 			if(selectstags.indexOf(cell0value) > -1)
 			{
+
 				var exist='false';
 				$('#'+cell0value+' option').each(function(){
-					if (this.value == cell0description) {
+					if (this.value == cell0description.split(' ').join('_')) {
 						exist= 'true';
 					}
 				});
+				
 				if(exist=='false')
 				{
-					// alert('false');
-					var x1= document.getElementById(cell0value);
-					var option = document.createElement("option");
-					option.text = cell0description;
-					option.value = cell0description;
-					x1.add(option);	
+
+					$("#"+cell0value+" option:last").after($('<option value="'+cell0description.split(' ').join('_')+'">'+cell0description+'</option>'));	
 					$("#"+cell0value).trigger("liszt:updated");
+					
+
 				}
 				else
 				{
-					// alert('true');
+				
 				}
 
 			}
 			else
 			{
+				
 				selectstags.push(cell0value);
 				creatingSelects(cell0value,selectstags);
-				var x1= document.getElementById(cell0value);
-				var option = document.createElement("option");
-				option.text = cell0description;
-				option.value = cell0description;
-				x1.add(option);	
+				$("#"+cell0value+" option:last").after($('<option value="'+cell0description.split(' ').join('_')+'">'+cell0description+'</option>'));				
+				// var x1= document.getElementById(cell0value);
+				// var option = document.createElement("option");
+				// option.text = cell0description;
+				// option.value = cell0description;
+				// x1.add(option);	
 				$("#"+cell0value).trigger("liszt:updated");
 			}
 			
@@ -1062,7 +1154,7 @@ var getselectLabels = values.split(',');
 		var selectList = '<div class="control-group span4 style="margin:0px;">'+
 						 '<label class="control-label" >'+getselectLabels[i]+'</label>'+
 						 '<div class="controls">'+
-						 '<select id="'+getselectLabels[i]+'" onChange="alert(this.id)" data-placeholder="Choose '+toTitleCase(getselectLabels[i]) +'" values="'+getselectLabels[i]+'"  class="span12" style="width:100%;">';
+						 '<select id="'+getselectLabels[i]+'" onChange="alert(this.value)" data-placeholder="Choose '+toTitleCase(getselectLabels[i]) +'"  class="span12" style="width:100%;">';
 		selectList += "<option values=''></option>";
 		selectList += "</select></div></div>";
 		$('#product_combinations').append(selectList);
@@ -1071,13 +1163,48 @@ var getselectLabels = values.split(',');
 	}
 	
 }
-	
-function delRow()
+function deleteElement(count,id)
+{
+	if(count <= 1)
+	{
+		$("#"+ id).remove();
+		$("#"+id).trigger("liszt:updated");
+	}
+}	
+function delRow(type,description)
   {
-    var current = window.event.srcElement;
-    //here we will delete the line
-    while ( (current = current.parentElement)  && current.tagName !="TR");
-         current.parentElement.removeChild(current);
+	var checkifNew= document.getElementById('product_complex_status').value;
+	if(checkifNew == 'NEW')
+	{
+	var current = window.event.srcElement;
+	while ( (current = current.parentElement)  && current.tagName !="TR");
+	current.parentElement.removeChild(current);	  
+	 var selectobject=document.getElementById(type)
+	 var getProductcomboStatus=  document.getElementById('product_combo_result').value;
+	 if(getProductcomboStatus == 'NOT YET SAVE')
+	 {
+	  for (var i=0; i<selectobject.length; i++)
+		{
+			if (selectobject.options[i+1].value.split(' ').join('_') == description || selectobject.options[i+1].value == description  )
+			{
+				selectobject.remove(i+1);
+				$("#"+type).trigger("liszt:updated");
+			}
+			else
+			{
+				
+			}
+		}		 
+	 }
+	}
+	else if(checkifNew == 'SAVED')
+	{
+		last_gritter = $.gritter.add({
+		title: 'Oppps.. DATA is in use',
+		text: 'You Cannot delete data after adding a product Go to Edit Section to modify ',
+		class_name: 'gritter-info gritter-center'
+		});			
+	}
   }
 function showSubCategoryInfo(CI1)
 {
@@ -1190,6 +1317,7 @@ function messageInfo(messagetype)
 										{
 										//	$("#other_images_result").append('<span class="profile-picture" id="span_image-'+getid+'"><a href="javascript:;" onClick= removeElement("#span_image-'+getid+'")><li class="icon-close red icon-large pull-right" style="position:static;"></li></a><img id="other_image-'+getid+'" class=""  src="'+e.target.result+'" style="width:120px; height:100px;" /></span>');									
 											$("#other_images_result").append('<span class="profile-picture" id="span_image-'+getid+'"></a><img id="other_image-'+getid+'" class=""  src="'+e.target.result+'" style="width:120px; height:100px;" /></span>');									
+											document.getElementById('product_combo_image_result').value='HAS IMAGES';
 										}
 									}
 								}

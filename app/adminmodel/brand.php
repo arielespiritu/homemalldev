@@ -44,6 +44,7 @@ class brand extends Model
 	public function setMI1Attribute($value)
 	{
 		return $this->attributes['market_id']=$value;
-	}		
+	}
+	
 
 }
