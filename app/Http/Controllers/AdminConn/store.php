@@ -193,8 +193,8 @@ public function __construct()
 			
 			// $result=$file->move($destination_logo,$file_name.'.'.$extension);
 			$img = Image::make($file);
-			$img->resize(300,300);
-			$img->insert('assets/avatar.png', 'bottom-right', 10, 10);
+			//$img->resize(300,300);
+			//$img->insert('assets/avatar.png', 'bottom-right', 10, 10);
 			$img->save($destination_logo.'/'.$file_name.'.'.$extension);			
 			if(file_exists($destination_logo.'/'.$file_name.'.'.$extension))			
 			{

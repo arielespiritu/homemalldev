@@ -30,6 +30,7 @@ Route::post('/HMadmin/Products/addSub','AdminConn\products@addsubcat');
 Route::post('/HMadmin/Products/addBrand','AdminConn\products@addBrand');
 Route::post('/HMadmin/Products/addProduct','AdminConn\products@addProduct');
 Route::post('/HMadmin/Products/addVariant','AdminConn\products@addVariant');
+Route::post('/HMadmin/Products/viewChild','AdminConn\products@viewChild');
 Route::post('/HMadmin/Products/getProducts','AdminConn\products@getProducNames');
 Route::post('/HMadmin/responsedec','AdminConn\decrypter@decrypt');
 //""

@@ -197,7 +197,7 @@ public function __construct()
 		}
 	}
 	public function getVariantID($variant_name)
-	{
+	{	 $variant_name = str_replace('_', ' ', $variant_name);
 		$variants= variants::where('variant_name','=',$variant_name)->get();
 		foreach($variants as $variant)
 		{
@@ -214,12 +214,16 @@ public function __construct()
 	}
 	public function getProductVariantID($variant_id,$variant_name_value)
 	{
-		$productvariants = productvariants::where('variant_id','=',$variant_id)->where('variant_name_value','=',$variant_name_value)->get();
-		foreach($productvariants as $productvariantID)
+		try{
+			$productvariants = productvariants::where('variant_id','=',$variant_id)->where('variant_name_value','=',$variant_name_value)->get();
+			foreach($productvariants as $productvariantID)
+			{
+			}
+			return $productvariantID['id'];			
+		}
+		catch(\Exception $e)
 		{
 		}
-		return $productvariantID['id'];
-		
 	}
 	public function addVariant(Request $request)
 	{
@@ -330,14 +334,24 @@ public function __construct()
 						}
 					}
 					//inserting combos
-						
+					
 					for($x1 = 0; $x1 < count($getChilds); $x1++)
 					{
 					//	return $this->getProductVariantID($this->getVariantID($getChildsCombo[$x]),$input['default_'.$getChildsCombo[$x]]);
-						 $productcombination= new productcombination;
-						 $productcombination->product_variant_id = $this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
-						 $productcombination->product_id = $productscombo->id;
-						 $productcombination->save();
+						$idcombo =$this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
+						if($idcombo  == '' ||  $idcombo== null )
+						{
+					
+						}
+						else
+						{
+							 $productcombination= new productcombination;
+							 $productcombination->product_variant_id = $this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
+							 $productcombination->product_id = $productscombo->id;
+							 $productcombination->save();						
+							
+						}
+
 					}					
 					return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '1','message' => 'Data Insert','data' => $product_info->id]));
 				}
@@ -369,14 +383,20 @@ public function __construct()
 						$this->upload_file(Input::file('image-'.$i),$dir,$i);
 					}
 				}				
-				for($x1 = 0; $x1 < count($getChilds); $x1++)
-				{
-				//	return $this->getProductVariantID($this->getVariantID($getChildsCombo[$x]),$input['default_'.$getChildsCombo[$x]]);
-					 $productcombination= new productcombination;
-					 $productcombination->product_variant_id = $this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
-					 $productcombination->product_id = $productscombo->id;
-					 $productcombination->save();
-				}					
+					for($x1 = 0; $x1 < count($getChilds); $x1++)
+					{
+						$idcombo =$this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
+						if($idcombo  == '' ||  $idcombo== null )
+						{
+						}
+						else
+						{
+							 $productcombination= new productcombination;
+							 $productcombination->product_variant_id = $this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
+							 $productcombination->product_id = $productscombo->id;
+							 $productcombination->save();						
+						}
+					}						
 				return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '1','message' => 'Data Insert','data' => $input['product_combo_result']]));
 			}
 			catch(\Exception $e)			
@@ -433,6 +453,12 @@ public function __construct()
 			return '0'.$e;
 		}
     }
+	public function viewChild()
+	{
+		$input = Input::all();
+		return $input['product_info'];
+		
+	}
 	public function showProducts(Request $request)
 	{
 		try
