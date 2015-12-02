@@ -13,7 +13,7 @@
 					<i class="icon-angle-right arrow-icon"></i>
 				</span>
 			</li>
-			<li class="active">Products</li>
+			<li class="active">Products </li>
 		</ul><!--.breadcrumb-->
 	</div>
 @endsection
@@ -31,7 +31,7 @@
 		<div class="widget-body">
 			<div class="widget-main">
 				<br>
-				<div class="row-fluid">
+				<div class="row-fluid" >
 					<div class="span4">
 						<div class="control-group">
 							<label class="control-label" >Product Type <a href="javascript:;"  onClick="messageInfo('product_type')" class="pull-right"><li class="icon-info" style="Color:red"> what ?</li></a></label>
@@ -72,12 +72,12 @@
 						</div>
 					</div>					
 				</div>
-				<div class="row-fluid">				
+				<div class="row-fluid">			
 					<div class="span12" >
 						<div class="control-group">
 							<label class="control-label" >Product Name </label>
 							<div class="controls">
-								<select class="span12" id="product_main_names" onChange="" style="width:100%;" data-placeholder="Choose Product main" >
+								<select class="span12" id="product_main_names" onChange="addChildInfo(this.value)" style="width:100%;" data-placeholder="Choose Product main" >
 
 								</select>
 							</div>
@@ -85,8 +85,8 @@
 					</div>				
 				</div>
 				<div class="hr hr-18 dotted hr-double"></div>
-				<div class="row-fluid" >
-					<div class="span6">
+				<div class="row-fluid">
+					<div class="span6" id="product_information_div">
 						<div class="widget-box span12">
 							<div class="widget-header widget-header-small header-color-dark ">
 								<h5>Product Information</h5>
@@ -131,7 +131,7 @@
 										<div class="control-group span4">
 											<label class="control-label" >Sub Category</label>
 											<div class="controls">
-												<select class="span12" style="width:100%;" onchange="alert(this.value)" id="product_sub_category" data-placeholder="Choose Category" >
+												<select class="span12" style="width:100%;" onchange="" id="product_sub_category" data-placeholder="Choose Category" >
 													<option value="" />
 												</select>	
 											</div>
@@ -220,7 +220,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="span6">
+					<div class="span6"  id="product_complex_div">
 						<div class="widget-box span12">
 							<div class="widget-header widget-header-small header-color-dark">
 								<h5>Product Complex Description</h5>
@@ -228,7 +228,6 @@
 							<div class="widget-body">
 								<div class="widget-main"  style="height:515px; overflow-y: scroll;">
 									<div class="span12">
-							
 										<div class="control-group span12">
 											<input id="product_complex_status" value="NEW" style="display:none"/>
 											<label class="control-label" >Description Type<a href="javascript:;"  onClick="messageInfo('variant_info')" class="pull-right"><li class="icon-info" style="Color:red"> No data ?</li></a></label>
@@ -279,7 +278,6 @@
 									<div class="row-fluid span12" style="margin-bottom:30px;">
 										<input type="text" id="product_combo_image_result" value="NO IMAGES" style="display:none"/> 
 										<center>
-									
 											<div class="widget-box span12" id="sample">
 												<div class="widget-header ">
 												<h5>Images</h5>
@@ -348,10 +346,9 @@
 											</div>
 										</div>									
 										<div id="product_combinations" class="span12 row-fluid" style="margin: 0px;">
-
 										</div>
 									</div>	
-									<input id="select_values" style="display:none" />
+									<input id="select_values"  style="display:none" />
 									<input id="product_combo_result" value="NOT YET SAVE" style="display:none"/>
 									<label> &nbsp;</label>
 								</div>
@@ -361,13 +358,13 @@
 				</div>
 				<div class="hr hr-18 dotted hr-double"></div>				
 				<div class="row-fluid wizard-actions">
-					<button onClick="window.location.reload();"  class="btn btn-danger btn-next" data-last="Finish ">
+					<button onClick="resetFieldsChild()"  class="btn btn-danger btn-next" data-last="Finish ">
 						Reset Product
 						<i class="fa-save"></i>
 					</button>				
-					<button onClick="addProduct()"  class="btn btn-success btn-next" data-last="Finish ">
+					<button onClick="addProduct()" id="addProduct_btn" class="btn btn-success btn-next" data-last="Finish ">
+						<i id="loading" style="font-size:5px; font-color: white; display:none;" class="spinner-loader"></i>
 						Add Product
-						<i class="fa-save"></i>
 					</button>
 				</div>			
 			</div>
@@ -528,7 +525,7 @@ function addSubcat(id)
 		},
 		function(result)
 		{
-			alert(result);
+			//alert(result);
 			if(result == '0')
 			{
 				last_gritter = $.gritter.add({
@@ -569,7 +566,9 @@ function isChildorParent(value)
 	//alert(value)
 	if(value=='child')
 	{
-		 $("#product_main_names").attr('disabled', false).trigger("liszt:updated");
+		$("#product_complex_div").fadeOut();
+		$("#product_information_div").fadeOut();
+		$("#product_main_names").attr('disabled', false).trigger("liszt:updated");
 		// product information
 		$('#market_info').prop('disabled', true).trigger("liszt:updated");
 		$('#product_category').prop('disabled', true).trigger("liszt:updated");
@@ -585,10 +584,11 @@ function isChildorParent(value)
 		$('#child_market_info').prop('disabled', false).trigger("liszt:updated");
 		$('#child_category_info').prop('disabled', false).trigger("liszt:updated");
 		$('#child_sub_category_info').prop('disabled', false).trigger("liszt:updated");		
-		
 	}
 	else
 	{
+		$("#product_complex_div").fadeIn();
+		$("#product_information_div").fadeIn();		
 		$("#product_main_names").attr('disabled', true).trigger("liszt:updated");
 		// product information
 		$('#market_info').prop('disabled', false).trigger("liszt:updated");
@@ -652,7 +652,7 @@ function addProduct()
 		{
 				var selectobject= document.getElementById(getSelect[i]);
 				var y = 1;
-				alert(selectobject.value);
+				//alert(selectobject.value);
 				formData.append("default_"+getSelect[i],selectobject.value); 
 				while(selectobject.options[y]) 
 				{
@@ -692,7 +692,8 @@ function addProduct()
 			countFiles++;
 			formData.append('image-'+i, file);
 		});
-
+		// $('#loading').fadeIn();
+		// $('#addProduct_btn').prop('disabled', true);
 			//alert(countFiles);
 			formData.append('imagecount',countFiles); 
 			$.ajax({
@@ -710,10 +711,18 @@ function addProduct()
 					//alert('1');
 					document.getElementById('product_combo_result').value = jsonResponse[0].data;
 					document.getElementById('product_complex_status').value='SAVED';
+					resetFieldsChild();
+					last_gritter = $.gritter.add({
+						title: 'Huray!!!',
+						text: 'Product was Succesfully Added you can now Add more product Subordinates',
+						class_name: 'gritter-success gritter-center'
+					});					
+					// $('#loading').fadeOut();
+					// $('#addProduct_btn').prop('disabled', false);	
+					
 				}
 				else
 				{
-					
 					messageResult='';
 					for(i= 0; i<jsonResponse[0].data.length;i++)
 					{
@@ -724,9 +733,12 @@ function addProduct()
 							text: messageResult,
 							class_name: 'gritter-error gritter-center'
 						});	
+						// $('#loading').fadeOut();
+						// $('#addProduct_btn').prop('disabled', false);	
 				}
 			}
-			});		
+			});	
+		
 	}
 }
 function addBrand(id)
@@ -758,14 +770,14 @@ function addBrand(id)
 		},
 		function(result)
 		{
-			alert(result);
+			//alert(result);
 			if(result == '0')
 			{
 				last_gritter = $.gritter.add({
 					title: 'Error Occured',
 					text: 'Please Contact the Administrator or please try again',
 					class_name: 'gritter-error gritter-center'
-				});					
+				});
 			}
 			else if(result == '2')
 			{
@@ -840,6 +852,17 @@ function getProduct(SC1)
 		}
 		$("#product_main_names").trigger("liszt:updated");
 	});
+}
+function addChildInfo(value)
+{
+	$.post("/HMadmin/Products/viewChild",
+	{
+		product_info:value,
+	},
+	function(result)
+	{
+		alert(result);
+	});		
 }
 function showChild_sub_category(CI1)
 {
@@ -1000,7 +1023,7 @@ function addVariants()
 		},
 		function(result)
 		{
-			alert(result);
+			//alert(result);
 		});			
 		
 		
@@ -1025,7 +1048,7 @@ function addVariants()
 	{
 		action_btn = 	
 								'<div class="hidden-phone visible-desktop action-buttons">'+
-									'<a class="red" href="javascript:;" onClick= delRow("'+variant_type+'","'+variant_name.split(' ').join('_')+'")>'+
+									'<a class="red" href="javascript:;" onClick= delRow("'+variant_type.split(' ').join('_')+'","'+variant_name.split(' ').join('_')+'")>'+
 										'<i class="icon-trash bigger-130"></i>'+
 									'</a>'+
 								'</div>'+
@@ -1036,7 +1059,7 @@ function addVariants()
 										'</button>'+
 										'<ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">'+
 											'<li>'+
-												'<a href="javascript:;" onClick= delRow("'+variant_type+'","'+variant_name.split(' ').join('_')+'") class="tooltip-error" data-rel="tooltip" title="Delete">'+
+												'<a href="javascript:;" onClick= delRow("'+variant_type.split(' ').join('_')+'","'+variant_name.split(' ').join('_')+'") class="tooltip-error" data-rel="tooltip" title="Delete">'+
 													'<span class="red">'+
 														'<i class="icon-trash bigger-120"></i>'+
 													'</span>'+
@@ -1075,9 +1098,10 @@ function getTableValues(tableid)
 		
 		var cell0value=document.getElementById(tableid).rows[y+1].cells[0].innerHTML;
 		var cell0description=document.getElementById(tableid).rows[y+1].cells[1].innerHTML;
+		cell0value = cell0value.split(' ').join('_');
 		if(arrayList.value=='' || arrayList.value == null)
 		{
-
+			cell0value = cell0value.split(' ').join('_');
 			selectstags.push(cell0value);
 			creatingSelects(cell0value,selectstags);
 			$("#"+cell0value+" option:last").after($('<option value="'+cell0description.split(' ').join('_')+'">'+cell0description+'</option>'));	
@@ -1152,15 +1176,32 @@ var getselectLabels = values.split(',');
 	{
 		//alert(getselectLabels[i]);
 		var selectList = '<div class="control-group span4 style="margin:0px;">'+
-						 '<label class="control-label" >'+getselectLabels[i]+'</label>'+
+						 '<label class="control-label" >'+getselectLabels[i].split('_').join(' ')+'</label>'+
 						 '<div class="controls">'+
-						 '<select id="'+getselectLabels[i]+'" onChange="alert(this.value)" data-placeholder="Choose '+toTitleCase(getselectLabels[i]) +'"  class="span12" style="width:100%;">';
-		selectList += "<option values=''></option>";
+						 '<select id="'+getselectLabels[i].split(' ').join('-')+'" onChange="alert(this.id)" data-placeholder="Choose '+toTitleCase(getselectLabels[i]).split('_').join(' ') +'"  class="span12" style="width:100%;">';
+		selectList += "<option values='0'></option>";
 		selectList += "</select></div></div>";
 		$('#product_combinations').append(selectList);
 		$("#"+getselectLabels[i]).chosen({ width: '100%'});
 		
 	}
+	
+}
+function resetFieldsChild()
+{
+	var getSelects = document.getElementById('select_values').value.split(',');
+	for(i=0;i< getSelects.length;i++)
+	{ 
+		$('#'+getSelects[i]).find('option:selected').removeAttr('selected');
+		$('#'+getSelects[i]).trigger("liszt:updated");
+	}
+	getDrectory("product_other_cancel","product_other_file","cancelOther");
+	document.getElementById('product_saleprice').value='';
+	document.getElementById('product_retailprice').value='';
+	document.getElementById('product_cost').value='';
+	document.getElementById('product_quantity').value='';	
+	
+	
 	
 }
 function deleteElement(count,id)
@@ -1179,7 +1220,7 @@ function delRow(type,description)
 	var current = window.event.srcElement;
 	while ( (current = current.parentElement)  && current.tagName !="TR");
 	current.parentElement.removeChild(current);	  
-	 var selectobject=document.getElementById(type)
+	 var selectobject=document.getElementById(type);
 	 var getProductcomboStatus=  document.getElementById('product_combo_result').value;
 	 if(getProductcomboStatus == 'NOT YET SAVE')
 	 {
