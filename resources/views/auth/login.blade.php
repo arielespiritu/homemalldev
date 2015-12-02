@@ -33,7 +33,7 @@
 									<input type="password" class="form-control input-md" placeholder="Password" name="password">
 								</div>
 								<div class="form-group col-md-12">
-									<button type="submit" class="btn btn-default btn-md btn-block">Sign In</button>
+									<button type="submit" class="btn btn-primary btn-md btn-block">Sign In</button>
 									</br>
 									<span><a href="#">Forgot Password?</a></span>
 								</div>
@@ -80,7 +80,7 @@
 								
 								<div class="form-group col-md-12">
 								<p>By clicking Sign Up, you agree to our <a href="">Terms</a> and <a href="">Conditions</a>.</p>
-									<button type="submit" class="btn btn-default btn-md btn-block">Sign Up</button>
+									<button type="submit" class="btn btn-primary btn-md btn-block">Sign Up</button>
 									</br>
 								</div>
 							</form>

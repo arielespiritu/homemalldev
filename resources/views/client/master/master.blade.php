@@ -35,7 +35,7 @@
 
 </head>
  <!--<body style="background:url({{ URL::asset('assets/img/bg.jpg') }});">-->
- <body>
+ <body >
     <!-- *** TOPBAR ***
  _________________________________________________________ -->  
     <div id="top" style="background:#000">
@@ -47,17 +47,16 @@
                 <ul class="menu">
 					@if(isset($user))
 						@foreach($user as $user)
-							<li><a href="javascript:void()"><i class="fa fa-user nav-user"></i>Hi&nbsp;&nbsp;{{ucfirst($user->member->fname)}}</a></li>
+							<li><a href="/My-Account/Info"><i class="fa fa-user nav-user"></i>Hi&nbsp;&nbsp;{{ucfirst($user->member->fname)}}</a></li>
 							<li><a href="/auth/logout" >Logout</a></li>
+							<li><a href="/My-Account/Favorites"><i class="fa fa-heart nav-heart"></i>Favorites</a></li>
+							<li><a href="/My-Account/Wishlist"><i class="fa fa-star nav-star"></i>Wishlist</a></li>
 						@endforeach
 					@else
 						<li><a href="/auth/login" ><i class="fa fa-user nav-user"></i>Login</a></li>
+						<li><a href="/My-Account/Favorites"><i class="fa fa-heart nav-heart"></i>Favorites</a></li>
+						<li><a href="/My-Account/Wishlist"><i class="fa fa-star nav-star"></i>Wishlist</a></li>
 					@endif  
-
-                    <li><a href="contact.html"><i class="fa fa-heart nav-heart"></i>Favorites</a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-star nav-star"></i>Wishlist</a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -92,7 +91,7 @@
     <!-- *** TOP BAR END *** -->
     <!-- *** NAVBAR ***
  _________________________________________________________ -->
-    <div class="navbar navbar-default yamm navbar-md " role="navigation" id="navbar" >
+    <div class="navbar navbar-default yamm navbar-md " role="navigation" id="navbar" style="z-index:999;" >
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand home" href="/market" style="padding-top:4px;">
@@ -215,10 +214,51 @@
     <!-- /#navbar -->
     <!-- *** NAVBAR END *** -->
 	
+	<style>
+	.sidebar-nav-fixed {
+    padding: 9px 0;
+    position:fixed;
+    right:0px;
+    top:0;
+    width:40px;
+	height:100%;
+	z-index:1;
+	border-radius:0px;
+	background:black;
+	border: 0px;
+	}
+
+	.row-fluid > .span-fixed-sidebar {
+		margin-left: 290px;
+	}
+
+	.side-icon{
+		color:white;
+		margin:auto;
+	}
+	.side-icon:hover{
+		color:black;
+	}
+	</style>
+	<!--
+	<div class="container-fluid">
+	  <div class="row-fluid row">
+		<div class="span3">
+		  <div class="well sidebar-nav-fixed" id="sidebar">
+			<ul class="nav nav-list" style="margin-top:190px;">
+			  <li><a href="#"><i class="fa fa-heart side-icon"></i></a></li>
+			  <li><a href="#"><i class="fa fa-star side-icon"></i></a></li>
+			  <li><a href="#"><i class="fa fa-shopping-cart side-icon"></i></a></li>
+			</ul>
+		  </div>
+		</div>
+	  </div>
+	</div>-->
+
 	
 	@yield('content')
 		
-            
+    
  
 
         <!-- *** FOOTER ***
@@ -427,11 +467,12 @@ $(window).load(function(){
 				console.log($(window).scrollTop());
 
 				if ($(window).scrollTop() > 150) {
-				  $('#navbar').addClass('navbar-fixed-top');
+					$('#navbar').addClass('navbar-fixed-top');
+				  
 				}
 
 				if ($(window).scrollTop() < 151) {
-				  $('#navbar').removeClass('navbar-fixed-top');
+					$('#navbar').removeClass('navbar-fixed-top');
 				}
 			  });
 			

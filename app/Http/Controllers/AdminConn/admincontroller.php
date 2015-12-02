@@ -129,7 +129,7 @@ public function showStoreProfile(Request $request)
 			 }
 			 else if($this->checkUserLevel() == 'empty' )
 			 {
-				return 'no indicator';
+				return redirect('/HMadmin/login');
 			 }
 			 else
 			 {

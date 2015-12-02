@@ -126,11 +126,11 @@
 
                             <div class="box-footer" style="margin:0px;">
                                 <div class="pull-left">
-                                    <a href="/Market" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continue shopping</a>
+                                    <a href="/Market" class="btn btn-primary"><i class="fa fa-chevron-left"></i> Continue shopping</a>
                                 </div>
                                 <div class="pull-right">
-                                    <button class="btn btn-default"><i class="fa fa-refresh"></i> Update basket</button>
-                                    <a href="/Checkout"  class="btn btn-default">Proceed to checkout <i class="fa fa-chevron-right"></i>
+                                    <button class="btn btn-primary"><i class="fa fa-refresh"></i> Update basket</button>
+                                    <a href="/Checkout"  class="btn btn-primary">Proceed to checkout <i class="fa fa-chevron-right"></i>
                                     </a>
                                 </div>
                             </div>

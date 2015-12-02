@@ -30,6 +30,7 @@ class AuthController extends Controller
 	protected $loginPath = 'auth/login';
 	protected $redirectPath = '/market';
 	protected $redirectAfterLogout = 'auth/login';
+	protected $redirectTo = '/admin';
     /**
      * Create a new authentication controller instance.
      *
@@ -117,7 +118,7 @@ class AuthController extends Controller
 			);
 			// attempt to do the login
 			if (Auth::attempt($userdata)) {
-				return redirect()->intended('/market')->with('market_data',$market_data);
+				return redirect()->intended('/market');
 			} else {        
 				// validation not successful, send back to form 
 				return redirect()->back()->withInput()->withErrors('Wrong username/password combination.')->with('market_data',$market_data);
@@ -161,6 +162,6 @@ class AuthController extends Controller
 	$redirectAfterLogout = 'auth/login';
 	    $market_data = Market::with('category')->get();
         Auth::logout(); // logout user
-        return redirect(\URL::previous())->with('market_data',$market_data);
+        return redirect(\URL::previous());
 	}
 }
