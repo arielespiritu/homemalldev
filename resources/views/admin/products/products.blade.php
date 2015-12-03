@@ -345,11 +345,16 @@
 												</select>		
 											</div>
 										</div>									
-										<div id="product_combinations" class="span12 row-fluid" style="margin: 0px;">
+										<div  class="row-fluid" style="margin: 0px;">
+											<div id="product_combinations" class="span12">
+	
+											</div>
 										</div>
 									</div>	
-									<input id="select_values"  style="display:none" />
+									<input id="select_values" style="display:none"  />
 									<input id="product_combo_result" value="NOT YET SAVE" style="display:none"/>
+									
+									
 									<label> &nbsp;</label>
 								</div>
 							</div>
@@ -358,7 +363,7 @@
 				</div>
 				<div class="hr hr-18 dotted hr-double"></div>				
 				<div class="row-fluid wizard-actions">
-					<button onClick="resetFieldsChild()"  class="btn btn-danger btn-next" data-last="Finish ">
+					<button onClick="window.location.reload()"  class="btn btn-danger btn-next" data-last="Finish ">
 						Reset Product
 						<i class="fa-save"></i>
 					</button>				
@@ -553,17 +558,26 @@ function addSubcat(id)
 				var jsonParse=  JSON.parse(result);
 				$('#product_sub_category').append('<option value='+jsonParse.SC1+'>'+jsonParse.SCN3+'</option>');
 				$("#product_sub_category").trigger("liszt:updated");	
-				
 			}
-
 		});			
-	
 	}
 }
-
+function selectReset(id)
+{
+	$('#'+id).find('option:selected').removeAttr('selected');
+	$('#'+id).trigger("liszt:updated");
+}
 function isChildorParent(value)
 {
-	//alert(value)
+	document.getElementById('product_combo_result').value = "NOT YET SAVE";
+	document.getElementById('product_complex_status').value = "NEW";
+	document.getElementById('select_values').value = "";
+	selectReset("child_market_info");
+	selectReset("child_category_info");
+	selectReset("child_sub_category_info");
+	selectReset("product_main_names");
+	
+	$('#product_combinations').empty();
 	if(value=='child')
 	{
 		$("#product_complex_div").fadeOut();
@@ -631,115 +645,128 @@ function addProduct()
 	var product_quantity = document.getElementById('product_quantity').value;
 	var combo_active_price = document.getElementById('combo_active_price').value;
 	var combo_status = document.getElementById('combo_status').value;
+	var product_type = document.getElementById('product_type').value;
 	
 	var selectValues = document.getElementById('select_values').value;
 
 	var formData = new FormData();
 	var countFiles=0;
 	
-	if(getSelect === '' || getSelect === null)
+	if(document.getElementById('product_type').value == 'main')
 	{
-		last_gritter = $.gritter.add({
-			title: 'Something Wrong',
-			text: 'Your Product Complex Is Empty Please Create product complex ',
-			class_name: 'gritter-error gritter-center'
-		});			
+			if(getSelect === '' || getSelect === null)
+			{
+				last_gritter = $.gritter.add({
+					title: 'Something Wrong',
+					text: 'Your Product Complex Is Empty Please Create product complex ',
+					class_name: 'gritter-error gritter-center'
+				});			
+			}
+			else
+			{
+				getSelect = getSelect.split(',');
+				for(i=0; i<getSelect.length;i++)
+				{
+						var selectobject= document.getElementById(getSelect[i]);
+						var y = 1;
+						//alert(selectobject.value);
+						formData.append("default_"+getSelect[i],selectobject.value); 
+						while(selectobject.options[y]) 
+						{
+							child={};
+							child[getSelect[i]]=selectobject.options[y].value;
+							arrayParent.push(child);
+							y++;
+						}
+						//alert();
+						formData.append(getSelect[i],JSON.stringify(arrayParent)); 
+						arrayParent= [];
+				}
+					formData.append('product_type',product_type); 
+					formData.append('product_name',product_name); 
+					formData.append('product_description',product_description); 
+					formData.append('market_info',market_info); 
+					formData.append('product_sub_category',product_sub_category); 
+					formData.append('brand_info',brand_info); 
+					formData.append('product_info_status',product_info_status); 
+					formData.append('brand_info',brand_info); 
+					formData.append('product_category',product_category); 
+					formData.append('product_ranged',product_ranged); 
+					
+					formData.append('product_saleprice',product_saleprice); 
+					formData.append('product_retailprice',product_retailprice); 
+					formData.append('product_cost',product_cost); 
+					formData.append('product_quantity',product_quantity); 
+					formData.append('combo_active_price',combo_active_price); 
+					formData.append('combo_status',combo_status); 
+					formData.append('product_combo_result',product_combo_result); 
+					
+					formData.append('selectValues',selectValues); 
+					
+					
+					jQuery.each(jQuery('#product_other_file')[0].files, function(i, file) {
+					countFiles++;
+					formData.append('image-'+i, file);
+				});
+				$('#loading').fadeIn();
+				$('#addProduct_btn').prop('disabled', true);
+					//alert(countFiles);
+					formData.append('imagecount',countFiles); 
+	
+			}
+	}
+ 	else if(document.getElementById('product_type').value == 'child')
+	{
+
+
+
 	}
 	else
 	{
-		getSelect = getSelect.split(',');
-		for(i=0; i<getSelect.length;i++)
-		{
-				var selectobject= document.getElementById(getSelect[i]);
-				var y = 1;
-				//alert(selectobject.value);
-				formData.append("default_"+getSelect[i],selectobject.value); 
-				while(selectobject.options[y]) 
-				{
-					child={};
-					child[getSelect[i]]=selectobject.options[y].value;
-					//alert(selectobject.options[y].value);	
-					//alert(child[getSelect[i]]);	
-					arrayParent.push(child);
-					y++;
-				}
-				//alert();
-				formData.append(getSelect[i],JSON.stringify(arrayParent)); 
-				arrayParent= [];
-		}
-			formData.append('product_name',product_name); 
-			formData.append('product_description',product_description); 
-			formData.append('market_info',market_info); 
-			formData.append('product_sub_category',product_sub_category); 
-			formData.append('brand_info',brand_info); 
-			formData.append('product_info_status',product_info_status); 
-			formData.append('brand_info',brand_info); 
-			formData.append('product_category',product_category); 
-			formData.append('product_ranged',product_ranged); 
-			
-			formData.append('product_saleprice',product_saleprice); 
-			formData.append('product_retailprice',product_retailprice); 
-			formData.append('product_cost',product_cost); 
-			formData.append('product_quantity',product_quantity); 
-			formData.append('combo_active_price',combo_active_price); 
-			formData.append('combo_status',combo_status); 
-			formData.append('product_combo_result',product_combo_result); 
-			
-			formData.append('selectValues',selectValues); 
-			
-			
-			jQuery.each(jQuery('#product_other_file')[0].files, function(i, file) {
-			countFiles++;
-			formData.append('image-'+i, file);
-		});
-		// $('#loading').fadeIn();
-		// $('#addProduct_btn').prop('disabled', true);
-			//alert(countFiles);
-			formData.append('imagecount',countFiles); 
-			$.ajax({
-				type: "POST",
-				url: "/HMadmin/Products/addProduct",     // Url to which the request is send
-				data:formData,
-				contentType: false,       // The content type used when sending data to the server.
-				processData:false,        // To send DOMDocument or non processed data file it is set to false		
-				success: function(result)   // A function to be called if request succeeds
-			{
-				alert(result);
-				var jsonResponse=  JSON.parse(result);
-				if(jsonResponse[0].success == '1')
-				{
-					//alert('1');
-					document.getElementById('product_combo_result').value = jsonResponse[0].data;
-					document.getElementById('product_complex_status').value='SAVED';
-					resetFieldsChild();
-					last_gritter = $.gritter.add({
-						title: 'Huray!!!',
-						text: 'Product was Succesfully Added you can now Add more product Subordinates',
-						class_name: 'gritter-success gritter-center'
-					});					
-					// $('#loading').fadeOut();
-					// $('#addProduct_btn').prop('disabled', false);	
-					
-				}
-				else
-				{
-					messageResult='';
-					for(i= 0; i<jsonResponse[0].data.length;i++)
-					{
-						messageResult+=jsonResponse[0].data[i]+'<br>';
-					}
-						last_gritter = $.gritter.add({
-							title: 'Something Wrong',
-							text: messageResult,
-							class_name: 'gritter-error gritter-center'
-						});	
-						// $('#loading').fadeOut();
-						// $('#addProduct_btn').prop('disabled', false);	
-				}
-			}
-			});	
 		
 	}
+	
+		$.ajax({
+			type: "POST",
+			url: "/HMadmin/Products/addProduct",     // Url to which the request is send
+			data:formData,
+			contentType: false,       // The content type used when sending data to the server.
+			processData:false,        // To send DOMDocument or non processed data file it is set to false		
+			success: function(result)   // A function to be called if request succeeds
+		{
+			var jsonResponse=  JSON.parse(result);
+			if(jsonResponse[0].success == '1')
+			{
+				document.getElementById('product_combo_result').value = jsonResponse[0].data;
+				document.getElementById('product_complex_status').value='SAVED';
+				resetFieldsChild();
+				last_gritter = $.gritter.add({
+					title: 'Huray!!!',
+					text: 'Product was Succesfully Added you can now Add more product Subordinates',
+					class_name: 'gritter-success gritter-center'
+				});					
+				$('#loading').fadeOut();
+				$('#addProduct_btn').prop('disabled', false);	
+				
+			}
+			else
+			{
+				messageResult='';
+				for(i= 0; i<jsonResponse[0].data.length;i++)
+				{
+					messageResult+=jsonResponse[0].data[i]+'<br>';
+				}
+					last_gritter = $.gritter.add({
+						title: 'Something Wrong',
+						text: messageResult,
+						class_name: 'gritter-error gritter-center'
+					});	
+					$('#loading').fadeOut();
+					$('#addProduct_btn').prop('disabled', false);	
+			}
+		}
+		});
+	
 }
 function addBrand(id)
 {
@@ -803,6 +830,9 @@ function addBrand(id)
 }
 function showChild_category_info(MI1)
 {
+	selectReset("child_sub_category_info");
+	selectReset("product_main_names");
+	$('#product_combinations').empty();
 	var x1= document.getElementById("child_category_info");
     document.getElementById("child_category_info").options.length = 0;
 	$("#child_category_info").trigger("liszt:updated");
@@ -830,6 +860,8 @@ function showChild_category_info(MI1)
 }
 function getProduct(SC1)
 {
+	$('#product_combinations').empty();
+	selectReset('product_main_names');
 	$.post("/HMadmin/Products/getProducts",
 	{
 		tempChild_subcat:SC1,
@@ -855,17 +887,50 @@ function getProduct(SC1)
 }
 function addChildInfo(value)
 {
+	$('#product_combinations').empty();
 	$.post("/HMadmin/Products/viewChild",
 	{
 		product_info:value,
 	},
 	function(result)
 	{
-		alert(result);
+		var variants=[]
+		var jsonProductVariants= JSON.parse(result);
+		for(i=0;i<jsonProductVariants.length;i++)
+		{
+			if(variants.indexOf(jsonProductVariants[i].get_variant.VN2) > -1)
+			{ 
+
+			}
+			else
+			{
+				variants.push(jsonProductVariants[i].get_variant.VN2);
+				creatingSelects(jsonProductVariants[i].get_variant.VN2.split(' ').join('_'),"");
+			
+			}
+	
+		}
+		for(i=0;i<jsonProductVariants.length;i++)
+		{
+				var exist='false';
+				$('#'+jsonProductVariants[i].get_variant.VN2.split(' ').join('_')+' option').each(function(){
+					if (this.text.split(' ').join('_') == jsonProductVariants[i].variant_name_value.split(' ').join('_')) {
+						exist= 'true';
+					}
+				});
+				if(exist=='false')
+				{
+					$("#"+jsonProductVariants[i].get_variant.VN2.split(' ').join('_')+" option:last").after($('<option value="'+jsonProductVariants[i].id+'">'+jsonProductVariants[i].variant_name_value+'</option>'));	
+					$("#"+jsonProductVariants[i].get_variant.VN2.split(' ').join('_')).trigger("liszt:updated");
+				}			
+			
+		}			
 	});		
 }
 function showChild_sub_category(CI1)
 {
+	selectReset("product_main_names");
+	$('#product_combinations').empty();
 	var x1= document.getElementById("child_sub_category_info");
 	document.getElementById("child_sub_category_info").options.length = 0;
 	var option = document.createElement("option");
@@ -937,8 +1002,7 @@ function showCategoryInfo(MI1)
 		}	
 		$("#brand_info").trigger("liszt:updated");
 //variants
-
-	//alert(JSON.stringify(jsonVariants));
+//alert(JSON.stringify(jsonVariants));
 	var x2 = document.getElementById("description_type");
     document.getElementById("description_type").options.length = 0;
     var option = document.createElement("option");
@@ -1001,6 +1065,7 @@ function getDrectory(changefrom,changeto,checkifcancel,imgsrclear)
 function removeElement(element)
 {
     $(element).remove();
+	//$('#masterdiv').empty();
 }
 
 function addVariants()
@@ -1178,7 +1243,7 @@ var getselectLabels = values.split(',');
 		var selectList = '<div class="control-group span4 style="margin:0px;">'+
 						 '<label class="control-label" >'+getselectLabels[i].split('_').join(' ')+'</label>'+
 						 '<div class="controls">'+
-						 '<select id="'+getselectLabels[i].split(' ').join('-')+'" onChange="alert(this.id)" data-placeholder="Choose '+toTitleCase(getselectLabels[i]).split('_').join(' ') +'"  class="span12" style="width:100%;">';
+						 '<select id="'+getselectLabels[i].split(' ').join('-')+'"  data-placeholder="Choose '+toTitleCase(getselectLabels[i]).split('_').join(' ') +'"  class="span12" style="width:100%;">';
 		selectList += "<option values='0'></option>";
 		selectList += "</select></div></div>";
 		$('#product_combinations').append(selectList);
@@ -1200,9 +1265,6 @@ function resetFieldsChild()
 	document.getElementById('product_retailprice').value='';
 	document.getElementById('product_cost').value='';
 	document.getElementById('product_quantity').value='';	
-	
-	
-	
 }
 function deleteElement(count,id)
 {
@@ -1243,7 +1305,7 @@ function delRow(type,description)
 		last_gritter = $.gritter.add({
 		title: 'Oppps.. DATA is in use',
 		text: 'You Cannot delete data after adding a product Go to Edit Section to modify ',
-		class_name: 'gritter-info gritter-center'
+		class_name: 'gritter-error gritter-center'
 		});			
 	}
   }
@@ -1300,6 +1362,7 @@ function toTitleCase(str)
 }
 function messageInfo(messagetype)
 {
+
 	if(messagetype == 'variant_info')
 	{
 		last_gritter = $.gritter.add({

@@ -238,171 +238,180 @@ public function __construct()
 	}
 	public function addProduct(Request $request)
 	{
-		$user=Auth::User();
 		$input = Input::all();
 		$getChilds =explode(",",$input['selectValues']);
-///////////////////////////////////////////////////////////////////////////////////////////		
-		//validator
-		$attributes = [
-			'product_name' => 'Product Name',
-			'product_description' => 'Product Description',
-			'market_info' => 'Market Place',
-			'product_category' => 'Category',
-			'product_sub_category' => 'Sub Category',
-			'brand_info' => 'Brand',
-			'product_info_status' => 'Product information Status',
-			'product_ranged' => 'Store Logo Status',
-			
-			'product_saleprice' => 'Sale Price',
-			'product_retailprice' =>'Retail Price',
-			'product_cost' => 'Product Cost',
-			'product_quantity' => 'Quantity',
-			'combo_active_price' => 'Active Price',
-			'combo_status' => 'Product Status',
-			
-		];								
-		$rules = [
-			'product_name' => 'required',
-			'product_description' => 'required',
-			'market_info' => 'required',
-			'product_category' => 'required',
-			'product_sub_category' => 'required',
-			'product_info_status' => 'required',
-			
-			'product_saleprice' => 'required',
-			'product_retailprice' => 'required',
-			'product_cost' => 'required',
-			'product_quantity' => 'required',
-			'combo_active_price' => 'required',
-			'combo_status' => 'required',
-			
-		];	
-		
-		if($input['product_combo_result'] == 'NOT YET SAVE')
+		if($input['product_type'] == 'main')
 		{
-			$validator = Validator::make(Input::all(),$rules,[],$attributes);
-			if ($validator->fails()) {
-				 return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '0','message' => 'Validator failed','data' => $validator->errors()->all()]));
-			}
-			else
-			{
-				try
-				{
-					//inserting productinformation
-						$product_info= new productinformation;
-						$product_info->product_name= $input['product_name'];
-						$product_info->sub_category_id= $input['product_sub_category'];
-						$product_info->product_status= $input['product_info_status'];
-						$product_info->store_id= $user->login_id;
-						$product_info->product_description= $input['product_description'];
-						$product_info->product_range= $input['product_ranged'];
-						$product_info->save();						
+			$attributes = [
+				'product_name' => 'Product Name',
+				'product_description' => 'Product Description',
+				'market_info' => 'Market Place',
+				'product_category' => 'Category',
+				'product_sub_category' => 'Sub Category',
+				'brand_info' => 'Brand',
+				'product_info_status' => 'Product information Status',
+				'product_ranged' => 'Store Logo Status',
+				
+				'product_saleprice' => 'Sale Price',
+				'product_retailprice' =>'Retail Price',
+				'product_cost' => 'Product Cost',
+				'product_quantity' => 'Quantity',
+				'combo_active_price' => 'Active Price',
+				'combo_status' => 'Product Status',
+				
+			];								
+			$rules = [
+				'product_name' => 'required',
+				'product_description' => 'required',
+				'market_info' => 'required',
+				'product_category' => 'required',
+				'product_sub_category' => 'required',
+				'product_info_status' => 'required',
+				
+				'product_saleprice' => 'required',
+				'product_retailprice' => 'required',
+				'product_cost' => 'required',
+				'product_quantity' => 'required',
+				'combo_active_price' => 'required',
+				'combo_status' => 'required',
+				
+			];			
 
-					//inserting all variants
-					
-					for($x = 0; $x < count($getChilds); $x++)
-					{
-						$decodeJSON=json_decode($input[$getChilds[$x]], TRUE);
-							foreach($decodeJSON as $values) { 
-							//return $input['default_'.$getChilds[$x]];
-									$productvariants = new productvariants;
-									$productvariants->variant_name_value = $values[$getChilds[$x]];
-									$productvariants->product_info_id = $product_info->id;
-									$productvariants->variant_id = $this->getVariantID($getChilds[$x]);
-									$productvariants->save();
-							}
+				if($input['product_combo_result'] == 'NOT YET SAVE')
+				{
+					$validator = Validator::make(Input::all(),$rules,[],$attributes);
+					if ($validator->fails()) {
+						 return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '0','message' => 'Validator failed','data' => $validator->errors()->all()]));
 					}
-					//inserting product combo
-					$productscombo= new productscombo;
-					$productscombo->product_info_id = $product_info->id;
-					$productscombo->sale_price = $input['product_saleprice'];
-					$productscombo->retail_price= $input['product_retailprice'];
-					$productscombo->product_cost= $input['product_cost'];
-					$productscombo->quantity= $input['product_quantity'];
-					$productscombo->active_price= $input['combo_active_price'];					
-					$productscombo->product_status= $input['combo_status'];
-					$productscombo->save();
-					//inserting images
-					for($i=0;$i<$input['imagecount'];$i++)
+					else
 					{
-						$productID = $productscombo->id;
-						if($this->checkifImagefile(Input::file('image-'.$i)) == 'true')
+						try
 						{
-							$extension = strtolower(Input::file('image-'.$i)->getClientOriginalExtension());
-							$dir = 'assets/img/store/'.$this->getStoreName($user->login_id).'/product/'.$productID.'/';
-							$this->upload_file(Input::file('image-'.$i),$dir,$i);
-						}
-					}
-					//inserting combos
-					
-					for($x1 = 0; $x1 < count($getChilds); $x1++)
-					{
-					//	return $this->getProductVariantID($this->getVariantID($getChildsCombo[$x]),$input['default_'.$getChildsCombo[$x]]);
-						$idcombo =$this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
-						if($idcombo  == '' ||  $idcombo== null )
-						{
-					
-						}
-						else
-						{
-							 $productcombination= new productcombination;
-							 $productcombination->product_variant_id = $this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
-							 $productcombination->product_id = $productscombo->id;
-							 $productcombination->save();						
+							//inserting productinformation
+								$product_info= new productinformation;
+								$product_info->product_name= $input['product_name'];
+								$product_info->sub_category_id= $input['product_sub_category'];
+								$product_info->product_status= $input['product_info_status'];
+								$product_info->store_id= $user->login_id;
+								$product_info->product_description= $input['product_description'];
+								$product_info->product_range= $input['product_ranged'];
+								$product_info->save();						
+
+							//inserting all variants
 							
-						}
+							for($x = 0; $x < count($getChilds); $x++)
+							{
+								$decodeJSON=json_decode($input[$getChilds[$x]], TRUE);
+									foreach($decodeJSON as $values) { 
+									//return $input['default_'.$getChilds[$x]];
+											$productvariants = new productvariants;
+											$productvariants->variant_name_value = $values[$getChilds[$x]];
+											$productvariants->product_info_id = $product_info->id;
+											$productvariants->variant_id = $this->getVariantID($getChilds[$x]);
+											$productvariants->save();
+									}
+							}
+							//inserting product combo
+							$productscombo= new productscombo;
+							$productscombo->product_info_id = $product_info->id;
+							$productscombo->sale_price = $input['product_saleprice'];
+							$productscombo->retail_price= $input['product_retailprice'];
+							$productscombo->product_cost= $input['product_cost'];
+							$productscombo->quantity= $input['product_quantity'];
+							$productscombo->active_price= $input['combo_active_price'];					
+							$productscombo->product_status= $input['combo_status'];
+							$productscombo->save();
+							//inserting images
+							for($i=0;$i<$input['imagecount'];$i++)
+							{
+								$productID = $productscombo->id;
+								if($this->checkifImagefile(Input::file('image-'.$i)) == 'true')
+								{
+									$extension = strtolower(Input::file('image-'.$i)->getClientOriginalExtension());
+									$dir = 'assets/img/store/'.$this->getStoreName($user->login_id).'/product/'.$productID.'/';
+									$this->upload_file(Input::file('image-'.$i),$dir,$i);
+								}
+							}
+							//inserting combos
+							
+							for($x1 = 0; $x1 < count($getChilds); $x1++)
+							{
+							//	return $this->getProductVariantID($this->getVariantID($getChildsCombo[$x]),$input['default_'.$getChildsCombo[$x]]);
+								$idcombo =$this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
+								if($idcombo  == '' ||  $idcombo== null )
+								{
+							
+								}
+								else
+								{
+									 $productcombination= new productcombination;
+									 $productcombination->product_variant_id = $this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
+									 $productcombination->product_id = $productscombo->id;
+									 $productcombination->save();						
+									
+								}
 
-					}					
-					return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '1','message' => 'Data Insert','data' => $product_info->id]));
+							}					
+							return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '1','message' => 'Data Insert','data' => $product_info->id]));
+						}
+						catch(\Exception $e)
+						{
+							$result = '0';
+						}
+					}	
 				}
-				catch(\Exception $e)
+				else
 				{
-					$result = '0';
+					try{
+						$productscombo= new productscombo;
+						$productscombo->product_info_id = $input['product_combo_result'];
+						$productscombo->sale_price = $input['product_saleprice'];
+						$productscombo->retail_price= $input['product_retailprice'];
+						$productscombo->product_cost= $input['product_cost'];
+						$productscombo->quantity= $input['product_quantity'];
+						$productscombo->active_price= $input['combo_active_price'];					
+						$productscombo->product_status= $input['combo_status'];
+						$productscombo->save();	
+						for($i=0;$i<$input['imagecount'];$i++)
+						{
+							$productID = $productscombo->id;
+							if($this->checkifImagefile(Input::file('image-'.$i)) == 'true')
+							{
+								$extension = strtolower(Input::file('image-'.$i)->getClientOriginalExtension());
+								$dir = 'assets/img/store/'.$this->getStoreName($user->login_id).'/product/'.$productID.'/';
+								$this->upload_file(Input::file('image-'.$i),$dir,$i);
+							}
+						}				
+							for($x1 = 0; $x1 < count($getChilds); $x1++)
+							{
+								$idcombo =$this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
+								if($idcombo  == '' ||  $idcombo== null )
+								{
+								}
+								else
+								{
+									 $productcombination= new productcombination;
+									 $productcombination->product_variant_id = $this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
+									 $productcombination->product_id = $productscombo->id;
+									 $productcombination->save();						
+								}
+							}						
+						return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '1','message' => 'Data Insert','data' => $input['product_combo_result']]));
+					}
+					catch(\Exception $e)			
+					{
+						return $e;
+					}
 				}
-			}	
+		}
+		elseif($input['product_type'] == 'child')
+		{
+			
+			return json_encode($input);
 		}
 		else
 		{
-			try{
-				$productscombo= new productscombo;
-				$productscombo->product_info_id = $input['product_combo_result'];
-				$productscombo->sale_price = $input['product_saleprice'];
-				$productscombo->retail_price= $input['product_retailprice'];
-				$productscombo->product_cost= $input['product_cost'];
-				$productscombo->quantity= $input['product_quantity'];
-				$productscombo->active_price= $input['combo_active_price'];					
-				$productscombo->product_status= $input['combo_status'];
-				$productscombo->save();	
-				for($i=0;$i<$input['imagecount'];$i++)
-				{
-					$productID = $productscombo->id;
-					if($this->checkifImagefile(Input::file('image-'.$i)) == 'true')
-					{
-						$extension = strtolower(Input::file('image-'.$i)->getClientOriginalExtension());
-						$dir = 'assets/img/store/'.$this->getStoreName($user->login_id).'/product/'.$productID.'/';
-						$this->upload_file(Input::file('image-'.$i),$dir,$i);
-					}
-				}				
-					for($x1 = 0; $x1 < count($getChilds); $x1++)
-					{
-						$idcombo =$this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
-						if($idcombo  == '' ||  $idcombo== null )
-						{
-						}
-						else
-						{
-							 $productcombination= new productcombination;
-							 $productcombination->product_variant_id = $this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
-							 $productcombination->product_id = $productscombo->id;
-							 $productcombination->save();						
-						}
-					}						
-				return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '1','message' => 'Data Insert','data' => $input['product_combo_result']]));
-			}
-			catch(\Exception $e)			
-			{
-				return $e;
-			}
+			return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '0','message' => 'Invalid Command','data' =>'']));
 		}
 	}
 	public function addBrand(Request $request)
@@ -456,8 +465,8 @@ public function __construct()
 	public function viewChild()
 	{
 		$input = Input::all();
-		return $input['product_info'];
-		
+		$productvariants=productvariants::where('product_info_id','=', $input['product_info'])->with('getVariant')->get();
+		return json_encode($productvariants);
 	}
 	public function showProducts(Request $request)
 	{
