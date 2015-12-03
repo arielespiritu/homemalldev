@@ -36,7 +36,7 @@ class CustomerAccountController extends Controller {
 
 	public function showAccount($type)
 	{
-		
+		    $id = Auth::user()->login_id;
 			$market_data = Market::with('category')->get();
 			$city = City::with('area')->get();
 			if (Auth::check())

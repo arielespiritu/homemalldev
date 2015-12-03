@@ -1,10 +1,12 @@
 @extends('client.master.master')
 
-@section('title',ucFirst($product_name).' Details')
+	@foreach($ProductInfo as $ProductInfo)
+	
+@section('title',ucFirst($ProductInfo->product_name).' Details')
 
 @section('content')
 
-
+			
 				<div class="col-md-12" style="background:white; margin-top:-15px; padding:0px;">
 					<div class="col-md-4 col-md-offset-4 col-xs-12 store-logo-detais" >
 						<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
@@ -102,7 +104,7 @@
 						<div class="col-md-7 " style="padding:0px; "  >
 							<div class="col-md-12 " style="padding:0px;">
 								<div class="col-md-12 " >
-									<h3>Sample Product</h3>
+									<h3>{{ucFirst($ProductInfo->product_name)}}</h3>
 									<h4 class="text-danger"><small>Price :&nbsp;&nbsp;</small>&#8369;&nbsp;&nbsp;0.00</h4>
 								</div>
 								<div class="col-md-12" style="padding:0px;">
@@ -123,30 +125,22 @@
 											</div>
 										</div>
 									</div>
+									@foreach($ProductInfo->productVariantGroup as $productVariantGroup)
 									<div id="variants_container" >
 										<div class="col-md-12 " >
-											<h4>Sizes</h4>
+											<h4>{{$productVariantGroup->variant->variant_name}}</h4>
 											<div class="col-md-12" style="padding:0px" >
 												<ul class="navs-variant">
-													<li ><a href="javascript:void()" style="background:black; color:white;">32</a></li>
-													<li><a href="javascript:void()">33</a></li>
-													<li><a href="javascript:void()">34</a></li>
-													<li><a href="javascript:void()">35</a></li>
-												</ul>
-											</div>
-										</div>
-										<div class="col-md-12 " >
-											<h4>Color</h4>
-											<div class="col-md-12" style="padding:0px" >
-												<ul class="navs-variant">
-													<li ><a href="javascript:void()" style="background:black; color:white;">Red</a></li>
-													<li><a href="javascript:void()">Blue</a></li>
-													<li><a href="javascript:void()">Yellow</a></li>
-													<li><a href="javascript:void()">Black</a></li>
+												@foreach($ProductInfo->productVariant as $productVariant)
+													@if($productVariant->variant_id==$productVariantGroup->variant_id)
+													<li ><a href="javascript:void()"> {{$productVariant->variant_name_value}}</a></li>
+													@endif
+												@endforeach
 												</ul>
 											</div>
 										</div>
 									</div>
+									@endforeach
 									<div class="col-md-12 " >
 										<h4>Quantity</h4>
 										<div class="input-group">
@@ -180,10 +174,7 @@
 							  <div class="tab-content">
 								<div id="home" class="tab-pane fade in active">
 								  <h3>Product Description</h3>
-								  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-								  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-								  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-								  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+								  <p>{{ucFirst($ProductInfo->product_description)}}</p>
 								</div>
 								<div id="menu1" class="tab-pane fade">
 										<fieldset class="rating" onclick="javascript:void()">
@@ -210,7 +201,7 @@
 					<div class="col-md-12 box" style="padding:10px; background:white;">
 					
                     <!-- *** MENUS AND FILTERS ***________ -->
-                    <h4>Store Product Category</h4>
+                    <h4>{{ucFirst($ProductInfo->store->store_name)}} Category</h4>
                       
                             <ul class="nav nav-pills nav-stacked category-menu">
                                 <li>
@@ -283,7 +274,7 @@
 					</div>
 				</div>
 			
- 
+			@endforeach	
 						
 @endsection
 
