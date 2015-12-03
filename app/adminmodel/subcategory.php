@@ -10,7 +10,7 @@ class subcategory extends Model
 	
 	protected $maps = ['id' => 'SC1', 'category_id' => 'CI1','sub_category_name' => 'SCN3'];
 	protected $appends = ['SC1','CI1','SCN3'];	
-	protected $hidden = ['id', 'category_id','sub_category_name'];
+	protected $hidden = ['id', 'category_id','sub_category_name','created_at', 'updated_at', 'deleted_at'];
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];	
 
 //getter

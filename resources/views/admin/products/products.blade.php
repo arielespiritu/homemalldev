@@ -110,7 +110,7 @@
 									</div>	
 									<div class="span12" style="margin:0px;">
 										<div class="control-group span4">
-											<label class="control-label" >Market</label>
+											<label class="control-label" >Market </label>
 											<div class="controls">
 												<select class="span12" onChange="showCategoryInfo(this.value)" id="market_info" style="width:100%;"  data-placeholder="Choose Category" > 
 													<option value="" />
@@ -173,7 +173,7 @@
 												<select class="span12" id="add_brand" onChange="visibleBrand(this.value)" style="width:100%;" data-placeholder="Choose Category" >
 													<option value="" />
 													<option value="1" />Yes
-													<option value="0" />No
+													<option selected value="0" />No
 												</select>
 											</div>
 										</div>
@@ -271,7 +271,7 @@
 					<div class="span12" style="margin:0px;">
 						<div class="widget-box span12">
 							<div class="widget-header widget-header-small header-color-dark">
-								<h5>Combination (temp lang d ko lang ilalagay)</h5>
+								<h5>Product Variants</h5>
 							</div>
 							<div class="widget-body">
 								<div class="widget-main" >
@@ -497,6 +497,7 @@ $("#child_market_info").chosen({ width: '100%'});
 $("#child_sub_category_info").chosen({ width: '100%'});
 $("#combo_status").chosen({ width: '100%'});
 $("#combo_active_price").chosen({ width: '100%'});
+$("#product_info_status").chosen({ width: '100%'});
  
  //noSpecialChar('#product_name');
  noSpecialChar('#product_description');
@@ -638,7 +639,7 @@ function addProduct()
 	var brand_info = document.getElementById('brand_info').value;
 	var product_info_status = document.getElementById('product_info_status').value;
 	var product_ranged = document.getElementById('product_ranged').value;
-//product 	
+//product 	 
 	var product_saleprice = document.getElementById('product_saleprice').value;
 	var product_retailprice = document.getElementById('product_retailprice').value;
 	var product_cost = document.getElementById('product_cost').value;
@@ -646,15 +647,25 @@ function addProduct()
 	var combo_active_price = document.getElementById('combo_active_price').value;
 	var combo_status = document.getElementById('combo_status').value;
 	var product_type = document.getElementById('product_type').value;
-	
+
 	var selectValues = document.getElementById('select_values').value;
+	
+	var product_main_names = document.getElementById('product_main_names').value;
 
 	var formData = new FormData();
 	var countFiles=0;
 	
 	if(document.getElementById('product_type').value == 'main')
 	{
-			if(getSelect === '' || getSelect === null)
+			if(product_name == '' || product_description == '' || market_info == '' || product_category == '' || product_sub_category == '' || product_info_status == '')
+			{
+				last_gritter = $.gritter.add({
+					title: 'Something Wrong',
+					text: 'Please Complete Fields in Product Information',
+					class_name: 'gritter-error gritter-center'
+				});					
+			}
+			else if(getSelect === '' || getSelect === null)
 			{
 				last_gritter = $.gritter.add({
 					title: 'Something Wrong',
@@ -662,25 +673,33 @@ function addProduct()
 					class_name: 'gritter-error gritter-center'
 				});			
 			}
+			else if(product_saleprice == '' || product_retailprice == '' || product_cost == '' || product_quantity == '' || combo_active_price == '' || combo_status == '')
+			{
+				last_gritter = $.gritter.add({
+					title: 'Something Wrong',
+					text: 'Please Complete Fields in Product Variants',
+					class_name: 'gritter-error gritter-center'
+				});					
+			}
 			else
 			{
 				getSelect = getSelect.split(',');
 				for(i=0; i<getSelect.length;i++)
 				{
-						var selectobject= document.getElementById(getSelect[i]);
-						var y = 1;
-						//alert(selectobject.value);
-						formData.append("default_"+getSelect[i],selectobject.value); 
-						while(selectobject.options[y]) 
-						{
-							child={};
-							child[getSelect[i]]=selectobject.options[y].value;
-							arrayParent.push(child);
-							y++;
-						}
-						//alert();
-						formData.append(getSelect[i],JSON.stringify(arrayParent)); 
-						arrayParent= [];
+					var selectobject= document.getElementById(getSelect[i]);
+					var y = 1;
+					//alert(selectobject.value);
+					formData.append("default_"+getSelect[i],selectobject.value); 
+					while(selectobject.options[y]) 
+					{
+						child={};
+						child[getSelect[i]]=selectobject.options[y].value;
+						arrayParent.push(child);
+						y++;
+					}
+					//alert();
+					formData.append(getSelect[i],JSON.stringify(arrayParent)); 
+					arrayParent= [];
 				}
 					formData.append('product_type',product_type); 
 					formData.append('product_name',product_name); 
@@ -708,8 +727,8 @@ function addProduct()
 					countFiles++;
 					formData.append('image-'+i, file);
 				});
-				$('#loading').fadeIn();
-				$('#addProduct_btn').prop('disabled', true);
+				// $('#loading').fadeIn();
+				// $('#addProduct_btn').prop('disabled', true);
 					//alert(countFiles);
 					formData.append('imagecount',countFiles); 
 	
@@ -717,15 +736,64 @@ function addProduct()
 	}
  	else if(document.getElementById('product_type').value == 'child')
 	{
-
-
-
+		var getChildCategory = document.getElementById("child_category_info").value;
+		var getChildMarket = document.getElementById("child_market_info").value;
+		var getChildSubcategory = document.getElementById("child_sub_category_info").value;
+		if(getChildCategory == '' || getChildMarket == '' || getChildSubcategory == ''|| product_main_names == '' )
+		{
+			last_gritter = $.gritter.add({
+				title: 'Something Wrong',
+				text: 'Please Complete the required dropdowns',
+				class_name: 'gritter-error gritter-center'
+			});				
+		}
+		else if(product_saleprice == '' || product_retailprice == '' || product_cost == '' || product_quantity == '' || combo_active_price == '' || combo_status == '')
+		{
+			last_gritter = $.gritter.add({
+				title: 'Something Wrong',
+				text: 'Please Complete Fields in Product Variants',
+				class_name: 'gritter-error gritter-center'
+			});					
+		}		
+		else
+		{
+				getSelect = getSelect.split(',');
+				for(i=0; i<getSelect.length;i++)
+				{
+					var selectobject= document.getElementById(getSelect[i]);
+					var y = 1;
+					//alert(selectobject.value);
+					formData.append("default_"+getSelect[i],selectobject.value); 
+					alert(selectobject.value);
+				}
+		
+						formData.append('product_type',product_type); 
+						formData.append('product_main_names',product_saleprice); 
+						formData.append('product_saleprice',product_saleprice); 
+						formData.append('product_retailprice',product_retailprice); 
+						formData.append('product_cost',product_cost); 
+						formData.append('product_quantity',product_quantity); 
+						formData.append('combo_active_price',combo_active_price); 
+						formData.append('combo_status',combo_status); 
+						formData.append('product_combo_result',product_combo_result); 
+						
+						formData.append('selectValues',selectValues); 
+						
+						
+						jQuery.each(jQuery('#product_other_file')[0].files, function(i, file) {
+						countFiles++;
+						formData.append('image-'+i, file);
+					});
+				$('#loading').fadeIn();
+				$('#addProduct_btn').prop('disabled', true);
+					formData.append('imagecount',countFiles); 
+					
+		}
 	}
 	else
 	{
 		
 	}
-	
 		$.ajax({
 			type: "POST",
 			url: "/HMadmin/Products/addProduct",     // Url to which the request is send
@@ -898,18 +966,19 @@ function addChildInfo(value)
 		var jsonProductVariants= JSON.parse(result);
 		for(i=0;i<jsonProductVariants.length;i++)
 		{
-			if(variants.indexOf(jsonProductVariants[i].get_variant.VN2) > -1)
+			if(variants.indexOf(jsonProductVariants[i].get_variant.VN2.split(' ').join('_')) > -1)
 			{ 
 
 			}
 			else
 			{
-				variants.push(jsonProductVariants[i].get_variant.VN2);
+				variants.push(jsonProductVariants[i].get_variant.VN2.split(' ').join('_'));
 				creatingSelects(jsonProductVariants[i].get_variant.VN2.split(' ').join('_'),"");
 			
 			}
 	
 		}
+		document.getElementById('select_values').value=variants;
 		for(i=0;i<jsonProductVariants.length;i++)
 		{
 				var exist='false';

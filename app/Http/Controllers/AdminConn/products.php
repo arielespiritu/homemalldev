@@ -238,8 +238,10 @@ public function __construct()
 	}
 	public function addProduct(Request $request)
 	{
+		$user=Auth::User();
 		$input = Input::all();
 		$getChilds =explode(",",$input['selectValues']);
+	
 		if($input['product_type'] == 'main')
 		{
 			$attributes = [
@@ -296,9 +298,7 @@ public function __construct()
 								$product_info->product_description= $input['product_description'];
 								$product_info->product_range= $input['product_ranged'];
 								$product_info->save();						
-
 							//inserting all variants
-							
 							for($x = 0; $x < count($getChilds); $x++)
 							{
 								$decodeJSON=json_decode($input[$getChilds[$x]], TRUE);
@@ -333,14 +333,12 @@ public function __construct()
 								}
 							}
 							//inserting combos
-							
 							for($x1 = 0; $x1 < count($getChilds); $x1++)
 							{
 							//	return $this->getProductVariantID($this->getVariantID($getChildsCombo[$x]),$input['default_'.$getChildsCombo[$x]]);
 								$idcombo =$this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
 								if($idcombo  == '' ||  $idcombo== null )
 								{
-							
 								}
 								else
 								{
@@ -348,15 +346,13 @@ public function __construct()
 									 $productcombination->product_variant_id = $this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
 									 $productcombination->product_id = $productscombo->id;
 									 $productcombination->save();						
-									
 								}
-
 							}					
 							return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '1','message' => 'Data Insert','data' => $product_info->id]));
 						}
 						catch(\Exception $e)
 						{
-							$result = '0';
+							 return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '0','message' => 'Validator failed','data' =>$e]));
 						}
 					}	
 				}
@@ -400,14 +396,78 @@ public function __construct()
 					}
 					catch(\Exception $e)			
 					{
-						return $e;
+						 return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '0','message' => 'Validator failed','data' =>$e]));
 					}
 				}
 		}
 		elseif($input['product_type'] == 'child')
 		{
-			
-			return json_encode($input);
+				$attributes = [
+					'product_saleprice' => 'Sale Price',
+					'product_retailprice' =>'Retail Price',
+					'product_cost' => 'Product Cost',
+					'product_quantity' => 'Quantity',
+					'combo_active_price' => 'Active Price',
+					'combo_status' => 'Product Status',
+					
+				];								
+				$rules = [
+					'product_saleprice' => 'required',
+					'product_retailprice' => 'required',
+					'product_cost' => 'required',
+					'product_quantity' => 'required',
+					'combo_active_price' => 'required',
+					'combo_status' => 'required',
+					
+				];		
+			try
+			{
+				$productscombo= new productscombo;
+				$productscombo->product_info_id =$input['product_main_names'];
+				$productscombo->sale_price = $input['product_saleprice'];
+				$productscombo->retail_price= $input['product_retailprice'];
+				$productscombo->product_cost= $input['product_cost'];
+				$productscombo->quantity= $input['product_quantity'];
+				$productscombo->active_price= $input['combo_active_price'];					
+				$productscombo->product_status= $input['combo_status'];
+				$productscombo->save();
+				$validator = Validator::make(Input::all(),$rules,[],$attributes);
+				if ($validator->fails()) {
+					 return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '0','message' => 'Validator failed','data' => $validator->errors()->all()]));
+				}
+				else
+				{	
+						for($i=0;$i<$input['imagecount'];$i++)
+						{
+							$productID = $productscombo->id;
+							if($this->checkifImagefile(Input::file('image-'.$i)) == 'true')
+							{
+								$extension = strtolower(Input::file('image-'.$i)->getClientOriginalExtension());
+								$dir = 'assets/img/store/'.$this->getStoreName($user->login_id).'/product/'.$productID.'/';
+								$this->upload_file(Input::file('image-'.$i),$dir,$i);
+							}
+						}
+						for($x1 = 0; $x1 < count($getChilds); $x1++)
+						{
+							$idcombo = $input['default_'.$getChilds[$x1]];;
+							if($idcombo  == '' ||  $idcombo== null )
+							{
+							}
+							else
+							{
+								 $productcombination= new productcombination;
+								 $productcombination->product_variant_id = $idcombo ;
+								 $productcombination->product_id = $productscombo->id;
+								 $productcombination->save();						
+							}
+						}					
+						return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '1','message' => 'Data Insert','data' =>'1']));
+				}
+			}
+			catch(\Exception $e)
+			{
+				return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '0','message' => 'Validator failed','data' =>$e]));
+			}
 		}
 		else
 		{
