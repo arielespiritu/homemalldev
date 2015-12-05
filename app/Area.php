@@ -9,5 +9,5 @@ class Area extends Model
     protected $table = 'location_tbl';
 	protected $primaryKey = 'id';
 	
-	protected $fillable = ['id','city','major_area'];
+	//protected $hidden = ['id','city','major_area'];
 }

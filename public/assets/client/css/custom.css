@@ -93,7 +93,7 @@ margin-right:10px;
 
 .carousel {
     margin-top: 20px;
-	border:1px solid #000;
+	border:1px solid #d3d3d3;
 }
 .item .thumb {
 	width: 25%;
@@ -231,6 +231,31 @@ list-style-type: none;
 .navs-variant a:hover{
 	background: rgba(0, 0, 0, 255); 
 	color:white;
+}
+.navs-variant a.active{
+	background: black; 
+	color:white;
+	pointer-events: none;
+   cursor: default;
+}
+.navs-variant a.active-white{
+	background: white; 
+	color:black;
+	pointer-events: none;
+   cursor: default;
+}
+.navs-variant a.not-active {
+	background: white; 
+	color:black;
+	pointer-events: none;
+	cursor: default;
+}
+
+.active-variant-img{
+ border:3px solid red;
+}
+.not-active-variant-img{
+ border:1px solid #d3d3d3;
 }
 
 a{

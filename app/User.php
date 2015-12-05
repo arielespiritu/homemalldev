@@ -32,7 +32,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-   protected $hidden = ['password', 'remember_token'];
+   protected $hidden = ['password', 'remember_token','indicator_id', 'login_id'];
    
     public function member() {
         return $this->belongsTo('App\Member','login_id','id')->withTrashed();

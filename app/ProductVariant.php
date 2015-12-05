@@ -11,7 +11,8 @@ class ProductVariant extends Model
     protected $table = 'product_variant_tbl';
 	protected $primaryKey = 'id';
 	
-	protected $fillable = ['id', 'product_info_id', 'variant_id' , 'variant_name_value', 'created_at', 'updated_at', 'deleted_at'];
+	//protected $hidden = ['id', 'product_info_id', 'variant_id' , 'variant_name_value', 'created_at', 'updated_at', 'deleted_at'];
+	
 	public function variant() {
         return $this->belongsTo('App\Variant','variant_id','id')->withTrashed();
     }

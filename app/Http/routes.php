@@ -84,15 +84,15 @@ Route::get('/{id}/Stores/{id2}', 'MarketController@showMarketStores'); //views
 Route::get('/{id}/Product/{id2}', 'MarketController@showMarketProducts'); //views
 Route::get('/{id}/Category/All', 'MarketController@showMarketCategory'); //views
 Route::get('/{id}/Category/{id2}/{id3}', 'MarketController@showMarketCategoryProduct'); //views
-
+Route::get('/Market/Get-Featured-Products', 'MarketController@showFeaturedProducts'); //views
 
 ///// product details routes
-Route::get('/Product/Details/{id}', 'ProductDetailsController@showProductDetails'); //views
+Route::get('/Product/Details/{id}/{id2}', 'ProductDetailsController@showProductDetails'); //views
 
+Route::post('/details/get-product-variant-combo', 'ProductDetailsController@getProductVariantCombo'); //views
+Route::post('/details/get-product-variant-combo-select', 'ProductDetailsController@getProductVariantComboSelect'); //views
+Route::post('/details/get-product-variant-combo-select-img', 'ProductDetailsController@getProductVariantComboSelectImg'); //views
 
-
-
-Route::get('/Product/{id}', 'ProductDetailsController@showProductInfo'); //views
 Route::get('/My-Account/{id}', 'CustomerAccountController@showAccount'); //views
 Route::get('/My-Account/{id}/{id2}', 'CustomerAccountController@showCustomerAccount'); //views
 

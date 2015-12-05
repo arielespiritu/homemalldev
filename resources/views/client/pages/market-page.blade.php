@@ -97,17 +97,17 @@
 									<div class="box">
 										<a href="/{{$market_data_category->market_name}}/Category/{{str_replace(' ','-',$category->category_name)}}/All"> <center><img class="img-responsive"  data-src="{{ URL::asset('assets/img/category/'.strtolower($market_data_category->market_name).'/'.$category->id.'.png') }}" data-src-retina="{{ URL::asset('assets/img/category/'.strtolower($market_data_category->market_name).'/'.$category->id.'.png') }}" src="{{ URL::asset('assets/img/loading.gif') }}" alt="" /></center></a>
 										<div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-										  <a href="/Product/Details/sample" class="list-group-item category-products" >
+										  <a href="/Product/Details/1/Ariel-Sample" class="list-group-item category-products" >
 											<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
 											<h5 class="list-group-item-heading">Product Name</h5>
 											<p class="list-group-item-text">P 100.00</p>
 										  </a>
-										  <a href="/Product/Details/sample1" class="list-group-item category-products" >
+										  <a href="/Product/Details/1/Ariel-Sample" class="list-group-item category-products" >
 											<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
 											<h5 class="list-group-item-heading">Product Name</h5>
 											<p class="list-group-item-text">P 100.00</p>
 										  </a>
-										   <a href="/Product/Details/sample2" class="list-group-item category-products" >
+										   <a href="/Product/Details/1/Ariel-Sample" class="list-group-item category-products" >
 											<img class="alignleft" src="{{ URL::asset('assets/img/store/samplestore/product/1.jpg') }}" alt="..." >
 											<h5 class="list-group-item-heading">Product Name</h5>
 											<p class="list-group-item-text">P 100.00</p>									
@@ -148,10 +148,10 @@
 						@for ($x = 0; $x < 12; $x++)
 							<div class="col-md-2 col-xs-6" style="padding:2px; margin-top:-25px;">
 									<div class="box">
-											<a href="/Product/Details/sample"><center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center></a>
+											<a href="/Product/Details/1/Ariel-Sample"><center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center></a>
 											<div class="item-desc" style="padding:10px" >
-												<a href="/Product/Details/sample"><h4 >Product Namessssssss</h4></a>
-												<a href="/Product/Details/sample"><p >P 100.00</p></a>
+												<a href="/Product/Details/1/Ariel-Sample"><h4 >Product Namessssssss</h4></a>
+												<a href="/Product/Details/1/Ariel-Sample"><p >P 100.00</p></a>
 												<div id="navcontainer">
 												<ul>
 													<li><a href="" ><i class="fa fa-shopping-cart cart" ></i></a></li>

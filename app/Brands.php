@@ -9,5 +9,5 @@ class Brands extends Model
     protected $table = 'brand_tbl';
 	protected $primaryKey = 'id';
 	
-	protected $fillable = ['id', 'brand_name', 'brand_indicator', 'market_id' ];
+	//protected $hidden = ['id', 'brand_name', 'brand_indicator', 'market_id' ];
 }

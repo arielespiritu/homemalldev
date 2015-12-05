@@ -14,7 +14,7 @@
     <title>
        HomemallPH - @yield('title')
     </title>
-
+	<meta name="_token" content="{!! csrf_token() !!}"/>
     <meta name="keywords" content="">
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
@@ -447,7 +447,7 @@
 </body>
 <script>
 
-$(window).load(function(){
+		$(window).load(function(){
 			$('img.bgfade').hide();
 			var dg_H = $(window).height();
 			var dg_W = $(window).width();
@@ -460,21 +460,15 @@ $(window).load(function(){
 			anim();
 			
 			$("img").unveil(1000);
-			//$("img").trigger("lookup");
-			
-			 $(window).scroll(function () { 
-
+			$(window).scroll(function () { 
 				console.log($(window).scrollTop());
-
 				if ($(window).scrollTop() > 150) {
 					$('#navbar').addClass('navbar-fixed-top');
-				  
 				}
-
 				if ($(window).scrollTop() < 151) {
 					$('#navbar').removeClass('navbar-fixed-top');
 				}
-			  });
+			});
 			
 			
 			
@@ -483,7 +477,9 @@ $(window).load(function(){
 			//window.location.href=window.location.href
 			})
 			
-			
+	$.ajaxSetup({
+		headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+	});		
 			
 		
 

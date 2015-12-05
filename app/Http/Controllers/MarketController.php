@@ -5,6 +5,7 @@ use Input;
 use App\User;
 use App\Market;
 use App\Brands;
+use App\FeaturedProducts;
 class MarketController extends Controller {
 
 	/*
@@ -36,14 +37,15 @@ class MarketController extends Controller {
 	public function showMarket()
 	{
 	$market_data = Market::with('category')->get();
+	$featured_products = FeaturedProducts::with('product_info')->get();
 	$brands = Brands::all();
 		if (Auth::check())
 		{
 			$id = Auth::user()->login_id;
 			$user = User::where('id', $id )->with('member')->get();
-			return view('client.pages.market')->with('user',$user)->with('market_data',$market_data)->with('brands_data',$brands);
+			return view('client.pages.market')->with('user',$user)->with('market_data',$market_data)->with('brands_data',$brands)->with('featured_products',$featured_products);
 		}else{
-			return view('client.pages.market')->with('market_data',$market_data)->with('brands_data',$brands);
+			return view('client.pages.market')->with('market_data',$market_data)->with('brands_data',$brands)->with('featured_products',$featured_products);
 		}
 	}
 	public function redirectToMarket()
@@ -150,13 +152,6 @@ class MarketController extends Controller {
 			}
 		}else{
 			return redirect(\URL::previous());
-		}
-	}
-	function imageHandler($destination){
-		if(file_exists($destination.'.png')){
-			return $destination.'.png';
-		}else{
-			return $destination.'.jpg';
 		}
 	}
 }

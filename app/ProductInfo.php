@@ -8,11 +8,11 @@ class ProductInfo extends Model
 {
     use SoftDeletes;
 	
-    protected $dates = ['deleted_at'];
+    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
     protected $table = 'product_information_tbl';
 	protected $primaryKey = 'id';
 	
-	protected $fillable = ['id', 'product_name', 'sub_category_id' , 'product_status', 'store_id', 'product_description', 'product_range', 'created_at', 'updated_at', 'deleted_at'];
+	//protected $hidden = ['id', 'product_name', 'sub_category_id' , 'product_status', 'store_id', 'product_description', 'product_range'];
 	
 	public function product() {
         return $this->hasMany('App\Product','product_info_id','id')->with('combo')->withTrashed();
