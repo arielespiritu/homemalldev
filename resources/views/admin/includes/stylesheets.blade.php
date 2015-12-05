@@ -13,6 +13,7 @@
 		<link href="{{URL::asset('assets/css/ace-responsive.min.css')}}" rel="stylesheet">
 		<link href="{{URL::asset('assets/css/fullcalendar.css')}}" rel="stylesheet">
 		
+
 		<link rel="stylesheet" href="http://css-spinners.com/css/spinner/spinner.css" type="text/css">
 
 	<meta name="_token" content="{!! csrf_token() !!}"/>

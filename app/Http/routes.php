@@ -20,6 +20,7 @@ Route::get('/HMadmin/Store-Banner','AdminConn\store@showStoreBanner');
 Route::get('/HMadmin/Store-Users', function () {
     return view('admin.store.storeuser');
 });
+
 Route::get('/HMadmin/Store-Profile','AdminConn\admincontroller@showStoreProfile');
 Route::get('/HMadmin/Products','AdminConn\products@showProducts');
 
@@ -33,6 +34,7 @@ Route::post('/HMadmin/Products/addVariant','AdminConn\products@addVariant');
 Route::post('/HMadmin/Products/viewChild','AdminConn\products@viewChild');
 Route::post('/HMadmin/Products/getProducts','AdminConn\products@getProducNames');
 Route::post('/HMadmin/responsedec','AdminConn\decrypter@decrypt');
+Route::post('/HMadmin/Products/reload-products','AdminConn\products@getAllParentProduct');
 //""
 
 
