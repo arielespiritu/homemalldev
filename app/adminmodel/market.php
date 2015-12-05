@@ -11,7 +11,7 @@ class market extends Model
 	protected $maps = ['id' => 'MI1', 'market_name' => 'MN2','market_interest_rate' => 'MI3'];
 	protected $appends = ['MI1', 'MN2','MI3'];	
 	protected $hidden = ['market_name', 'id','market_interest_rate'];
-
+	protected $fillable = ['MN2','MI3'];	
 	
 	public function getMI1Attribute($value)
     {

@@ -10,7 +10,7 @@ class variants extends Model
 	
 	protected $maps = ['id' => 'VT1', 'variant_name' => 'VN2','market_id' => 'MI1'];
 	protected $appends = ['VT1','VN2','MI1'];	
-	protected $hidden = ['id', 'variant_name','market_id'];
+	protected $hidden = ['id', 'variant_name','market_id','created_at', 'updated_at', 'deleted_at'];
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];	
 	public function getVT1Attribute($value)
     {

@@ -10,7 +10,7 @@ class brand extends Model
 	
 	protected $maps = ['id' => 'BI1','brand_name' => 'BN2', 'brand_indicator' => 'BINR3', 'market_id' => 'MI1'];
 	protected $appends = ['BI1','BN2','BINR3','MI1'];	
-	protected $hidden = ['id', 'brand_name','brand_indicator','market_id'];
+	protected $hidden = ['id', 'brand_name','brand_indicator','market_id','created_at', 'updated_at', 'deleted_at'];
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 	public function getBI1Attribute($value)
 	{
