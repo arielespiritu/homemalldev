@@ -27,7 +27,6 @@ public function showDashboard(Request $request)
 			 if($this->checkUserLevel() == 'authFailed' )
 			 {
 				return redirect('/HMadmin/login');
-				
 			 }
 			 else if($this->checkUserLevel() == 'authErr' )
 			 {	 

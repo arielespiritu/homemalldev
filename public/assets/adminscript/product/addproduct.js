@@ -528,7 +528,7 @@ function showChild_sub_category(CI1)
 function showCategoryInfo(MI1)
 {
 	visibilityaccordion("#add_sub_category","out");
-///category	
+//category	
 	var x1= document.getElementById("product_sub_category");
     document.getElementById("product_sub_category").options.length = 0;
 	$("#product_sub_category").trigger("liszt:updated");
@@ -602,7 +602,7 @@ function showCategoryInfo(MI1)
 function noSpecialChar(id)
 {
 	$(id).bind('input', function() {
-	$(this).val($(this).val().replace(/[^a-z0-9\s\w]/gi, ''));
+	$(this).val($(this).val().replace(/[^a-z0-9.\s\w]/gi, ''));
 	});
 }
 function restrictProduct_name(id)

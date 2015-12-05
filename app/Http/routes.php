@@ -23,6 +23,7 @@ Route::get('/HMadmin/Store-Users', function () {
 
 Route::get('/HMadmin/Store-Profile','AdminConn\admincontroller@showStoreProfile');
 Route::get('/HMadmin/Products','AdminConn\products@showProducts');
+Route::get('/HMadmin/Main-Products','AdminConn\products@showMainProducts');
 
 //POST
 Route::post('/HMadmin/loginauth','AdminConn\loginauth@validateLogin');

@@ -1,7 +1,7 @@
 @extends('admin.includes.master.master')
 @section('main_header_title', 'Products')
 @endsection
-@section('sub_header_title', 'Product Information ')
+@section('sub_header_title', 'Add Product ')
 @endsection
 @section('breadcrumbs')
 	<div class="breadcrumbs" id="breadcrumbs">
@@ -19,7 +19,7 @@
 @endsection
 @section('content')
 <div class="row-fluid">
-	<div class="widget-box span12 collapsed">
+	<div class="widget-box span12 ">
 			<div class="widget-header widget-header-small header-color-dark">
 				<h5>Add Product Here</h5>
 				<div class="widget-toolbar">
@@ -376,97 +376,6 @@
 		</div>
 	</div>		
 </div>		
-<br>
-
-<div class="row-fluid">
-	<div class="span12 widget-container-span" >
-		<div class="widget-box"> 
-			<div class="widget-header widget-header widget-header-small header-color-dark">
-				<h5>Product Main</h5>
-				<div class="widget-toolbar">
-					<a href="javascript:;" onClick="reloadDatatable('tbl_product_main')"  data-action="reload">
-						<i class="icon-refresh"></i>
-					</a>
-				</div>
-			</div>
-			<div class="widget-body" style="overflow:scroll" >
-				<div class="widget-main">
-					<div class="row-fluid">
-						<table id="tbl_product_main" class="table table-striped table-bordered table-hover">
-							<thead >
-								<tr>
-									<th style="width:50px;">ID</th>
-									<th>Product Name</th>
-									<th class="">Sub Category</th>
-									<th class="">Product Status</th>
-									<th class="">Total Quantity</th>
-									<th class=""></th>
-								</tr>
-							</thead>
-							<tbody>
-							@foreach($productinformation as $prodinfo)
-								<tr>
-									<td>
-										{{$prodinfo->id}}
-									</td>								
-									<td>
-										{{$prodinfo->product_name}}
-									</td>	
-									<td>
-										{{$prodinfo->getSubCategoryName->SCN3}}
-									</td>
-									<td>
-										{{$prodinfo->getStatus->indicator_name}}
-									</td>	
-									<td>
-										1.00
-									</td>		
-									<td class="td-actions">
-										<div class="hidden-phone visible-desktop action-buttons">
-											<a class="blue" href="#">
-												<i class="icon-zoom-in bigger-130"></i>
-											</a>
-
-											<a class="green" href="#">
-												<i class="icon-pencil bigger-130"></i>
-											</a>
-										</div>
-
-										<div class="hidden-desktop visible-phone">
-											<div class="inline position-relative">
-												<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-													<i class="icon-caret-down icon-only bigger-120"></i>
-												</button>
-
-												<ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-													<li>
-														<a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-															<span class="blue">
-																<i class="icon-zoom-in bigger-120"></i>
-															</span>
-														</a>
-													</li>
-													<li>
-														<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-															<span class="green">
-																<i class="icon-edit bigger-120"></i>
-															</span>
-														</a>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</td>									
-								</tr>
-							@endforeach
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 @endsection
 @section('myscripts')
 <script>
@@ -474,7 +383,6 @@ var jsonCategory =<?php echo json_encode($category_info); ?>;
 var jsonBrand =<?php echo json_encode($brand_info); ?>;
 var jsonVariants =<?php echo json_encode($variants); ?>;
 var jsonSubCategory =<?php echo json_encode($sub_cat); ?>;
-
 $("#product_main_names").chosen({ width: '100%' });
 $("#market_info").chosen({ width: '100%' });
 $("#product_type").chosen({ width: '100%' });
@@ -491,96 +399,6 @@ $("#child_sub_category_info").chosen({ width: '100%'});
 $("#combo_status").chosen({ width: '100%'});
 $("#combo_active_price").chosen({ width: '100%'});
 $("#product_info_status").chosen({ width: '100%'});
-	$(function() {
-		var oTable1 = $('#tbl_product_main').dataTable( {
-		"aoColumns": [
-		  { "bSortable": false },
-		  null, null,null, null, 
-		  { "bSortable": false }
-		] } );
-		
-		
-		$('table th input:checkbox').on('click' , function(){
-			var that = this;
-			$(this).closest('table').find('tr > td:first-child input:checkbox')
-			.each(function(){
-				this.checked = that.checked;
-				$(this).closest('tr').toggleClass('selected');
-			});
-				
-		});
-		$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-		function tooltip_placement(context, source) {
-			var $source = $(source);
-			var $parent = $source.closest('table')
-			var off1 = $parent.offset();
-			var w1 = $parent.width();
-	
-			var off2 = $source.offset();
-			var w2 = $source.width();
-	
-			if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-			return 'left';
-		}
-	});
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function reloadDatatable(id)
-{
-var gate="<?php echo  Crypt::encrypt('devANONE') ?>";
-		$.post("/HMadmin/Products/reload-products",
-		{
-			gates:gate,
-		},
-		function(result)
-		{		
-			var resultJson=JSON.parse(result);
-			//alert(result);
-			$('#tbl_product_main').dataTable().fnClearTable();
-			for(rI=0;rI<resultJson.length;rI++)
-			{
-				$('#tbl_product_main').dataTable().fnAddData( [
-					""+resultJson[rI].id,""+resultJson[rI].product_name,
-					""+resultJson[rI].get_sub_category_name.SCN3,""+ resultJson[rI].get_status.indicator_name,"1",
-								'	<div class="hidden-phone visible-desktop action-buttons">'+
-								'		<a class="blue" href="#">'+
-								'			<i class="icon-zoom-in bigger-130"></i>'+
-								'		</a>'+
-
-								'		<a class="green" href="#">'+
-								'			<i class="icon-pencil bigger-130"></i>'+
-								'		</a>'+
-								'	</div>'+							
-								'<div class="hidden-desktop visible-phone">'+
-									'<div class="inline position-relative">'+
-									'	<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">'+
-									'		<i class="icon-caret-down icon-only bigger-120"></i>'+
-									'	</button>'+
-									'	<ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">'+
-									'		<li>'+
-									'			<a href="#" class="tooltip-info" data-rel="tooltip" title="View">'+
-									'				<span class="blue">'+
-									'					<i class="icon-zoom-in bigger-120"></i>'+
-									'				</span>'+
-									'			</a>'+
-									'		</li>'+
-									'		<li>'+
-									'			<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">'+
-									'				<span class="green">'+
-									'					<i class="icon-edit bigger-120"></i>'+
-									'				</span>'+
-									'			</a>'+
-									'		</li>'+
-									'	</ul>'+
-									'</div>'+
-								'</div>'
-					] );
-			}
-		});
-}
-
-
 </script>
 <script  src="{{URL::asset('assets/adminscript/product/addproduct.js')}}"></script> 
-
 @endsection

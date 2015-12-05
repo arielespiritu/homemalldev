@@ -318,9 +318,15 @@
 
 						<ul class="submenu">
 							<li>
-								<a href="/HMadmin/Products">
+								<a href="/HMadmin/Main-Products">
 									<i class="icon-double-angle-right"></i>
 									Products Information
+								</a>
+							</li>						
+							<li>
+								<a href="/HMadmin/Products">
+									<i class="icon-double-angle-right"></i>
+									Add Products
 								</a>
 							</li>
 						</ul>

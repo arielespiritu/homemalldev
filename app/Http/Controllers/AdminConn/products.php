@@ -395,9 +395,7 @@ public function __construct()
 				}
 				else
 				{
-					
 					$checkparentChildExist = array();
-					
 					for($x1 = 0; $x1 < count($getChilds); $x1++)
 					{
 						$checkCombo =$this->getProductVariantID($this->getVariantID($getChilds[$x1]),$input['default_'.$getChilds[$x1]]);
@@ -585,6 +583,7 @@ public function __construct()
 	}
 	public function addsubcat(Request $request)
 	{
+		$user=Auth::User();
 		try
 		{
 			$input= Input::all();
@@ -594,9 +593,11 @@ public function __construct()
 			}
 			else
 			{
+				
 				$subcategory = new subcategory;
 				$subcategory->CI1 = $input['temp_catid'];
 				$subcategory->SCN3 = $input['sub_name'];
+				$subcategory->SI1 = $user->login_id;
 				$subcategory->save();
 				return json_encode($subcategory);				
 			}
@@ -615,10 +616,11 @@ public function __construct()
 	public function getAllParentProduct(Request $request)
 	{
 		$input= Input::all();
+		$userLogin= Auth::user();
 		$decrypted = Crypt::decrypt($input['gates']);
 			if($decrypted == 'devANONE')
 			{
-				$productinformation = productinformation::with('getSubCategoryName')->with('getStatus')->get();
+				$productinformation = productinformation::with('getSubCategoryName')->with('getStatus')->where('store_id','=',$userLogin->login_id)->get();
 				return json_encode($productinformation);				
 			}
 			else
@@ -662,8 +664,8 @@ public function __construct()
 						$userLogin= Auth::user();
 						$storeowner = storeowner::where('store_id','=',$userLogin->login_id)->with('showStoreInfo')->get();
 						$category= category::all();
-						$sub_category= subcategory::all();
-						$productinformation = productinformation::all();
+						$sub_category= subcategory::where('store_id','=',$userLogin->login_id)->orWhere('store_id', '=','0')->get();
+						$productinformation = productinformation::where('store_id','=',$userLogin->login_id)->get();
 						$brand= brand::all();
 						$market= market::all();
 						$variants= variants::all();
@@ -701,6 +703,73 @@ public function __construct()
 		{
 			
 		}		
+	}
+	public function showMainProducts(Request $request)
+	{
+		try
+		{
+			//return $this->checkUserLevel();
+			if ($request->isMethod('GET')) 
+			{
+				 if($this->checkUserLevel() == 'authFailed' )
+				 {
+					return redirect('/HMadmin/login');
+				 }
+				 else if($this->checkUserLevel() == 'authErr' )
+				 {	 
+					return redirect('/HMadmin/login');
+				 }
+				 else if($this->checkUserLevel() == 'empty' )
+				 {
+					return 'no indicator';
+				 }
+				 else
+				 {
+					 foreach($this->checkUserLevel() as $indicatorInfo)
+					 {
+						$indicator_id=$indicatorInfo->id;
+						$indicator_name=$indicatorInfo->indicator_name;
+						$indicator_for=$indicatorInfo->indicator_for;
+					 }				
+					 if($indicator_name == 'STORE ADMIN')
+					 {
+						$userLogin= Auth::user();
+						$storeowner = storeowner::where('store_id','=',$userLogin->login_id)->with('showStoreInfo')->get();
+						$category= category::all();
+						$sub_category= subcategory::all();
+						$productinformation = productinformation::where('store_id','=',$userLogin->login_id)->get();
+						$brand= brand::all();
+						$market= market::all();
+						$variants= variants::all();
+						$indicator= indicator::where('indicator_for','=','PRODUCT STATUS')->get();
+						$product_status= indicator::where('indicator_for','=','PRODUCT PRICE')->get();
+						//return json_encode($productinformation);
+						return view('admin.products.mainproduct')
+								->with('userLevel',$indicator_name)
+								->with('userinfo',$storeowner)
+								->with('sub_cat',$sub_category) // ok
+								->with('productinformation',$productinformation);
+					 }
+					 else
+					 {
+						$userLogin= Auth::user();
+						$storeowner = storeowner::where('store_id','=',$userLogin->login_id)->with('showStoreInfo')->get();
+						return view('admin.products.products')
+								->with('userLevel',$indicator_name)
+								->with('userinfo',$storeowner);
+					 }
+				 }
+			}
+			else
+			{
+				//err method err
+			}			
+		}
+		catch(\Exception $e)
+		{
+			
+		}		
+		
 	}
 
 }
