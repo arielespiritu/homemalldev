@@ -61,10 +61,9 @@
 									<td>
 										<center>
 										<p  id="product_combo_parag_id-{{$prodinfo->id}}" >{{$prodinfo->getSubCategoryName->SCN3}}</p>
-											<select class="span12" style="width:100%; " id="product_combo_id-{{$i}}" data-placeholder="Choose Status">
+											<select class="span12" style="width:100%; z-index:999; " id="product_combo_id-{{$i}}" data-placeholder="Choose Status">
 													<option value="" />
 												@foreach($sub_cat as $subcategory)
-													<option value="{{$subcategory->id}}" />{{$subcategory->SCN3}} 
 													@if($prodinfo->getSubCategoryName->CI1 == $subcategory->CI1)
 														@if($prodinfo->getSubCategoryName->SC1 == $subcategory->SC1 )
 															<option selected value="{{$subcategory->id}}" />{{$subcategory->SCN3}}
@@ -75,7 +74,6 @@
 													@endif
 												@endforeach	
 											</select>	
-										
 										</center>
 									</td>
 									<td>
@@ -158,7 +156,15 @@ function createChosen(countNum,additionalIDkey)
 {
 	for(i=0;i< countNum;i++)
 	{
-		$("#"+additionalIDkey+i).chosen({ width: '100%'});
+		if(i == countNum )
+		{
+			break;
+		}
+		else
+		{
+			$("#"+additionalIDkey+i).chosen({ width: '100%'});
+		}
+		
 	}
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////

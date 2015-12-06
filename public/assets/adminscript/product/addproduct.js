@@ -233,8 +233,8 @@ function addProduct()
 					countFiles++;
 					formData.append('image-'+i, file);
 				});
-				$('#loading').fadeIn();
-				$('#addProduct_btn').prop('disabled', true);
+				// $('#loading').fadeIn();
+				// $('#addProduct_btn').prop('disabled', true);
 					//alert(countFiles);
 					formData.append('imagecount',countFiles); 
 	
@@ -305,7 +305,7 @@ function addProduct()
 			processData:false,        // To send DOMDocument or non processed data file it is set to false		
 			success: function(result)   // A function to be called if request succeeds
 		{
-			//alert(result);
+			alert(result);
 			var jsonResponse=  JSON.parse(result);
 			if(jsonResponse[0].success == '1')
 			{
@@ -442,7 +442,6 @@ function getProduct(SC1)
 	},
 	function(result)
 	{	
-	
 		var x = document.getElementById("product_main_names");
 		document.getElementById("product_main_names").options.length = 0;
 		var option = document.createElement("option");
@@ -647,7 +646,6 @@ function getDrectory(changefrom,changeto,checkifcancel,imgsrclear)
 function removeElement(element)
 {
     $(element).remove();
-	//$('#masterdiv').empty();
 }
 
 function addVariants()
