@@ -19,6 +19,7 @@ use App\adminmodel\productvariants;
 use App\adminmodel\productinformation;
 use App\adminmodel\productscombo;
 use App\adminmodel\productcombination;
+use App\adminmodel\inventorydetails;
 use Auth;
 use Image;
 use Crypt;
@@ -226,6 +227,7 @@ public function getProductVariantID($variant_id,$variant_name_value)
 	{
 	}
 }
+
 public function getAllChild($product_info_id,$arrayCombo)
 {
 	$productinformation = productinformation::where('id','=',$product_info_id)->with('getChild')->get();
@@ -236,7 +238,6 @@ public function getAllChild($product_info_id,$arrayCombo)
 		foreach($product_info['getChild'] as $product_info)
 		{
 			$checkifExist= $this->checkComboifExist($product_info->id);
-			
 			if($arrayCombo === array_intersect($arrayCombo, $checkifExist) && $checkifExist === array_intersect($checkifExist, $arrayCombo)) {
 				$status = 'true';
 				break;
@@ -249,6 +250,22 @@ public function getAllChild($product_info_id,$arrayCombo)
 		}
 	}
 	return $status;
+}
+public function getSubCategory()
+{
+	$input = Input::all();
+	$user=Auth::User();
+	try
+	{
+		$subcategory = subcategory::where('category_id','=',$input['temp_subkey'])->where('store_id','=',$user->login_id)->get();
+		//return json_encode($subcategory);
+		return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '1','message' => 'Generate Success','data' =>$subcategory]));
+	}
+	catch(\Exception $e)
+	{
+		return $e;
+	}
+	
 }
 public function checkComboifExist($product_id)
 {
@@ -263,7 +280,7 @@ public function checkComboifExist($product_id)
 		return $getarrayCombo;
 	}
 }
-public function insertToProductInformation($product_name,$sub_category_id,$product_info_status,$store_id,$product_description,$product_ranged)
+public function insertToProductInformation($product_name,$sub_category_id,$product_info_status,$store_id,$brand_id,$product_description,$product_ranged)
 {
 	try
 	{
@@ -272,6 +289,7 @@ public function insertToProductInformation($product_name,$sub_category_id,$produ
 		$product_info->sub_category_id= $sub_category_id;
 		$product_info->product_status= $product_info_status;
 		$product_info->store_id= $store_id;
+		$product_info->brand_id= $brand_id;
 		$product_info->product_description= $product_description;
 		$product_info->product_range= $product_ranged;
 		$product_info->save();
@@ -298,6 +316,21 @@ public function insertProductVariants($variant_name_value,$product_info_id,$vari
 		return '0';
 	}
 }
+public function insertInventoryDetails($product_id,$quantity)
+{
+	try
+	{
+		$inventorydetails = new inventorydetails;
+		$inventorydetails->product_id = $product_id;
+		$inventorydetails->quantity =  $quantity;
+		$inventorydetails->save();	
+		return $inventorydetails->id;	
+	}
+	catch(\Exception $e)
+	{
+		return '0';
+	}
+}
 public function insertProductSubordinates($productinfo_id,$sale_price,$retail_price,$product_cost,$quantity,$active_price,$product_status)
 {
 	try
@@ -307,10 +340,11 @@ public function insertProductSubordinates($productinfo_id,$sale_price,$retail_pr
 		$productscombo->sale_price = $sale_price;
 		$productscombo->retail_price= $retail_price;
 		$productscombo->product_cost= $product_cost;
-		$productscombo->quantity= $quantity;
+		//$productscombo->quantity= $quantity;
 		$productscombo->active_price= $active_price;
 		$productscombo->product_status= $product_status;
-		$productscombo->save();	
+		$productscombo->save();
+		$this->insertInventoryDetails($productscombo->id,$quantity);
 		return $productscombo->id;	
 	}
 	catch(\Exception $e)
@@ -331,6 +365,39 @@ public function insertProductCombo($product_variant_id,$product_id)
 	catch(\Exception $e)
 	{
 		return '0';
+	}
+}
+public function updateParent($status,Request $request)
+{
+	$input = Input::all();
+	if($status == 'QuickEdit')
+	{
+		try
+		{
+			$productinformation=productinformation::find($input['temp_prodkey']);
+			$productinformation->product_name =$input['temp_prodname'];
+			$productinformation->sub_category_id =$input['temp_subKey'];
+			$productinformation->save();		
+			return '1';
+		}
+		catch(\Exception $e)
+		{
+			return '0';
+		}
+	}
+	else if($status == 'QuickEditStatus')
+	{
+		try
+		{
+			$productinformation=productinformation::find($input['temp_prodkey']);
+			$productinformation->product_status =$input['temp_indicator'];
+			$productinformation->save();		
+			return '1';
+		}
+		catch(\Exception $e)
+		{
+			return '0';
+		}		
 	}
 }
 public function addProduct(Request $request)
@@ -385,7 +452,7 @@ public function addProduct(Request $request)
 				try
 				{
 					//inserting productinformation
-					$product_info_id=$this->insertToProductInformation($input['product_name'],$input['product_sub_category'],$input['product_info_status'],$user->login_id,$input['product_description'],$input['product_ranged']);							
+					$product_info_id=$this->insertToProductInformation($input['product_name'],$input['product_sub_category'],$input['product_info_status'],$user->login_id,$input['brand_info'],$input['product_description'],$input['product_ranged']);							
 					if($product_info_id == '0' || $product_info_id== '' )
 					{
 						return json_encode(array(['key' => '12345','session' => csrf_token(),'success' => '0','message' => 'Validator failed','data' =>array('Unable to save product Information check the fields remove unwanted special character')]));
@@ -858,7 +925,38 @@ public function addProduct(Request $request)
 		{
 			
 		}		
-		
 	}
-
+	public function showEditProduct($productID)
+	{
+		$userLogin= Auth::user();
+		$productinformation = productinformation::with('getSubCategoryName')->with('getChild')->with('getStatus')->where('store_id','=',$userLogin->login_id)->where('id','=',$productID)->get();
+		
+		if(count($productinformation) == '0')
+		{
+			return redirect('/HMadmin/Main-Products');
+		}
+		else
+		{
+			$variants= variants::all();
+			$brand= brand::all();
+			$category= category::all();
+			$sub_category= subcategory::all();
+			$market= market::all();
+			$product_status= indicator::where('indicator_for','=','PRODUCT STATUS')->get();
+			$storeowner = storeowner::where('store_id','=',$userLogin->login_id)->with('showStoreInfo')->get();
+			$brand= brand::all();
+				return json_encode($productinformation);
+			return view('admin.products.editproduct')
+					->with('userinfo',$storeowner)		
+					->with('market_info',$market) // ok
+					->with('category_info',$category) // ok 
+					->with('variants',$variants) // ok
+					->with('brand_info',$brand) //ok	
+					->with('product_status',$product_status)			
+					->with('sub_cat',$sub_category)			
+					->with('$brand_info',$brand)			
+					->with('productinformation',$productinformation);			
+		}
+	}
 }
+;

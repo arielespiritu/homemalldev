@@ -20,14 +20,14 @@
 @section('content')
 <div class="row-fluid">
 	<div class="widget-box span12 ">
-			<div class="widget-header widget-header-small header-color-dark">
-				<h5>Add Product Here</h5>
-				<div class="widget-toolbar">
-					<a href="javascript:;" data-action="collapse">
-						<i class="icon-chevron-down"></i>
-					</a>
-				</div>
+		<div class="widget-header widget-header-small header-color-dark">
+			<h5>Add Product Here</h5>
+			<div class="widget-toolbar">
+				<a href="javascript:;" data-action="collapse">
+					<i class="icon-chevron-down"></i>
+				</a>
 			</div>
+		</div>
 		<div class="widget-body">
 			<div class="widget-main">
 				<br>
@@ -78,7 +78,6 @@
 							<label class="control-label" >Product Name </label>
 							<div class="controls">
 								<select class="span12" id="product_main_names" onChange="addChildInfo(this.value)" style="width:100%;" data-placeholder="Choose Product main" >
-
 								</select>
 							</div>
 						</div>						
@@ -86,15 +85,13 @@
 				</div>
 				<div class="hr hr-18 dotted hr-double"></div>
 				<div class="row-fluid">
-					<div class="span6" id="product_information_div">
+					<div class="span12" id="product_information_div">
 						<div class="widget-box span12">
 							<div class="widget-header widget-header-small header-color-dark ">
 								<h5>Product Information</h5>
 							</div>
-
 							<div class="widget-body">
 								<div class="widget-main">
-								
 									<div class="control-group">
 										<input id="product_information_status" value="NEW" style="display:none"/>
 										<label class="control-label" ><li class="icon-basket"></li> Product Name</label>
@@ -102,12 +99,6 @@
 											<input type="text" class="span12" id="product_name" placeholder=""  />
 										</div>
 									</div>					
-									<div class="control-group">
-										<label class="control-label" >Product description</label>
-										<div class="controls">
-												<textarea class="span12 limited" rows="3" id="product_description" style="resize:none;" data-maxlength="50"></textarea>
-										</div>
-									</div>	
 									<div class="span12" style="margin:0px;">
 										<div class="control-group span4">
 											<label class="control-label" >Market </label>
@@ -158,16 +149,16 @@
 										</div>
 									</div>
 									<div class="span12" style="margin:0px;">
-										<div class="control-group span6">
+										<div class="control-group span4">
 											<label class="control-label" >Brand</label>
 											<div class="controls">
-												<select class="span12"  id="brand_info" style="width:100%;"  data-placeholder="Choose Category" > 
+												<select class="span12" onChange="alert(this.value)"  id="brand_info" style="width:100%;"  data-placeholder="Choose Category" > 
 													<option value="" />
 														<option value=""/>
 												</select>	
 											</div>
 										</div>
-										<div class="control-group span6">
+										<div class="control-group span4">
 											<label class="control-label" >Add More Brand?</label>
 											<div class="controls">
 												<select class="span12" id="add_brand" onChange="visibleBrand(this.value)" style="width:100%;" data-placeholder="Choose Category" >
@@ -177,6 +168,19 @@
 												</select>
 											</div>
 										</div>
+										<div class="control-group span4">
+											<div class="control-group span12">
+												<label class="control-label" >Product Status:</label>
+												<div class="controls">
+													<select class="span12" style="width:100%;" id="product_info_status" data-placeholder="Choose Category" >
+														<option value="" />
+													@foreach($indicator as $price_status)
+														<option value="{{$price_status->id}}" />{{$price_status->indicator_name}} 
+													@endforeach	
+													</select>	
+												</div>
+											</div>										
+										</div>										
 									</div>					
 									<div class="span12" id="add_brand_name" style="margin:0px; display:none">
 										<div id="addBrand" class="accordion">
@@ -197,40 +201,40 @@
 											</div>
 										</div>
 									</div>	
-									<div class="span12" style="margin:0px;">
-										<div class="control-group span12">
-											<label class="control-label" >Product Status:</label>
-											<div class="controls">
-												<select class="span12" style="width:100%;" id="product_info_status" data-placeholder="Choose Category" >
-													<option value="" />
-												@foreach($indicator as $price_status)
-													<option value="{{$price_status->id}}" />{{$price_status->indicator_name}} 
-												@endforeach	
-												</select>	
-											</div>
-										</div>
-									</div>
-									<div class="control-group">
-										<div class="controls">
-										<label class="control-label" >Product Ranged: </label>							
-												<textarea class="span12 limited" rows="4" id="product_ranged" placeholder="EG. 2 to 3 days timeframe" style="resize:none;" data-maxlength="50"></textarea>
-										</div>
+									<div class="row-fluid">
+										<div class="span6">
+											<div class="control-group">
+												<label class="control-label" >Product description</label>
+												<div class="controls">
+														<textarea class="span12 limited" rows="4" id="product_description" style="resize:none;" data-maxlength="50"></textarea>
+												</div>
+											</div>										
+										</div>	
+										<div class="span6">									
+											<div class="control-group">
+												<div class="controls">
+												<label class="control-label" >Product Ranged: </label>							
+														<textarea class="span12 limited" rows="4" id="product_ranged" placeholder="EG. 2 to 3 days timeframe" style="resize:none;" data-maxlength="50"></textarea>
+												</div>
+											</div>	
+										</div>	
 									</div>								
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="span6"  id="product_complex_div">
+				</div>
+				<div class="row-fluid">
+					<div class="span12"  id="product_complex_div">
 						<div class="widget-box span12">
 							<div class="widget-header widget-header-small header-color-dark">
 								<h5>Product Complex Description</h5>
 							</div>
 							<div class="widget-body">
-								<div class="widget-main"  style="height:515px; overflow-y: scroll;">
+								<div class="widget-main"  style="height:300px; overflow-y: scroll;">
 									<div class="span12">
-										<div class="control-group span12">
+										<div class="control-group span4">
 											<input id="product_complex_status" value="NEW" style="display:none"/>
-											<label class="control-label" >Description Type<a href="javascript:;"  onClick="messageInfo('variant_info')" class="pull-right"><li class="icon-info" style="Color:red"> No data ?</li></a></label>
 											<div class="controls">
 												<div class="span12">
 													<select class="span12" style="width:100%;"  id="description_type" data-placeholder="Choose Variant Type" >
@@ -239,20 +243,15 @@
 												</div>	
 											</div>
 										</div>	
+										<div class="control-group span6">
+											<div class="controls">
+												<input type="text" class="span12" id="description_name" placeholder="Variant Name"  />
+											</div>
+										</div>											
+										<div class="span2">
+											<button class="btn btn-default btn-mini span12 pull-right" id="variant_add_btn" onClick="addVariants()">add</button>
+										</div>										
 									</div>
-									<div class="span12" style="margin:0px;">
-										<div class="row-fluid">
-											<div class="control-group span10">
-												<div class="controls">
-													<input type="text" class="span12" id="description_name" placeholder="Variant Name"  />
-												</div>
-											</div>						 					
-											<div class="span2">
-												<button class="btn btn-default btn-mini span12 pull-right" id="variant_add_btn" onClick="addVariants()">add</button>
-											</div>									
-										</div>	
-										<br>											
-									</div>	
 									<table id="variant_tbl" class="table table-striped table-bordered table-hover"  >
 										<thead>
 											<tr>

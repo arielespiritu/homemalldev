@@ -233,8 +233,8 @@ function addProduct()
 					countFiles++;
 					formData.append('image-'+i, file);
 				});
-				// $('#loading').fadeIn();
-				// $('#addProduct_btn').prop('disabled', true);
+				$('#loading').fadeIn();
+				$('#addProduct_btn').prop('disabled', true);
 					//alert(countFiles);
 					formData.append('imagecount',countFiles); 
 	
@@ -290,7 +290,6 @@ function addProduct()
 				$('#loading').fadeIn();
 				$('#addProduct_btn').prop('disabled', true);
 					formData.append('imagecount',countFiles); 
-					
 		}
 	}
 	else
@@ -567,7 +566,7 @@ function showCategoryInfo(MI1)
 				//alert('1');
 				var option = document.createElement("option");	
 				option.text =jsonBrand[getBrand].BN2;
-				option.value =jsonBrand[getBrand].BN1;
+				option.value =jsonBrand[getBrand].BI1;
 				x1.add(option);
 			}
 			else
@@ -647,7 +646,6 @@ function removeElement(element)
 {
     $(element).remove();
 }
-
 function addVariants()
 {	  
 	var variantName= document.getElementById('description_name').value;
@@ -733,14 +731,12 @@ function checkifhasinTable(tableid,type,description)
 }
 function getTableValues(tableid)
 {
-
 	var rows = document.getElementById(tableid).getElementsByTagName('tbody')[0].getElementsByTagName('tr').length;
 	var x = document.getElementById(tableid).rows[1].cells[0].innerHTML;
 	var arrayList= document.getElementById('select_values');
 	var selectstags = [];
 	for(y=0;y< rows;y++)
 	{
-		
 		var cell0value=document.getElementById(tableid).rows[y+1].cells[0].innerHTML;
 		var cell0description=document.getElementById(tableid).rows[y+1].cells[1].innerHTML;
 		cell0value = cell0value.split(' ').join('_');
@@ -754,35 +750,28 @@ function getTableValues(tableid)
 		}
 		else
 		{
-			
 			selectstags = arrayList.value.split(",");
 			if(selectstags.indexOf(cell0value) > -1)
 			{
-
 				var exist='false';
 				$('#'+cell0value+' option').each(function(){
 					if (this.value == cell0description.split(' ').join('_')) {
 						exist= 'true';
 					}
 				});
-				
 				if(exist=='false')
 				{
 
 					$("#"+cell0value+" option:last").after($('<option value="'+cell0description.split(' ').join('_')+'">'+cell0description+'</option>'));	
 					$("#"+cell0value).trigger("liszt:updated");
-					
-
 				}
 				else
 				{
 				
 				}
-
 			}
 			else
 			{
-				
 				selectstags.push(cell0value);
 				creatingSelects(cell0value,selectstags);
 				$("#"+cell0value+" option:last").after($('<option value="'+cell0description.split(' ').join('_')+'">'+cell0description+'</option>'));				
@@ -793,7 +782,6 @@ function getTableValues(tableid)
 				// x1.add(option);	
 				$("#"+cell0value).trigger("liszt:updated");
 			}
-			
 		}
 	}
 	arrayList.value=selectstags;
