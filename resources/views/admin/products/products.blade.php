@@ -218,7 +218,17 @@
 												</div>
 											</div>	
 										</div>	
-									</div>								
+									</div>	
+									<div class="row-fluid">	
+										<div class="span12">	
+											<div class="control-group">
+												<label class="control-label " for="form-field-tags">Keywords:</label>
+												<div class="controls">
+													<input type="text" name="tags"  id="parent_keywords" value=" " placeholder="Enter tags ..." />
+												</div>
+											</div>									
+										</div>									
+									</div>									
 								</div>
 							</div>
 						</div>

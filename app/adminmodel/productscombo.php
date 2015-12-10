@@ -25,6 +25,11 @@ class productscombo extends Model
 	}
 	public function  getInventory()
 	{
-		return $this->hasMany('App\adminmodel\inventorydetails', 'product_id', 'id')->select()->orderBy('created_at', 'asc');
+		return $this->hasMany('App\adminmodel\inventorydetails', 'product_id', 'id')->select('quantity')->selectRaw('product_id,sum(quantity) as total_inv')->groupBy('product_id');
+	}
+	public function  getParenInventory()
+	{
+		return $this->hasMany('App\adminmodel\inventorydetails', 'product_id', 'id');
 	}
 }
+					
