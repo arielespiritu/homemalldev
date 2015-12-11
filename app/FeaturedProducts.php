@@ -15,6 +15,6 @@ class FeaturedProducts extends Model
 	//protected $fillable = ['id', 'product_info_id', 'status' ,  'created_at', 'updated_at', 'deleted_at'];
 
 	public function product_info() {
-        return $this->belongsTo('App\ProductInfo','product_info_id','id')->with('product')->with('store')->with('productVariantGroup')->with('productVariant');
+        return $this->belongsTo('App\ProductInfo','product_info_id','id')->with('product')->with('store')->with('productVariantGroup')->with('productVariant')->where('product_status','=','9');
     }
 }

@@ -11,7 +11,13 @@ class MarketCategory extends Model
 	protected $primaryKey = 'id';
 	//protected $hidden = ['id', 'category_name', 'market_id' , 'created_at', 'updated_at', 'deleted_at'];
 	public function subCategory() {
-        return $this->hasMany('App\MarketCategorySubCategory','category_id','id')->with('product')->withTrashed();
+        return $this->hasMany('App\MarketCategorySubCategory','category_id','id')->with('products')->with('productList')->withTrashed();
     }
+	
+	public function subCategoryStore() {
+        return $this->hasMany('App\MarketCategorySubCategory','category_id','id')->with('productsStore')->with('products')->with('products_random')->withTrashed();
+    }
+	
+
 
 }

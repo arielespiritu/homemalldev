@@ -135,7 +135,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+		'Anam\Phpcart\CartServiceProvider',
         /*
          * Application Service Providers...
          */
@@ -144,7 +144,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 		Intervention\Image\ImageServiceProvider::class,
-
+		
     ],
 
     /*
@@ -194,7 +194,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 		'Image' => Intervention\Image\Facades\Image::class,
-		
+		'Cart' => 'Anam\Phpcart\Facades\Cart'
     ],
 
 ];

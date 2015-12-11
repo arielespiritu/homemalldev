@@ -26,19 +26,19 @@
 							<div id="textbox">
 								<h4 class="alignleft">{{$type}} {{$market}} Products</h4>
 							</div>
+				</div>
+				<div class="col-md-8 col-xs-12  same-height-row" style="padding:0px; ">
+					<div id="textbox">
+						<div id="navcontainer" >
+								<ul>
+									<li><a href="/{{$market}}/Product/Sale" class="alignright-market">Sale</a></li>
+									<li><a href="/{{$market}}/Product/Popular" class="alignright-market" >Popular</a></li>
+									<li><a href="/{{$market}}/Product/New" class="alignright-market">New</a></li>
+									<li><a href="/{{$market}}/Product/All" class="alignright-market">All</a></li>
+								</ul>
 						</div>
-						<div class="col-md-8 col-xs-12  same-height-row" style="padding:0px; ">
-							<div id="textbox">
-								<div id="navcontainer" >
-										<ul>
-											<li><a href="/{{$market}}/Product/Sale" class="alignright-market">Sale</a></li>
-											<li><a href="/{{$market}}/Product/Popular" class="alignright-market" >Popular</a></li>
-											<li><a href="/{{$market}}/Product/New" class="alignright-market">New</a></li>
-											<li><a href="/{{$market}}/Product/All" class="alignright-market">All</a></li>
-										</ul>
-								</div>
-							</div>
-						</div>
+					</div>
+				</div>
 				<div style="clear: both;"></div>
             </div>
 			

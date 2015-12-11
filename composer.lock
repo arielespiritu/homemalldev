@@ -4,9 +4,58 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "051e3e86dab1370f73b162ce8b85a020",
-    "content-hash": "257f54b8fc91338079b433ec63d0a7a5",
+    "hash": "66970ff907f174c8a227127522e3c81c",
+    "content-hash": "c30db6a8e5bd0acbf513a39989c26747",
     "packages": [
+        {
+            "name": "anam/phpcart",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/anam-hossain/phpcart.git",
+                "reference": "7b63c844e83a32a6f59871e18d96f69eeb03ed09"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/anam-hossain/phpcart/zipball/7b63c844e83a32a6f59871e18d96f69eeb03ed09",
+                "reference": "7b63c844e83a32a6f59871e18d96f69eeb03ed09",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0",
+                "symfony/http-foundation": "~2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Anam\\Phpcart\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anam hossain",
+                    "email": "enam33@gmail.com"
+                }
+            ],
+            "description": "Simple framework agnostic shopping cart",
+            "homepage": "https://github.com/anam-hossain/phpcart",
+            "keywords": [
+                "Laravel cart",
+                "Laravel shopping cart",
+                "cart",
+                "php cart",
+                "shopping cart"
+            ],
+            "time": "2015-05-16 12:25:40"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",
@@ -285,7 +334,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/2d8de6577b86c8b3bf49b6578d659ba9ee21fcc1",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/e6acb1609ce89f2c1ec7864fbbda0a20a3eeca70",
                 "reference": "2d8de6577b86c8b3bf49b6578d659ba9ee21fcc1",
                 "shasum": ""
             },

@@ -10,10 +10,9 @@
 				<div class="col-md-9 " style="padding:2px;" >
 					<div class="col-md-12 box" style="padding:15px; background:white" >
 					<h1>Shopping cart</h1>
-						<div class="col-md-12 " >
-						<form method="post" action="">
-						{!! csrf_field() !!}
-                            <p class="text-muted">You currently have 3 item(s) in your cart.</p>
+					 <p class="text-muted">You currently have 3 item(s) in your cart.</p>
+						<div class="col-md-12 " id="cart-div" >
+						
                             <h4>Order from <a href="" style="color:red">Sample Store</a></h4>
                             <div class="table-responsive">
                                 <table class="table">
@@ -126,15 +125,16 @@
 
                             <div class="box-footer" style="margin:0px;">
                                 <div class="pull-left">
-                                    <a href="/Market" class="btn btn-primary"><i class="fa fa-chevron-left"></i> Continue shopping</a>
+                                    <a href="/Market" class="btn btn-primary"><i class="fa fa-chevron-left"></i> Continue Shopping</a>
                                 </div>
                                 <div class="pull-right">
-                                    <button class="btn btn-primary"><i class="fa fa-refresh"></i> Update basket</button>
-                                    <a href="/Checkout"  class="btn btn-primary">Proceed to checkout <i class="fa fa-chevron-right"></i>
+                                    <button class="btn btn-danger" onclick="removeAllCart()"> Clear Basket</button>
+                                    <a href="/Checkout"  class="btn btn-primary">Proceed to Checkout <i class="fa fa-chevron-right"></i>
                                     </a>
                                 </div>
                             </div>
-                        </form>
+                      
+					  
 						</div>
 
 						
@@ -187,7 +187,37 @@
 
 @section('page-script')
 <script>
-
+function removeAllCart(){
+		try{
+			var response = $.ajax({
+				type: "POST",
+				url: "/cart/removecart",
+				async: false
+			}).responseText;
+			alert(response);
+			var datas = JSON.parse(response);
+			if(datas.success==true){
+				var elem1 = document.getElementsByClassName("badge-cart1");
+				var elem2 = document.getElementById("badge-cart2");
+				var elem3 = document.getElementById("badge-cart3");
+				var elem4 = document.getElementById("badge-cart4");
+				if ( elem1 ) {
+				 elem1.innerHTML="0";
+				}
+				if ( elem2 ) {
+				elem2.innerHTML="0";
+				}
+				if ( elem3 ) {
+				elem3.innerHTML="0";
+				}
+				if ( elem4) {
+				elem4.innerHTML="0";
+				}
+			}
+		}catch(err){
+			alert(err.message);
+		}
+}	
 </script>	
 	
 @endsection

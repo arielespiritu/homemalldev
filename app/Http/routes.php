@@ -100,5 +100,12 @@ Route::get('/My-Account/{id}', 'CustomerAccountController@showAccount'); //views
 Route::get('/My-Account/{id}/{id2}', 'CustomerAccountController@showCustomerAccount'); //views
 
 
+///// store routes
+Route::get('/Store/{id}', 'StoreController@showStore'); //views
 
 
+///// cart controller ////
+Route::get('/cart/getcart', 'CartController@getCart'); 
+Route::post('/cart/addcart', 'CartController@addCart'); 
+Route::post('/cart/removecart', 'CartController@removeCart'); 
+Route::get('/cart/getitemcount', 'CartController@getItemCartCount'); 

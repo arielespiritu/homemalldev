@@ -5,8 +5,7 @@
 @section('content')
 
 			<div class="container">
-				<div class="col-md-12 market "  style="padding:0px;" >
-					
+				<div class="col-md-12 market "  style="padding:0px; margin-top:-15px;" >
 					<div class="col-md-3 same-height-row" style="padding:0px;" >
 						<div class="col-md-12  market-logo box" >
 							 <center><img class="img-responsive" src="{{ URL::asset('assets/img/market/'.$market.'.png') }}" alt=""></center>
@@ -23,53 +22,55 @@
 						</div>		
 					</div>
 				</div>
-            </div>
-			<div class="container">
-				<div class="col-md-12" style="padding:2px">
-					<div class="col-md-4 col-xs-12 same-height-row" style="padding:0px; ">
+				<div class="col-md-4 col-xs-12 same-height-row" style="padding:0px;  ">
 							<div id="textbox">
-								  <h4 class="alignleft">{{$type}} {{ucfirst($category_name)}}</h4>
-							</div>
-							</div>
-							<div class="col-md-8 col-xs-12 same-height-row" style="padding:0px; ">
-							<div id="textbox">
-								  <div id="navcontainer" >
-										<ul>
-											<li><a href="/{{$market}}/Category/{{str_replace(' ','-',$category_name)}}/Sale" class="alignright-market">Sale</a></li>
-											<li><a href="/{{$market}}/Category/{{str_replace(' ','-',$category_name)}}/Popular" class="alignright-market" >Popular</a></li>
-											<li><a href="/{{$market}}/Category/{{str_replace(' ','-',$category_name)}}/New" class="alignright-market">New</a></li>
-											<li><a href="/{{$market}}/Category/{{str_replace(' ','-',$category_name)}}/All" class="alignright-market">All</a></li>
-										</ul>
-									</div>
-							</div>
+								<h4 class="alignleft">{{$type}} {{ucfirst($category_name)}}</h4>
 							</div>
 				</div>
-
-				<div class="col-md-12 " style="padding:0px; margin-bottom:40px;" >
-					<div class="col-md-12 col-xs-12" style="padding:2px">
-								@for ($x = 0; $x < 12; $x++)
-									<div class="col-md-2 col-xs-6" style="padding:2px; ">
-											<div class="box">
-													<a href="/Product/Details/1/Ariel-Sample"><center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center></a>
-													<div class="item-desc" style="padding:10px" >
-														<a href="/Product/Details/1/Ariel-Sample"><h4 >Product Namessssssss</h4></a>
-														<a href="/Product/Details/1/Ariel-Sample"><p >P 100.00</p></a>
-														<div id="navcontainer">
-														<ul>
-															<li><a href="" ><i class="fa fa-shopping-cart cart" ></i></a></li>
-															<li><a href="" class="alignright-icon"><i class="fa fa-heart heart" ></i></a></li>
-															<li><a href="" class="alignright-icon"><i class="fa fa-star star" ></i></a></li>
-														</ul>
-														</div>
-														
-													</div>
+				<div class="col-md-8 col-xs-12  same-height-row" style="padding:0px; ">
+					<div id="textbox">
+						<div id="navcontainer" >
+								<ul>
+									<li><a href="/{{$market}}/Product/Sale" class="alignright-market">Sale</a></li>
+									<li><a href="/{{$market}}/Product/Popular" class="alignright-market" >Popular</a></li>
+									<li><a href="/{{$market}}/Product/New" class="alignright-market">New</a></li>
+									<li><a href="/{{$market}}/Product/All" class="alignright-market">All</a></li>
+								</ul>
+						</div>
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+            </div>
+			
+			
+		
+            <div class=""  >
+                <div class="container" >
+					<div class="col-md-12" style="padding:2px; margin-top:20px;" >
+						<div class="col-md-12" style="padding:0px">
+						@for ($x = 0; $x < 12; $x++)
+							<div class="col-md-2 col-xs-6" style="padding:2px; margin-top:-25px;">
+									<div class="box">
+											<a href="/Product/Details/1/Ariel-Sample"><center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center></a>
+											<div class="item-desc" style="padding:10px" >
+												<a href="/Product/Details/1/Ariel-Sample"><h4 >Product Namessssssss</h4></a>
+												<a href="/Product/Details/1/Ariel-Sample"><p >P 100.00</p></a>
+												<div id="navcontainer">
+												<ul>
+													<li><a href="" ><i class="fa fa-shopping-cart cart" ></i></a></li>
+													<li><a href="" class="alignright-icon"><i class="fa fa-heart heart" ></i></a></li>
+													<li><a href="" class="alignright-icon"><i class="fa fa-star star" ></i></a></li>
+												</ul>
+												</div>
+												
 											</div>
 									</div>
-								@endfor	
-					</div>	
-				
-				</div>
-			</div>
+							</div>
+						@endfor	
+						</div>
+					</div>
+                </div>
+            </div>
 			
 						
 @endsection

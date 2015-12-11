@@ -14,8 +14,19 @@ class MarketCategorySubCategory extends Model
 	public function category() {
         return $this->belongsTo('App\MarketCategory','category_id','id')->orderBy('sub_category_name','asc')->withTrashed();
     }
-	public function product() {
-        return $this->hasMany('App\ProductInfo','sub_category_id','id')->withTrashed();
+	public function productList() {
+        return $this->hasMany('App\ProductInfo','sub_category_id','id')->with('store')->where('product_status','=','9')->withTrashed();
     }
+	public function products() {
+        return $this->hasMany('App\ProductInfo','sub_category_id','id')->with('store')->with('product')->where('product_status','=','9')->withTrashed();
+    }
+	public function products_random() {
+        return $this->hasMany('App\ProductInfo','sub_category_id','id')->with('store')->with('product')->where('product_status','=','9')->orderByRaw("RAND()")->withTrashed();
+    }
+	public function productsStore() {
+        return $this->hasMany('App\ProductInfo','sub_category_id','id')->with('store')->with('productVariant')->where('product_status','=','9')->withTrashed();
+    }
+	
+	
 	
 }

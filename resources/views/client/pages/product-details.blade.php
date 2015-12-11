@@ -9,11 +9,11 @@
 			
 		<div class="col-md-12" style="background:white; margin-top:-15px; padding:0px;">
 			<div class="col-md-4 col-md-offset-4 col-xs-12 store-logo-detais"  style="padding:5px;">
-				<div class="wraptocenter"><span></span><img style=" border:1px solid #d3d3d3;" src="{{ URL::asset(getStoreBanner($ProductInfo->store->store_name)) }}" alt="..."></div>
+				<a href="/Store/1"><div class="wraptocenter"><span></span><img style=" border:1px solid #d3d3d3;" src="{{ URL::asset(getStoreBanner($ProductInfo->store->store_name)) }}" alt="..."></div></a>
 			</div>
 			<div class="col-md-12" style="padding:0px; margin-top:-18px;">
 				<ul class="navs">
-					<li><a href="/">Home</a></li>
+					<li><a href="/Store/1">Home</a></li>
 					<li><a href="/about/">Products</a></li>
 					<li><a href="/work/">About</a></li>
 					<li><a href="/clients/">Contact</a></li>
@@ -44,7 +44,6 @@
 									<div id="carousel" class="carousel slide" data-ride="carousel" >
 										<div class="carousel-inner" id="div-prod-img-display1">
 										<?php $count=0;?>
-		
 										@if(count($ImageFiles)==0)
 											<div class="item active">
 													<img src="{{ URL::asset('assets/img/noimage.png')}}">
@@ -54,6 +53,7 @@
 												@if($count==0)
 												<div class="item active">
 													<img src="{{ URL::asset($ImageFiles['dirname'].'/'.$ImageFiles['basename'])}}">
+												
 												</div>
 												@else
 												<div class="item">
@@ -82,7 +82,7 @@
 										</div><!-- /carousel-inner -->
 									</div> <!-- /thumbcarousel -->
 								</div><!-- /clearfix -->
-								</div> <!-- /col-sm-6 -->
+								</div>
 						</div>
 					</div>
 
@@ -93,7 +93,7 @@
 								<?php $count3=0;?>
 								@foreach($ProductInfo->product as $products)
 									@if($count3==0)
-									<h4 class="text-danger"><small>Price :&nbsp;&nbsp;</small><span>&#8369;&nbsp;&nbsp;</span><span id="price_view">{{$products->sale_price}}</span></h4>
+									<h4 class="text-danger">Price :&nbsp;&nbsp;&#8369;&nbsp;&nbsp;<strong id="price_view">{{$products->sale_price}}</strong></h4>
 									@endif
 									<?php $count3++;?>
 								@endforeach
@@ -107,21 +107,23 @@
 											
 											<?php $counts=0;?>
 											@foreach($ProductInfo->product as $product)
-												<?php 
-												if($product->active_price==7){
-													$price = $product->sale_price;
-												}
-												else{
-													$price = $product->retail_price;
-												}
-												?>
-												@if($counts==0)
-													<input type="hidden" value="{{$product->id}}" id="spdct">
-													<div style="padding:2px;" class="thumb"><a href="javascript:void()"  id="imglnk{{$product->id}}" onclick="select({{$product->id}},{{$counts}},{{$ProductInfo->id}},{{$price}})"><img id="img{{$counts}}" src="{{ URL::asset(getSingleImageProduct($product->id,$ProductInfo->store->store_name)) }}"></a></div>
-												@else
-													<div style="padding:2px;" class="thumb"><a href="javascript:void()" id="imglnk{{$product->id}}"  onclick="select({{$product->id}},{{$counts}},{{$ProductInfo->id}},{{$price}})"><img  id="img{{$counts}}"  src="{{ URL::asset(getSingleImageProduct($product->id,$ProductInfo->store->store_name)) }}"></a></div>
-												@endif
-												<?php $counts++;?>
+												@if($product->product_status==9)
+													<?php 
+													if($product->active_price==7){
+														$price = $product->sale_price;
+													}
+													else{
+														$price = $product->retail_price;
+													}
+													?>
+													@if($counts==0)
+														<input type="hidden" value="{{$product->id}}" id="spdct">
+														<div style="padding:2px;" class="thumb"><a href="javascript:void()"  id="imglnk{{$product->id}}" onclick="select({{$product->id}},{{$counts}},{{$ProductInfo->id}},{{$price}})"><img id="img{{$counts}}" src="{{ URL::asset(getSingleImageProduct($product->id,$ProductInfo->store->store_name)) }}"></a></div>
+													@else
+														<div style="padding:2px;" class="thumb"><a href="javascript:void()" id="imglnk{{$product->id}}"  onclick="select({{$product->id}},{{$counts}},{{$ProductInfo->id}},{{$price}})"><img  id="img{{$counts}}"  src="{{ URL::asset(getSingleImageProduct($product->id,$ProductInfo->store->store_name)) }}"></a></div>
+													@endif
+													<?php $counts++;?>
+												@endif	
 											@endforeach
 											<input type="hidden" value="{{$counts}}" id="spdctcnt">
 											</div>
@@ -168,110 +170,96 @@
 									<a href="/HMadmin" class="btn btn-default btn-md flat" style="color:black" ><i class="fa fa-star star" ></i>To Wishlist</a>
 									</br>
 									</br>
+									<div style="z-index:3">
+										<div class="fb-like" data-href="<?php echo('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']); ?>" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" ></div>
+									</div>
 								</div>
 							</div>
 						</div>
+						
 					</div>
+					
 					<div class="col-md-12" style="padding:10px; "  >
-						  <ul class="nav nav-tabs">
-							<li class="active"><a data-toggle="tab" href="#home">Product Description</a></li>
-							<li><a data-toggle="tab" href="#menu1">Review</a></li>
-						  </ul>
-						  <div class="tab-content">
-							<div id="home" class="tab-pane fade in active">
-							  <h3>Product Description</h3>
-							  <p>{{ucFirst($ProductInfo->product_description)}}</p>
+							<div  class="col-md-12 no-padding">
+							    <h3>Product Description</h3>
+							  	<hr>
+								<p>{{ucFirst($ProductInfo->product_description)}}</p>
 							</div>
-							<div id="menu1" class="tab-pane fade">
-									<fieldset class="rating" onclick="javascript:void()">
-										<h3>Reviews</h3>
-										<input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
-										<input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
-										<input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
-										<input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
-										<input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
-									</fieldset>
-								<div class="col-md-12" style="padding:10px; "  >
-									<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					
+							<div class="col-md-12 no-padding" >
+								<h3>Reviews / Comments / Concerns</h3>
+								<hr>
+								<div class="col-md-12 no-padding" style="z-index:0">
+									<p><strong>RULES:</strong> Feel free to comment in our products! Please do not use foul words. Thank you.</p>
+								</div >
+								<div class="col-md-12 no-padding" >
+									<div class="fb-comments" data-href="<?php echo('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']); ?>" data-width="100%" data-numposts="5"></div>
 								</div>
 							</div>
-						  </div>
-					</div>	
+						 
+					</div>
 				</div>
+				 <div class="col-md-12" style="padding:0px; " >
+						<center><h3>Related Product</h3></center>
+							 @for ($x = 0; $x < 8; $x++)
+								<div class="col-md-3 col-xs-6" style="padding:2px;">
+									<div class="box" style="padding:0px;">
+											<a href="/product/details/sample"><center><img class="img-responsive"  data-src="{{ URL::asset('assets/img/category/grocery/1.png') }}" data-src-retina="{{ URL::asset('assets/img/category/grocery/1.png') }}" src="{{ URL::asset('assets/img/loading.gif') }}" /></center></a>
+											<div class="item-desc" style="padding:10px" >
+												<a href="/product/details/sample"><h4 >Product Namessssssss</h4></a>
+												<a href="/product/details/sample"><p >P 100.00</p></a>
+												<div id="navcontainer">
+												<ul>
+													<li><a href="" ><i class="fa fa-shopping-cart cart" ></i></a></li>
+													<li><a href="" class="alignright-icon"><i class="fa fa-heart heart" ></i></a></li>
+													<li><a href="" class="alignright-icon"><i class="fa fa-star star" ></i></a></li>
+												</ul>
+												</div>
+												
+											</div>
+									</div>
+								</div>
+							@endfor	
+				</div>					
+
 			</div>
 			
 			<div class="col-md-3 " style="padding:2px; "  >				
 				<div class="col-md-12 box" style="padding:10px; background:white;">
 				<!-- *** MENUS AND FILTERS ***________ -->
 				<h4>{{ucFirst($ProductInfo->store->store_name)}} Category</h4>
-				  
-						<ul class="nav nav-pills nav-stacked category-menu">
-							<li>
-								<a href="category.html">Men <span class="badge pull-right">42</span></a>
+				<ul class="nav nav-pills nav-stacked category-menu">
+					<li>
+						@foreach($store_market_data as $store_market_data )
+							@if(count($store_market_data->category)>0)
+								<h4>{{$store_market_data->market_name}}</h4>
+							@endif
+							@foreach($store_market_data->category as $categorys )
+								<a href="/{{$store_market_data->market_name}}/Category/{{str_replace(' ','-',$categorys->category_name)}}/All">{{$categorys->category_name}} <span class="badge pull-right"></span></a>
 								<ul>
-									<li><a href="category.html" class="link">T-shirts</a>
-									</li>
-									<li><a href="category.html" class="link">Shirts</a>
-									</li>
-									<li><a href="category.html" class="link">Pants</a>
-									</li>
-									<li><a href="category.html" class="link">Accessories</a>
-									</li>
+									@foreach($categorys->subCategory as $subCategorys)
+										@if(count($subCategorys->products)>0)
+											<li style="padding:3px"><a href="category.html" class="link">{{$subCategorys->sub_category_name}} <span class="badge pull-right">
+												<?php $itemCount=0; ?>
+												@foreach($subCategorys->products as $products)
+													@if($products->product_status==9)
+														<?php $itemCount++; ?>
+													@endif
+												@endforeach
+												{{$itemCount}}
+											</span></a> </li>
+										@endif
+									@endforeach
 								</ul>
-							</li>
-							<li>
-								<a href="category.html">Ladies  <span class="badge pull-right">123</span></a>
-								<ul>
-									<li><a href="category.html" class="link">T-shirts</a>
-									</li>
-									<li><a href="category.html" class="link">Skirts</a>
-									</li>
-									<li><a href="category.html" class="link">Pants</a>
-									</li>
-									<li><a href="category.html" class="link">Accessories</a>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<a href="category.html">Kids  <span class="badge pull-right">11</span></a>
-								<ul>
-									<li><a href="category.html" class="link">T-shirts</a>
-									</li>
-									<li><a href="category.html" class="link">Skirts</a>
-									</li>
-									<li><a href="category.html" class="link">Pants</a>
-									</li>
-									<li><a href="category.html" class="link">Accessories</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
+							@endforeach
+						@endforeach
+					</li>
+				</ul>
+				
 				</div>
 			</div> 
 		</div> 	
 		<!-- *** MENUS AND FILTERS END *** -->
-	   <div class="col-md-12" style="padding:0px; " >
-			<center><h3>Related Product</h3></center>
-				 @for ($x = 0; $x < 12; $x++)
-					<div class="col-md-2 col-xs-6" style="padding:2px;">
-						<div class="box" style="padding:0px;">
-								<a href="/product/details/sample"><center><img class="img-responsive"  data-src="{{ URL::asset('assets/img/category/grocery/1.png') }}" data-src-retina="{{ URL::asset('assets/img/category/grocery/1.png') }}" src="{{ URL::asset('assets/img/loading.gif') }}" /></center></a>
-								<div class="item-desc" style="padding:10px" >
-									<a href="/product/details/sample"><h4 >Product Namessssssss</h4></a>
-									<a href="/product/details/sample"><p >P 100.00</p></a>
-									<div id="navcontainer">
-									<ul>
-										<li><a href="" ><i class="fa fa-shopping-cart cart" ></i></a></li>
-										<li><a href="" class="alignright-icon"><i class="fa fa-heart heart" ></i></a></li>
-										<li><a href="" class="alignright-icon"><i class="fa fa-star star" ></i></a></li>
-									</ul>
-									</div>
-									
-								</div>
-						</div>
-					</div>
-				@endfor	
-		</div>
 		</div>
 			
 			@endforeach	
@@ -286,7 +274,7 @@
 		var spdct = $("#spdct").val();
 		$("#imglnk"+spdct).trigger('click');
 		$("#img"+spdct).addClass('active-variant-img');
-		
+
 	});
 
 	

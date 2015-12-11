@@ -1,0 +1,15 @@
+//// get stores with product in specific market ////
+
+
+@foreach($markets_datas->categoryStore as $category_store )
+								@foreach($category_store->subCategoryStore as $subCategory_store )
+									@foreach($subCategory_store->productsStore as $products_store )
+										@if(!in_array($products_store->store->id, $stores_per_market_with_product))
+											<?php array_push($stores_per_market_with_product,$products_store->store->id) ?>
+											<a  href="/Store/{{$products_store->store_id}}"><div class="col-md-4  col-xs-6 store-logo" >
+												<div class="wraptocenter"><span></span><img src="{{ URL::asset(getStoreBanner($products_store->store->store_name)) }}" alt="..."></div>
+											</div></a>
+										@endif
+									@endforeach	
+								@endforeach	
+							@endforeach		

@@ -38,44 +38,58 @@ class ProductDetailsController extends Controller {
 	 */
 	public function showProductDetails($pid,$product_name)
 	{		
-		if (ProductInfo::where('id', '=', $pid)->exists()) {
+
+		if (ProductInfo::where('id', '=', $pid)->where('product_status', '=', '9')->exists()) {
+		
 		$ProductInfo = ProductInfo::with('product')->with('store')->with('productVariantGroup')->with('productVariant')->where('id','=',$pid)->get();
+		
+		$fb_seo_meta = array();
 		foreach($ProductInfo as $info){
 			$name=$info->product_name;
 			$store_name=$info->store->store_name;
 			$store_id=$info->store->id;
+			$sub_category_id=$info->sub_category_id;
+			$fb_seo_meta['title']= $store_name.' - '.$info->product_name;
+			$fb_seo_meta['description']=$info->product_description;
+			foreach($info->product as $piid){
+				$product_id=$piid->id;
+				break;
+			}
+			break;
 		}
+	
 			if (ProductInfo::where('id', '=', $pid)->where('product_name', '=', decodeUrlRoute($product_name))->exists()) {
 			   $market_data = Market::with('category')->get();
 			   $listFiles=[];
-			   $files = \File::files('assets/img/store/'.$store_name.'/product/'.$pid);
+			   $files = \File::files('assets/img/store/'.$store_name.'/product/'.$product_id);
 			   foreach($files as $path)
 				 {
 					 $listFiles[] = pathinfo($path);
-				 }
-				
-				
-				// $market = DB::table('market_tbl')
-				// ->join('category_tbl', 'market_tbl.id', '=', 'category_tbl.market_id')
-				// ->join('sub_category_tbl', 'category_tbl.id', '=', 'sub_category_tbl.category_id')
-				// ->select('market_tbl.id','market_tbl.market_name')
-				// ->where('sub_category_tbl.store_id','=',$store_id)
-				// ->groupBy('market_tbl.id')
-				// ->get();
-				// $arrays =  array();
-				// foreach ($market as $market)	{
-					// array_push($arrays, $market->id);
-				// }	
-				
-				//$bp = BusinessApplication::whereIn('id', $arrays  )->with('business_info')->with('owner')->get();		
+				 }	
+				 
+				$fb_seo_meta['image']='assets/img/noimage.png';
+				foreach($listFiles as $seo_img)
+				{
+					$fb_seo_meta['image']=$seo_img['dirname'].'/'.$seo_img['basename'];
+					break;
+				}
+				 
+				$store_market_data = Market::with(['category' => function ($query)  use($store_id){
+						$query->whereHas('subCategory', function ($q) use($store_id) {
+						  $q->where('store_id','=',$store_id)->groupBy('category_id');             
+						});
+					}])->get();
+					
+					
+					
 				if (Auth::check())
 				{
 					$id = Auth::user()->login_id;
 					$user = User::where('id', $id )->with('member')->get();
-					return view('client.pages.product-details')->with('user',$user)->with('market_data',$market_data)->with('ProductInfo',$ProductInfo)->with('ImageFiles',$listFiles )->with('OtherFiles',$listFiles );
+					return view('client.pages.product-details')->with('user',$user)->with('market_data',$market_data)->with('store_market_data',$store_market_data)->with('ProductInfo',$ProductInfo)->with('ImageFiles',$listFiles )->with('OtherFiles',$listFiles )->with('fb_seo_meta',$fb_seo_meta);
 				}else{
-					return view('client.pages.product-details')->with('market_data',$market_data)->with('ProductInfo',$ProductInfo)->with('ImageFiles',$listFiles )->with('OtherFiles',$listFiles );
-					//return $market_data;
+					return view('client.pages.product-details')->with('market_data',$market_data)->with('store_market_data',$store_market_data)->with('ProductInfo',$ProductInfo)->with('ImageFiles',$listFiles )->with('OtherFiles',$listFiles )->with('fb_seo_meta',$fb_seo_meta);
+					//return $listFiles;
 				
 				}
 				
@@ -92,7 +106,7 @@ class ProductDetailsController extends Controller {
 		$input = Input::all();
 		$id=$input['a'];
 		$id2=$input['b'];
-		$Product = Product::where('product_info_id','=',$id)->get();
+		$Product = Product::where('product_info_id','=',$id)->where('product_status', '=', '9')->get();
 		$arrays =  array();
 		foreach ($Product as $bp)	{
 			array_push($arrays, $bp->id);
@@ -110,7 +124,7 @@ class ProductDetailsController extends Controller {
 		$input = Input::all();
 		$pid=$input['pid'];
 		$piid=$input['piid'];
-		$ProductInfo = ProductInfo::where('id','=',$piid)->get();
+		$ProductInfo = ProductInfo::where('id','=',$piid)->where('product_status', '=', '9')->get();
 		foreach($ProductInfo as $info){
 			$name=$info->product_name;
 			$store_name=$info->store->store_name;

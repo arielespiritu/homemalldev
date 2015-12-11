@@ -1,26 +1,27 @@
 @extends('client.master.master')
 
-@section('title', 'Market Place')
+@section('title', 'HomemallPH - Market Place')
 
 @section('content')
 
     <div id="all">
-		<div id="main-slider" style="margin-top:-15px;"> 
-			<div class="item" style="background:#a22221;">
-				<center><img class="img-responsive" src="{{ URL::asset('assets/img/banner4.png') }}" alt=""></center>
-			</div>	
-			<div class="item"  style="background:#b3a387;">
-				<center><img src="{{ URL::asset('assets/img/banner1.png') }}" alt="" class="img-responsive"></center>
+					
+			<div id="main-slider" style="margin-top:-15px;"> 
+				<div class="item" style="background:#a22221;">
+					<center><img class="img-responsive" src="{{ URL::asset('assets/img/banner4.png') }}" alt=""></center>
+				</div>	
+				<div class="item"  style="background:#b3a387;">
+					<center><img src="{{ URL::asset('assets/img/banner1.png') }}" alt="" class="img-responsive"></center>
+				</div>
+				<div class="item" style="background:#32ace8;" >
+					<center><img class="img-responsive" src="{{ URL::asset('assets/img/banner2.png') }}" alt=""></center>
+				</div>
+				<div class="item" >
+					<center><img class="img-responsive" src="{{ URL::asset('assets/img/banner3.png') }}" alt=""></center>
+				</div>	
+				
 			</div>
-			<div class="item" style="background:#32ace8;" >
-				<center><img class="img-responsive" src="{{ URL::asset('assets/img/banner2.png') }}" alt=""></center>
-			</div>
-			<div class="item" >
-				<center><img class="img-responsive" src="{{ URL::asset('assets/img/banner3.png') }}" alt=""></center>
-			</div>						
-		</div>
-		
-		
+			
 	</div>
    
 		<div id="hot" style="margin-top:10px;">
@@ -30,39 +31,50 @@
 						<img class="img-responsive" src="{{ URL::asset('assets/img/market/featuredItem.png') }}" alt="Homemallph Market">
 					</div>
 					<div class="col-md-12" style="padding:0px" id="featured-products">
+					<?php $countss = 0;$order = array();?>
 					@foreach($featured_products as $featured_products )
-						<div class="col-md-3 col-xs-6" style="padding:2px; margin-top:-23px;">
-							<div class="box" >
-							
-								<a href="/Product/Details/{{$featured_products->product_info->id}}/{{encodeUrlRoute($featured_products->product_info->product_name)}}"><center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center></a>
-								<div class="item-desc" style="padding:10px" >
-									<a href="/Product/Details/{{$featured_products->product_info->id}}/{{encodeUrlRoute($featured_products->product_info->product_name)}}"><h4 >{{$featured_products->product_info->product_name}}</h4></a>
-									<?php $count=0;?>
-									@foreach($featured_products->product_info->product as $product )
-										@if($count==0)
-										<?php $count++;?>
-										<h4><p >&#8369;&nbsp;&nbsp;{{$product->sale_price}}</p></h4>
+						<div class="col-md-2 col-xs-6" style="padding:2px; margin-top:-25px;">
+							@if(count($featured_products->product_info)>0)
+								@if($countss<12)
+								<?php $countss++;?>
+								<div class="box" style="position: relative;" >
+									<img class="img-responsive" style="position: absolute;top: 0px; left: 0;"  src="{{ URL::asset('assets/img/sale.png') }}" alt="">
+									<a href="/Product/Details/{{$featured_products->product_info->id}}/{{encodeUrlRoute($featured_products->product_info->product_name)}}">
+									<center>
+									<?php $countimg=0;?>
+									@foreach($featured_products->product_info->product as $products )
+										@if($countimg==0)
+											<?php $countimg++; $order['data1'] = $products->id;?>
+												<img class="img-responsive"  data-src="{{ URL::asset(getSingleImageProduct($products->id,$featured_products->product_info->store->store_name)) }}" src="{{ URL::asset('assets/img/loading.gif') }}" alt="">
 										@endif
 									@endforeach	
-									<div id="navcontainer">
-									<ul>
-										<li><a href="" ><i class="fa fa-shopping-cart cart " ></i></a></li>
-										<li><a href="" class="alignright-icon"><i class="fa fa-heart heart" ></i></a></li>
-										<li><a href="" class="alignright-icon"><i class="fa fa-star star" ></i></a></li>
-									</ul>
+									</center></a>
+									<div class="item-desc" style="padding:10px" >
+										<a href="/Product/Details/{{$featured_products->product_info->id}}/{{encodeUrlRoute($featured_products->product_info->product_name)}}"><h4 >{{$featured_products->product_info->product_name}}</h4></a>
+										<?php $count=0; $order['data2'] = $featured_products->product_info->product_name;?>
+										@foreach($featured_products->product_info->product as $product )
+											@if($count==0)
+												<?php $count++;
+												$order['data3'] = $product->sale_price; 
+												$order['data4'] = 1;?>
+												<h4><p >&#8369;&nbsp;&nbsp;{{$product->sale_price}}</p></h4>
+											@endif
+										@endforeach	
+										<button onclick="addCart({{json_encode($order)}})" class="btn btn-default pull-right btn-xs" style="margin-top:-30px; padding:4px 3px 4px 3px;"><i class="fa fa-shopping-cart cart-cart"></i></button>
 									</div>
+									
 								</div>
-							</div>
+								@endif
+							@endif
 						</div>
 					@endforeach	
 					</div>
-
 				</div>
 			</div>
 			<div class="container" >
-				<div class="col-md-12" style="padding:0px; margin-top:-26px; margin-bottom:-26px" >
+				<div class="col-md-12" style="padding:0px; margin-top:-24px; margin-bottom:-26px" >
 						<div class="col-md-12 box" >
-							<img class="img-responsive" src="{{ URL::asset('assets/img/market/market.png') }}" alt="Homemallph Market">
+							<img class="img-responsive" src="{{ URL::asset('assets/img/market/markets.png') }}" alt="Homemallph Market">
 						</div>
 				</div>
 			</div>			
@@ -73,93 +85,71 @@
 			?>
 			@foreach($market_data as $markets_datas )
 			<?php $count=0; ?>
-				
 			<div class="box"  style="background:{{$bg[$num]}}; padding:0px; margin-top:80px;  margin-bottom:10px;">
-				<center><img class="img-responsive" style="margin-top:-80px;" src="{{ URL::asset('assets/img/market/'.strtolower($markets_datas->market_name).'-add.png') }}" alt=""></center>
+				<center><img class="img-responsive" style="margin-top:-80px;" src="{{ URL::asset('assets/img/market/'.$markets_datas->market_name.'-add.png') }}" alt=""></center>
 			</div>
 			<div style="clear: both;"></div>
 			<div class="container">
-
-						<div style="clear: both;"></div>
-                        <div class="col-md-12 market box" >
-							
-							<div class="col-md-3 same-height-row" style="padding:0px; ">
-								<div class="col-md-12  market-logo" >
-									 <a  href="/{{$markets_datas->market_name}}"><center><img class="img-responsive" src="{{ URL::asset('assets/img/market/'.$markets_datas->market_name.'.png') }}" alt=""></center></a>
-								</div>
+					<div style="clear: both;"></div>
+					<div class="col-md-12 market box" >
+						
+						<div class="col-md-3 same-height-row" style="padding:0px; ">
+							<div class="col-md-12  market-logo" >
+								 <a  href="/{{$markets_datas->market_name}}"><center><img class="img-responsive" src="{{ URL::asset('assets/img/market/'.$markets_datas->market_name.'.png') }}" alt=""></center></a>
 							</div>
-							<div class="col-md-9 same-height-row" style="padding:0px; ">
-								<div class="col-md-4  col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store1.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store2.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store3.jpg') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store4.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store6.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store4.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4 col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store6.png') }}" alt="..."></div>
-								</div>
-								<div class="col-md-4  col-xs-6 store-logo" >
-									<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/store/store7.jpg') }}" alt="..."></div>
-								</div>							
-							</div>
-                        </div>
+						</div>
+						<div class="col-md-9 same-height-row" style="padding:0px; ">
+						@foreach($featured_store as $stores )
+							@if($stores->market_id==$markets_datas->id)
+								<a href="/Store/{{$stores->store_id}}" ><div class="col-md-4  col-xs-6 store-logo" >
+									<div class="wraptocenter"><span></span><img src="{{ URL::asset(getStoreBanner($stores->store->store_name)) }}" alt="..."></div>
+								</div></a>	
+							@endif
+						@endforeach
+						</div>
+					</div>
                 </div>
-				
-				
-				
+
 				<div class="container" >
-						@foreach($markets_datas->category as $category )
-							@if($count<4)
-							<?php $count++; ?>
-								<div class="col-md-3 col-xs-6" style="padding:2px; margin-bottom:-25px;">
+						@foreach($featured_category as $category )
+							@if($category->category->market_id==$markets_datas->id)
+								<div class="col-md-3 col-xs-6" style="padding:2px; margin-bottom:-22px;">
 									<div class="box">
-										<a href="/{{$markets_datas->market_name}}/Category/{{str_replace(' ','-',$category->category_name)}}/All"> <center><img class="img-responsive"  data-src="{{ URL::asset('assets/img/category/'.strtolower($markets_datas->market_name).'/'.$category->id.'.png') }}" data-src-retina="{{ URL::asset('assets/img/category/'.strtolower($markets_datas->market_name).'/'.$category->id.'.png') }}" src="{{ URL::asset('assets/img/loading.gif') }}" alt="" /></center></a>
-										<div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px;" >
-										@for ($x = 0; $x < 3; $x++)
-										    <a href="/Product/Details/1/Ariel-Sample" class="list-group-item category-products" >
-												<img class="alignleft" src="{{ URL::asset(imagePath('assets/img/store/samplestore/product/1/0')) }}" alt="..." >
-												<h5 class="list-group-item-heading">Product Name</h5>
-												<p class="list-group-item-text">P 100.00</p>
-											</a>
-										@endfor
+										<a href="/{{$markets_datas->market_name}}/Category/{{str_replace(' ','-',$category->category->category_name)}}/All"> <center><img class="img-responsive"  data-src="{{ URL::asset('assets/img/category/'.$markets_datas->market_name.'/'.$category->category->id.'.png') }}" data-src-retina="{{ URL::asset('assets/img/category/'.$markets_datas->market_name.'/'.$category->category->id.'.png') }}" src="{{ URL::asset('assets/img/loading.gif') }}" alt="" /></center></a>
+										<div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px; " >
+										<?php $prodCounts=0; ?>
+										@foreach($category->categoryProduct as $products )
+													@if($prodCounts<3)
+														<a href="/Product/Details/{{$products->products->id}}/{{encodeUrlRoute($products->products->product_name)}}" class="list-group-item category-products"  >
+															<?php $imgCounts=0; ?>
+															@foreach($products->products->product as $productss )
+																@if($imgCounts==0)
+																<img class="alignleft"  data-src="{{ URL::asset(getSingleImageProduct($productss->id,$products->products->store->store_name)) }}" data-src-retina="" src="{{ URL::asset('assets/img/loading.gif') }}" alt="" />
+																<?php $imgCounts++; ?>
+																@endif
+															@endforeach	
+															<div class="item-desc-prod "  >
+																<b><h5 class="list-group-item-heading">{{$products->products->product_name}}</h5></b>
+																<p class="list-group-item-text">P 100.00</p>
+															</div>
+														</a>
+													<?php $prodCounts++; ?>	
+													@endif
+										@endforeach	
 										</div>
 									</div>
 								</div>
 							@endif
 						@endforeach	
-						
-						<!--<div class="col-md-12 " style="padding:0px; margin-top:10px;"  >
-							<div id="textbox">
-								  <a  href="/market/{{strtolower($markets_datas->market_name)}}" class="alignright" style="margin-top:-20px;">See More</a>
-							</div>
-						</div>-->
-					</div>
-
                 </div>
-     		<?php $num++; ?>
+			<?php $num++; ?>
 			@endforeach	
 				
 			
            <div class="container" >
-				<div class="col-md-12" style="padding:2px; margin-top:10px;">
+				<div class="col-md-12" style="padding:2px; margin-top:-4px;">
 					<div class="col-md-12 box" >
-							<h3 class="text-uppercase text-center"><i class="fa fa-tag"></i>&nbsp;&nbsp;Brand&nbsp;&nbsp; <i class="fa fa-tag"></i></h3>
-							<p class="lead text-center">Choose your branded items!</p>
+						<img class="img-responsive" src="{{ URL::asset('assets/img/market/brands.png') }}" alt="Homemallph Market">
 					</div>
 				</div>
 			</div>
@@ -172,7 +162,7 @@
 									<div class="col-sm-12 same-height-row" style="padding:0px; ">	
 										@foreach($brands_data as $brands_data )
 										<div class="col-sm-2 col-xs-6 store-logo" >
-											<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/brand/'.strtolower($brands_data->id).'.png') }}" alt="..."></div>
+											<div class="wraptocenter"><span></span><img src="{{ URL::asset('assets/img/brand/'.$brands_data->id.'.png') }}" alt="..."></div>
 										</div>	
 										@endforeach	
 									</div>
@@ -182,33 +172,45 @@
                     </div>
                 </div>
             </div>
-          
+					
 			<div class="container" >
 				<div class="col-md-12" style="padding:2px; margin-top:-25px;" >
 					<div class="col-md-12 box" >
-						<h3 class="text-uppercase text-center"><i class="fa fa-star"></i>&nbsp;&nbsp; Trend&nbsp;&nbsp; <i class="fa fa-star"></i></h3>
-						<p class="lead text-center">Check our new and hottest items!</p>
+						<img class="img-responsive" src="{{ URL::asset('assets/img/market/trends.png') }}" alt="Homemallph Market">
 					</div>
 					<div class="col-md-12" style="padding:0px">
-					@for ($x = 0; $x < 12; $x++)
-						<div class="col-md-2 col-xs-6" style="padding:2px; margin-top:-23px;">
-								<div class="box">
-										<a href="/Product/Details/1/Ariel-Sample"><center><img class="img-responsive" src="{{ URL::asset('assets/img/category/grocery/1.png') }}" alt=""></center></a>
+						@foreach($featured_trend as $featured_trend )
+							<div class="col-md-2 col-xs-6" style="padding:2px; margin-top:-23px;">
+								@if(count($featured_trend->product_info)>0)
+								
+									<?php $countss++;?>
+									<div class="box" >
+										<a href="/Product/Details/{{$featured_trend->product_info->id}}/{{encodeUrlRoute($featured_trend->product_info->product_name)}}">
+										<center>
+										<?php $countimg=0;?>
+										@foreach($featured_trend->product_info->product as $products )
+											@if($countimg==0)
+												<?php $countimg++;?>
+													<img class="img-responsive"  data-src="{{ URL::asset(getSingleImageProduct($products->id,$featured_trend->product_info->store->store_name)) }}" src="{{ URL::asset('assets/img/loading.gif') }}" alt="">
+											@endif
+										@endforeach	
+										</center></a>
 										<div class="item-desc" style="padding:10px" >
-											<a href="/Product/Details/1/Ariel-Sample"><h4 >Product Namessssssss</h4>
-											<a href="/Product/Details/1/Ariel-Sample"><p >P 100.00</p></h4>
-											<div id="navcontainer">
-											<ul>
-												<li><a href=""><i class="fa fa-shopping-cart cart "  ></i></a></li>
-												<li><a href="" class="alignright-icon"><i class="fa fa-heart heart" ></i></a></li>
-												<li><a href="" class="alignright-icon"><i class="fa fa-star star"  ></i></a></li>
-											</ul>
-											</div>
-											
+											<a href="/Product/Details/{{$featured_trend->product_info->id}}/{{encodeUrlRoute($featured_trend->product_info->product_name)}}"><h4 >{{$featured_trend->product_info->product_name}}</h4></a>
+											<?php $count=0;?>
+											@foreach($featured_trend->product_info->product as $product )
+												@if($count==0)
+													<?php $count++;?>
+													<h4><p >&#8369;&nbsp;&nbsp;{{$product->sale_price}}</p></h4>
+												@endif
+											@endforeach	
+											<button class="btn btn-default pull-right btn-sm" style="margin-top:-30px; padding:4px 3px 4px 3px;"><i class="fa fa-shopping-cart cart-cart"></i></button>
 										</div>
-								</div>
-						</div>
-					@endfor	
+									</div>
+								
+								@endif
+							</div>
+						@endforeach	
 					</div>
 				</div>
 			</div>
@@ -281,10 +283,36 @@
 			
 			
 			
-	function getFeaturedProducts(){
-		$.post("/References/Barangay/Delete", {id : id}, function(result){	
-
-		});
+	function addCart(data){
+		try{
+			var response = $.ajax({
+				type: "POST",
+				url: "/cart/addcart",
+				data: {data1:data.data1 ,data2:data.data2, data3:data.data3, data4:data.data4},
+				async: false
+			}).responseText;
+			var datas = JSON.parse(response);
+			if(datas.success==true){
+				var elem1 = document.getElementsByClassName("badge-cart1");
+				var elem2 = document.getElementById("badge-cart2");
+				var elem3 = document.getElementById("badge-cart3");
+				var elem4 = document.getElementById("badge-cart4");
+				if ( elem1 ) {
+				 elem1.innerHTML=datas.data.datas2+"";
+				}
+				if ( elem2 ) {
+				elem2.innerHTML=datas.data.datas2+"";
+				}
+				if ( elem3 ) {
+				elem3.innerHTML=datas.data.datas2+"";
+				}
+				if ( elem4) {
+				elem4.innerHTML=datas.data.datas2+"";
+				}
+			}
+		}catch(err){
+			alert(err.message);
+		}
 	}		
 	</script>
 	

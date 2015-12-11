@@ -1,5 +1,7 @@
 <?php
 // My common functions
+
+
 function imagePath($path)
 {
     if(file_exists($path.'.png')){
@@ -86,5 +88,18 @@ function getStoreBanner($store_name)
 	}else{
 		return 'assets/img/nobanner.png';
 	}
-}					
+}	
+function cartData(){
+			$cart = new Anam\Phpcart\Cart();
+			$cart_data = array();
+			$items = $cart->getItems();
+			$itemsCount = $cart->count();
+			$itemsQuantityCount = $cart->totalQuantity();
+			$itemsTotalPrice = $cart->getTotal();
+			$cart_data['datas1'] = $items;
+			$cart_data['datas2'] = $itemsCount;
+			$cart_data['datas3'] = $itemsQuantityCount;
+			$cart_data['datas4'] = $itemsTotalPrice;
+			return $cart_data;
+}		
 ?>

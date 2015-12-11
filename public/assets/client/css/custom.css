@@ -27,6 +27,19 @@
 	margin-top:0px;
 	color:red;
 }
+
+.align-searches {
+	float: center;
+	margin-top:-100px;
+	margin-left:20px;
+	color:black;
+}.align-searches:hover {
+	float: center;
+	margin-left:20px;
+	margin-top:-100px;
+	color:red;
+}
+
 .alignright:hover {
 	float: right;
 	margin-top:0px;
@@ -87,6 +100,7 @@ margin-right:10px;
 	height:50px;
 	width:50px;
 	margin-right:15px;
+	margin-bottom:15px;
 
 }
 /* CSS used here will be applied after bootstrap.css */
@@ -148,6 +162,17 @@ color: red;
 	white-space: nowrap;
 }
 
+.item-desc-prod h5{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size:15px;
+}
+.item-desc-prod p{
+	color:#ff0000;
+	white-space: nowrap;
+}
+
 .input-xs {
     height: 30px;
     padding: 2px 5px;
@@ -196,7 +221,6 @@ list-style-type: none;
     margin:0;
     padding:0;
     text-align:center;
-
 }
 .navs li{
     display:inline;
@@ -210,7 +234,43 @@ list-style-type: none;
 .navs a:hover{
 	color:red;
 }
+
+.navs-popular-serches{
+    list-style:none;
+    margin:0;
+    padding:0;
+    text-align:center;
+}
+.navs-popular-serches li{
+    display:inline;
+}
+.navs-popular-serches a{
+    display:inline-block;
+    padding:10px 10px 0px 10px;
+	color:black;
+}
+
+.navs-popular-serches a:hover{
+	color:red;
+}
  
+.simple-navs{
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+.simple-navs li{
+    display:inline;
+}
+.simple-navs a{
+    display:inline-block;
+    padding:0px 5px 0px 15px;
+	color:black;
+}
+
+.simple-navs a:hover{
+	color:red;
+}
  
  
 .navs-variant{
@@ -554,7 +614,9 @@ color:red;
 	height:70%;
 	width:70%;
 	}
-	
+    #mainbody{
+		margin-right:0px;
+	}
 }
 @media(min-width:768px){
 	.market-logo{
@@ -572,6 +634,9 @@ color:red;
 	height: auto !important;
 	height:70%;
 	width:70%;
+	}
+	#mainbody{
+		margin-right:0px;
 	}
 }
 @media(min-width:992px){
@@ -591,7 +656,9 @@ color:red;
 	height:70%;
 	width:70%;
 	}
-
+	#mainbody{
+		margin-right:40px;
+	}
 }
 @media(min-width:1200px){
 	.market-logo{
@@ -609,6 +676,9 @@ color:red;
 	height: auto !important;
 	height:90%;
 	width:90%;
+	}
+	#mainbody{
+		margin-right:40px;
 	}
 }
 

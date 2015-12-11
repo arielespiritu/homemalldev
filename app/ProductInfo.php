@@ -15,7 +15,7 @@ class ProductInfo extends Model
 	//protected $hidden = ['id', 'product_name', 'sub_category_id' , 'product_status', 'store_id', 'product_description', 'product_range'];
 	
 	public function product() {
-        return $this->hasMany('App\Product','product_info_id','id')->with('combo')->withTrashed();
+        return $this->hasMany('App\Product','product_info_id','id')->with('combo')->where('product_status','=','9')->withTrashed();
     }
 	public function productVariantGroup() {
         return $this->hasMany('App\ProductVariant','product_info_id','id')->with('variant')->groupBy('variant_id')->withTrashed();
