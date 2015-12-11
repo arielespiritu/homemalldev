@@ -145,13 +145,12 @@ public function checkifImagefile($photo)
 public function addVariant(Request $request)
 {
 	$input = Input::all();
-
 	$productvariants =  new productvariants;
 	$productvariants->product_info_id =$input['product_info_id'];
 	$productvariants->variant_id =$this->getVariantID($input['variant_type']);
 	$productvariants->variant_name_value =$input['variant_name'];
 	$productvariants->save();
-	return json_encode($productvariants);
+	return $productvariants->id;
 }	
 ///
 // END GLOBAL FUNC
@@ -199,6 +198,19 @@ public function checkBrandnameExist($brand_name,$marketid)
 	catch(\Exception $e)
 	{
 		return '0';
+	}
+}
+public function getSelectedVariant()
+{
+	try
+	{
+		$input= Input::all();
+		$productvariants = productvariants::where('product_info_id','=',$input['temp_key'])->where('variant_id','=',$input['temp_variantKey'])->with('getVariant')->get();
+		return json_encode($productvariants);
+	}
+	catch(\Exception $e)
+	{
+		return $e;
 	}
 }
 public function getVariantID($variant_name)
@@ -493,11 +505,36 @@ public function updateParent($status,Request $request)
 	}
 	elseif($status=='LongEditParent')
 	{
-		$this->updateProductInformation($input['temp_idkey'],$input['product_name'],$input['product_sub_category'],$input['product_info_status'],$input['brand_info'],$input['product_description'],$input['product_ranged']);
-		$this->inserProductTags($input['temp_idkey'],$input['parent_keywords']);
+		try
+		{
+			$this->updateProductInformation($input['temp_idkey'],$input['product_name'],$input['product_sub_category'],$input['product_info_status'],$input['brand_info'],$input['product_description'],$input['product_ranged']);
+			$this->inserProductTags($input['temp_idkey'],$input['parent_keywords']);
+			return 'Product Information Updated--success--Up-to-date';
+		}
+		catch(\Exception $e)
+		{
+			return '0'.$e.'--error--Someting Wrong';
+		}
 	}
-	
-	
+	elseif($status == 'delSelectedVariant')
+	{
+		try{ //2-unable to delte 3- err 1-delted
+			$productcombination=productcombination::where('product_variant_id','=',$input['temp_variantKey'])->get();
+			if(count($productcombination) != '0')
+			{
+				return '2';
+			}
+			else
+			{
+				$productvariants=productvariants::where('id','=',$input['temp_variantKey'])->forceDelete();
+				return '1';
+			}
+		}
+		catch(\Exception $e)
+		{
+			return '3'.$e;
+		}
+	}
 }
 public function addProduct(Request $request)
 {
@@ -884,7 +921,12 @@ catch(\Exception $err)
 		$decrypted = Crypt::decrypt($input['gates']);
 			if($decrypted == 'devANONE')
 			{
-				$productinformation = productinformation::with('getSubCategoryName')->with('getStatus')->where('store_id','=',$userLogin->login_id)->get();
+					$productinformation = productinformation::with('getSubCategoryName')->with('getStatus')->with(['getParentChildforInventory' => function ($query) {
+											$query->join('inventory_details_tbl', 'product_tbl.id', '=', 'inventory_details_tbl.product_id')
+												  ->selectRaw('product_tbl.product_info_id,product_tbl.id,inventory_details_tbl.product_id,sum(inventory_details_tbl.quantity) as total_inv')
+												  ->groupBy('product_tbl.product_info_id');
+											
+										}])->where('store_id','=',$userLogin->login_id)->get();	
 				if(count($productinformation) == '0')
 				{
 					return '0';

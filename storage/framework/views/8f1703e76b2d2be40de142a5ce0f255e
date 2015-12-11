@@ -1,9 +1,8 @@
-@extends('admin.includes.master.master')
-@section('main_header_title', 'Products')
-@endsection
-@section('sub_header_title', 'Product Information ')
-@endsection
-@section('breadcrumbs')
+<?php $__env->startSection('main_header_title', 'Products'); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('sub_header_title', 'Product Information '); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('breadcrumbs'); ?>
 	<div class="breadcrumbs" id="breadcrumbs">
 		<ul class="breadcrumb">
 			<li>
@@ -16,8 +15,8 @@
 			<li class="active">Products </li>
 		</ul><!--.breadcrumb-->
 	</div>
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 <div class="row-fluid">
 	<div class="span12 widget-container-span" >
 		<div class="widget-box"> 
@@ -45,60 +44,63 @@
 							</thead>
 							<tbody>
 							<?php $i=0 ?>
-							@foreach($productinformation as $prodinfo)
+							<?php foreach($productinformation as $prodinfo): ?>
 								<tr>
 									<td>
-										<p>{{$prodinfo->id}}</p>
+										<p><?php echo e($prodinfo->id); ?></p>
 									</td>								
 									<td>
 										<center>
-											<p id="product_parag_id-{{$prodinfo->id}}">{{$prodinfo->product_name}}</p>
-											<input type="text" class="span12" id="product_input_id-{{$prodinfo->id}}" style="display:none" value="{{$prodinfo->product_name}}" placeholder="Sub category Name" />
+											<p id="product_parag_id-<?php echo e($prodinfo->id); ?>"><?php echo e($prodinfo->product_name); ?></p>
+											<input type="text" class="span12" id="product_input_id-<?php echo e($prodinfo->id); ?>" style="display:none" value="<?php echo e($prodinfo->product_name); ?>" placeholder="Sub category Name" />
 										</center>
 									</td>	
 									<td>
 										<center>
-										@if(!is_null($prodinfo->getSubCategoryName))
-										<p  id="combo_parag_id-{{$prodinfo->id}}" >{{$prodinfo->getSubCategoryName->SCN3}}</p>
-											<select class="span12" id="product_combo_id-{{$prodinfo->id}}"  style="width:100%; z-index:999; display:none"  data-placeholder="Choose Status">
+										<?php if(!is_null($prodinfo->getSubCategoryName)): ?>
+										<p  id="combo_parag_id-<?php echo e($prodinfo->id); ?>" ><?php echo e($prodinfo->getSubCategoryName->SCN3); ?></p>
+											<select class="span12" id="product_combo_id-<?php echo e($prodinfo->id); ?>"  style="width:100%; z-index:999; display:none"  data-placeholder="Choose Status">
 															<option value="" />
-												@foreach($sub_cat as $subcategory)
-													@if($prodinfo->getSubCategoryName->CI1 == $subcategory->CI1)
-														@if($prodinfo->getSubCategoryName->SC1 == $subcategory->SC1 )
-															<option selected value="{{$subcategory->id}}" />{{$subcategory->SCN3}}
-														@else
-															<option value="{{$subcategory->id}}" />{{$subcategory->SCN3}}
-														@endif	
-													@else
-													@endif
-												@endforeach	
+												<?php foreach($sub_cat as $subcategory): ?>
+													<?php if($prodinfo->getSubCategoryName->CI1 == $subcategory->CI1): ?>
+														<?php if($prodinfo->getSubCategoryName->SC1 == $subcategory->SC1 ): ?>
+															<option selected value="<?php echo e($subcategory->id); ?>" /><?php echo e($subcategory->SCN3); ?>
+
+														<?php else: ?>
+															<option value="<?php echo e($subcategory->id); ?>" /><?php echo e($subcategory->SCN3); ?>
+
+														<?php endif; ?>	
+													<?php else: ?>
+													<?php endif; ?>
+												<?php endforeach; ?>	
 											</select>									
-										@else
-											<p  id="combo_parag_id-{{$prodinfo->id}}" ></p>
-											<select class="span12" id="product_combo_id-{{$prodinfo->id}}"  style="width:100%; z-index:999; display:none"  data-placeholder="Choose Status">
+										<?php else: ?>
+											<p  id="combo_parag_id-<?php echo e($prodinfo->id); ?>" ></p>
+											<select class="span12" id="product_combo_id-<?php echo e($prodinfo->id); ?>"  style="width:100%; z-index:999; display:none"  data-placeholder="Choose Status">
 												<option value="" />
-												@foreach($sub_cat as $subcategory)
-													@if($prodinfo->store_id == $subcategory->store_id)
-															<option value="{{$subcategory->id}}" />{{$subcategory->SCN3}}
-													@else
-													@endif
-												@endforeach													
+												<?php foreach($sub_cat as $subcategory): ?>
+													<?php if($prodinfo->store_id == $subcategory->store_id): ?>
+															<option value="<?php echo e($subcategory->id); ?>" /><?php echo e($subcategory->SCN3); ?>
+
+													<?php else: ?>
+													<?php endif; ?>
+												<?php endforeach; ?>													
 											</select>	
-										@endif
+										<?php endif; ?>
 										</center>
 									</td>
 									<td>
 										<div>
 										<label class="switch" style="padding:0px;">
-										@if($prodinfo->getStatus->id == '9')
-											<p  id="product_status_name-{{$prodinfo->id}}" style="display:none">PUBLISH</p>
-											<input class="switch-input" onChange='changeStat("product_status_name-{{$prodinfo->id}}","{{$prodinfo->id}}")' type="checkbox" checked/>
+										<?php if($prodinfo->getStatus->id == '9'): ?>
+											<p  id="product_status_name-<?php echo e($prodinfo->id); ?>" style="display:none">PUBLISH</p>
+											<input class="switch-input" onChange='changeStat("product_status_name-<?php echo e($prodinfo->id); ?>","<?php echo e($prodinfo->id); ?>")' type="checkbox" checked/>
 											
-										@else
-											<p  id="product_status_name-{{$prodinfo->id}}"  style="display:none">NOT PUBLISH</p>
-											<input class="switch-input" id="" style="" onChange='changeStat("product_status_name-{{$prodinfo->id}}","{{$prodinfo->id}}")' type="checkbox"/>
+										<?php else: ?>
+											<p  id="product_status_name-<?php echo e($prodinfo->id); ?>"  style="display:none">NOT PUBLISH</p>
+											<input class="switch-input" id="" style="" onChange='changeStat("product_status_name-<?php echo e($prodinfo->id); ?>","<?php echo e($prodinfo->id); ?>")' type="checkbox"/>
 											
-										@endif
+										<?php endif; ?>
 											<span class="switch-label"  data-on="ACTIVE" data-off="INACTIVE"></span> 
 											<span class="switch-handle"></span> 
 										</label>
@@ -106,23 +108,24 @@
 									</td>	
 									<td>
 										<center>
-											@foreach($prodinfo->getParentChildforInventory as $totalInventory)
-											@endforeach
-											{{$totalInventory->total_inv}}
+											<?php foreach($prodinfo->getParentChildforInventory as $totalInventory): ?>
+											<?php endforeach; ?>
+											<?php echo e($totalInventory->total_inv); ?>
+
 										</center>
 									</td>		
 									<td class="td-actions">
 										<div class="hidden-phone visible-desktop action-buttons">
-											<a class="blue" id="product_btn_save-{{$i}}" onClick="btn_save('{{$prodinfo->id}}','product_input_id-{{$prodinfo->id}}','product_combo_id-{{$prodinfo->id}}','product_btn_edit-{{$i}}','product_btn_save-{{$i}}','product_btn_cancel-{{$i}}')" style="display:none" href="javascript:;">
+											<a class="blue" id="product_btn_save-<?php echo e($i); ?>" onClick="btn_save('<?php echo e($prodinfo->id); ?>','product_input_id-<?php echo e($prodinfo->id); ?>','product_combo_id-<?php echo e($prodinfo->id); ?>','product_btn_edit-<?php echo e($i); ?>','product_btn_save-<?php echo e($i); ?>','product_btn_cancel-<?php echo e($i); ?>')" style="display:none" href="javascript:;">
 												<i class="icon-save bigger-130"></i>
 											</a>										
-											<a class="orange" id="product_btn_view-{{$i}}" onClick="" href="/HMadmin/Product/{{$prodinfo->id}}">
+											<a class="orange" id="product_btn_view-<?php echo e($i); ?>" onClick="" href="/HMadmin/Product/<?php echo e($prodinfo->id); ?>">
 												<i class="icon-zoom-in bigger-130"></i>
 											</a>
-											<a class="green" id="product_btn_edit-{{$i}}" onClick="visibility('product_btn_edit-{{$i}}','product_btn_save-{{$i}}','product_btn_cancel-{{$i}}','{{$prodinfo->id}}','edit')" href="javascript:;">
+											<a class="green" id="product_btn_edit-<?php echo e($i); ?>" onClick="visibility('product_btn_edit-<?php echo e($i); ?>','product_btn_save-<?php echo e($i); ?>','product_btn_cancel-<?php echo e($i); ?>','<?php echo e($prodinfo->id); ?>','edit')" href="javascript:;">
 												<i class="icon-pencil bigger-130"></i>
 											</a>
-											<a class="red" id="product_btn_cancel-{{$i}}" style="display:none" onClick="visibility('product_btn_edit-{{$i}}','product_btn_save-{{$i}}','product_btn_cancel-{{$i}}','{{$prodinfo->id}}','cancel')" href="javascript:;">
+											<a class="red" id="product_btn_cancel-<?php echo e($i); ?>" style="display:none" onClick="visibility('product_btn_edit-<?php echo e($i); ?>','product_btn_save-<?php echo e($i); ?>','product_btn_cancel-<?php echo e($i); ?>','<?php echo e($prodinfo->id); ?>','cancel')" href="javascript:;">
 												<i class="icon-close bigger-130"></i>
 											</a>											
 										</div>
@@ -134,22 +137,22 @@
 
 												<ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
 													<li>
-														<a class="blue" id="product_btn_save-phone-{{$i}}" onClick="btn_save('{{$prodinfo->id}}','product_input_id-{{$prodinfo->id}}','product_combo_id-{{$prodinfo->id}}','product_btn_edit-phone-{{$i}}','product_btn_save-phone-{{$i}}','product_btn_cancel-phone-{{$i}}')" style="display:none" href="javascript:;">
+														<a class="blue" id="product_btn_save-phone-<?php echo e($i); ?>" onClick="btn_save('<?php echo e($prodinfo->id); ?>','product_input_id-<?php echo e($prodinfo->id); ?>','product_combo_id-<?php echo e($prodinfo->id); ?>','product_btn_edit-phone-<?php echo e($i); ?>','product_btn_save-phone-<?php echo e($i); ?>','product_btn_cancel-phone-<?php echo e($i); ?>')" style="display:none" href="javascript:;">
 															<i class="icon-save bigger-130"></i>
 														</a>
 													</li>
 													<li>
-														<a class="orange" id="product_btn_view-phone-{{$i}}" onClick="" href="javascript:;">
+														<a class="orange" id="product_btn_view-phone-<?php echo e($i); ?>" onClick="" href="javascript:;">
 															<i class="icon-zoom-in bigger-130"></i>
 														</a>
 													</li>
 													<li>
-														<a class="green" id="product_btn_edit-phone-{{$i}}" onClick="visibility('product_btn_edit-phone-{{$i}}','product_btn_save-phone-{{$i}}','product_btn_cancel-phone-{{$i}}','{{$prodinfo->id}}','edit')" href="javascript:;">
+														<a class="green" id="product_btn_edit-phone-<?php echo e($i); ?>" onClick="visibility('product_btn_edit-phone-<?php echo e($i); ?>','product_btn_save-phone-<?php echo e($i); ?>','product_btn_cancel-phone-<?php echo e($i); ?>','<?php echo e($prodinfo->id); ?>','edit')" href="javascript:;">
 															<i class="icon-pencil bigger-130"></i>
 														</a>
 													</li>
 													<li>
-														<a class="red" id="product_btn_cancel-phone-{{$i}}" style="display:none" onClick="visibility('product_btn_edit-phone-{{$i}}','product_btn_save-phone-{{$i}}','product_btn_cancel-phone-{{$i}}','{{$prodinfo->id}}','cancel')" href="javascript:;">
+														<a class="red" id="product_btn_cancel-phone-<?php echo e($i); ?>" style="display:none" onClick="visibility('product_btn_edit-phone-<?php echo e($i); ?>','product_btn_save-phone-<?php echo e($i); ?>','product_btn_cancel-phone-<?php echo e($i); ?>','<?php echo e($prodinfo->id); ?>','cancel')" href="javascript:;">
 															<i class="icon-close bigger-130"></i>
 														</a>													
 													</li>
@@ -159,7 +162,7 @@
 									</td>									
 								</tr>
 								<?php $i++; ?>
-							@endforeach
+							<?php endforeach; ?>
 							</tbody>
 						</table>
 					</div>
@@ -168,8 +171,8 @@
 		</div>
 	</div>
 </div>
-@endsection
-@section('myscripts')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('myscripts'); ?>
 <script>
 var jsonSubCategory =<?php echo json_encode($sub_cat); ?>;
 //createChosen(getchosenCount,"product_combo_id-");
@@ -307,7 +310,7 @@ function explodejson(getJ)
 }
 function reloadDatatable(id)
 {
-var getchosenCount= "{{$i}}";
+var getchosenCount= "<?php echo e($i); ?>";
 
 var gate="<?php echo  Crypt::encrypt('devANONE') ?>";
 		$.post("/HMadmin/Products/reload-products",
@@ -400,4 +403,6 @@ var gate="<?php echo  Crypt::encrypt('devANONE') ?>";
 	});
 }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.includes.master.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -39,6 +39,7 @@ Route::post('/HMadmin/responsedec','AdminConn\decrypter@decrypt');
 Route::post('/HMadmin/Products/reload-products','AdminConn\products@getAllParentProduct');
 Route::post('/HMadmin/Products/Edit-Product/{id}','AdminConn\products@updateParent');
 Route::post('/HMadmin/Products/viewSubCat','AdminConn\products@getSubCategory');
+Route::post('/HMadmin/Products/showSelectedVariant','AdminConn\products@getSelectedVariant');
 //""
 
 
