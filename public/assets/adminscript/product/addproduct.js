@@ -5,7 +5,14 @@ noSpecialChar('#product_ranged');
 noSpecialChar('#description_name');
 restrictProduct_name("#product_name");
 isChildorParent(document.getElementById('product_type').value);
-
+var tag_input = $('#parent_keywords');
+if(! ( /msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase())) ) 
+	tag_input.tag({placeholder:tag_input.attr('placeholder')});
+else {
+	//display a textarea for old IE, because it doesn't support this plugin or another one I tried!
+	tag_input.after('<textarea id="'+tag_input.attr('id')+'" class="span12" name="'+tag_input.attr('name')+'" rows="3">'+tag_input.val()+'</textarea>').remove();
+	// $('#form-field-tags').autosize({append: "\n"});
+}
 function addSubcat(id)
 {
 	var getValue = document.getElementById(id).value;
@@ -157,6 +164,8 @@ function addProduct()
 	var selectValues = document.getElementById('select_values').value;
 	
 	var product_main_names = document.getElementById('product_main_names').value;
+	
+	var parent_keywords = document.getElementById('parent_keywords').value;
 
 	var formData = new FormData();
 	var countFiles=0;
@@ -207,6 +216,7 @@ function addProduct()
 					formData.append(getSelect[i],JSON.stringify(arrayParent)); 
 					arrayParent= [];
 				}
+					formData.append('parent_keywords',parent_keywords); 
 					formData.append('product_type',product_type); 
 					formData.append('product_name',product_name); 
 					formData.append('product_description',product_description); 
@@ -237,7 +247,49 @@ function addProduct()
 				$('#addProduct_btn').prop('disabled', true);
 					//alert(countFiles);
 					formData.append('imagecount',countFiles); 
-	
+					
+					$.ajax({
+						type: "POST",
+						url: "/HMadmin/Products/addProduct",     // Url to which the request is send
+						data:formData,
+						contentType: false,       // The content type used when sending data to the server.
+						processData:false,        // To send DOMDocument or non processed data file it is set to false		
+						success: function(result)   // A function to be called if request succeeds
+					{
+						alert(result);
+						var jsonResponse=  JSON.parse(result);
+						if(jsonResponse[0].success == '1')
+						{
+							document.getElementById('product_combo_result').value = jsonResponse[0].data;
+							document.getElementById('product_complex_status').value='SAVED';
+							document.getElementById('product_information_status').value='NEED TO RESET';
+							resetFieldsChild();
+							last_gritter = $.gritter.add({
+								title: 'Huray!!!',
+								text: 'Product was Succesfully Added you can now Add more product Subordinates',
+								class_name: 'gritter-success gritter-center'
+							});					
+							$('#loading').fadeOut();
+							$('#addProduct_btn').prop('disabled', false);	
+							
+						}
+						else
+						{
+							messageResult='';
+							for(i= 0; i<jsonResponse[0].data.length;i++)
+							{
+								messageResult+=jsonResponse[0].data[i]+'<br>';
+							}
+								last_gritter = $.gritter.add({
+									title: 'Something Wrong',
+									text: messageResult,
+									class_name: 'gritter-error gritter-center'
+								});	
+								$('#loading').fadeOut();
+								$('#addProduct_btn').prop('disabled', false);	
+						}
+					}
+					});						
 			}
 	}
  	else if(document.getElementById('product_type').value == 'child')
@@ -291,54 +343,55 @@ function addProduct()
 				$('#addProduct_btn').prop('disabled', true);
 					formData.append('imagecount',countFiles); 
 					
+					$.ajax({
+						type: "POST",
+						url: "/HMadmin/Products/addProduct",     // Url to which the request is send
+						data:formData,
+						contentType: false,       // The content type used when sending data to the server.
+						processData:false,        // To send DOMDocument or non processed data file it is set to false		
+						success: function(result)   // A function to be called if request succeeds
+					{
+						alert(result);
+						var jsonResponse=  JSON.parse(result);
+						if(jsonResponse[0].success == '1')
+						{
+							document.getElementById('product_combo_result').value = jsonResponse[0].data;
+							document.getElementById('product_complex_status').value='SAVED';
+							document.getElementById('product_information_status').value='NEED TO RESET';
+							resetFieldsChild();
+							last_gritter = $.gritter.add({
+								title: 'Huray!!!',
+								text: 'Product was Succesfully Added you can now Add more product Subordinates',
+								class_name: 'gritter-success gritter-center'
+							});					
+							$('#loading').fadeOut();
+							$('#addProduct_btn').prop('disabled', false);	
+							
+						}
+						else
+						{
+							messageResult='';
+							for(i= 0; i<jsonResponse[0].data.length;i++)
+							{
+								messageResult+=jsonResponse[0].data[i]+'<br>';
+							}
+								last_gritter = $.gritter.add({
+									title: 'Something Wrong',
+									text: messageResult,
+									class_name: 'gritter-error gritter-center'
+								});	
+								$('#loading').fadeOut();
+								$('#addProduct_btn').prop('disabled', false);	
+						}
+					}
+					});					
 		}
 	}
 	else
 	{
 		
 	}
-		$.ajax({
-			type: "POST",
-			url: "/HMadmin/Products/addProduct",     // Url to which the request is send
-			data:formData,
-			contentType: false,       // The content type used when sending data to the server.
-			processData:false,        // To send DOMDocument or non processed data file it is set to false		
-			success: function(result)   // A function to be called if request succeeds
-		{
-			//alert(result);
-			var jsonResponse=  JSON.parse(result);
-			if(jsonResponse[0].success == '1')
-			{
-				document.getElementById('product_combo_result').value = jsonResponse[0].data;
-				document.getElementById('product_complex_status').value='SAVED';
-				document.getElementById('product_information_status').value='NEED TO RESET';
-				resetFieldsChild();
-				last_gritter = $.gritter.add({
-					title: 'Huray!!!',
-					text: 'Product was Succesfully Added you can now Add more product Subordinates',
-					class_name: 'gritter-success gritter-center'
-				});					
-				$('#loading').fadeOut();
-				$('#addProduct_btn').prop('disabled', false);	
-				
-			}
-			else
-			{
-				messageResult='';
-				for(i= 0; i<jsonResponse[0].data.length;i++)
-				{
-					messageResult+=jsonResponse[0].data[i]+'<br>';
-				}
-					last_gritter = $.gritter.add({
-						title: 'Something Wrong',
-						text: messageResult,
-						class_name: 'gritter-error gritter-center'
-					});	
-					$('#loading').fadeOut();
-					$('#addProduct_btn').prop('disabled', false);	
-			}
-		}
-		});
+
 	
 }
 function addBrand(id)
@@ -442,7 +495,6 @@ function getProduct(SC1)
 	},
 	function(result)
 	{	
-	
 		var x = document.getElementById("product_main_names");
 		document.getElementById("product_main_names").options.length = 0;
 		var option = document.createElement("option");
@@ -568,7 +620,7 @@ function showCategoryInfo(MI1)
 				//alert('1');
 				var option = document.createElement("option");	
 				option.text =jsonBrand[getBrand].BN2;
-				option.value =jsonBrand[getBrand].BN1;
+				option.value =jsonBrand[getBrand].BI1;
 				x1.add(option);
 			}
 			else
@@ -647,9 +699,7 @@ function getDrectory(changefrom,changeto,checkifcancel,imgsrclear)
 function removeElement(element)
 {
     $(element).remove();
-	//$('#masterdiv').empty();
 }
-
 function addVariants()
 {	  
 	var variantName= document.getElementById('description_name').value;
@@ -735,14 +785,12 @@ function checkifhasinTable(tableid,type,description)
 }
 function getTableValues(tableid)
 {
-
 	var rows = document.getElementById(tableid).getElementsByTagName('tbody')[0].getElementsByTagName('tr').length;
 	var x = document.getElementById(tableid).rows[1].cells[0].innerHTML;
 	var arrayList= document.getElementById('select_values');
 	var selectstags = [];
 	for(y=0;y< rows;y++)
 	{
-		
 		var cell0value=document.getElementById(tableid).rows[y+1].cells[0].innerHTML;
 		var cell0description=document.getElementById(tableid).rows[y+1].cells[1].innerHTML;
 		cell0value = cell0value.split(' ').join('_');
@@ -756,35 +804,28 @@ function getTableValues(tableid)
 		}
 		else
 		{
-			
 			selectstags = arrayList.value.split(",");
 			if(selectstags.indexOf(cell0value) > -1)
 			{
-
 				var exist='false';
 				$('#'+cell0value+' option').each(function(){
 					if (this.value == cell0description.split(' ').join('_')) {
 						exist= 'true';
 					}
 				});
-				
 				if(exist=='false')
 				{
 
 					$("#"+cell0value+" option:last").after($('<option value="'+cell0description.split(' ').join('_')+'">'+cell0description+'</option>'));	
 					$("#"+cell0value).trigger("liszt:updated");
-					
-
 				}
 				else
 				{
 				
 				}
-
 			}
 			else
 			{
-				
 				selectstags.push(cell0value);
 				creatingSelects(cell0value,selectstags);
 				$("#"+cell0value+" option:last").after($('<option value="'+cell0description.split(' ').join('_')+'">'+cell0description+'</option>'));				
@@ -795,7 +836,6 @@ function getTableValues(tableid)
 				// x1.add(option);	
 				$("#"+cell0value).trigger("liszt:updated");
 			}
-			
 		}
 	}
 	arrayList.value=selectstags;

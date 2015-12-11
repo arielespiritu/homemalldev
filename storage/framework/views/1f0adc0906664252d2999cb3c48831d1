@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <?php echo $__env->yieldContent('title'); ?>
+		<?php echo $__env->yieldContent('head'); ?>
+		<?php echo $__env->yieldContent('javascripts'); ?>
+	</head>
+	<body>
+		<?php echo $__env->yieldContent('body'); ?>
+	</body>
+		
+</html>

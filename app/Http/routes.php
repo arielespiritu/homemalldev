@@ -24,6 +24,7 @@ Route::get('/HMadmin/Store-Users', function () {
 Route::get('/HMadmin/Store-Profile','AdminConn\admincontroller@showStoreProfile');
 Route::get('/HMadmin/Products','AdminConn\products@showProducts');
 Route::get('/HMadmin/Main-Products','AdminConn\products@showMainProducts');
+Route::get('/HMadmin/Product/{id}','AdminConn\products@showEditProduct');
 
 //POST
 Route::post('/HMadmin/loginauth','AdminConn\loginauth@validateLogin');
@@ -36,6 +37,9 @@ Route::post('/HMadmin/Products/viewChild','AdminConn\products@viewChild');
 Route::post('/HMadmin/Products/getProducts','AdminConn\products@getProducNames');
 Route::post('/HMadmin/responsedec','AdminConn\decrypter@decrypt');
 Route::post('/HMadmin/Products/reload-products','AdminConn\products@getAllParentProduct');
+Route::post('/HMadmin/Products/Edit-Product/{id}','AdminConn\products@updateParent');
+Route::post('/HMadmin/Products/viewSubCat','AdminConn\products@getSubCategory');
+Route::post('/HMadmin/Products/showSelectedVariant','AdminConn\products@getSelectedVariant');
 //""
 
 

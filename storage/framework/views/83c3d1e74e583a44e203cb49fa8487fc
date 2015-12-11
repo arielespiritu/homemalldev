@@ -1,0 +1,32 @@
+<?php $__env->startSection('main_header_title', 'Dashboard'); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('sub_header_title', 'overview & stats'); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('breadcrumbs'); ?>
+	<div class="breadcrumbs" id="breadcrumbs">
+		<ul class="breadcrumb">
+			<li>
+				<i class="icon-home home-icon"></i>
+				<a href="/">Home</a>
+
+				<span class="divider">
+					<i class="icon-angle-right arrow-icon"></i>
+				</span>
+			</li>
+			<li class="active">Dashboard</li>
+		</ul><!--.breadcrumb-->
+	</div>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+	
+
+hello
+
+
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('myscripts'); ?>
+<script>
+</script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.includes.master.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

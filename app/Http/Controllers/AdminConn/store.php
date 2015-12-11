@@ -165,6 +165,11 @@ public function __construct()
 			}
 		}
 	}
+	public function move_file($file,$destination_logo,$file_name)
+	{
+		$extension = strtolower($file->getClientOriginalExtension());
+		$result=$file->move($destination_logo,$file_name.'.'.$extension);
+	}
 
 	public function upload_file($file,$destination_logo,$file_name)
 	{

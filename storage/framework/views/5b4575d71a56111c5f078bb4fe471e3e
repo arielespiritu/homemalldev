@@ -1,0 +1,320 @@
+<?php $__env->startSection('title', 'HomemallPH - Market Place'); ?>
+
+<?php $__env->startSection('content'); ?>
+
+    <div id="all">
+					
+			<div id="main-slider" style="margin-top:-15px;"> 
+				<div class="item" style="background:#a22221;">
+					<center><img class="img-responsive" src="<?php echo e(URL::asset('assets/img/banner4.png')); ?>" alt=""></center>
+				</div>	
+				<div class="item"  style="background:#b3a387;">
+					<center><img src="<?php echo e(URL::asset('assets/img/banner1.png')); ?>" alt="" class="img-responsive"></center>
+				</div>
+				<div class="item" style="background:#32ace8;" >
+					<center><img class="img-responsive" src="<?php echo e(URL::asset('assets/img/banner2.png')); ?>" alt=""></center>
+				</div>
+				<div class="item" >
+					<center><img class="img-responsive" src="<?php echo e(URL::asset('assets/img/banner3.png')); ?>" alt=""></center>
+				</div>	
+				
+			</div>
+			
+	</div>
+   
+		<div id="hot" style="margin-top:10px;">
+			<div class="container" >
+				<div class="col-md-12" style="padding:0px;" >
+					<div class="col-md-12 box" >
+						<img class="img-responsive" src="<?php echo e(URL::asset('assets/img/market/featuredItem.png')); ?>" alt="Homemallph Market">
+					</div>
+					<div class="col-md-12" style="padding:0px" id="featured-products">
+					<?php $countss = 0;$order = array();?>
+					<?php foreach($featured_products as $featured_products ): ?>
+						<div class="col-md-2 col-xs-6" style="padding:2px; margin-top:-25px;">
+							<?php if(count($featured_products->product_info)>0): ?>
+								<?php if($countss<12): ?>
+								<?php $countss++;?>
+								<div class="box" style="position: relative;" >
+									<img class="img-responsive" style="position: absolute;top: 0px; left: 0;"  src="<?php echo e(URL::asset('assets/img/sale.png')); ?>" alt="">
+									<a href="/Product/Details/<?php echo e($featured_products->product_info->id); ?>/<?php echo e(encodeUrlRoute($featured_products->product_info->product_name)); ?>">
+									<center>
+									<?php $countimg=0;?>
+									<?php foreach($featured_products->product_info->product as $products ): ?>
+										<?php if($countimg==0): ?>
+											<?php $countimg++; $order['data1'] = $products->id;?>
+												<img class="img-responsive"  data-src="<?php echo e(URL::asset(getSingleImageProduct($products->id,$featured_products->product_info->store->store_name))); ?>" src="<?php echo e(URL::asset('assets/img/loading.gif')); ?>" alt="">
+										<?php endif; ?>
+									<?php endforeach; ?>	
+									</center></a>
+									<div class="item-desc" style="padding:10px" >
+										<a href="/Product/Details/<?php echo e($featured_products->product_info->id); ?>/<?php echo e(encodeUrlRoute($featured_products->product_info->product_name)); ?>"><h4 ><?php echo e($featured_products->product_info->product_name); ?></h4></a>
+										<?php $count=0; $order['data2'] = $featured_products->product_info->product_name;?>
+										<?php foreach($featured_products->product_info->product as $product ): ?>
+											<?php if($count==0): ?>
+												<?php $count++;
+												$order['data3'] = $product->sale_price; 
+												$order['data4'] = 1;?>
+												<h4><p >&#8369;&nbsp;&nbsp;<?php echo e($product->sale_price); ?></p></h4>
+											<?php endif; ?>
+										<?php endforeach; ?>	
+										<button onclick="addCart(<?php echo e(json_encode($order)); ?>)" class="btn btn-default pull-right btn-xs" style="margin-top:-30px; padding:4px 3px 4px 3px;"><i class="fa fa-shopping-cart cart-cart"></i></button>
+									</div>
+									
+								</div>
+								<?php endif; ?>
+							<?php endif; ?>
+						</div>
+					<?php endforeach; ?>	
+					</div>
+				</div>
+			</div>
+			<div class="container" >
+				<div class="col-md-12" style="padding:0px; margin-top:-24px; margin-bottom:-26px" >
+						<div class="col-md-12 box" >
+							<img class="img-responsive" src="<?php echo e(URL::asset('assets/img/market/markets.png')); ?>" alt="Homemallph Market">
+						</div>
+				</div>
+			</div>			
+
+			<?php 
+				$bg=array("#f6ecb7","#103f71","#ca27f4","#4a79f5"); 
+				$num = 0;
+			?>
+			<?php foreach($market_data as $markets_datas ): ?>
+			<?php $count=0; ?>
+			<div class="box"  style="background:<?php echo e($bg[$num]); ?>; padding:0px; margin-top:80px;  margin-bottom:10px;">
+				<center><img class="img-responsive" style="margin-top:-80px;" src="<?php echo e(URL::asset('assets/img/market/'.$markets_datas->market_name.'-add.png')); ?>" alt=""></center>
+			</div>
+			<div style="clear: both;"></div>
+			<div class="container">
+					<div style="clear: both;"></div>
+					<div class="col-md-12 market box" >
+						
+						<div class="col-md-3 same-height-row" style="padding:0px; ">
+							<div class="col-md-12  market-logo" >
+								 <a  href="/<?php echo e($markets_datas->market_name); ?>"><center><img class="img-responsive" src="<?php echo e(URL::asset('assets/img/market/'.$markets_datas->market_name.'.png')); ?>" alt=""></center></a>
+							</div>
+						</div>
+						<div class="col-md-9 same-height-row" style="padding:0px; ">
+						<?php foreach($featured_store as $stores ): ?>
+							<?php if($stores->market_id==$markets_datas->id): ?>
+								<a href="/Store/<?php echo e($stores->store_id); ?>" ><div class="col-md-4  col-xs-6 store-logo" >
+									<div class="wraptocenter"><span></span><img src="<?php echo e(URL::asset(getStoreBanner($stores->store->store_name))); ?>" alt="..."></div>
+								</div></a>	
+							<?php endif; ?>
+						<?php endforeach; ?>
+						</div>
+					</div>
+                </div>
+
+				<div class="container" >
+						<?php foreach($featured_category as $category ): ?>
+							<?php if($category->category->market_id==$markets_datas->id): ?>
+								<div class="col-md-3 col-xs-6" style="padding:2px; margin-bottom:-22px;">
+									<div class="box">
+										<a href="/<?php echo e($markets_datas->market_name); ?>/Category/<?php echo e(str_replace(' ','-',$category->category->category_name)); ?>/All"> <center><img class="img-responsive"  data-src="<?php echo e(URL::asset('assets/img/category/'.$markets_datas->market_name.'/'.$category->category->id.'.png')); ?>" data-src-retina="<?php echo e(URL::asset('assets/img/category/'.$markets_datas->market_name.'/'.$category->category->id.'.png')); ?>" src="<?php echo e(URL::asset('assets/img/loading.gif')); ?>" alt="" /></center></a>
+										<div class="list-group" style="margin-bottom:0px; border-radius: 0px 0px 0px 0px; " >
+										<?php $prodCounts=0; ?>
+										<?php foreach($category->categoryProduct as $products ): ?>
+													<?php if($prodCounts<3): ?>
+														<a href="/Product/Details/<?php echo e($products->products->id); ?>/<?php echo e(encodeUrlRoute($products->products->product_name)); ?>" class="list-group-item category-products"  >
+															<?php $imgCounts=0; ?>
+															<?php foreach($products->products->product as $productss ): ?>
+																<?php if($imgCounts==0): ?>
+																<img class="alignleft"  data-src="<?php echo e(URL::asset(getSingleImageProduct($productss->id,$products->products->store->store_name))); ?>" data-src-retina="" src="<?php echo e(URL::asset('assets/img/loading.gif')); ?>" alt="" />
+																<?php $imgCounts++; ?>
+																<?php endif; ?>
+															<?php endforeach; ?>	
+															<div class="item-desc-prod "  >
+																<b><h5 class="list-group-item-heading"><?php echo e($products->products->product_name); ?></h5></b>
+																<p class="list-group-item-text">P 100.00</p>
+															</div>
+														</a>
+													<?php $prodCounts++; ?>	
+													<?php endif; ?>
+										<?php endforeach; ?>	
+										</div>
+									</div>
+								</div>
+							<?php endif; ?>
+						<?php endforeach; ?>	
+                </div>
+			<?php $num++; ?>
+			<?php endforeach; ?>	
+				
+			
+           <div class="container" >
+				<div class="col-md-12" style="padding:2px; margin-top:-4px;">
+					<div class="col-md-12 box" >
+						<img class="img-responsive" src="<?php echo e(URL::asset('assets/img/market/brands.png')); ?>" alt="Homemallph Market">
+					</div>
+				</div>
+			</div>
+            <div class="container" >
+                <div class="col-md-12" style="padding:2px; margin-top:-25px;" >
+                    <div class="box" >
+                        <div id="get-inspired" class="owl-carousel owl-theme">
+                            <div class="item">
+                               <div class="col-sm-12 " style="padding:0px;  ">
+									<div class="col-sm-12 same-height-row" style="padding:0px; ">	
+										<?php foreach($brands_data as $brands_data ): ?>
+										<div class="col-sm-2 col-xs-6 store-logo" >
+											<div class="wraptocenter"><span></span><img src="<?php echo e(URL::asset('assets/img/brand/'.$brands_data->id.'.png')); ?>" alt="..."></div>
+										</div>	
+										<?php endforeach; ?>	
+									</div>
+								</div>	
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+					
+			<div class="container" >
+				<div class="col-md-12" style="padding:2px; margin-top:-25px;" >
+					<div class="col-md-12 box" >
+						<img class="img-responsive" src="<?php echo e(URL::asset('assets/img/market/trends.png')); ?>" alt="Homemallph Market">
+					</div>
+					<div class="col-md-12" style="padding:0px">
+						<?php foreach($featured_trend as $featured_trend ): ?>
+							<div class="col-md-2 col-xs-6" style="padding:2px; margin-top:-23px;">
+								<?php if(count($featured_trend->product_info)>0): ?>
+								
+									<?php $countss++;?>
+									<div class="box" >
+										<a href="/Product/Details/<?php echo e($featured_trend->product_info->id); ?>/<?php echo e(encodeUrlRoute($featured_trend->product_info->product_name)); ?>">
+										<center>
+										<?php $countimg=0;?>
+										<?php foreach($featured_trend->product_info->product as $products ): ?>
+											<?php if($countimg==0): ?>
+												<?php $countimg++;?>
+													<img class="img-responsive"  data-src="<?php echo e(URL::asset(getSingleImageProduct($products->id,$featured_trend->product_info->store->store_name))); ?>" src="<?php echo e(URL::asset('assets/img/loading.gif')); ?>" alt="">
+											<?php endif; ?>
+										<?php endforeach; ?>	
+										</center></a>
+										<div class="item-desc" style="padding:10px" >
+											<a href="/Product/Details/<?php echo e($featured_trend->product_info->id); ?>/<?php echo e(encodeUrlRoute($featured_trend->product_info->product_name)); ?>"><h4 ><?php echo e($featured_trend->product_info->product_name); ?></h4></a>
+											<?php $count=0;?>
+											<?php foreach($featured_trend->product_info->product as $product ): ?>
+												<?php if($count==0): ?>
+													<?php $count++;?>
+													<h4><p >&#8369;&nbsp;&nbsp;<?php echo e($product->sale_price); ?></p></h4>
+												<?php endif; ?>
+											<?php endforeach; ?>	
+											<button class="btn btn-default pull-right btn-sm" style="margin-top:-30px; padding:4px 3px 4px 3px;"><i class="fa fa-shopping-cart cart-cart"></i></button>
+										</div>
+									</div>
+								
+								<?php endif; ?>
+							</div>
+						<?php endforeach; ?>	
+					</div>
+				</div>
+			</div>
+            
+        
+		
+		<div style="background:#fff;" >
+		<div class="container">
+            <div class="row">
+			<br>
+				<div class="col-md-12" style="padding:0px;">
+					<div class="col-md-2 img-footer" style="padding:20px;" >
+						<center>
+							<img class="" src="<?php echo e(URL::asset('assets/img/convenience.png')); ?>" alt="..." >
+							<h4 class="text-center">Convenience</h4>
+							<p class="text-center">You don't need to get dressed and  drive to your favorite store.</p>
+						</center>
+					</div>
+					<div class="col-md-2 img-footer" style="padding:20px" >
+						<center>
+							<img class="" src="<?php echo e(URL::asset('assets/img/DeliveryIcon.png')); ?>" alt="..." >
+							<h4 class="text-center">Shipping</h4>
+							<p class="text-center"> We ship first in National Capital Region (NCR) with our logisctic partner.</p>
+						</center>
+					</div>
+					<div class="col-md-2 img-footer" style="padding:20px" >
+						<center>
+							<img class="" src="<?php echo e(URL::asset('assets/img/SafePayment.png')); ?>" alt="..." >
+							<h4 class="text-center">Payment</h4>
+							<p class="text-center"> Pay with the world’s most popular and secure payment methods..</p>
+						</center>
+					</div>
+					<div class="col-md-2 img-footer" style="padding:20px" >
+						<center>
+							<img class="" src="<?php echo e(URL::asset('assets/img/ShopWithConfidence.png')); ?>" alt="..." >
+							<h4 class="text-center">Shop with Confidence</h4>
+							<p class="text-center"> Our Buyer Protection covers your purchase from click to delivery..</p>
+						</center>
+					</div>
+					<div class="col-md-2 img-footer" style="padding:20px" >
+						<center>
+							<img class="" src="<?php echo e(URL::asset('assets/img/HelpCenter.png')); ?>" alt="..." >
+							<h4 class="text-center">24/7 Help Center</h4>
+							<p class="text-center"> Round-the-clock assistance for a smooth shopping experience..</p>
+						</center>
+					</div>
+					<div class="col-md-2" style="padding:20px" >
+						<center>
+						</br>
+							<img class="" src="<?php echo e(URL::asset('assets/img/1googlePlay.png')); ?>" alt="..." style="height:30px; width:120px;" >
+							<h4 class="text-center">Andriod app</h4>
+							<p class="text-center"> Download the app and get the world of HomeMallPH at your fingertips..</p>
+						</center>
+					</div>
+				
+				</div>
+
+			</div>
+		</div>
+	</div>
+						
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('page-script'); ?>
+	
+
+	<script type="text/javascript">
+
+			
+			
+			
+	function addCart(data){
+		try{
+			var response = $.ajax({
+				type: "POST",
+				url: "/cart/addcart",
+				data: {data1:data.data1 ,data2:data.data2, data3:data.data3, data4:data.data4},
+				async: false
+			}).responseText;
+			var datas = JSON.parse(response);
+			if(datas.success==true){
+				var elem1 = document.getElementsByClassName("badge-cart1");
+				var elem2 = document.getElementById("badge-cart2");
+				var elem3 = document.getElementById("badge-cart3");
+				var elem4 = document.getElementById("badge-cart4");
+				if ( elem1 ) {
+				 elem1.innerHTML=datas.data.datas2+"";
+				}
+				if ( elem2 ) {
+				elem2.innerHTML=datas.data.datas2+"";
+				}
+				if ( elem3 ) {
+				elem3.innerHTML=datas.data.datas2+"";
+				}
+				if ( elem4) {
+				elem4.innerHTML=datas.data.datas2+"";
+				}
+			}
+		}catch(err){
+			alert(err.message);
+		}
+	}		
+	</script>
+	
+	
+	
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('client.master.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

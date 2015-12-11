@@ -15,6 +15,10 @@ class subcategory extends Model
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];	
 	
 //getter
+	public function getCategory()
+	{
+		return $this->belongsTo('App\adminmodel\category', 'category_id', 'id');
+	}
 	public function getSC1Attribute($value)
     {
         return $this->attributes['id'];

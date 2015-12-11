@@ -26,6 +26,9 @@
 		<script src="{{URL::asset('assets/js/flot/jquery.flot.min.js')}}"></script>
 		<script src="{{URL::asset('assets/js/flot/jquery.flot.pie.min.js')}}"></script>
 		<script src="{{URL::asset('assets/js/flot/jquery.flot.resize.min.js')}}"></script>
+	<!-- tags -->
+		<script src="{{URL::asset('assets/js/bootstrap-tag.min.js')}}"></script>	
+		<script src="{{URL::asset('assets/js/Scroller.js')}}"></script>	
 <script>
 	$.ajaxSetup({
 		headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
